@@ -1,3 +1,4 @@
+---
 patterns:
     - has(key)
 ---
