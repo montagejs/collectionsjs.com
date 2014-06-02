@@ -1,6 +1,7 @@
+---
 
 names:
-    - has(key)
+-   has(key)
 
 ---
 
