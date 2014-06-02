@@ -1,9 +1,12 @@
+
 names:
 -   has(value)
+
 collections:
 -   set
 -   sorted-set
 -   sorted-array-set
+
 ---
 
 Whether an equivalent value exists in this collection.

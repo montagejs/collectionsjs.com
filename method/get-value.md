@@ -1,5 +1,7 @@
+
 names:
 -   get(value)
+
 collections:
 -   set
 -   fast-set
@@ -8,6 +10,7 @@ collections:
 -   sorted-set
 -   sorted-array
 -   sorted-array-set
+
 ---
 
 Retrieves the equivalent value from the collection.

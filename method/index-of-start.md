@@ -1,12 +1,16 @@
+
 names:
 -   indexOf(value)
 -   indexOf(value, start)
+
 collections:
 -   array
 -   deque
+
 todo:
 -   list implementation
 -   set implementation
+
 ---
 
 Returns the position of a value, or *-1* if the value is not found.

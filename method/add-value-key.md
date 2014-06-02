@@ -1,5 +1,7 @@
+
 names:
 -   add(value, key)
+
 collections:
 -   map
 -   dict
@@ -9,6 +11,7 @@ collections:
 -   multi-map
 -   sorted-map
 -   sorted-array-map
+
 ---
 
 Adds a value for a given key to a map.

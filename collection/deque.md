@@ -1,10 +1,12 @@
 names:
 -   Deque()
 -   Deque(values)
+
 inherits:
 -   generic-collection
 -   generic-order
 -   range-changes
+
 methods:
 -   add
 -   push
@@ -30,9 +32,11 @@ methods:
 -   reduce
 -   reduce-right
 -   construct-clone
+
 todo:
 -   clone
 -   iterate
+
 ---
 
 `maxCapacity`

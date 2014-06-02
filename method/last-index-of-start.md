@@ -1,12 +1,16 @@
+
 names:
 -   lastIndexOf(value)
 -   lastIndexOf(value, start)
+
 collections:
 -   array
 -   deque
+
 todo:
 -   list implementation
 -   set implementation
+
 ---
 
 Returns the last position of a value, or *-1* if the value is not found.

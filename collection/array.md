@@ -3,6 +3,7 @@ names:
 -   Array(length)
 -   Array(...values)
 -   Array.from(values)
+
 inherits:
 -   generic-collection/add-each
 -   generic-collection/delete-each
@@ -21,6 +22,7 @@ inherits:
 -   generic-collection/group
 -   generic-collection/sorted
 -   generic-collection/reversed
+
 methods:
 -   push
 -   pop
@@ -44,6 +46,7 @@ methods:
 -   construct-clone
 -   clone
 -   iterate-start-end
+
 ---
 
 An ordered collection of values with fast random access, `push(...values)`, and

@@ -1,10 +1,13 @@
+
 names:
 -   has(value)
 -   has(value, equals)
+
 collections:
 -   list
 -   array
 -   deque
+
 ---
 
 Returns whether an equivalent value exists in this collection.

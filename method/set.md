@@ -1,5 +1,7 @@
+
 names:
 -   set(key, value)
+
 collections:
 -   map
 -   multi-map
@@ -10,6 +12,7 @@ collections:
 -   sorted-array-map
 -   fast-map
 -   dict
+
 ---
 
 Sets the value for a given key.

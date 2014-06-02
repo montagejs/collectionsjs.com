@@ -1,10 +1,13 @@
+
 names:
 -   delete(value)
 -   delete(value, equals)
+
 collections:
 -   array
 -   list
 -   deque
+
 ---
 
 Seeks out and deletes the first equivalent value.

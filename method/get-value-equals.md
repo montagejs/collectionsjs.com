@@ -1,9 +1,12 @@
+
 names:
 -   get(value)
 -   get(value, equals)
+
 collections:
 -   list
 -   deque
+
 ---
 
 Retrieves the equivalent value from this collection.

@@ -1,9 +1,12 @@
+
 names:
 -   indexOf(value)
+
 collections:
 -   sorted-set
 -   sorted-array
 -   sorted-array-set
+
 ---
 
 Returns the position of a value, or *-1* if the value is not found.

@@ -1,12 +1,15 @@
+
 names:
 -   Dict()
 -   Dict(entries)
 -   Dict(map)
+
 inherits:
 -   generic-collection
 -   generic-map
 -   property-changes
 -   observable-object
+
 methods:
 -   get-key
 -   aset
@@ -18,6 +21,7 @@ methods:
 -   reduce-right
 -   one
 -   construct-clone
+
 ---
 
 A mapping from string keys to values.

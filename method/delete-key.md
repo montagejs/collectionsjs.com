@@ -1,5 +1,7 @@
+
 names:
 -   delete(key)
+
 collections:
 -   map
 -   multi-map
@@ -10,6 +12,7 @@ collections:
 -   sorted-array-map
 -   fast-map
 -   dict
+
 ---
 
 Deletes the value for a given key.

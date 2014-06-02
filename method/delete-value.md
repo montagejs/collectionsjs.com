@@ -1,5 +1,7 @@
+
 names:
 -   delete(value)
+
 collections:
 -   set
 -   sorted-set
@@ -8,6 +10,7 @@ collections:
 -   sorted-array-set
 -   fast-set
 -   heap
+
 ---
 
 Deletes the first equivalent value.

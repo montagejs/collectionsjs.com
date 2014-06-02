@@ -1,8 +1,10 @@
+
 names:
 -   get(key)
 -   get(key, default)
 -   get(index)
 -   get(index, default)
+
 collections:
 -   map
 -   sorted-map
@@ -10,6 +12,7 @@ collections:
 -   weak-map
 -   array
 -   object
+
 ---
 
 Gets the value for a key in a map.

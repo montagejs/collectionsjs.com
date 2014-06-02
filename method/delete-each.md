@@ -1,8 +1,10 @@
+
 names:
 -   deleteEach(values)
 -   deleteEach(values, equals)
 -   deleteEach(keys)
 -   deleteEach(keys, equals)
+
 collections:
 -   array
 -   list
@@ -23,8 +25,10 @@ collections:
 -   fast-map
 -   dict
 -   heap
+
 todo:
 -   consider breaking this into versions for each of the kinds of delete
+
 ---
 
 Deletes every value or every value for each key.

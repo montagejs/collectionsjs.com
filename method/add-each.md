@@ -1,6 +1,8 @@
+
 names:
 -   addEach(values)
 -   addEach(map)
+
 collections:
 -   list
 -   deque
@@ -22,6 +24,7 @@ collections:
 -   sorted-array-map
 -   array
 -   object
+
 ---
 
 Copies values or entries from another collection into this collection,

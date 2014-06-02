@@ -1,5 +1,7 @@
+
 names:
 -   add(value)
+
 collections:
 -   list
 -   deque
@@ -10,6 +12,7 @@ collections:
 -   sorted-array-set
 -   fast-set
 -   heap
+
 ---
 
 Adds a value to a collection.
