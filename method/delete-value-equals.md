@@ -1,3 +1,4 @@
+---
 names:
 -   delete(value)
 -   delete(value, equals)

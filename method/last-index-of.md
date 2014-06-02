@@ -1,3 +1,4 @@
+---
 names:
 -   lastIndexOf(value)
 collections:
