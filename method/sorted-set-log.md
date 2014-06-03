@@ -4,7 +4,7 @@
 
 Writes a tree describing the internal state of the sorted set splay tree.
 
----
+--- |
 
 `charmap` is an object that notes which characters to use to draw
 lines.  By default, this is the `TreeLog.unicodeRound` property from the

@@ -8,7 +8,7 @@ see:
 
 Iterates every value in this collection.
 
----
+--- |
 
 :warning: The `iterate` method and its notion of iterators only applies to
 version 2. See [iterator][iterator] for version 1.

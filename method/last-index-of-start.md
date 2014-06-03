@@ -23,7 +23,7 @@ todo:
 
 Returns the last position of a value, or *-1* if the value is not found.
 
----
+--- |
 
 Returns the position of the last of equivalent values.  The second argument
 is an optional index from which to start seeking, the upper bound of the

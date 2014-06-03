@@ -5,7 +5,7 @@ name: WeakMap()
 names:
 -   WeakMap()
 
----
+--- |
 
 A map of object keys to values with good garbage collection behavior.
 See [WeakMap][].

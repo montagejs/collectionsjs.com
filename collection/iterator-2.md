@@ -7,7 +7,7 @@ see:
 
 Produces values in order on demand.
 
----
+--- |
 
 :warning: Version 2 iterators differ substantially from version 1.
 This is a description of iterators for version 2, which are on track for the

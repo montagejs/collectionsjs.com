@@ -16,7 +16,7 @@ collections:
 
 Retrieves the equivalent value from the collection.
 
----
+--- |
 
 This is a very fast operation for `Set`, `FastSet`, `LruSet`, and `LfuSet`,
 which are backed by hash tables.

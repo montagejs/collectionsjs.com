@@ -13,7 +13,7 @@ see:
 Finds the last value whthin a collection that passes a test, searching from the
 right.
 
----
+--- |
 
 At time of writing, no collection implements this method, but it would be be a
 logical addition triangulated from [find][] (an ECMA6 Proposal) and

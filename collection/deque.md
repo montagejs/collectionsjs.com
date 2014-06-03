@@ -39,7 +39,7 @@ todo:
 -   clone
 -   iterate
 
----
+--- |
 
 An ordered collection of values with fast random access, `push`, `pop`, `shift`,
 and `unshift`, but slow to splice when massive.

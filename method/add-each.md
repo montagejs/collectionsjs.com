@@ -31,7 +31,7 @@ collections:
 Copies values or entries from another collection into this collection,
 and then returns this.
 
----
+--- |
 
 If the argument is an object that implements `forEach`, for example, most
 collections including `Map` and `Array`, the behavior of `addEach` varies by

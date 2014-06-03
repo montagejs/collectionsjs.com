@@ -12,7 +12,7 @@ see:
 
 Finds the first index within a collection that passes a test.
 
----
+--- |
 
 This is a method implemented by some JavaScript engines, but not yet provided by
 MontageJS Collections nor its Array shims.

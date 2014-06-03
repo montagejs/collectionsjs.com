@@ -13,7 +13,7 @@ see:
 
 Creates a shallow clone of this collection.
 
----
+--- |
 
 `constructClone` is a utility for other generic collection methods, particularly
 `clone` and `filter`.

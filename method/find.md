@@ -12,7 +12,7 @@ see:
 
 Finds the first value within a collection that passes a test.
 
----
+--- |
 
 This method is defined by an ECMAScript 6 proposal and documented on [MDN][].
 

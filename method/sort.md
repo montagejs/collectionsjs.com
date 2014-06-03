@@ -13,7 +13,7 @@ see:
 
 Sorts a collection in place.
 
----
+--- |
 
 :warning: The default comparator for `sort` on `Array` is defined by the
 JavaScript language specification and is almost never appropriate.
