@@ -5,11 +5,16 @@ var yaml = require("js-yaml");
 
 Q.all([loadDirectory("../collection", parseCollectionDocument), loadDirectory("../method", parseMethodDocument)])
 .spread(function (collectionDocuments, methodDocuments) {
-    // console.log(collectionDocuments, methodDocuments);
-    // console.log(collectionDocuments);
+    var warningsCount = 0;
     Object.keys(collectionDocuments).forEach(function (collectionName) {
-        lintCollection(collectionName, collectionDocuments[collectionName], methodDocuments);
+        var warnings = lintCollection(collectionName, collectionDocuments[collectionName], methodDocuments);
+        warnings.forEach(function (warning) {
+            console.log(collectionName + ": " + warning);
+        });
+        warningsCount += warnings.length;
     });
+    console.log();
+    console.log(warningsCount + " warnings");
 })
 .done();
 
@@ -66,43 +71,30 @@ function lintCollection(collectionName, collectionDocument, methodDocuments) {
         return;
     }
 
-    var warnings;
+    var warnings = [];
     try {
-        warnings = linters.map(function (linter) {
-            return linter(collectionName, collectionDocument, methodDocuments);
-        }).filter(function (result) {
-            return !!result;
+        linters.forEach(function (linter) {
+            warnings = warnings.concat(linter(collectionName, collectionDocument, methodDocuments));
         });
     } catch (error) {
         error.message = "Failed to lint " + collectionName + " because " + error.message;
         throw error;
     }
 
-    if (warnings.length) {
-        console.log("Warnings for", collectionName + ":");
-        warnings.map(function (warning) {
-            console.log("  ", warning);
-        });
-        console.log();
-    }
+    return warnings;
 }
 
 function lintAllMethodsKnown(collectionName, collectionDocument, methodDocuments) {
     var methodNames = Object.keys(methodDocuments);
     var collectionMethods = collectionDocument[0].methods;
 
-    if (!collectionMethods) {
-        return false;
-    }
-
     var unknownMethods = collectionMethods.filter(function (name) {
         return methodNames.indexOf(name) === -1;
+    }).map(function (method) {
+        return "Unknown method " + JSON.stringify(method);
     });
 
-    if (unknownMethods.length) {
-        return "Unknown methods: " + unknownMethods.join(", ");
-    }
-    return false;
+    return unknownMethods;
 }
 
 function lintSymmetricRelation(collectionName, collectionDocument, methodDocuments) {
@@ -111,10 +103,9 @@ function lintSymmetricRelation(collectionName, collectionDocument, methodDocumen
     var missingRelations = collectionMethodNames.filter(function (methodName) {
         var methodDocument = methodDocuments[methodName];
         return methodDocument && methodDocument[0].collections.indexOf(collectionName) === -1;
+    }).map(function (method) {
+        return "Symetric relation missing from " + JSON.stringify(method);
     });
 
-    if (missingRelations.length) {
-        return "Symetric relation missing from: " + missingRelations.join(", ");
-    }
-    return false;
+    return missingRelations;
 }
