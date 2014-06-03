@@ -1,5 +1,13 @@
 ---
 
+name: clone()
+
+names:
+-   clone()
+-   clone(null, memo)
+-   clone(depth)
+-   clone(depth, memo)
+
 see:
 -   construct-clone
 

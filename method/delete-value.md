@@ -1,16 +1,6 @@
 ---
 
-names:
--   delete(value)
-
-collections:
--   set
--   sorted-set
--   lru-set
--   sorted-array
--   sorted-array-set
--   fast-set
--   heap
+name: delete(value)
 
 ---
 

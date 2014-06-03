@@ -1,5 +1,11 @@
 ---
 
+name: map(callback)
+
+names:
+-   map(callback)
+-   map(callback, thisp)
+
 see:
 -   for-each
 -   filter

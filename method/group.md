@@ -1,6 +1,11 @@
 ---
 
-name: group(callback, thisp, equals)
+name: group(callback)
+
+names:
+-   group(callback)
+-   group(callback, thisp)
+-   group(callback, thisp, equals)
 
 see:
 -   reduce

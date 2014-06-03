@@ -1,5 +1,15 @@
 ---
 
+name: findValue(value)
+
+names:
+-   find(value)
+-   find(value, equals)
+-   find(value, equals, start)
+-   findValue(value)
+-   findValue(value, equals)
+-   findValue(value, equals, start)
+
 see:
 -   find-last-value
 -   find

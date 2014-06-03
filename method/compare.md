@@ -1,5 +1,7 @@
 ---
 
+name: compare(value)
+
 see:
 -   equals
 -   hash

@@ -1,7 +1,10 @@
 ---
 
-name: splice(start, length)
 name: splice(start, length, ...values)
+
+names:
+-   splice(start, length)
+-   splice(start, length, ...values)
 
 see:
 -   swap

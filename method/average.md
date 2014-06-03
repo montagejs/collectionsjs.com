@@ -1,5 +1,7 @@
 ---
 
+name: average()
+
 names:
 -   average()
 -   average(zero)

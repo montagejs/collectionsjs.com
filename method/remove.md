@@ -1,5 +1,7 @@
 ---
 
+name: remove(value)
+
 see:
 -   delete-value
 

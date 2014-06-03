@@ -1,5 +1,12 @@
 ---
 
+name: reduce(callback, basis)
+
+names:
+-   reduce(callback)
+-   reduce(callback, basis)
+-   reduce(callback, basis, thisp)
+
 see:
 -   reduce-right
 -   iterate
@@ -34,6 +41,9 @@ This is a shortcoming that should be rectified in version 2.
 including `forEach`, `map`, and `filter`.
 `iterate` is more appropriate for `some` and `every`, which may finish before
 visiting every entry in the collection.
+
+Also, on `Array`, `reduceRight` does not accept an optional `thisp` argument.
+Other collections do.
 
 If this collection is an array with holes, those entries will not be visited.
 

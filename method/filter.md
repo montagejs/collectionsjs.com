@@ -1,5 +1,7 @@
 ---
 
+name: filter(callback, thisp)
+
 see:
 -   for-each
 -   map

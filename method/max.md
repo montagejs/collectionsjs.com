@@ -1,5 +1,7 @@
 ---
 
+name: max()
+
 see:
 -   min
 -   greatest

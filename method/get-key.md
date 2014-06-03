@@ -1,18 +1,12 @@
 ---
 
+name: get(key)
+
 names:
 -   get(key)
 -   get(key, default)
 -   get(index)
 -   get(index, default)
-
-collections:
--   map
--   sorted-map
--   sorted-array-map
--   weak-map
--   array
--   object
 
 ---
 

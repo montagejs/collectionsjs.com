@@ -1,5 +1,7 @@
 ---
 
+name: only()
+
 see:
 -   one
 -   first

@@ -1,5 +1,7 @@
 ---
 
+name: sum()
+
 names:
 -   sum()
 -   sum(zero)

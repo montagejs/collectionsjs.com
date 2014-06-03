@@ -1,12 +1,10 @@
 ---
 
+name: lastIndexOf(value)
+
 names:
 -   lastIndexOf(value)
 -   lastIndexOf(value, start)
-
-collections:
--   array
--   deque
 
 see:
 -   index-of-start

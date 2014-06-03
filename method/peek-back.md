@@ -1,5 +1,7 @@
 ---
 
+name: peekBack()
+
 see:
 -   poke-back
 -   peek

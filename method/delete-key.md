@@ -1,18 +1,6 @@
 ---
 
-names:
--   delete(key)
-
-collections:
--   map
--   multi-map
--   weak-map
--   sorted-map
--   lru-map
--   lfu-map
--   sorted-array-map
--   fast-map
--   dict
+name: delete(key)
 
 ---
 

@@ -1,5 +1,7 @@
 ---
 
+name: unzip(collections)
+
 see:
 -   zip
 

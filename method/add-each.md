@@ -1,30 +1,10 @@
 ---
 
+name: addEach(...)
+
 names:
 -   addEach(values)
 -   addEach(map)
-
-collections:
--   list
--   deque
--   map
--   set
--   heap
--   dict
--   sorted-array
--   fast-set
--   lru-set
--   lfu-set
--   sorted-array-set
--   sorted-set
--   fast-map
--   lfu-map
--   lru-map
--   multi-map
--   sorted-map
--   sorted-array-map
--   array
--   object
 
 ---
 

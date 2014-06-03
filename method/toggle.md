@@ -1,5 +1,7 @@
 ---
 
+name: toggle(value)
+
 see:
 -   add-value
 -   delete-value

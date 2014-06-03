@@ -1,5 +1,7 @@
 ---
 
+name: ensureCapacity(capacity)
+
 see:
 -   grow
 

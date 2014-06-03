@@ -1,5 +1,7 @@
 ---
 
+name: poke(value)
+
 see:
 -   peek
 -   poke-back

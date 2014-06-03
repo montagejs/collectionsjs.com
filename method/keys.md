@@ -1,5 +1,7 @@
 ---
 
+name: keys()
+
 see:
 -   values
 -   entries

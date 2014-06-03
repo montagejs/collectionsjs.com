@@ -1,16 +1,6 @@
 ---
 
-names:
--   get(value)
-
-collections:
--   set
--   fast-set
--   lru-set
--   lfu-set
--   sorted-set
--   sorted-array
--   sorted-array-set
+name: get(value)
 
 ---
 

@@ -1,18 +1,6 @@
 ---
 
-names:
--   add(value)
-
-collections:
--   list
--   deque
--   set
--   sorted-set
--   lru-set
--   sorted-array
--   sorted-array-set
--   fast-set
--   heap
+name: add(value)
 
 ---
 

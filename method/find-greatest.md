@@ -3,6 +3,7 @@
 name: findGreatest()
 
 see:
+-   max
 -   find-least
 -   find-greatest-less-than
 -   find-greatest-less-than-or-equal

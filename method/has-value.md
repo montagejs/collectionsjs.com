@@ -1,12 +1,6 @@
 ---
 
-names:
--   has(value)
-
-collections:
--   set
--   sorted-set
--   sorted-array-set
+name: has(value)
 
 ---
 

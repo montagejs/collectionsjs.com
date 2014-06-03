@@ -1,17 +1,6 @@
 ---
 
-names:
--   add(value, key)
-
-collections:
--   map
--   dict
--   fast-map
--   lfu-map
--   lru-map
--   multi-map
--   sorted-map
--   sorted-array-map
+name: add(value, key)
 
 ---
 

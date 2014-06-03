@@ -1,7 +1,6 @@
 ---
 
-names:
--   findLast(callback, thisp)
+name: findLast(callback, thisp)
 
 see:
 -   find

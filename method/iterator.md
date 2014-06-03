@@ -1,5 +1,7 @@
 ---
 
+name: iterator()
+
 see:
 -   iterate
 -   iterate-start-end

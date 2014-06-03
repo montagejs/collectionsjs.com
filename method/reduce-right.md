@@ -1,5 +1,12 @@
 ---
 
+name: reduceRight(callback, basis)
+
+names:
+-   reduceRight(callback)
+-   reduceRight(callback, basis)
+-   reduceRight(callback, basis, thisp)
+
 see:
 -   reduce
 
@@ -24,6 +31,9 @@ an error.
 However, at time of writing, all other collections in this library require an
 initial `basis`.
 This is a shortcoming that should be rectified in version 2.
+
+Also, on `Array`, `reduceRight` does not accept an optional `thisp` argument.
+Other collections do.
 
 If this collection is an array with holes, those entries will not be visited.
 

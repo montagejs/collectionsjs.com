@@ -1,5 +1,7 @@
 ---
 
+name: reversed()
+
 see:
 -   reverse
 -   sorted

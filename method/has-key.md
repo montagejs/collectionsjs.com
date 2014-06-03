@@ -1,10 +1,6 @@
 ---
 
-names:
--   has(key)
-
-collections:
--   dict
+name: has(key)
 
 ---
 

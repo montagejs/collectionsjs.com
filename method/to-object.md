@@ -1,5 +1,7 @@
 ---
 
+name: toObject()
+
 see:
 -   to-array
 

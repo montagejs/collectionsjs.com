@@ -1,12 +1,9 @@
 ---
 
+name: lastIndexOf(value)
+
 names:
 -   lastIndexOf(value)
-
-collections:
--   sorted-set
--   sorted-array
--   sorted-array-set
 
 ---
 

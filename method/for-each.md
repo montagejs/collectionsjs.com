@@ -1,5 +1,11 @@
 ---
 
+name: forEach(callback)
+
+names:
+-   forEach(callback)
+-   forEach(callback, thisp)
+
 see:
 -   reduce
 -   map

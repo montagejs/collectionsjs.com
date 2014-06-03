@@ -1,13 +1,10 @@
 ---
 
+name: has(value)
+
 names:
 -   has(value)
 -   has(value, equals)
-
-collections:
--   list
--   array
--   deque
 
 ---
 

@@ -1,5 +1,7 @@
 ---
 
+name: zip(...iterables)
+
 see:
 -   unzip
 

@@ -1,12 +1,10 @@
 ---
 
+name: delete(value)
+
 names:
 -   delete(value)
 -   delete(value, equals)
-
-collections:
--   array
--   list
 
 todo:
 -   deque

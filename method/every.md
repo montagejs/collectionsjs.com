@@ -1,5 +1,11 @@
 ---
 
+name: every(callback)
+
+names:
+-   every(callback)
+-   every(callback, thisp)
+
 see:
 -   some
 -   filter

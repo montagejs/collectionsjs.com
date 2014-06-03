@@ -1,5 +1,11 @@
 ---
 
+name: findLastValue(value)
+
+names:
+-   findLastValue(value)
+-   findLastValue(value, equals)
+
 see:
 -   find-value
 -   find-last

@@ -1,6 +1,9 @@
 ---
 
+name: find(callback)
+
 names:
+-   find(callback)
 -   find(callback, thisp)
 
 see:

@@ -1,12 +1,10 @@
 ---
 
+name: get(value)
+
 names:
 -   get(value)
 -   get(value, equals)
-
-collections:
--   list
--   deque
 
 ---
 

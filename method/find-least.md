@@ -3,6 +3,7 @@
 name: findLeast()
 
 see:
+-   min
 -   find-greatest
 -   find-least-greater-than
 -   find-least-greater-than-or-equal

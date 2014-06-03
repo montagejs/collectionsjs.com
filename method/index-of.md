@@ -1,12 +1,6 @@
 ---
 
-names:
--   indexOf(value)
-
-collections:
--   sorted-set
--   sorted-array
--   sorted-array-set
+name: indexOf(value)
 
 ---
 
