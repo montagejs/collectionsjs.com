@@ -3,6 +3,7 @@
 see:
 -   for-each
 -   filter
+-   group
 
 ---
 

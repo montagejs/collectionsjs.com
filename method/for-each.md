@@ -4,6 +4,7 @@ see:
 -   reduce
 -   map
 -   filter
+-   group
 
 ---
 
