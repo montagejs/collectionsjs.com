@@ -1,0 +1,142 @@
+
+# deque
+-   push
+-   pop
+-   shift
+-   unshift
+-   peek
+-   poke
+-   peek-back
+-   poke-back
+
+# set
+-   has-value
+-   has-value-equals
+-   get-value
+-   get-value-equals
+-   add-value
+-   delete-value
+-   delete-value-equals
+-   remove
+-   contains
+-   toggle
+
+# map
+-   has-key
+-   get-key
+-   set
+-   add-value-key
+-   delete-key
+-   keys
+-   values
+-   entries
+
+# common
+-   add-each
+-   delete-each
+
+# order
+-   slice
+-   splice
+-   swap
+-   clear
+
+# find
+
+-   index-of
+-   last-index-of
+
+-   index-of-start
+-   last-index-of-start
+
+-   find
+-   find-last
+
+-   find-index
+-   find-last-index
+
+-   find-value
+-   find-last-value
+
+-   find-least
+-   find-least-greater-than
+-   find-least-greater-than-or-equal
+-   find-greatest
+-   find-greatest-less-than
+-   find-greatest-less-than-or-equal
+
+# iterable
+
+-   iterate
+-   iterate-start-end
+-   iterator
+
+-   for-each
+-   map
+-   filter
+-   reduce
+-   reduce-right
+-   group
+-   some
+-   every
+-   any
+-   all
+-   one
+-   only
+
+-   sort
+-   sorted
+-   reverse
+-   reversed
+
+# string
+-   join
+-   split
+
+# numeric
+-   sum
+-   average
+-   min
+-   max
+
+# array
+
+-   zip
+-   unzip
+-   enumerate
+
+-   concat
+-   flatten
+
+# convert
+
+-   to-array
+-   to-object
+
+# operators
+
+-   equals
+-   compare
+-   hash
+-   clone
+-   construct-clone
+
+-   content-compare
+-   content-equals
+-   content-hash
+
+# Deque
+-   ensure-capacity
+-   grow
+
+# List
+-   scan
+
+# SortedSet
+-   splay
+-   splay-index
+-   sorted-set-log
+
+# Iterator
+-   drop-while
+
