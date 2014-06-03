@@ -20,7 +20,7 @@ methods:
 -   construct-clone
 -   has-value
 -   get-value
--   add
+-   add-value
 -   delete-value
 -   one
 -   clear

@@ -18,7 +18,7 @@ inherits:
 methods:
 -   has-value
 -   get-value
--   add
+-   add-value
 -   delete-value
 -   index-of
 -   last-index-of
@@ -39,7 +39,6 @@ methods:
 -   clear
 -   equals
 -   compare
--   iterate
 -   iterate-start-end
 
 ---

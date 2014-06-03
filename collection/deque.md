@@ -10,7 +10,7 @@ inherits:
 -   range-changes
 
 methods:
--   add
+-   add-value
 -   push
 -   pop
 -   shift

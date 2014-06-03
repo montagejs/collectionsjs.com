@@ -21,7 +21,7 @@ methods:
 -   get-value-equals
 -   delete-value-equals
 -   clear
--   add
+-   add-value
 -   push
 -   unshift
 -   pop

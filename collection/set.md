@@ -18,7 +18,7 @@ inherits:
 methods:
 -   has-value
 -   get-value
--   add
+-   add-value
 -   delete-value
 -   pop
 -   shift

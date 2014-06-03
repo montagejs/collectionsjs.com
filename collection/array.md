@@ -34,8 +34,8 @@ methods:
 -   get-key
 -   set
 -   delete-key
--   find-equals-start
--   find-last-value-equals-start
+-   find-value
+-   find-last-value
 -   swap
 -   peek
 -   poke

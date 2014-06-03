@@ -13,7 +13,7 @@ inherits:
 
 methods:
 -   get-key
--   aset
+-   set
 -   has-key
 -   delete-key
 -   dict-assert-string
