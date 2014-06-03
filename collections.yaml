@@ -20,3 +20,13 @@
 -   iterator
 -   array
 -   object
+-   generic-collection
+-   generic-order
+-   generic-set
+-   generic-map
+-   property-changes
+-   range-changes
+-   map-changes
+-   observable-object
+-   observable-range
+-   observable-map

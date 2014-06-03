@@ -1,28 +1,29 @@
 ---
+
 names:
 -   Array()
 -   Array(length)
 -   Array(...values)
 -   Array.from(values)
 
-inherits:
--   generic-collection/add-each
--   generic-collection/delete-each
--   generic-collection/to-array
--   generic-collection/to-object
--   generic-collection/all
--   generic-collection/any
--   generic-collection/min
--   generic-collection/max
--   generic-collection/sum
--   generic-collection/average
--   generic-collection/only
--   generic-collection/flatten
--   generic-collection/zip
--   generic-collection/enumerate
--   generic-collection/group
--   generic-collection/sorted
--   generic-collection/reversed
+mixin:
+-   add-each
+-   delete-each
+-   to-array
+-   to-object
+-   all
+-   any
+-   min
+-   max
+-   sum
+-   average
+-   only
+-   flatten
+-   zip
+-   enumerate
+-   group
+-   sorted
+-   reversed
 
 methods:
 -   push

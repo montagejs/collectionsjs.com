@@ -2,12 +2,16 @@
 
 see:
 -   iterate-start-end
+-   iterator
 
 ---
 
 Iterates every value in this collection.
 
 ---
+
+:warning: The `iterate` method and its notion of iterators only applies to
+version 2. See [iterator][iterator] for version 1.
 
 The `iterate` method returns an `Iterator`.
 
