@@ -3,7 +3,7 @@ var path = require("path");
 var fs = require("q-io/fs");
 var yaml = require("js-yaml");
 
-Q.all([loadDirectory("../collection"), loadDirectory("../method")])
+Q.all([loadDirectory("../collection", parseCollectionDocument), loadDirectory("../method", parseMethodDocument)])
 .spread(function (collectionDocuments, methodDocuments) {
     // console.log(collectionDocuments, methodDocuments);
     // console.log(collectionDocuments);
@@ -13,7 +13,7 @@ Q.all([loadDirectory("../collection"), loadDirectory("../method")])
 })
 .done();
 
-function loadDirectory(pathname) {
+function loadDirectory(pathname, parse) {
     var documents = {};
 
     return fs.list(pathname)
@@ -22,7 +22,7 @@ function loadDirectory(pathname) {
             var name = path.basename(filename, ".md");
             return fs.read(path.join(pathname, filename))
             .then(function (content) {
-                documents[name] = parseDocument(content.toString("utf8"));
+                documents[name] = parse(content.toString("utf8"));
             })
             .catch(function (error) {
                 error.message = "Could not load " + path.join(pathname, filename) + " because " + error.message;
@@ -32,11 +32,30 @@ function loadDirectory(pathname) {
     });
 }
 
+function parseCollectionDocument(content) {
+    var document = parseDocument(content);
+    if (!document[0].methods) {
+        document[0].methods = [];
+    }
+    return document;
+}
+
+function parseMethodDocument(content) {
+    var document = parseDocument(content);
+    if (!document[0].collections) {
+        document[0].collections = [];
+    }
+    return document;
+}
+
 function parseDocument(content) {
     var document = [];
     yaml.safeLoadAll(content, function (part) {
         document.push(part);
     });
+    if (!document[0]) {
+        document[0] = {};
+    }
     return document;
 }
 
@@ -87,11 +106,11 @@ function lintAllMethodsKnown(collectionName, collectionDocument, methodDocuments
 }
 
 function lintSymmetricRelation(collectionName, collectionDocument, methodDocuments) {
-    var methodNames = Object.keys(methodDocuments);
+    var collectionMethodNames = collectionDocument[0].methods;
 
-    var missingRelations = methodNames.filter(function (methodName) {
+    var missingRelations = collectionMethodNames.filter(function (methodName) {
         var methodDocument = methodDocuments[methodName];
-        return methodDocument[0] && methodDocument[0].collections && methodDocument[0].collections.indexOf(collectionName) === -1;
+        return methodDocument && methodDocument[0].collections.indexOf(collectionName) === -1;
     });
 
     if (missingRelations.length) {
