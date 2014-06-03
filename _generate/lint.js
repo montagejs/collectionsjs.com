@@ -60,7 +60,7 @@ function lintCollection(collectionName, collectionDocument, methodDocuments) {
     }
 
     if (warnings.length) {
-        console.log("Warnings for", collectionName);
+        console.log("Warnings for", collectionName + ":");
         warnings.map(function (warning) {
             console.log("  ", warning);
         });
@@ -71,6 +71,10 @@ function lintCollection(collectionName, collectionDocument, methodDocuments) {
 function lintAllMethodsKnown(collectionName, collectionDocument, methodDocuments) {
     var methodNames = Object.keys(methodDocuments);
     var collectionMethods = collectionDocument[0].methods;
+
+    if (!collectionMethods) {
+        return false;
+    }
 
     var unknownMethods = collectionMethods.filter(function (name) {
         return methodNames.indexOf(name) === -1;
@@ -87,7 +91,7 @@ function lintSymmetricRelation(collectionName, collectionDocument, methodDocumen
 
     var missingRelations = methodNames.filter(function (methodName) {
         var methodDocument = methodDocuments[methodName];
-        return methodDocument[0].collections.indexOf(collectionName) === -1;
+        return methodDocument[0] && methodDocument[0].collections && methodDocument[0].collections.indexOf(collectionName) === -1;
     });
 
     if (missingRelations.length) {
