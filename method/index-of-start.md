@@ -8,6 +8,12 @@ collections:
 -   array
 -   deque
 
+see:
+-   last-index-of-start
+-   index-of
+-   find-index
+-   find-value
+
 todo:
 -   list implementation
 -   set implementation
@@ -32,4 +38,9 @@ comparison.
 This method is slow, requiring a linear walk.
 Fast implementations of `indexOf(value)` exist for `SortedSet`, `SortedArray`,
 and `SortedArraySet`, but do not support a start index.
+
+The precedent for the `indexOf` method is the JavaScript Array method, as
+described on [MDN][].
+
+[MDN]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 

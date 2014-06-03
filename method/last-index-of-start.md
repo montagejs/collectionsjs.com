@@ -8,6 +8,13 @@ collections:
 -   array
 -   deque
 
+see:
+-   index-of-start
+-   index-of
+-   find-last-value
+-   find-last
+-   find-last-index
+
 todo:
 -   list implementation
 -   set implementation
@@ -32,4 +39,9 @@ comparison.
 This method is slow, requiring a linear walk.
 Fast implementations of `lastIndexOf(value)` exist for `SortedSet`, `SortedArray`,
 and `SortedArraySet`, but do not support a start index.
+
+The precedent for the `lastIndexOf` method is the JavaScript Array method, as
+described on [MDN][].
+
+[MDN]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf
 
