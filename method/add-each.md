@@ -70,7 +70,7 @@ treated as a map from index to value at that index.
 var map = new Map();
 
 function argue() { return arguments; }
-map.addEach(argue("a, "b", "c"));
+map.addEach(argue("a", "b", "c"));
 expect(map.entries()).toEqual([[0, "a"], [1, "b"], [2, "c"]]);
 
 var list = new List();
