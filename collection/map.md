@@ -3,6 +3,7 @@
 name: Map()
 
 names:
+-   Map()
 -   Map(values)
 -   Map(values, equals, hash)
 -   Map(values, equals, hash, getDefault)

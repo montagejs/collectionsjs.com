@@ -1,5 +1,7 @@
 ---
 
+name: Map
+
 collections:
 -   map
 -   fast-map
@@ -9,7 +11,7 @@ collections:
 -   sorted-array-map
 -   weak-map
 
----
+--- |
 
 A map is the interface of a lookup table.
 The methods intrinsic to a map are `get(key)`, `set(key, value)`, `has(key)`,

@@ -1,5 +1,7 @@
 ---
 
+name: Deque
+
 collections:
 -   deque
 -   list

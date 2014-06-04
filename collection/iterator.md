@@ -9,27 +9,27 @@ names:
 -   Iterator(next)
 
 mixin:
--   for-each
--   map
--   filter
--   every
--   some
--   any
--   all
--   min
--   max
--   sum
--   average
--   flatten
--   zip
--   enumerate
--   sorted
--   group
--   reversed
--   to-array
--   to-object
--   iterator
--   iterate
+-   generic-collection/for-each
+-   generic-collection/map
+-   generic-collection/filter
+-   generic-collection/every
+-   generic-collection/some
+-   generic-collection/any
+-   generic-collection/all
+-   generic-collection/min
+-   generic-collection/max
+-   generic-collection/sum
+-   generic-collection/average
+-   generic-collection/flatten
+-   generic-collection/zip
+-   generic-collection/enumerate
+-   generic-collection/sorted
+-   generic-collection/group
+-   generic-collection/reversed
+-   generic-collection/to-array
+-   generic-collection/to-object
+-   generic-collection/iterator
+-   generic-collection/iterate
 
 methods:
 -   construct-clone
