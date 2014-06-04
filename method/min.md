@@ -10,3 +10,5 @@ see:
 
 Returns the smallest value in this collection.
 
+--- |
+

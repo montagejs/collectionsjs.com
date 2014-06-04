@@ -10,7 +10,7 @@ see:
 
 Returns whether this collection is equivalent to the given collection.
 
----
+--- |
 
 In general, collections are equivalent if they have the same content.
 However, length, order, and uniqueness must also be equivalent if this collection,

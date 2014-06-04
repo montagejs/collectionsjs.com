@@ -25,7 +25,7 @@ methods:
 
 A map with a maximum capacity that will evict the least frequently used entry.
 
----
+--- |
 
 An `LfuMap` is backed by an `LfuSet` of *[key, value]* entries, with
 `contentEquals` and `contentHash` overriden to only consider the *key*.

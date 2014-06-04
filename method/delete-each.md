@@ -16,7 +16,7 @@ todo:
 Deletes every value or every value for each key.
 Returns the number of successful deletions.
 
----
+--- |
 
 If provided an `equals` argument, it will forward that operator to the
 underlying `delete` implementation, which may or may not be appropriate

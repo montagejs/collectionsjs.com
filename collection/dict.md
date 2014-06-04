@@ -1,5 +1,7 @@
 ---
 
+name: Dict()
+
 names:
 -   Dict()
 -   Dict(entries)
@@ -27,7 +29,7 @@ methods:
 
 A mapping from string keys to values.
 
----
+--- |
 
 A dictionary is a specialized `map`.
 The keys are required to be strings.
@@ -43,7 +45,7 @@ The `new` keyword is optional.
 
 The optional first argument of the dictionary constructor is an object to copy
 into the dictionary initially.
-The value to copy may be…
+The value to copy may be...
 
 -   An object literal
 -   Any map-like collection with strings for keys

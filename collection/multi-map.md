@@ -20,7 +20,7 @@ methods:
 
 A map from keys to buckets, typically arrays.
 
----
+--- |
 
 A `MultMap` is a thin layer on a `Map`.
 The `getDefault` and `set` methods are overriden to ensure that there will

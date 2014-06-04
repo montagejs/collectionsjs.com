@@ -1,5 +1,7 @@
 ---
 
+name: GenericMap()
+
 methods:
 -   add-each
 -   get-key
@@ -19,4 +21,6 @@ methods:
 
 An abstract collection that implements many generic methods, reusable by most
 maps.
+
+--- |
 

@@ -33,8 +33,8 @@ var interfaces = new Dict(interfaceRefs.map(function (ref) {
         ref: ref,
         name: front.name,
         collections: front.collections,
-        summary: render(parts[1]),
-        detail: render(parts[2])
+        summary: render(front.summary || parts[1] || ""),
+        detail: render(front.detail || parts[2] || "")
     }];
 }));
 
@@ -48,9 +48,9 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         inherits: front.inherits || [],
         mixin: front.mixin || [],
         methods: front.methods || [],
-        summary: render(parts[1] || ""),
-        detail: render(parts[2] || ""),
-        samples: render(parts[3] || "")
+        summary: render(front.summary || parts[1] || ""),
+        detail: render(front.detail || parts[2] || ""),
+        samples: render(front.samples || parts[3] || "")
     }];
 }));
 
@@ -75,9 +75,9 @@ var methods = new Dict(methodRefs.map(function (ref) {
         name: front.name,
         names: front.names,
         deprecated: Boolean(front.deprecated),
-        summary: render(parts[1] || ""),
-        detail: render(parts[2] || ""),
-        samples: render(parts[3] || ""),
+        summary: render(front.summary || parts[1] || ""),
+        detail: render(front.detail || parts[2] || ""),
+        samples: render(front.samples || parts[3] || ""),
         collections: myCollections.values(),
         versions: new Dict(versions.map(function (versionSpecific, version) {
             return [version, {
@@ -86,7 +86,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
                 name: versionSpecific.name || front.name,
                 names: versionSpecific.names || front.names || [versionSpecific.name || front.name],
                 deprecated: Boolean(front.deprecated),
-                summary: render(parts[1] || "")
+                summary: render(front.summary || parts[1] || "")
             }];
         }))
     }];

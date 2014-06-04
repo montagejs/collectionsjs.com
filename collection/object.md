@@ -1,5 +1,7 @@
 ---
 
+name: Object()
+
 methods:
 -   is-object
 -   clone
@@ -23,4 +25,6 @@ methods:
 ---
 
 The native JavaScript object, with some additional constructor methods shimmed.
+
+--- |
 

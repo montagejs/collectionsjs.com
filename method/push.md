@@ -16,7 +16,7 @@ see:
 
 Adds values to the end of a collection.
 
----
+--- |
 
 For purposes of genericity, collections that have an intrinsic relative order
 for their values, like a `SortedSet`, support the `push` method but do not

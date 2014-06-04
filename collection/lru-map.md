@@ -25,7 +25,7 @@ methods:
 
 A map with a maximum capacity that will evict the least recently used entry.
 
----
+--- |
 
 An `LruMap` is backed by an `LruSet` of *[key, value]* entries, with
 `contentEquals` and `contentHash` overriden to only consider the *key*.

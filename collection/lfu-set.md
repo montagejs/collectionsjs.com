@@ -32,7 +32,7 @@ methods:
 
 A set with a maximum capacity that will evict the least frequently used value.
 
----
+--- |
 
 An `LfuSet` is backed by a `Set` and a doubly linked list of `Set` instances for
 each cohort of values by frequency of use.

@@ -19,7 +19,7 @@ see:
 Aggregates every value in this collection with the result collected up to that
 index.
 
----
+--- |
 
 The callback argument is a function that will accept the result collected so
 far, the value for each entry, the key or index, and the collection itself.

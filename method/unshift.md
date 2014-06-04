@@ -18,7 +18,7 @@ see:
 
 Adds values to the beginning of a collection.
 
----
+--- |
 
 For purposes of genericity, collections that have an intrinsic relative order
 for their values, like a `SortedSet`, support the `unsfhit` method but do

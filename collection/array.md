@@ -56,7 +56,7 @@ methods:
 An ordered collection of values with fast random access, `push(...values)`, and
 `pop()`, but can be slow to splice when sufficiently massive.
 
----
+--- |
 
 The `shim-array` module provides extensions so it hosts all the expressiveness
 of other collections.  The `shim-array` module shims some ECMAScript 5 methods

@@ -35,7 +35,7 @@ methods:
 
 A collection of unique values.
 
----
+--- |
 
 The constructor will add all of the values if any are given.
 If the values are a map, the keys will be lost.

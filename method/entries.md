@@ -14,7 +14,7 @@ see:
 
 Returns an array of all *[key, value]* entries for this map.
 
----
+--- |
 
 Previous versions called this method `items()`.
 This name has been deprecated in version 1, and removed in version 2.

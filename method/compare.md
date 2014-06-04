@@ -10,7 +10,7 @@ see:
 
 Compares two values and returns a number having the same relative value to zero.
 
----
+--- |
 
 Compare will return a number
 

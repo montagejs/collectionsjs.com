@@ -7,7 +7,7 @@ name: delete(value)
 Deletes the first equivalent value.
 Returns whether the key was found and successfully deleted.
 
----
+--- |
 
 This is a very fast operation for `Set`, `LruSet`, and `FastSet` because they
 are backed by hash tables.

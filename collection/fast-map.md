@@ -1,5 +1,7 @@
 ---
 
+name: FastMap()
+
 names:
 -   FastMap()
 -   FastMap(values)
@@ -27,7 +29,7 @@ methods:
 
 The backing store for a `Map`.
 
----
+--- |
 
 The `FastMap` is a map from arbitrary keys to values.
 It is itself backed by a `FastSet` of *[key, value]* entries, with

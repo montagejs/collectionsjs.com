@@ -1,5 +1,7 @@
 ---
 
+name: GenericCollection()
+
 methods:
 -   add-each
 -   delete-each
@@ -33,4 +35,6 @@ methods:
 
 An abstract collection that implements many generic methods, reusable by most
 collections.
+
+--- |
 

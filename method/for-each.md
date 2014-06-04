@@ -16,7 +16,7 @@ see:
 
 Calls the callback for each entry in the collection.
 
----
+--- |
 
 The given callback receives the value for each entry, the key or index, and the
 collection itself.

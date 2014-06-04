@@ -14,7 +14,7 @@ todo:
 Seeks out and deletes an equivalent value.
 Returns whether the value was found and successfully deleted.
 
----
+--- |
 
 This is a slow operation because it involves a linear walk to find the
 equivalent value.

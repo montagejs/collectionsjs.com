@@ -10,7 +10,7 @@ see:
 
 Consistently returns the same string for the same object.
 
----
+--- |
 
 To support maps and sets in advance of the `Map` and `Set` soon to be provided
 by JavaScript, `hash` allows us to emulate these collections.

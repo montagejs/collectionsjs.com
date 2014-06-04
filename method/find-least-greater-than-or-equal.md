@@ -13,7 +13,7 @@ see:
 Finds the smallest value greater than or equal to the given value,
 returning the node at which it was found, or undefined.
 
----
+--- |
 
 Values are compared using the collection’s intrinsic `contentEquals` and
 `contentCompare`, determined at time of construction.

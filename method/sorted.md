@@ -13,7 +13,7 @@ see:
 
 Returns a sorted array of the values in this collection.
 
----
+--- |
 
 The comparator must be a function that accepts two values and returns a number.
 

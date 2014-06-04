@@ -6,7 +6,7 @@ name: add(value)
 
 Adds a value to a collection.
 
----
+--- |
 
 Ignores the operation if the value already exists within a set.
 Regardless of the collection, returns whether the value was in fact added to the

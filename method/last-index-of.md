@@ -9,7 +9,7 @@ names:
 
 Returns the last position of a value, or *-1* if the value is not found.
 
----
+--- |
 
 Returns the position of the last of equivalent values.
 Equivalence is defined by the equality operator intrinsic to the collection,

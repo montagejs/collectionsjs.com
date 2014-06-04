@@ -4,4 +4,5 @@ name: dropWhile(callback)
 
 ---
 
----
+--- |
+

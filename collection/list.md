@@ -45,7 +45,7 @@ methods:
 
 An ordered list of values.
 
----
+--- |
 
 A `List` is backed by a doubly linked list with a head node.
 

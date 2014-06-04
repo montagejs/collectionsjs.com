@@ -15,7 +15,7 @@ see:
 
 Returns whether any entry in this collection passes a given test.
 
----
+--- |
 
 The given callback receives the value for each entry, the key or index, and the
 collection itself.

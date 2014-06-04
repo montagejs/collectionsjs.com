@@ -1,5 +1,7 @@
 ---
 
+name: FastSet()
+
 inherits:
 -   generic-collection
 -   generic-set
@@ -23,7 +25,7 @@ methods:
 
 The backing store for `Set` and `FastMap`.
 
----
+--- |
 
 A `FastSet` is a set of arbitrary values, including objects.
 It is itself backed by a `Dict` of hash keys to a `List` of non-equivalent

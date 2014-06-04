@@ -24,7 +24,7 @@ methods:
 A map of *[key, value]* entries, where keys may be arbitrary values including
 objects.
 
----
+--- |
 
 The optional `equals` and `hash` override the `contentEquals` and `contentHash`
 properties that operate on the keys of the map to determine whether keys are

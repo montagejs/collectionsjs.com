@@ -15,7 +15,7 @@ see:
 
 Creates a deep replica of this collection.
 
----
+--- |
 
 Clones values deeply, to the specified depth, using the memo map to connect
 reference cycles.

@@ -6,7 +6,7 @@ name: has(value)
 
 Whether an equivalent value exists in this collection.
 
----
+--- |
 
 This operation is very fast for sets because they are backed by a hash table.
 The operation is fast for `SortedSet` and `SortedArraySet` by virtue of a binary

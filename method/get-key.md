@@ -12,7 +12,7 @@ names:
 
 Gets the value for a key in a map.
 
----
+--- |
 
 If there is no entry with the request key, and the user calls `get` with a
 second argument *even if that argument is undefined*, the second argument will

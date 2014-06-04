@@ -17,7 +17,7 @@ methods:
 
 A collection of unique values stored in sorted order, backed by a plain array.
 
----
+--- |
 
 If the given values are an actual array, the `SortedArraySet` takes ownership of
 that array and maintains its content.

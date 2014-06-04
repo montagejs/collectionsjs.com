@@ -55,7 +55,7 @@ methods:
 
 A collection of values stored in sorted order using a binary tree.
 
----
+--- |
 
 A `SortedSet` is a splay tree, using the top-down splaying algorithm from
 “Self-adjusting Binary Search Trees” by Sleator and Tarjan.

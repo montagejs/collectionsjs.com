@@ -10,7 +10,7 @@ see:
 Assuming that this is a collection of collections, returns a new collection that
 contains all the values of each nested collection in order.
 
----
+--- |
 
 For collections that do not allow duplicate values, like `Set`, `concat` will
 favor the last of all duplicates.

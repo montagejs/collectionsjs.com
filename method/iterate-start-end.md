@@ -17,7 +17,7 @@ todo:
 
 Iterates from start to end within a collection.
 
----
+--- |
 
 Returns an iterator that will start at the given index and stop when it reaches
 the end.

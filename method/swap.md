@@ -14,7 +14,7 @@ see:
 
 Replaces a length of values from a starting position with the given values.
 
----
+--- |
 
 Unlike `splice`, if the start index is beyond the length of an array, `swap`
 will extend the array to the given start index, leaving holes between the old

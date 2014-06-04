@@ -15,7 +15,7 @@ see:
 
 Finds the last equivalent value, searching from the right.
 
----
+--- |
 
 For `List` and `SortedSet`, returns the node at which the value was found, or
 `null` if no equivalent value exists.

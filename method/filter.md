@@ -13,7 +13,7 @@ see:
 Returns an array with each value from this collection that passes the given
 test.
 
----
+--- |
 
 The given callback receives the value for each entry, the key or index, and the
 collection itself.

@@ -1,5 +1,7 @@
 ---
 
+name: Heap()
+
 names:
 -   Heap()
 -   Heap(values)
@@ -39,7 +41,7 @@ methods:
 
 A collection of values with the largest always on top.
 
----
+--- |
 
 A heap is a binary tree where each node is greater than both its leaves.
 The tree itself is complete or nearly complete at all times, so the heap is

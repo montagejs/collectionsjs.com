@@ -21,7 +21,7 @@ methods:
 
 A map of key value pairs, sorted by key, backed by an array.
 
----
+--- |
 
 A `SortedArrayMap` is a `Map` backed by a `SortedArraySet`, which is in turn
 backed by a `SortedArray`, backed by an `Array`.

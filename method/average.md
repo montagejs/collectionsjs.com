@@ -11,7 +11,7 @@ names:
 Returns the arithmetic mean of the collection, by computing its sum and the
 count of values and returning the quotient.
 
----
+--- |
 
 The optional zero argument is the initial value for both the sum and count, and
 defaults to *0*.

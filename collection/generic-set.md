@@ -1,5 +1,7 @@
 ---
 
+name: GenericSet()
+
 methods:
 -   union
 -   intersection
@@ -14,4 +16,6 @@ methods:
 
 An abstract collection that implements many generic methods, reusable by most
 sets.
+
+--- |
 

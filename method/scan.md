@@ -6,7 +6,7 @@ name: scan(index, default)
 
 An internal utility of `List` coercing indexes to nodes.
 
----
+--- |
 
 Returns the `index` if it is a node.
 Returns the `default` if the index is not defined.

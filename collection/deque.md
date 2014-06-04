@@ -1,5 +1,7 @@
 ---
 
+name: Deque()
+
 names:
 -   Deque()
 -   Deque(values)
@@ -39,12 +41,12 @@ todo:
 -   clone
 -   iterate
 
---- |
-
-An ordered collection of values with fast random access, `push`, `pop`, `shift`,
-and `unshift`, but slow to splice when massive.
-
 ---
+
+An ordered collection of values with fast random access, push, pop, shift,
+and unshift, but slow to splice.
+
+--- |
 
 A double ended queue is backed by a circular buffer, which cuts down on garbage
 collector churn.

@@ -45,7 +45,7 @@ methods:
 
 A collection of values stored in stable stored order, backed by an array.
 
----
+--- |
 
 If the given values are an array, the `SortedArray` takes ownership of that
 array and modifies it in place.

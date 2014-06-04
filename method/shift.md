@@ -19,7 +19,7 @@ see:
 
 Removes a value from the beginning of a collection, and returns that value.
 
----
+--- |
 
 For a `SortedSet`, this is equivalent to removing the minimum value of the
 collection.

@@ -10,7 +10,7 @@ names:
 
 Retrieves the equivalent value from this collection.
 
----
+--- |
 
 This is a slow operation that visits each value in the collection.
 By default, the equality operator is `Object.equals`.

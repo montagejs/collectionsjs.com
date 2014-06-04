@@ -6,7 +6,7 @@ name: add(value, key)
 
 Adds a value for a given key to a map.
 
----
+--- |
 
 This is an alias for `set(key, value)` that does not have an obvious reason to
 exist.

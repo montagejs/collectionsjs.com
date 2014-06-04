@@ -32,7 +32,7 @@ methods:
 
 A set with a maximum capacity that will evict the least recently used value.
 
----
+--- |
 
 An `LruSet` is backed by a `Set` and uses the set’s own insertion order list to
 track which value was least recently used.

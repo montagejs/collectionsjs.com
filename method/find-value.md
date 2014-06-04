@@ -23,7 +23,7 @@ see:
 
 Finds the first equivalent value.
 
----
+--- |
 
 For `List` and `SortedSet`, returns the node at which the value was found, or
 `null` if no equivalent value exists.

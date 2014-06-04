@@ -17,7 +17,7 @@ Returns an array of the values contained in the
 half-open interval [start, end), that is, including the start and
 excluding the end.
 
----
+--- |
 
 For `Array`, `List`, and `Deque`, both terms may be numeric positive or negative
 indicies.
