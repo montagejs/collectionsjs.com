@@ -1,6 +1,6 @@
 ---
 
-name: addEach(...)
+name: addEach(values|map)
 
 names:
 -   addEach(values)

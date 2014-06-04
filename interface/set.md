@@ -11,6 +11,10 @@ collections:
 -   lru-set
 -   lfu-set
 
+---
+
+Any collection that has no duplicate values.
+
 --- |
 
 A set represents a collection of unique values.

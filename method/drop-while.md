@@ -1,5 +1,7 @@
 ---
 
+name: dropWhile(callback)
+
 ---
 
 ---

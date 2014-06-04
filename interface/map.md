@@ -11,6 +11,10 @@ collections:
 -   sorted-array-map
 -   weak-map
 
+---
+
+Any lookup table from keys to values.
+
 --- |
 
 A map is the interface of a lookup table.

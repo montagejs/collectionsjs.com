@@ -1,5 +1,7 @@
 ---
 
+name: sortedSetLog(...)
+
 ---
 
 Writes a tree describing the internal state of the sorted set splay tree.

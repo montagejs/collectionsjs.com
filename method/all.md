@@ -2,7 +2,7 @@
 
 name: all()
 
-deprecated: YES
+deprecated: true
 
 see:
 -   any

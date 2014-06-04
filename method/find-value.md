@@ -1,14 +1,18 @@
 ---
 
-name: findValue(value)
-
-names:
--   find(value)
--   find(value, equals)
--   find(value, equals, start)
--   findValue(value)
--   findValue(value, equals)
--   findValue(value, equals, start)
+versions:
+    1:
+        name: find(value)
+        names:
+            -   find(value)
+            -   find(value, equals)
+            -   find(value, equals, start)
+    2:
+        name: findValue(value)
+        names:
+        -   findValue(value)
+        -   findValue(value, equals)
+        -   findValue(value, equals, start)
 
 see:
 -   find-last-value

@@ -9,6 +9,10 @@ collections:
 
 ---
 
+Any collection of ordered values, for queues and stacks.
+
+---
+
 A deque, our double-ended-queue, is a collection that supports
 `push(...values)`, `pop()`, `shift()`, and `unshift(...values)`.
 An `Array` is a prime example of a `Deque`, but `shift()` and
