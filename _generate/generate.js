@@ -57,6 +57,24 @@ function generate(templates) {
 
 function serve() {
     var httpApps = require("q-io/http-apps");
-    require("q-io/http").Server(httpApps.HandleHtmlFragmentResponses(httpApps.ListDirectories(httpApps.FileTree("_site")))).listen(8000);
+
+    var app = httpApps.HandleHtmlFragmentResponses(httpApps.ListDirectories(httpApps.FileTree("_site")));
+    var app2 = function (request, response) {
+        return app(request, response)
+        .then(function (response) {
+            // if no .html extension then retry with .html extension. Leads
+            // to cleaner urls (and emulates github)
+            if (response.status === 404 && request.url.search(/\.html$/) === -1) {
+                request.url += ".html";
+                request.path += ".html";
+                request.pathInfo += ".html";
+                return app(request, response);
+            } else {
+                return response;
+            }
+        });
+    };
+
+    require("q-io/http").Server(app2).listen(8000);
     console.log("Serving on http://127.0.0.1:8000");
 }
