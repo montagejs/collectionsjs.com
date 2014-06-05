@@ -1,6 +1,6 @@
 ---
 
-name: has(value)
+name: has(value, equals?)
 
 names:
 -   has(value)

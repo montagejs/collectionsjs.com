@@ -2,7 +2,11 @@
 
 version: +
 
-name: findLast(callback, thisp)
+name: findLast(callback, thisp?)
+
+names:
+-   findLast(callback)
+-   findLast(callback, thisp)
 
 see:
 -   find

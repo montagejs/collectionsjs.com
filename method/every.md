@@ -1,6 +1,6 @@
 ---
 
-name: every(callback)
+name: every(callback, thisp?)
 
 names:
 -   every(callback)

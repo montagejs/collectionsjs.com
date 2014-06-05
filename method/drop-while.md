@@ -1,6 +1,6 @@
 ---
 
-name: dropWhile(callback)
+name: dropWhile(callback, thisp?)
 
 ---
 

@@ -1,8 +1,10 @@
 ---
 
-name: any()
+version: v1
 
 deprecated: true
+
+name: any()
 
 see:
 -   all

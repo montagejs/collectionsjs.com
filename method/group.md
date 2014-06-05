@@ -1,6 +1,6 @@
 ---
 
-name: group(callback)
+name: group(callback, thisp?, equals?)
 
 names:
 -   group(callback)

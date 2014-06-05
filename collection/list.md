@@ -41,6 +41,10 @@ methods:
 -   make-observable
 -   iterate
 
+todo:
+-   peekBack
+-   pokeBack
+
 ---
 
 An ordered list of values.

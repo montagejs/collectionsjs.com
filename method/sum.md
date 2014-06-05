@@ -1,6 +1,6 @@
 ---
 
-name: sum()
+name: sum(zero?)
 
 names:
 -   sum()

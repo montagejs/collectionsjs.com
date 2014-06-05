@@ -1,6 +1,10 @@
 ---
 
-name: compare(value)
+name: compare(value, compare?)
+
+names:
+-   compare(value)
+-   compare(value, compare)
 
 see:
 -   equals

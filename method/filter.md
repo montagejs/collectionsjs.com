@@ -1,6 +1,10 @@
 ---
 
-name: filter(callback, thisp)
+name: filter(callback, thisp?)
+
+names:
+-   filter(callback)
+-   filter(callback, thisp)
 
 see:
 -   for-each

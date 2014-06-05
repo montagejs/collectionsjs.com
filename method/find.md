@@ -2,7 +2,7 @@
 
 version: +
 
-name: find(callback)
+name: find(callback, thisp?)
 
 names:
 -   find(callback)

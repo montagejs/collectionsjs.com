@@ -1,6 +1,6 @@
 ---
 
-name: slice(...)
+name: slice(start?, end?)
 
 names:
 -   slice()

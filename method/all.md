@@ -1,5 +1,7 @@
 ---
 
+version: v1
+
 name: all()
 
 deprecated: true

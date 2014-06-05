@@ -1,6 +1,6 @@
 ---
 
-name: get(value)
+name: get(value, equals?)
 
 names:
 -   get(value)

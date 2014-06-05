@@ -1,6 +1,6 @@
 ---
 
-name: clone()
+name: clone(depth?, memo?)
 
 names:
 -   clone()

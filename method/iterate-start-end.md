@@ -2,7 +2,7 @@
 
 version: v2
 
-name: iterate(start, end)
+name: iterate(start?, end?)
 
 names:
 -   iterate()

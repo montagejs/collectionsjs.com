@@ -1,6 +1,6 @@
 ---
 
-name: some(callback)
+name: some(callback, thisp?)
 
 names:
 -   some(callback)

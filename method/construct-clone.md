@@ -1,6 +1,6 @@
 ---
 
-name: constructClone()
+name: constructClone(values?)
 
 names:
 -   constructClone()

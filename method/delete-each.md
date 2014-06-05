@@ -1,6 +1,6 @@
 ---
 
-name: deleteEach(...)
+name: deleteEach(values|keys, equals?)
 
 names:
 -   deleteEach(values)

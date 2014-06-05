@@ -1,15 +1,14 @@
 ---
 
-
 versions:
     v1:
-        name: findLast(value)
+        name: findLast(value, equals?, start?)
         names:
         -   findLast(value)
         -   findLast(value, equals)
         -   findLast(value, equals, start)
     v2:
-        name: findLastValue(value)
+        name: findLastValue(value, equals?, start?)
         names:
         -   findLastValue(value)
         -   findLastValue(value, equals)

@@ -1,6 +1,6 @@
 ---
 
-name: join(delimiter)
+name: join(delimiter?)
 
 names:
 -   join()

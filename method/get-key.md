@@ -1,6 +1,6 @@
 ---
 
-name: get(key)
+name: get(key|index, default?)
 
 names:
 -   get(key)

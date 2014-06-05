@@ -1,6 +1,6 @@
 ---
 
-name: map(callback)
+name: map(callback, thisp?)
 
 names:
 -   map(callback)

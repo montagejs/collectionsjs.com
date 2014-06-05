@@ -1,6 +1,6 @@
 ---
 
-name: delete(value)
+name: delete(value, equals?)
 
 names:
 -   delete(value)

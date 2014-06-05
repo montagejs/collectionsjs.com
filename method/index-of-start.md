@@ -1,6 +1,6 @@
 ---
 
-name: indexOf(value)
+name: indexOf(value, start?)
 
 names:
 -   indexOf(value)

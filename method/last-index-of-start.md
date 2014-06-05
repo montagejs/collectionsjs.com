@@ -1,6 +1,6 @@
 ---
 
-name: lastIndexOf(value)
+name: lastIndexOf(value, start?)
 
 names:
 -   lastIndexOf(value)

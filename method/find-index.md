@@ -2,7 +2,11 @@
 
 version: x
 
-name: findIndex(callback, thisp)
+name: findIndex(callback, thisp?)
+
+names:
+-   findIndex(callback)
+-   findIndex(callback, thisp)
 
 see:
 -   find-last-index

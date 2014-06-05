@@ -1,6 +1,6 @@
 ---
 
-name: sorted()
+name: sorted(compare?)
 
 names:
 -   sorted()

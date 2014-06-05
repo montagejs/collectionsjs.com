@@ -1,6 +1,6 @@
 ---
 
-name: forEach(callback)
+name: forEach(callback, thisp?)
 
 names:
 -   forEach(callback)
