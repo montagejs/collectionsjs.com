@@ -9,6 +9,7 @@ var data = require("./scrape");
 setup()
 .then(loadTemplates)
 .then(generate)
+.then(buildJavascript)
 .then(serve)
 .done();
 
@@ -54,6 +55,13 @@ function generate(templates) {
     console.log("Generated.");
 }
 
+function buildJavascript() {
+    var build = require("mr/build");
+    return build("assets/script/index.js")
+    .then(function (bundle) {
+        return fs.write(path.join("_site", "script", "recollections.js"), bundle);
+    });
+}
 
 function serve() {
     var httpApps = require("q-io/http-apps");
