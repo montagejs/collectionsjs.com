@@ -20,7 +20,6 @@ function setup() {
     })
     .then(function () {
         return Q.all([
-            fs.makeDirectory("_site/collection"),
             fs.makeDirectory("_site/method")
         ]);
     });
@@ -44,7 +43,7 @@ function loadTemplates() {
 function generate(templates) {
     var collectionTemplate = templates.collection;
     data.collections.map(function (details, name) {
-        fs.write(path.join("_site", "collection", name + ".html"), collectionTemplate(details)).done();
+        fs.write(path.join("_site", name + ".html"), collectionTemplate(details)).done();
     });
 
     var methodTemplate = templates.method;
