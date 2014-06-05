@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{name}} - Collections</title>
+    <title>{{name}} method - Collections</title>
 
     <link rel="stylesheet" href="/style/bootstrap.min.css">
     <link rel="stylesheet" href="/style/style.css">
 
 </head>
-<body>
+<body class="method">
     <div class="container">
         <nav class="row" role="navigation">
             <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
@@ -18,12 +18,12 @@
             <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
         </nav>
 
-        <h2>{{name}}</h2>
+        <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
 
         <div class="row">
             <div class="col-sm-6">
 
-                {{#if deprected}}<p><strong>Depreacted.</strong></p>{{/if}}
+                {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
 
                 {{{summary}}}
 

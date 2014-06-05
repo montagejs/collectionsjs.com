@@ -17,3 +17,13 @@ nav {
 .questions > div {
     margin-bottom: 10px;
 }
+
+.method h2::before {
+    font-style: italic;
+    color: #CCC;
+    content: "collection.";
+}
+
+.deprecated {
+    text-decoration: line-through;
+}
