@@ -32,6 +32,7 @@ methods:
 -   last-index-of-start
 -   find-value
 -   find-last-value
+-   has-value
 -   has-value-equals
 -   reduce
 -   reduce-right

@@ -32,6 +32,7 @@ methods:
 -   pop
 -   shift
 -   unshift
+-   has-value
 -   has-value-equals
 -   get-key
 -   set

@@ -17,8 +17,11 @@ inherits:
 methods:
 -   find-value
 -   find-last-value
+-   has-value
 -   has-value-equals
+-   get-value
 -   get-value-equals
+-   delete-value
 -   delete-value-equals
 -   clear
 -   add-value
