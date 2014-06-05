@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collections</title>
+
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3"><a href="/">Collections</a></div>
+            <a class="col-sm-3" href="/documenation">Documentation</a>
+        </nav>
+        <div class="row search">
+            <input class="col-md-9 col-sm-8 col-xs-11" type="text" placeholder="Search">
+            <a class="col-md-3 col-sm-4 col-xs-12" href="/all">All collections and methods</a>
+        </div>
+        <h2>Choose a collection</h2>
+        <div class="row">
+            <div class="col-sm-9 questions">
+                <div class="row">
+                    <p class="col-sm-4 col-xs-12">Do you want a map or a list? <a href="#">Explain…</a></p>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value="" checked> Doesn't matter</label>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value=""> A key => value mapping</label>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value=""> A list</label>
+                </div>
+                <div class="row">
+                    <p class="col-sm-4 col-xs-12">Which items do you need quick access to? <a href="#">Explain…</a></p>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value="" checked> Doesn't matter</label>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> All items</label>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> Just the first or last item</label>
+                    <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> The smallest or largest item</label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <ul>
+                    <li>Array</li>
+                    <li><a href="collection.html">Dict</a></li>
+                    <li>Set</li>
+                    <li>Map</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

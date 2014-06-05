@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{name}} - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2>{{name}}</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                {{#if deprected}}<p><strong>Depreacted.</strong></p>{{/if}}
+
+                {{{summary}}}
+
+                {{{detail}}}
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Constructors</h3>
+
+                <ul>
+                {{#each names}}
+                    <li>{{this}}</li>
+                {{/each}}
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    {{#each collections}}
+                    <li><a href="/collection/{{ref}}.html">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

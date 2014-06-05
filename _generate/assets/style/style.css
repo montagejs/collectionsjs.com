@@ -1,0 +1,19 @@
+.search input {
+    font-size: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.search a {
+    line-height: 52px;
+}
+
+nav {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 24.5px;
+}
+
+.questions > div {
+    margin-bottom: 10px;
+}
