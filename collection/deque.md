@@ -27,8 +27,11 @@ methods:
 -   peek-back
 -   poke
 -   poke-back
+-   get-value
 -   get-value-equals
+-   index-of
 -   index-of-start
+-   last-index-of
 -   last-index-of-start
 -   find-value
 -   find-last-value

@@ -45,8 +45,6 @@ methods:
 -   take-while
 -   zip-iterator
 -   enumerate-iterator
-
-constructor-methods:
 -   iterator-iterate
 -   iterator-cycle
 -   iterator-concat

@@ -36,7 +36,8 @@ methods:
 -   has-value-equals
 -   get-key
 -   set
--   delete-key
+-   delete-value
+-   delete-value-equals
 -   find-value
 -   find-last-value
 -   swap
