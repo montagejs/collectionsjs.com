@@ -1,6 +1,6 @@
 ---
 
-name: Object()
+name: Object
 
 methods:
 -   is-object

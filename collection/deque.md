@@ -1,6 +1,6 @@
 ---
 
-name: Deque()
+name: Deque
 
 names:
 -   Deque()

@@ -1,6 +1,6 @@
 ---
 
-name: GenericCollection()
+name: GenericCollection
 
 methods:
 -   add-each

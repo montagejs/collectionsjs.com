@@ -1,6 +1,6 @@
 ---
 
-name: Heap()
+name: Heap
 
 names:
 -   Heap()

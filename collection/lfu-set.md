@@ -1,6 +1,6 @@
 ---
 
-name: LfuSet()
+name: LfuSet
 
 names:
 -   LfuSet(values)

@@ -1,5 +1,5 @@
 
-name: WeakMap()
+name: WeakMap
 
 names:
 -   WeakMap()

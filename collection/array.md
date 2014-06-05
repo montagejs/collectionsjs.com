@@ -1,6 +1,6 @@
 ---
 
-name: Array()
+name: Array
 
 names:
 -   Array()

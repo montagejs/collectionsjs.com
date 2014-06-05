@@ -1,6 +1,6 @@
 ---
 
-name: GenericMap()
+name: GenericMap
 
 methods:
 -   add-each

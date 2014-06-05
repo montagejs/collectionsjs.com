@@ -1,6 +1,6 @@
 ---
 
-name: Iterator()
+name: Iterator
 
 version: 1
 

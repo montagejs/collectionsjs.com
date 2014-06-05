@@ -1,6 +1,6 @@
 ---
 
-name: LruMap()
+name: LruMap
 
 names:
 -   LruMap()

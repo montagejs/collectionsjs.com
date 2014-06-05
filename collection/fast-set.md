@@ -1,6 +1,6 @@
 ---
 
-name: FastSet()
+name: FastSet
 
 inherits:
 -   generic-collection

@@ -1,6 +1,6 @@
 ---
 
-name: SortedArray()
+name: SortedArray
 
 names:
 -   SortedArray()

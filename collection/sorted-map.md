@@ -1,6 +1,6 @@
 ---
 
-name: SortedMap()
+name: SortedMap
 
 names:
 -   SortedMap()

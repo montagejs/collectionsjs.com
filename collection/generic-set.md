@@ -1,6 +1,6 @@
 ---
 
-name: GenericSet()
+name: GenericSet
 
 methods:
 -   union

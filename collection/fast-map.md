@@ -1,6 +1,6 @@
 ---
 
-name: FastMap()
+name: FastMap
 
 names:
 -   FastMap()

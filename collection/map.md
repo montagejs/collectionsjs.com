@@ -1,6 +1,6 @@
 ---
 
-name: Map()
+name: Map
 
 names:
 -   Map()

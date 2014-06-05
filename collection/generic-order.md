@@ -1,6 +1,6 @@
 ---
 
-name: GenericOrder()
+name: GenericOrder
 
 methods:
 -   equals

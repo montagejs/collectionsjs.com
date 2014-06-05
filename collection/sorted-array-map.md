@@ -1,6 +1,6 @@
 ---
 
-name: SortedArrayMap()
+name: SortedArrayMap
 
 names:
 -   SortedArrayMap()

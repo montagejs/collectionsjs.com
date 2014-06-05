@@ -1,6 +1,6 @@
 ---
 
-name: SortedArraySet()
+name: SortedArraySet
 
 names:
 -   SortedArraySet()

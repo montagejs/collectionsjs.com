@@ -1,6 +1,6 @@
 ---
 
-name: LruSet()
+name: LruSet
 
 names:
 -   LruSet(values)

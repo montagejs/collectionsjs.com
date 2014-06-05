@@ -1,6 +1,6 @@
 ---
 
-name: MultiMap()
+name: MultiMap
 
 names:
 -   MultiMap()

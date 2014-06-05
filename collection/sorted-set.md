@@ -1,6 +1,6 @@
 ---
 
-name: SortedSet()
+name: SortedSet
 
 names:
 -   SortedSet()

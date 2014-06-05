@@ -1,6 +1,6 @@
 ---
 
-name: List()
+name: List
 
 names:
 -   List()

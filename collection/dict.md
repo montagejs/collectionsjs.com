@@ -1,6 +1,6 @@
 ---
 
-name: Dict()
+name: Dict
 
 names:
 -   Dict()

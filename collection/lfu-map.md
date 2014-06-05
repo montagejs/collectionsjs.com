@@ -1,6 +1,6 @@
 ---
 
-name: LfuMap()
+name: LfuMap
 
 names:
 -   LfuMap()
