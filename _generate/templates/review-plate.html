@@ -1,0 +1,69 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Collections</title>
+        <link rel="stylesheet" href="style/review-plate.css">
+        <link rel="stylesheet" href="style/tomorrow.css">
+        <script src="script/data.js" defer></script>
+        <script src="script/review-plate.js" defer></script>
+    </head>
+    <body>
+
+        <div class="panel" id="interfaces">
+        {{#each interfaces}}
+            <div class="card interface" id="interface-{{ref}}">
+                <div class="name">{{name}}</div>
+                {{{summary}}}
+            </div>
+        {{/each}}
+        </div>
+
+        <div class="panel" id="collections">
+        {{#each collections}}
+            <div class="card collection" id="collection-{{ref}}">
+                <div class="name">{{name}}</div>
+                {{{summary}}}
+            </div>
+        {{/each}}
+        </div>
+
+        <div class="panel" id="details">
+        {{#each interfaces}}
+            <div class="detail" id="detail-interface-{{ref}}">
+                <h2 class="name">{{name}}</h2>
+                {{{summary}}}
+                {{{detail}}}
+            </div>
+        {{/each}}
+        {{#each collections}}
+            <div class="detail" id="detail-collection-{{ref}}">
+                <h2 class="name">{{name}}</h2>
+                {{{summary}}}
+                {{{detail}}}
+            </div>
+        {{/each}}
+        {{#each methods}}
+            <div class="detail" id="detail-method-{{ref}}">
+                <h2 class="name">{{name}}</h2>
+                {{{summary}}}
+                {{{detail}}}
+            </div>
+        {{/each}}
+        </div>
+
+        <div class="panel" id="methods">
+        {{#each methodVersions}}
+            <div class="card method" id="method-{{ref}}">
+                {{#if version}}
+                <span class="badge">{{version}}</span>
+                {{/if}}
+                <div class="name">{{name}}</div>
+                {{{summary}}}
+            </div>
+        {{/each}}
+        </div>
+
+    </body>
+</html>

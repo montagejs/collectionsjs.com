@@ -5,6 +5,7 @@ var yaml = require("js-yaml");
 var marked = require("marked");
 var highlight = require("highlight.js");
 var Dict = require("collections/dict");
+var MultiMap = require("collections/multi-map");
 
 var root = path.dirname(__dirname);
 
@@ -54,7 +55,7 @@ var collections = new Dict(collectionRefs.map(function (ref) {
     }];
 }));
 
-// Construct full collection list for each method
+// Build method version tree
 
 var methods = new Dict(methodRefs.map(function (ref) {
     var parts = readYaml(path.join("method", ref + ".md"));
@@ -63,13 +64,8 @@ var methods = new Dict(methodRefs.map(function (ref) {
     if (front.version) {
         versions = new Dict([["" + front.version, {}]]);
     } else {
-        versions = new Dict(front.versions || {"all": {}});
+        versions = new Dict(front.versions || {"": {}});
     }
-    var myCollections = new Dict();
-    collectCollections(myCollections, front["very-fast"], "very-fast");
-    collectCollections(myCollections, front["fast"], "fast");
-    collectCollections(myCollections, front["slow"], "slow");
-    collectCollections(myCollections, collectionRefs);
     return [ref, {
         ref: ref,
         name: front.name,
@@ -78,7 +74,9 @@ var methods = new Dict(methodRefs.map(function (ref) {
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
         samples: render(front.samples || parts[3] || ""),
-        collections: myCollections.values(),
+        "very-fast": front["very-fast"],
+        "fast": front["fast"],
+        "slow": front["slow"],
         versions: new Dict(versions.map(function (versionSpecific, version) {
             return [version, {
                 ref: ref,
@@ -92,28 +90,17 @@ var methods = new Dict(methodRefs.map(function (ref) {
     }];
 }));
 
-function collectCollections(myCollections, refs, speed) {
-    (refs || []).forEach(function (ref) {
-        if (!myCollections.has(ref)) {
-            var collection = collections.get(ref);
-            myCollections.set(ref, {
-                ref: ref,
-                name: collection.name,
-                speed: speed
-            });
-        }
-    });
-}
-
 // Collection complete list of implemented methods and the prototype used for
 // each method
 
+var collectionsByMethod = new MultiMap();
 collections = new Dict(collections.map(function (collection, ref) {
     var implemented = new Dict();
     collectMethods(implemented, collection);
     var implementations = methods.filter(function (method) {
         return implemented.has(method.ref);
     }).map(function (method) {
+        collectionsByMethod.get(method.ref).add(ref);
         return implemented.get(method.ref);
     });
     var collectionMethods = implementations.map(function (implementation) {
@@ -172,6 +159,41 @@ function collectMethods(implemented, collection) {
             ref: ref,
             prototype: collection.ref
         });
+    });
+}
+
+// Construct full collection list for each method
+
+methods = new Dict(methods.map(function (method, ref) {
+    var myCollections = new Dict();
+    collectCollections(myCollections, method["very-fast"], "very-fast");
+    collectCollections(myCollections, method["fast"], "fast");
+    collectCollections(myCollections, method["slow"], "slow");
+    collectCollections(myCollections, collectionsByMethod.get(ref));
+    collectCollections(myCollections, collectionRefs, "not-implemented");
+    return [ref, {
+        ref: method.ref,
+        name: method.name,
+        names: method.names,
+        deprecated: method.deprecated,
+        summary: method.summary,
+        detail: method.detail,
+        samples: method.samples,
+        collections: myCollections.values(),
+        versions: method.versions
+    }];
+}));
+
+function collectCollections(myCollections, refs, note) {
+    (refs || []).forEach(function (ref) {
+        if (!myCollections.has(ref)) {
+            var collection = collections.get(ref);
+            myCollections.set(ref, {
+                ref: ref,
+                name: collection.name,
+                note: note
+            });
+        }
     });
 }
 

@@ -1,8 +1,8 @@
+
 var Q = require("q");
 var fs = require("q-io/fs");
 var path = require("path");
 var Handlebars = require("handlebars");
-var marked = require("marked");
 
 var data = require("./scrape");
 
