@@ -1,5 +1,5 @@
 
-# deque
+# deque interface
 -   push
 -   pop
 -   shift
@@ -9,7 +9,7 @@
 -   peek-back
 -   poke-back
 
-# set
+# set interface
 -   has-value
 -   has-value-equals
 -   get-value
@@ -21,7 +21,7 @@
 -   contains
 -   toggle
 
-# map
+# map interface
 -   has-key
 -   get-key
 -   set
@@ -64,6 +64,15 @@
 -   find-greatest
 -   find-greatest-less-than
 -   find-greatest-less-than-or-equal
+
+# Iterator specific
+
+-   map-iterator
+-   filter-iterator
+-   drop-while
+-   take-while
+-   zip-iterator
+-   enumerate-iterator
 
 # iterable
 
@@ -125,18 +134,15 @@
 -   content-equals
 -   content-hash
 
-# Deque
+# Deque collection specific
 -   ensure-capacity
 -   grow
 
-# List
+# List specific
 -   scan
 
-# SortedSet
+# SortedSet specific
 -   splay
 -   splay-index
 -   sorted-set-log
-
-# Iterator
--   drop-while
 
