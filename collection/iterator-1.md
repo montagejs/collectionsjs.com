@@ -2,7 +2,7 @@
 
 name: Iterator
 
-version: 1
+version: v1
 
 see:
 -   iterator-2

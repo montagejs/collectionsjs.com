@@ -1,5 +1,7 @@
 ---
 
+version: x
+
 name: findIndex(callback, thisp)
 
 see:

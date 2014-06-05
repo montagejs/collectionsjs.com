@@ -1,10 +1,19 @@
 ---
 
-name: findLastValue(value)
 
-names:
--   findLastValue(value)
--   findLastValue(value, equals)
+versions:
+    v1:
+        name: findLast(value)
+        names:
+        -   findLast(value)
+        -   findLast(value, equals)
+        -   findLast(value, equals, start)
+    v2:
+        name: findLastValue(value)
+        names:
+        -   findLastValue(value)
+        -   findLastValue(value, equals)
+        -   findLastValue(value, equals, start)
 
 see:
 -   find-value

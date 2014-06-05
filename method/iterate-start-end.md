@@ -1,5 +1,7 @@
 ---
 
+version: v2
+
 name: iterate(start, end)
 
 names:

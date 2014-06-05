@@ -8,6 +8,12 @@ names:
 -   SortedArraySet(values, equals, compare)
 -   SortedArraySet(values, equals, compare, getDefault)
 
+inherits:
+-   sorted-array
+-   generic-set
+-   property-changes
+-   observable-object
+
 methods:
 -   add
 -   reduce

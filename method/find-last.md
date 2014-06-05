@@ -1,5 +1,7 @@
 ---
 
+version: +
+
 name: findLast(callback, thisp)
 
 see:

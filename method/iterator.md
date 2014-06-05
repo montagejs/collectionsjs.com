@@ -1,6 +1,6 @@
 ---
 
-version: 1
+version: v1
 
 name: iterator()
 

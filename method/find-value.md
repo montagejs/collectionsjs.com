@@ -1,13 +1,13 @@
 ---
 
 versions:
-    1:
+    v1:
         name: find(value)
         names:
             -   find(value)
             -   find(value, equals)
             -   find(value, equals, start)
-    2:
+    v2:
         name: findValue(value)
         names:
         -   findValue(value)
