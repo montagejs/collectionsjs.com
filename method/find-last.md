@@ -9,7 +9,7 @@ see:
 
 ---
 
-Finds the last value whthin a collection that passes a test, searching from the
+Finds the last value within a collection that passes a test, searching from the
 right.
 
 --- |

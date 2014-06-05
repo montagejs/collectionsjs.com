@@ -1,6 +1,6 @@
 ---
 
-names: findLastIndex(callback, thisp)
+name: findLastIndex(callback, thisp)
 
 see:
 -   find-index
