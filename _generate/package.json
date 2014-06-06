@@ -9,14 +9,17 @@
   "author": "Stuart Knightley <stuart@stuartk.com>",
   "license": "MIT",
   "dependencies": {
-    "js-yaml": "~3.0.2",
-    "q-io": "~1.11.1",
-    "q": "~1.0.1",
+    "js-yaml": "^3.0.2",
+    "q-io": "^2.0.6",
+    "q": "^2.0.2",
     "collections": "^1.1.0",
     "marked": "^0.3.2",
     "highlight.js": "^8.0.0",
     "handlebars": "^2.0.0-alpha.4",
     "mr": "^2.0.3",
-    "esprima": "^1.2.2"
+    "esprima": "^1.2.2",
+    "js-git": "git://github.com/creationix/js-git.git",
+    "q-git": "0.0.2",
+    "git-node-fs": "0.0.2"
   }
 }
