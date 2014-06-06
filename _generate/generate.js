@@ -1,27 +1,41 @@
 
 var Q = require("q");
 var fs = require("q-io/fs");
+var Reader = require("q-io/reader");
 var path = require("path");
 var Handlebars = require("handlebars");
 
 var data = require("./scrape");
 
-setup()
-.then(loadTemplates)
-.then(generate)
-.then(buildJavascript)
-.then(serve)
-.done();
-
-function setup() {
+if (require.main === module) {
+    var siteFs = fs.reroot("_site");
     return fs.removeTree("_site")
     .catch(function () {})
     .then(function () {
-        return fs.copyTree("assets", "_site");
+        return fs.makeTree("_site");
+    })
+    .then(build.bind(null, siteFs))
+    .then(serve.bind(null, siteFs))
+    .done();
+}
+
+exports.build = build;
+function build(siteFs) {
+    return Q()
+    .then(setup.bind(null, siteFs))
+    .then(loadTemplates)
+    .then(generate.bind(null, siteFs))
+    .then(buildJavascript.bind(null, siteFs))
+}
+
+function setup(siteFs) {
+    return Q()
+    .then(function () {
+        return fs.copyTree("assets", ".", siteFs);
     })
     .then(function () {
         return Q.all([
-            fs.makeDirectory("_site/method")
+            siteFs.makeTree("method")
         ]);
     });
 }
@@ -41,48 +55,69 @@ function loadTemplates() {
     });
 }
 
-function generate(templates) {
+function generate(siteFs, templates) {
     var collectionTemplate = templates.collection;
-    data.collections.map(function (details, name) {
-        fs.write(path.join("_site", name + ".html"), collectionTemplate(details)).done();
-    });
-
     var methodTemplate = templates.method;
-    data.methods.map(function (details, name) {
-        fs.write(path.join("_site", "method", name + ".html"), methodTemplate(details)).done();
-    });
 
-    console.log("Generated.");
+    return Q().then(function () {
+        return Reader(data.collections)
+        .forEach(function (details, name) {
+            return siteFs.write(name + ".html", collectionTemplate(details));
+        });
+    })
+    .then(function () {
+        return Reader(data.methods)
+        .forEach(function (details, name) {
+            return siteFs.write(path.join("method", name + ".html"), methodTemplate(details));
+        });
+    })
+    .then(function () {
+        console.log("Generated.");
+    });
 }
 
-function buildJavascript() {
+function buildJavascript(siteFs) {
     var build = require("mr/build");
     return build("assets/script/index.js")
     .then(function (bundle) {
-        return fs.write(path.join("_site", "script", "recollections.js"), bundle);
+        return siteFs.write(path.join("script", "recollections.js"), bundle);
     });
 }
 
-function serve() {
+exports.serve = serve;
+function serve(siteFs) {
     var httpApps = require("q-io/http-apps");
 
-    var app = httpApps.HandleHtmlFragmentResponses(httpApps.ListDirectories(httpApps.FileTree("_site")));
-    var app2 = function (request, response) {
-        return app(request, response)
-        .then(function (response) {
-            // if no .html extension then retry with .html extension. Leads
-            // to cleaner urls (and emulates github)
-            if (response.status === 404 && request.url.search(/\.html$/) === -1) {
-                request.url += ".html";
-                request.path += ".html";
-                request.pathInfo += ".html";
-                return app(request, response);
-            } else {
-                return response;
-            }
+    var app = new httpApps.Chain()
+    .use(httpApps.Error)
+    .use(httpApps.Log)
+    .use(httpApps.HandleHtmlFragmentResponses)
+    .use(httpApps.ListDirectories)
+    .use(function HtmlRedirect(next) {
+        return function (request) {
+            return next(request)
+            .then(function (response) {
+                // if no .html extension then retry with .html extension. Leads
+                // to cleaner urls (and emulates github)
+                if (response.status === 404 && request.url.search(/\.html$/) === -1) {
+                    request.url += ".html";
+                    request.path += ".html";
+                    request.pathInfo += ".html";
+                    return next(request);
+                } else {
+                    return response;
+                }
+            });
+        };
+    })
+    .use(function (next) {
+        return httpApps.FileTree("/", {
+            fs: siteFs
         });
-    };
+    })
+    .end();
 
-    require("q-io/http").Server(app2).listen(8000);
+    require("q-io/http").Server(app).listen(8000);
     console.log("Serving on http://127.0.0.1:8000");
 }
+
