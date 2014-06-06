@@ -97,6 +97,8 @@ function generate(siteFs, templates) {
     var methodTemplate = templates.method;
 
     return Q().then(function () {
+        return siteFs.write("index.html", templates.index({collections: data.collections.toObject()}));
+    }).then(function () {
         return Reader(data.collections)
         .forEach(function (details, name) {
             return siteFs.write(name + ".html", collectionTemplate(details));
@@ -129,7 +131,6 @@ function serve(siteFs) {
     .use(httpApps.Error)
     .use(httpApps.Log)
     .use(httpApps.HandleHtmlFragmentResponses)
-    .use(httpApps.ListDirectories)
     .use(function HtmlRedirect(next) {
         return function (request) {
             return next(request)
@@ -147,6 +148,7 @@ function serve(siteFs) {
             });
         };
     })
+    .use(httpApps.DirectoryIndex)
     .use(function (next) {
         return httpApps.FileTree("/", {
             fs: siteFs
