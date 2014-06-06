@@ -36,6 +36,7 @@ nav {
     overflow: hidden;
     height: 1px;
     width: 1px;
+    margin-left: -1px;
     display: inline-block;
 }
 

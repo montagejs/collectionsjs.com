@@ -29,7 +29,12 @@ function evalSample(element) {
 function evaluate(source) {
     var result;
     try {
-        result = JSON.stringify(globalEval(source));
+        result = globalEval(source);
+        try {
+            result = JSON.stringify(result);
+        } catch (error) {
+            result = "<Unable to stringify " + result.toString() + ">";
+        }
     } catch (error) {
         result = error.name + ": " + error.message;
     }
@@ -67,7 +72,7 @@ function addInput(element) {
     input.placeholder = "\u276F";
 
     input.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 && this.value) {
             var input = createInputElement(this.value);
             element.insertBefore(input, container);
             var output = createOutputElement(evaluate(this.value));
