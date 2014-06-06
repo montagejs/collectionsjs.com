@@ -15,7 +15,7 @@ require('js-git/mixins/formats')(repo);
 
 var gitFs = new GitFs(repo);
 
-gitFs.load("refs/heads/gh-pages")
+gitFs.load("refs/remotes/origin/gh-pages")
 .then(function () {
     return gitFs.removeTree("/");
 })
@@ -29,7 +29,7 @@ gitFs.load("refs/heads/gh-pages")
     })
 })
 .then(function () {
-    return gitFs.save();
+    return gitFs.saveAs("refs/heads/gh-pages");
 })
 .done();
 
