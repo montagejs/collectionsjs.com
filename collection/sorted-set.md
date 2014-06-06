@@ -50,6 +50,8 @@ methods:
 -   sorted-set-log
 -   sorted-set-log-node
 -   construct-clone
+-   content-equals
+-   content-compare
 
 ---
 

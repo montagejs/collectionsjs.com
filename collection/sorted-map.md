@@ -18,6 +18,8 @@ methods:
 -   construct-clone
 -   sorted-map-log
 -   sorted-map-log-node
+-   content-equals
+-   content-compare
 
 ---
 

@@ -16,6 +16,8 @@ inherits:
 
 methods:
 -   construct-clone
+-   content-equals
+-   content-compare
 
 ---
 

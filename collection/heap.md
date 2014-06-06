@@ -36,6 +36,8 @@ methods:
 -   heap-handle-content-range-will-change
 -   heap-handle-content-map-change
 -   heap-handle-content-map-will-change
+-   content-equals
+-   content-compare
 
 ---
 

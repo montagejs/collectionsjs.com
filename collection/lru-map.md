@@ -20,6 +20,8 @@ methods:
 -   lru-map-log
 -   lru-map-stringify
 -   lru-add-map-change-listener
+-   content-equals
+-   content-hash
 
 ---
 

@@ -43,10 +43,11 @@ methods:
 -   update-indexes
 -   make-observable
 -   iterate
+-   construct-clone
 
 todo:
--   peekBack
--   pokeBack
+-   peek-back
+-   poke-back
 
 ---
 

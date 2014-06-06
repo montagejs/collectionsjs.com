@@ -30,6 +30,8 @@ methods:
 -   set-log
 -   make-observable
 -   construct-clone
+-   content-equals
+-   content-hash
 
 ---
 

@@ -24,6 +24,8 @@ methods:
 -   construct-clone
 -   fast-map-log
 -   fast-map-stringify
+-   content-equals
+-   content-hash
 
 ---
 

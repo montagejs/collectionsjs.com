@@ -27,6 +27,8 @@ methods:
 -   reduce
 -   reduce-right
 -   iterate
+-   content-equals
+-   content-hash
 
 ---
 

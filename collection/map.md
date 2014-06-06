@@ -18,6 +18,8 @@ methods:
 -   construct-clone
 -   map-log
 -   map-log-node
+-   content-equals
+-   content-hash
 
 ---
 

@@ -2,6 +2,11 @@
 
 name: FastSet
 
+names:
+-   FastSet(values)
+-   FastSet(values, equals, hash)
+-   FastSet(values, equals, hash, getDefault)
+
 inherits:
 -   generic-collection
 -   generic-set
@@ -20,6 +25,8 @@ methods:
 -   construct-clone
 -   fast-set-log
 -   fast-set-log-node
+-   content-equals
+-   content-hash
 
 ---
 

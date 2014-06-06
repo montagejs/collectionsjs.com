@@ -15,6 +15,8 @@ methods:
 -   set
 -   bucket
 -   construct-clone
+-   content-equals
+-   content-hash
 
 ---
 

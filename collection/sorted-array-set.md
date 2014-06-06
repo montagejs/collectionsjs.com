@@ -18,6 +18,9 @@ methods:
 -   add
 -   reduce
 -   reduce-right
+-   construct-clone
+-   content-equals
+-   content-compare
 
 ---
 

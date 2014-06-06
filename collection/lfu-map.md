@@ -20,6 +20,8 @@ methods:
 -   lfu-map-log
 -   lfu-map-stringify
 -   lfu-add-map-change-listener
+-   content-equals
+-   content-hash
 
 ---
 
