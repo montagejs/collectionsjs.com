@@ -1,8 +1,6 @@
 var globalEval = eval;
 
-window.Dict = function () {};
-window.Dict.prototype.set = function() { return "asd"; };
-window.Dict.prototype.get = function() { return 123; };
+window.Dict = require("collections/dict");
 
 module.exports = function (element) {
     evalSample(element);
