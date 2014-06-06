@@ -1,74 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{name}} method - Collections</title>
+{{#include "layout" title=name afterTitle="method" bodyClass="method"}}
 
-    <link rel="stylesheet" href="/style/bootstrap.min.css">
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="stylesheet" href="/style/tomorrow.css">
+    <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
 
-</head>
-<body class="method">
-    <div class="container">
-        <nav class="row" role="navigation">
-            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
-            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
-            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
-        </nav>
+    <div class="row">
+        <div class="col-sm-6">
+            {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
 
-        <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
+            {{{summary}}}
 
-        <div class="row">
-            <div class="col-sm-6">
-
-                {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
-
-                {{{summary}}}
-
-                {{{detail}}}
-            </div>
-
-            <div class="col-sm-6">
-                <h3 class="visible-xs">Examples</h3>
-
-                <pre>&#x276F; ?</pre>
-
-            </div>
+            {{{detail}}}
         </div>
 
+        <div class="col-sm-6">
+            <h3 class="visible-xs">Examples</h3>
 
-        <div class="row">
-            <div class="col-sm-6 col-sm-push-6">
-                <h3>Arguments</h3>
-
-                <ul>
-                {{#each names}}
-                    <li>{{this}}</li>
-                {{else}}
-                    <li>{{name}}</li>
-                {{/each}}
-                </ul>
-
-                <h3>Related</h3>
-
-                <ul>
-                    <li><a href="#">Todo</a></li>
-                </ul>
-            </div>
-
-            <div class="col-sm-6 col-sm-pull-6">
-                <h3>On collections</h3>
-
-                <ul>
-                    {{#each collections}}
-                    <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
-                    {{/each}}
-                </ul>
-            </div>
+            {{include "repl" samples=samples}}
         </div>
     </div>
-</body>
-</html>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-push-6">
+            <h3>Arguments</h3>
+
+            <ul>
+            {{#each names}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{name}}</li>
+            {{/each}}
+            </ul>
+
+            <h3>Related</h3>
+
+            <ul>
+                <li><a href="#">Todo</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-6 col-sm-pull-6">
+            <h3>On collections</h3>
+
+            <ul>
+                {{#each collections}}
+                <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+{{/include}}

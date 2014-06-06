@@ -41,11 +41,48 @@ function setup(siteFs) {
 }
 
 function loadTemplates() {
-    return Q.all([
-        fs.read("./templates/index.html"),
-        fs.read("./templates/collection.html"),
-        fs.read("./templates/method.html")
-    ])
+    return fs.list("./templates/includes")
+    .then(function (list) {
+        // Compile all includes
+        var includes = {};
+        return Q.all(list.map(function (filename) {
+            var name = path.basename(filename, ".html");
+            return fs.read(path.join("./templates/includes", filename))
+            .then(function (include) {
+                includes[name] = Handlebars.compile(include.toString("utf8"));
+            });
+        }))
+        .thenResolve(includes);
+    })
+    .then(function (includes) {
+        // Register "include" helper, which takes an include name and a hash
+        // of variables to use. If used as a block then then the {{{content}}}
+        // variable inside of the include will be replaced with the content
+        // you pass to the block:
+        //
+        // * {{include "include-name" variable="value"}}
+        // * {{#include "include-name" variable="value"}}
+        //      some content
+        //   {{/include}}
+        Handlebars.registerHelper("include", function (name, options) {
+            if (includes[name]) {
+                if (options.fn) {
+                    options.hash.content = options.fn(options.data.root);
+                }
+                return new Handlebars.SafeString(includes[name](options.hash));
+            } else {
+                console.log(name, options);
+                throw new Error("No include '" + name + "'");
+            }
+        });
+    })
+    .then(function () {
+        return Q.all([
+            fs.read("./templates/index.html"),
+            fs.read("./templates/collection.html"),
+            fs.read("./templates/method.html"),
+        ]);
+    })
     .spread(function (index, collection, method) {
         return {
             index: Handlebars.compile(index.toString("utf8")),
