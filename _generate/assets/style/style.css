@@ -27,3 +27,15 @@ nav {
 .deprecated {
     text-decoration: line-through;
 }
+
+.repl-input::before {
+    content: "\00276F\0000a0";
+}
+
+.repl-command {
+    padding-top: 4.5px;
+}
+
+.repl-command input {
+    width: 100%;
+}

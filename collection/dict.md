@@ -25,6 +25,13 @@ methods:
 -   one
 -   construct-clone
 
+samples:
+- |
+    var dict = new Dict(null, function (key) {
+        return this.get(key.slice(0, key.length - 1));
+    });
+    dict.set("a", 10);
+    dict.get("abcdefg")
 ---
 
 A mapping from string keys to values.

@@ -6,6 +6,7 @@ var marked = require("marked");
 var highlight = require("highlight.js");
 var Dict = require("collections/dict");
 var MultiMap = require("collections/multi-map");
+var parseSample = require("./parse-sample.js");
 
 var root = path.dirname(__dirname);
 
@@ -51,7 +52,7 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         methods: front.methods || [],
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
-        samples: render(front.samples || parts[3] || "")
+        samples: (front.samples || []).map(parseSample)
     }];
 }));
 
@@ -73,7 +74,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
         deprecated: Boolean(front.deprecated),
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
-        samples: render(front.samples || parts[3] || ""),
+        samples: (front.samples || []).map(parseSample),
         "very-fast": front["very-fast"],
         "fast": front["fast"],
         "slow": front["slow"],
