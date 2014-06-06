@@ -32,6 +32,13 @@ nav {
     content: "\00276F\0000a0";
 }
 
+.repl-output-comment {
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    display: inline-block;
+}
+
 .repl-command {
     padding-top: 4.5px;
 }

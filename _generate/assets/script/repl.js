@@ -50,6 +50,11 @@ function createOutputElement(result) {
         output.classList.add("repl-output");
         output.textContent = result + "\n";
 
+        var comment = document.createElement("span");
+        comment.classList.add("repl-output-comment");
+        comment.textContent = "// ";
+        output.insertBefore(comment, output.lastChild);
+
         return output;
     }
 }
