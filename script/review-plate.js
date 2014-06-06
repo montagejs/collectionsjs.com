@@ -80,7 +80,7 @@ function render(state) {
             cardElement.className = (card.className || "");
             panelElement.appendChild(cardElement);
             // force a paint. chrome render glitch.
-            //cardElement.offsetHeight;
+            cardElement.offsetHeight;
         }
         panelElement.scrollTop = scroll[panel];
     }
