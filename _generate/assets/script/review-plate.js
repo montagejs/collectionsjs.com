@@ -10,12 +10,38 @@ var panelElements = {
     methods: document.getElementById("methods")
 };
 
+var headerElements = {
+    interfaces: document.getElementById("interfacesHeader"),
+    collections: document.getElementById("collectionsHeader"),
+    details: document.getElementById("detailsHeader"),
+    methods: document.getElementById("methodsHeader")
+};
+
 var allState = {
     interfaces: null,
     collections: null,
     details: null,
     methods: null
 };
+
+var headers = {
+    "interface": {
+        interfaces: "Interfaces",
+        collections: "Implementations",
+        methods: "Methods"
+    },
+    collection: {
+        interfaces: "Interfaces",
+        collections: "Collections",
+        methods: "Implements"
+    },
+    method: {
+        interfaces: "Interfaces",
+        collections: "Implementors",
+        methods: "Methods"
+    }
+};
+
 var activeTarget;
 var selectedId;
 
@@ -44,6 +70,20 @@ function cardClick(event) {
         render(data.states[target.id]);
         target.classList.add("selected");
         target.scrollIntoViewIfNeeded();
+        for (var name in headers) {
+            if (target.classList.contains(name)) {
+                var headers = headers[name];
+                for (var name in headers) {
+                    headerElements[name].innerText = headers[name];
+                }
+                break;
+            }
+        }
+        if (target.classList.contains("method")) {
+            panelElements.collections.scrollTop = 0;
+        } else if (target.classList.contains("collection")) {
+            panelElements.methods.scrollTop = 0;
+        }
     }
 }
 
@@ -80,7 +120,7 @@ function render(state) {
             cardElement.className = (card.className || "");
             panelElement.appendChild(cardElement);
             // force a paint. chrome render glitch.
-            cardElement.offsetHeight;
+            //cardElement.offsetHeight;
         }
         panelElement.scrollTop = scroll[panel];
     }

@@ -11,58 +11,78 @@
     </head>
     <body>
 
-        <div class="panel" id="interfaces">
-        {{#each interfaces}}
-            <div class="card interface" id="interface-{{ref}}">
-                <div class="name">{{name}}</div>
-                {{{summary}}}
+        <div class="column" id="interfacesColumn">
+            <header>
+                <h2>Interfaces</h2>
+            </header>
+            <div class="panel" id="interfaces">
+            {{#each interfaces}}
+                <div class="card interface" id="interface-{{ref}}">
+                    <div class="name">{{name}}</div>
+                    {{{summary}}}
+                </div>
+            {{/each}}
             </div>
-        {{/each}}
         </div>
 
-        <div class="panel" id="collections">
-        {{#each collections}}
-            <div class="card collection" id="collection-{{ref}}">
-                <div class="name">{{name}}</div>
-                {{{summary}}}
+        <div class="column" id="collectionsColumn">
+            <header>
+                <h2 id="collectionsHeader">Collections</h2>
+            </header>
+            <div class="panel" id="collections">
+            {{#each collections}}
+                <div class="card collection" id="collection-{{ref}}">
+                    <div class="name">{{name}}</div>
+                    {{{summary}}}
+                </div>
+            {{/each}}
             </div>
-        {{/each}}
         </div>
 
-        <div class="panel" id="details">
-        {{#each interfaces}}
-            <div class="detail" id="detail-interface-{{ref}}">
-                <h2 class="name">{{name}}</h2>
-                {{{summary}}}
-                {{{detail}}}
+        <div class="column" id="detailsColumn">
+            <header>
+                <h2 id="detailsHeader"></h2>
+            </header>
+            <div class="panel" id="details">
+            {{#each interfaces}}
+                <div class="detail" id="detail-interface-{{ref}}">
+                    <h2 class="name">{{name}}</h2>
+                    {{{summary}}}
+                    {{{detail}}}
+                </div>
+            {{/each}}
+            {{#each collections}}
+                <div class="detail" id="detail-collection-{{ref}}">
+                    <h2 class="name">{{name}}</h2>
+                    {{{summary}}}
+                    {{{detail}}}
+                </div>
+            {{/each}}
+            {{#each methods}}
+                <div class="detail" id="detail-method-{{ref}}">
+                    <h2 class="name">{{name}}</h2>
+                    {{{summary}}}
+                    {{{detail}}}
+                </div>
+            {{/each}}
             </div>
-        {{/each}}
-        {{#each collections}}
-            <div class="detail" id="detail-collection-{{ref}}">
-                <h2 class="name">{{name}}</h2>
-                {{{summary}}}
-                {{{detail}}}
-            </div>
-        {{/each}}
-        {{#each methods}}
-            <div class="detail" id="detail-method-{{ref}}">
-                <h2 class="name">{{name}}</h2>
-                {{{summary}}}
-                {{{detail}}}
-            </div>
-        {{/each}}
         </div>
 
-        <div class="panel" id="methods">
-        {{#each methodVersions}}
-            <div class="card method" id="method-{{ref}}">
-                {{#if version}}
-                <span class="badge">{{version}}</span>
-                {{/if}}
-                <div class="name">{{name}}</div>
-                {{{summary}}}
+        <div class="column" id="methodsColumn">
+            <header>
+                <h2 id="methodsHeader">Methods</h2>
+            </header>
+            <div class="panel" id="methods">
+            {{#each methodVersions}}
+                <div class="card method" id="method-{{ref}}">
+                    {{#if version}}
+                    <span class="badge">{{version}}</span>
+                    {{/if}}
+                    <div class="name">{{name}}</div>
+                    {{{summary}}}
+                </div>
+            {{/each}}
             </div>
-        {{/each}}
         </div>
 
     </body>
