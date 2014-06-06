@@ -1,0 +1,49 @@
+.search input {
+    font-size: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.search a {
+    line-height: 52px;
+}
+
+nav {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 24.5px;
+}
+
+.questions > div {
+    margin-bottom: 10px;
+}
+
+.method h2::before {
+    font-style: italic;
+    color: #CCC;
+    content: "collection.";
+}
+
+.deprecated {
+    text-decoration: line-through;
+}
+
+.repl-input::before {
+    content: "\00276F\0000a0";
+}
+
+.repl-output-comment {
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    margin-left: -1px;
+    display: inline-block;
+}
+
+.repl-command {
+    padding-top: 4.5px;
+}
+
+.repl-command input {
+    width: 100%;
+}

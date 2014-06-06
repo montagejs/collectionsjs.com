@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>add(value, key) method - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+
+</head>
+<body class="method">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2 >add(value, key)</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                
+
+                <p>Adds a value for a given key to a map.</p>
+
+
+                <p>This is an alias for <code>set(key, value)</code> that does not have an obvious reason to
+exist.
+The purpose of this method is to allow certain generic collection methods
+including <code>addEach</code>, <code>filter</code>, and <code>clone</code>, to treat sets and maps in the same
+fashion, without regard for whether the keys are or not meaningful for the
+collection.
+For example, sets implement <code>add(value)</code>, but maps implement <code>add(value, key)</code>.
+Iterating a <code>List</code> provides meaningful indexes that can be used for keys if they
+are converted to maps.
+Consider this excerpt from <code>addEach(values)</code> for generic collections.</p>
+<pre><code class="lang-js">values.forEach(<span class="hljs-keyword">this</span>.add, <span class="hljs-keyword">this</span>);
+</code></pre>
+<p>This copies values from an abitrary collection into this one.
+Regardless of whether this collection is a map or a set, and whether the values
+come from a map or a set, <code>add</code> is able to bridge the gap.
+This is particularly important since <code>addEach(values)</code> is the last operation of
+every collection constructor.</p>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Arguments</h3>
+
+                <ul>
+                
+                    <li>add(value, key)</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    
+                    <li><a href="/map">Map</a> </li>
+                    
+                    <li><a href="/dict">Dict</a> </li>
+                    
+                    <li><a href="/fast-map">FastMap</a> </li>
+                    
+                    <li><a href="/lfu-map">LfuMap</a> </li>
+                    
+                    <li><a href="/lru-map">LruMap</a> </li>
+                    
+                    <li><a href="/multi-map">MultiMap</a> </li>
+                    
+                    <li><a href="/sorted-map">SortedMap</a> </li>
+                    
+                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                    
+                    <li><a href="/generic-map">GenericMap</a> </li>
+                    
+                    <li><a href="/list">List</a> </li>
+                    
+                    <li><a href="/deque">Deque</a> </li>
+                    
+                    <li><a href="/set">Set</a> </li>
+                    
+                    <li><a href="/heap">Heap</a> </li>
+                    
+                    <li><a href="/sorted-array">SortedArray</a> </li>
+                    
+                    <li><a href="/fast-set">FastSet</a> </li>
+                    
+                    <li><a href="/lru-set">LruSet</a> </li>
+                    
+                    <li><a href="/lfu-set">LfuSet</a> </li>
+                    
+                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                    
+                    <li><a href="/sorted-set">SortedSet</a> </li>
+                    
+                    <li><a href="/weak-map">WeakMap</a> </li>
+                    
+                    <li><a href="/iterator-1">Iterator</a> </li>
+                    
+                    <li><a href="/array">Array</a> </li>
+                    
+                    <li><a href="/object">Object</a> </li>
+                    
+                    <li><a href="/generic-collection">GenericCollection</a> </li>
+                    
+                    <li><a href="/generic-order">GenericOrder</a> </li>
+                    
+                    <li><a href="/generic-set">GenericSet</a> </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

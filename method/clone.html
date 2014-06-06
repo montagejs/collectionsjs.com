@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>clone(depth?, memo?) method - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+
+</head>
+<body class="method">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2 >clone(depth?, memo?)</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                
+
+                <p>Creates a deep replica of this collection.</p>
+
+
+                <p>Clones values deeply, to the specified depth, using the memo map to connect
+reference cycles.</p>
+<p>The default depth is <code>Infinity</code>, in which case, clone will explore every
+transitive reference of this object graph, producing a mirror image in the clone
+graph.
+A depth of <em>1</em> signifies a shallow clone, and a depth of <em>0</em> signifies no clone
+at all and this collection returns itself.</p>
+<p>The memo is only required to implement <code>has</code> and <code>set</code>, and accept arbitrary
+objects for keys.
+<code>Map</code> is sufficient and can be thrown away immediately to recover memory.
+The map can however serve a secondary purpose of being able to look up an object
+in the clone graph by its corresponding object in this graph.
+A memo can also be primed with pre-determined replicas of certain objects,
+particularly useful for non-clonable objects, or to extend an existing clone
+graph.
+The default memo may be a <code>Map</code> or <code>WeakMap</code>.</p>
+<p>Clone will delegate to objects that implement the <code>clone</code> method, passing the
+next depth and the memo.
+Clone replicates object literals that inherit directly from <em>Object.prototype</em>
+or <em>null</em>.
+However, if an object does is not clonable, <code>clone</code> will throw a <code>TypeError</code>.</p>
+<p>Though <code>clone</code> can and should be overridden for specific types, it should be
+consumed through <code>Object.clone</code>, which handles the default depth and memo cases,
+so clone methods do not need to.</p>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Arguments</h3>
+
+                <ul>
+                
+                    <li>clone()</li>
+                
+                    <li>clone(null, memo)</li>
+                
+                    <li>clone(depth)</li>
+                
+                    <li>clone(depth, memo)</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    
+                    <li><a href="/list">List</a> </li>
+                    
+                    <li><a href="/deque">Deque</a> </li>
+                    
+                    <li><a href="/map">Map</a> </li>
+                    
+                    <li><a href="/set">Set</a> </li>
+                    
+                    <li><a href="/heap">Heap</a> </li>
+                    
+                    <li><a href="/dict">Dict</a> </li>
+                    
+                    <li><a href="/sorted-array">SortedArray</a> </li>
+                    
+                    <li><a href="/fast-set">FastSet</a> </li>
+                    
+                    <li><a href="/lru-set">LruSet</a> </li>
+                    
+                    <li><a href="/lfu-set">LfuSet</a> </li>
+                    
+                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                    
+                    <li><a href="/sorted-set">SortedSet</a> </li>
+                    
+                    <li><a href="/fast-map">FastMap</a> </li>
+                    
+                    <li><a href="/lfu-map">LfuMap</a> </li>
+                    
+                    <li><a href="/lru-map">LruMap</a> </li>
+                    
+                    <li><a href="/multi-map">MultiMap</a> </li>
+                    
+                    <li><a href="/sorted-map">SortedMap</a> </li>
+                    
+                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                    
+                    <li><a href="/array">Array</a> </li>
+                    
+                    <li><a href="/object">Object</a> </li>
+                    
+                    <li><a href="/generic-collection">GenericCollection</a> </li>
+                    
+                    <li><a href="/weak-map">WeakMap</a> </li>
+                    
+                    <li><a href="/iterator-1">Iterator</a> </li>
+                    
+                    <li><a href="/generic-order">GenericOrder</a> </li>
+                    
+                    <li><a href="/generic-set">GenericSet</a> </li>
+                    
+                    <li><a href="/generic-map">GenericMap</a> </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

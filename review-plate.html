@@ -1,0 +1,2684 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Collections</title>
+        <link rel="stylesheet" href="style/review-plate.css">
+        <link rel="stylesheet" href="style/tomorrow.css">
+        <script src="script/data.js" defer></script>
+        <script src="script/review-plate.js" defer></script>
+    </head>
+    <body>
+
+        <div class="panel" id="interfaces">
+        
+            <div class="card interface" id="interface-deque">
+                <div class="name">Deque</div>
+                <p>Any collection of ordered values, for queues and stacks.</p>
+
+            </div>
+        
+            <div class="card interface" id="interface-set">
+                <div class="name">Set</div>
+                <p>Any collection that has no duplicate values.</p>
+
+            </div>
+        
+            <div class="card interface" id="interface-map">
+                <div class="name">Map</div>
+                <p>Any lookup table from keys to values.</p>
+
+            </div>
+        
+        </div>
+
+        <div class="panel" id="collections">
+        
+            <div class="card collection" id="collection-list">
+                <div class="name">List</div>
+                <p>An ordered list of values.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-deque">
+                <div class="name">Deque</div>
+                <p>An ordered collection of values with fast random access, push, pop, shift, and unshift, but slow to splice.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-map">
+                <div class="name">Map</div>
+                <p>A map of <em>[key, value]</em> entries, where keys may be arbitrary values including objects.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-set">
+                <div class="name">Set</div>
+                <p>A collection of unique values.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-heap">
+                <div class="name">Heap</div>
+                <p>A collection of values with the largest always on top.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-dict">
+                <div class="name">Dict</div>
+                <p>A mapping from string keys to values.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-sorted-array">
+                <div class="name">SortedArray</div>
+                <p>A collection of values stored in stable stored order, backed by an array.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-fast-set">
+                <div class="name">FastSet</div>
+                <p>The backing store for <code>Set</code> and <code>FastMap</code>.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-lru-set">
+                <div class="name">LruSet</div>
+                <p>A set with a maximum capacity that will evict the least recently used value.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-lfu-set">
+                <div class="name">LfuSet</div>
+                <p>A set with a maximum capacity that will evict the least frequently used value.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-sorted-array-set">
+                <div class="name">SortedArraySet</div>
+                <p>A collection of unique values stored in sorted order, backed by a plain array.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-sorted-set">
+                <div class="name">SortedSet</div>
+                <p>A collection of values stored in sorted order using a binary tree.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-fast-map">
+                <div class="name">FastMap</div>
+                <p>The backing store for a <code>Map</code>.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-lfu-map">
+                <div class="name">LfuMap</div>
+                <p>A map with a maximum capacity that will evict the least frequently used entry.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-lru-map">
+                <div class="name">LruMap</div>
+                <p>A map with a maximum capacity that will evict the least recently used entry.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-multi-map">
+                <div class="name">MultiMap</div>
+                <p>A map from keys to buckets, typically arrays.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-sorted-map">
+                <div class="name">SortedMap</div>
+                <p>A map with entries sorted by key.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-sorted-array-map">
+                <div class="name">SortedArrayMap</div>
+                <p>A map of key value pairs, sorted by key, backed by an array.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-weak-map">
+                <div class="name">WeakMap</div>
+                <p>A map of object keys to values with good garbage collection behavior.
+See <a href="https://github.com/drses/weak-map">WeakMap</a>.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-iterator-1">
+                <div class="name">Iterator</div>
+                <p>Produces values in order on demand.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-array">
+                <div class="name">Array</div>
+                <p>An ordered collection of values with fast random access, <code>push(...values)</code>, and <code>pop()</code>, but can be slow to splice when sufficiently massive.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-object">
+                <div class="name">Object</div>
+                <p>The native JavaScript object, with some additional constructor methods shimmed.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-generic-collection">
+                <div class="name">GenericCollection</div>
+                <p>An abstract collection that implements many generic methods, reusable by most collections.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-generic-order">
+                <div class="name">GenericOrder</div>
+                <p>An abstract collection that implements generic methods that can be used by any collection that keeps its values in a meaningful order.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-generic-set">
+                <div class="name">GenericSet</div>
+                <p>An abstract collection that implements many generic methods, reusable by most sets.</p>
+
+            </div>
+        
+            <div class="card collection" id="collection-generic-map">
+                <div class="name">GenericMap</div>
+                <p>An abstract collection that implements many generic methods, reusable by most maps.</p>
+
+            </div>
+        
+        </div>
+
+        <div class="panel" id="details">
+        
+            <div class="detail" id="detail-interface-deque">
+                <h2 class="name">Deque</h2>
+                <p>Any collection of ordered values, for queues and stacks.</p>
+
+                <p>A deque, our double-ended-queue, is a collection that supports
+<code>push(...values)</code>, <code>pop()</code>, <code>shift()</code>, and <code>unshift(...values)</code>.
+An <code>Array</code> is a prime example of a <code>Deque</code>, but <code>shift()</code> and
+<code>unshift(...values)</code> reposition every subsequent value within the array.</p>
+<p>The <code>Deque</code> collection is designed specifically to perform well for all four of
+these operations.
+A deque is backed by a circular buffer, which has nice properties for avoiding
+garbage collection when values are frequently added and removed.
+However, <code>swap(index, length, values)</code> and <code>splice(index, length, ...values</code>) do
+require repositioning every subsequent value in the circular buffer.</p>
+<p>A <code>List</code> collection also supports fast deque operations.
+Lists are backed by a doubly linked list with a head node.
+The linked list is part of the list&#39;s public interface and you can manipulate it
+directly, which makes it possible to perform very fast concatenation and splices
+at any position.
+However, frequently adding and removing values will effect garbage collector
+churn.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-interface-set">
+                <h2 class="name">Set</h2>
+                <p>Any collection that has no duplicate values.</p>
+
+                <p>A set represents a collection of unique values.
+The methods intrinsic to a set are <code>add(value)</code> and <code>delete(value)</code>.
+Sets ignore attempts to add duplicate values.
+Sets share a wealth of special methods like <code>union(values)</code> and
+<code>intersection(values)</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-interface-map">
+                <h2 class="name">Map</h2>
+                <p>Any lookup table from keys to values.</p>
+
+                <p>A map is the interface of a lookup table.
+The methods intrinsic to a map are <code>get(key)</code>, <code>set(key, value)</code>, <code>has(key)</code>,
+and <code>delete(key)</code>.</p>
+<p>All maps are iterable and reducible, but vary in one detail.
+The callback receives the value for each key, and unlike with an <code>Array</code>, the
+key takes the place of the index.</p>
+<pre><code class="lang-js">var map = Map({a: <span class="hljs-number">10</span>})<span class="hljs-comment">;</span>
+
+map<span class="hljs-preprocessor">.forEach</span>(function (value, key) {
+    expect(key)<span class="hljs-preprocessor">.toBe</span>(<span class="hljs-string">"a"</span>)<span class="hljs-comment">;</span>
+    expect(value)<span class="hljs-preprocessor">.toBe</span>(<span class="hljs-number">10</span>)<span class="hljs-comment">;</span>
+})
+
+var iterator = map<span class="hljs-preprocessor">.iterate</span>()<span class="hljs-comment">;</span>
+var iteration = iterator<span class="hljs-preprocessor">.next</span>()<span class="hljs-comment">;</span>
+expect(iteration<span class="hljs-preprocessor">.value</span>)<span class="hljs-preprocessor">.toBe</span>(<span class="hljs-number">10</span>)<span class="hljs-comment">;</span>
+expect(iteration<span class="hljs-preprocessor">.index</span>)<span class="hljs-preprocessor">.toBe</span>(<span class="hljs-string">"a"</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>All maps can be identified by their <code>isMap</code> property.</p>
+<p>All maps are backed by an analogous set of key and value entries.
+The map implementation overrides the intrinsic operators for the internal
+<code>store</code> set — like <code>equals</code>, <code>compare</code>, and <code>hash</code> — to consider only the key in
+determining equivalence, order, and uniqueness for each entry, as applicable.
+All maps share most of their implementation through a <code>GenericMap</code> abstract
+collection.</p>
+<p>By virtue of implementation reuse, all maps are also observable.
+However, the observer implementation varies significantly between versions 1 and
+2.</p>
+
+            </div>
+        
+        
+            <div class="detail" id="detail-collection-list">
+                <h2 class="name">List</h2>
+                <p>An ordered list of values.</p>
+
+                <p>A <code>List</code> is backed by a doubly linked list with a head node.</p>
+<p>The list has a <code>head</code> property to an empty node.
+The list begins with the <code>next</code> node from the <code>head</code>.
+The last node of the list is the <code>prev</code> node from the <code>head</code>.
+The <code>head</code> represents the node one past the end of the list and has no <code>value</code>.</p>
+<p>Nodes can be manipulated directly.
+Lists use a <code>Node(value)</code> property as their node constructor.
+It supports <code>delete()</code>, <code>addBefore(node)</code>, and <code>addAfter(node)</code>.
+Directly manipulating <code>next</code> and <code>prev</code> of a node allows for fast splicing.</p>
+<p>Nodes can be reused to avoid garbage collector churn.
+However, if you do not need to splice, a <code>Deque</code> may perform better than <code>List</code>.</p>
+<p>Lists can be iterated.
+The iterator will produce artificial indexes for each value.</p>
+<p>Lists provide slow random access by index.
+Methods that accept indexes to seek a position will count as they walk to the
+sought node.
+These methods will always accept a node instead to instantly traverse to a known
+position.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-deque">
+                <h2 class="name">Deque</h2>
+                <p>An ordered collection of values with fast random access, push, pop, shift, and unshift, but slow to splice.</p>
+
+                <p>A double ended queue is backed by a circular buffer, which cuts down on garbage
+collector churn.
+As long as the queue is stable, meaning values are added and removed at roughtly
+the same pace, the backing store will not create new objects.
+The store itself is an object with numeric indexes, like an array.
+The indexes of the deque are offset from the indexes within the circular buffer,
+and values spill over from the end of the buffer back to the beginning.
+As values are removed by way of shifting, it makes remove for values by way of
+pushing.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Deque = <span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/deque"</span>)
+</code></pre>
+<p>Deques have constants <code>maxCapacity</code> and <code>minCapacity</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-map">
+                <h2 class="name">Map</h2>
+                <p>A map of <em>[key, value]</em> entries, where keys may be arbitrary values including objects.</p>
+
+                <p>The optional <code>equals</code> and <code>hash</code> override the <code>contentEquals</code> and <code>contentHash</code>
+properties that operate on the keys of the map to determine whether keys are
+equivalent and where to store them.</p>
+<p>The optional <code>getDefault</code> function overrides the map’s own <code>getDefault</code> method,
+which is called by <code>get(key)</code> if no entry is found for the requested key.</p>
+<p>A <code>Map</code> is backed by a <code>Set</code> of <em>[key, value]</em> entries, with <code>contentEquals</code> and
+<code>contentHash</code> overridden to only consider the <em>key</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-set">
+                <h2 class="name">Set</h2>
+                <p>A collection of unique values.</p>
+
+                <p>The constructor will add all of the values if any are given.
+If the values are a map, the keys will be lost.</p>
+<p>The optional <code>equals</code> and <code>hash</code> arguments override the set’s <code>contentEquals</code> and
+<code>contentCompare</code> methods and determine where to store values and whether they
+are equivalent.</p>
+<p>The optional <code>getDefault</code> argument overrides the set’s <code>getDefault(value)</code>
+method, which will be called by <code>get</code> if it cannot find an equivalent value
+within the set.</p>
+<p>The purpose of <code>get</code> is less obvious on a <code>Set</code> than a <code>Map</code>, since you would
+not often need to find a value you already have.
+However, by virtue of overriding <code>contentEquals</code> and <code>contentHash</code>, it is
+possible to search for a value using an “equivalent” place-holder.
+This is how maps use sets to find <em>[key, value]</em> entries when they only know the
+<em>key</em>.</p>
+<p>A <code>Set</code> is backed by a <code>FastSet</code> and a <code>List</code>.
+The <code>List</code> is called <code>order</code> and tracks the iteration order of the <code>Set</code>.
+Values are produced in the order they were first inserted.
+The <code>FastSet</code> is called <code>store</code> and ensures uniqueness and very fast searches.
+The <code>FastSet</code> stores nodes form the <code>order</code> list but hashes and compares them by
+their <code>value</code> property.</p>
+<p>The <code>Store</code> and <code>Order</code> constructors can be overridden by inheritors.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-heap">
+                <h2 class="name">Heap</h2>
+                <p>A collection of values with the largest always on top.</p>
+
+                <p>A heap is a binary tree where each node is greater than both its leaves.
+The tree itself is complete or nearly complete at all times, so the heap is
+backed by a compact array.
+When values are added or removed, the tree rotates until the value has sunk
+until its parent is greater, or floated until all children are less.</p>
+<p>Values are presumed to not change in relative position without first being
+removed, and perhaps added back, or adjusted after mutation using <code>sink(index)</code>
+or <code>float(index)</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-dict">
+                <h2 class="name">Dict</h2>
+                <p>A mapping from string keys to values.</p>
+
+                <p>A dictionary is a specialized <code>map</code>.
+The keys are required to be strings.
+With this constraint in place, the mapping can make many simplifying assumptions
+and use a plain JavaScript object as its backing store.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Dict = <span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/dict"</span>);
+<span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict();
+</code></pre>
+<p>The <code>new</code> keyword is optional.</p>
+<p>The optional first argument of the dictionary constructor is an object to copy
+into the dictionary initially.
+The value to copy may be...</p>
+<ul>
+<li>An object literal</li>
+<li>Any map-like collection with strings for keys</li>
+<li>Any other kind of collection containing [key, value] pairs.</li>
+</ul>
+<p>The optional second argument of the constructor is a <code>getDefault(key)</code> function.
+This function will be called as a method of the dictionary if the value for a
+given key does not exist when a user calls <code>get(key)</code>.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict(<span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key)</span> {</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.<span class="hljs-keyword">get</span>(key.slice(<span class="hljs-number">0</span>, key.length - <span class="hljs-number">1</span>));
+});
+dict.<span class="hljs-keyword">set</span>(<span class="hljs-string">"a"</span>, <span class="hljs-number">10</span>);
+expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abcdefg"</span>)).toBe(<span class="hljs-number">10</span>);
+</code></pre>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-sorted-array">
+                <h2 class="name">SortedArray</h2>
+                <p>A collection of values stored in stable stored order, backed by an array.</p>
+
+                <p>If the given values are an array, the <code>SortedArray</code> takes ownership of that
+array and modifies it in place.
+These changes can be observed.</p>
+<p><code>SortedArray</code> flies the <code>isSorted</code> flag.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-fast-set">
+                <h2 class="name">FastSet</h2>
+                <p>The backing store for <code>Set</code> and <code>FastMap</code>.</p>
+
+                <p>A <code>FastSet</code> is a set of arbitrary values, including objects.
+It is itself backed by a <code>Dict</code> of hash keys to a <code>List</code> of non-equivalent
+values that share the same hash key.
+The order of iteration is depth first through this structure, so not a faithful
+emulation of a proper ECMAScript 6 <code>Set</code> if there are hash collisions.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-lru-set">
+                <h2 class="name">LruSet</h2>
+                <p>A set with a maximum capacity that will evict the least recently used value.</p>
+
+                <p>An <code>LruSet</code> is backed by a <code>Set</code> and uses the set’s own insertion order list to
+track which value was least recently used.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-lfu-set">
+                <h2 class="name">LfuSet</h2>
+                <p>A set with a maximum capacity that will evict the least frequently used value.</p>
+
+                <p>An <code>LfuSet</code> is backed by a <code>Set</code> and a doubly linked list of <code>Set</code> instances for
+each cohort of values by frequency of use.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-sorted-array-set">
+                <h2 class="name">SortedArraySet</h2>
+                <p>A collection of unique values stored in sorted order, backed by a plain array.</p>
+
+                <p>If the given values are an actual array, the <code>SortedArraySet</code> takes ownership of
+that array and maintains its content.
+The user can then observe that array for changes.</p>
+<p>A sorted array sets performs better than a <code>SortedSet</code> when it has roughly less
+than 100 values.</p>
+<p><code>SortedArraySet</code> instances fly the <code>isSorted</code> and <code>isSet</code> flags.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-sorted-set">
+                <h2 class="name">SortedSet</h2>
+                <p>A collection of values stored in sorted order using a binary tree.</p>
+
+                <p>A <code>SortedSet</code> is a splay tree, using the top-down splaying algorithm from
+“Self-adjusting Binary Search Trees” by Sleator and Tarjan.
+Instead of traversing the tree, every algorithm rotates until the node of
+interest surfaces to the root node.
+This tends to cause the most frequently used nodes to stay toward the top over
+time.</p>
+<p><code>SortedSet</code> instances fly the <code>isSorted</code> and <code>isSet</code> flags.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-fast-map">
+                <h2 class="name">FastMap</h2>
+                <p>The backing store for a <code>Map</code>.</p>
+
+                <p>The <code>FastMap</code> is a map from arbitrary keys to values.
+It is itself backed by a <code>FastSet</code> of <em>[key, value]</em> entries, with
+<code>contentEquals</code> and <code>contentCompare</code> overridden to consider only the <em>key</em>.
+The <code>FastMap</code> is fast because it does not track insertion order of the entries,
+so it will not behave exactly like an ECMAScript 6 <code>Map</code> in that regard.
+The enumeration order of the map will depend on whether there are hash
+collisions.
+If there are no hash collisions, its enumeration order is consistent with <code>Map</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-lfu-map">
+                <h2 class="name">LfuMap</h2>
+                <p>A map with a maximum capacity that will evict the least frequently used entry.</p>
+
+                <p>An <code>LfuMap</code> is backed by an <code>LfuSet</code> of <em>[key, value]</em> entries, with
+<code>contentEquals</code> and <code>contentHash</code> overriden to only consider the <em>key</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-lru-map">
+                <h2 class="name">LruMap</h2>
+                <p>A map with a maximum capacity that will evict the least recently used entry.</p>
+
+                <p>An <code>LruMap</code> is backed by an <code>LruSet</code> of <em>[key, value]</em> entries, with
+<code>contentEquals</code> and <code>contentHash</code> overriden to only consider the <em>key</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-multi-map">
+                <h2 class="name">MultiMap</h2>
+                <p>A map from keys to buckets, typically arrays.</p>
+
+                <p>A <code>MultMap</code> is a thin layer on a <code>Map</code>.
+The <code>getDefault</code> and <code>set</code> methods are overriden to ensure that there will
+always be a single bucket value intrinsic to each key, always returned by <code>get</code>
+and only modified by <code>set</code>.</p>
+<p>The optional <code>bucket</code> argument overrides the <code>MultiMap</code>’s default <code>bucket(key)</code>
+method, which creates a new bucketsfor a given key.
+By default, this method just returns an empty array.</p>
+<p>The optional <code>equals</code> and <code>hash</code> arguments override the <code>contentEquals</code> and
+<code>contentHash</code> methods, which operate on keys of the map to find where to store
+entries.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-sorted-map">
+                <h2 class="name">SortedMap</h2>
+                <p>A map with entries sorted by key.</p>
+
+                <p>A <code>SortedMap</code> is backed by a <code>SortedSet</code> of <em>[key, value]</em> entries, with
+<code>contentEquals</code> and <code>contentCompare</code> overridden to consider only the key.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-sorted-array-map">
+                <h2 class="name">SortedArrayMap</h2>
+                <p>A map of key value pairs, sorted by key, backed by an array.</p>
+
+                <p>A <code>SortedArrayMap</code> is a <code>Map</code> backed by a <code>SortedArraySet</code>, which is in turn
+backed by a <code>SortedArray</code>, backed by an <code>Array</code>.
+The sorted array maintains the order of the entries using a binary search
+considering only the key portion of each entry.</p>
+<p><code>SortedArrayMap</code> instances fly the <code>isSorted</code> and <code>isMap</code> flags.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-weak-map">
+                <h2 class="name">WeakMap</h2>
+                <p>A map of object keys to values with good garbage collection behavior.
+See <a href="https://github.com/drses/weak-map">WeakMap</a>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-collection-iterator-1">
+                <h2 class="name">Iterator</h2>
+                <p>Produces values in order on demand.</p>
+
+                <p>:warning: Version 2 iterators differ substantially from version 1.
+This is a description of iterators from version 1, which tracked an earlier
+version of the ECMAScript iterator proposal.</p>
+<p>An iterator is an object with a <code>next</code> method that returns the next value for
+the iterator, or throws <code>StopIteration</code>, a global sentinel object for all
+iterators.
+<code>ReturnValue</code> is a global constructor for instances that inherit from
+<code>StopIteration</code> used to stop an iterator with a return value, particularly
+useful for generators.
+The <code>iterator</code> module shims these globals if they do not already exist.</p>
+<p>An iterable is an object that implements <code>iterator</code>.
+Collections that implement <code>iterator</code> may return either an iterator or an
+<code>Iterator</code>.
+<code>Iterator</code> supports additional methods beyond <code>next</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-array">
+                <h2 class="name">Array</h2>
+                <p>An ordered collection of values with fast random access, <code>push(...values)</code>, and <code>pop()</code>, but can be slow to splice when sufficiently massive.</p>
+
+                <p>The <code>shim-array</code> module provides extensions so it hosts all the expressiveness
+of other collections.  The <code>shim-array</code> module shims some ECMAScript 5 methods
+onto the array prototype if they are not natively implemented.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">require</span>(<span class="hljs-string">"collections/shim-array"</span>);
+</code></pre>
+
+            </div>
+        
+            <div class="detail" id="detail-collection-object">
+                <h2 class="name">Object</h2>
+                <p>The native JavaScript object, with some additional constructor methods shimmed.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-collection-generic-collection">
+                <h2 class="name">GenericCollection</h2>
+                <p>An abstract collection that implements many generic methods, reusable by most collections.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-collection-generic-order">
+                <h2 class="name">GenericOrder</h2>
+                <p>An abstract collection that implements generic methods that can be used by any collection that keeps its values in a meaningful order.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-collection-generic-set">
+                <h2 class="name">GenericSet</h2>
+                <p>An abstract collection that implements many generic methods, reusable by most sets.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-collection-generic-map">
+                <h2 class="name">GenericMap</h2>
+                <p>An abstract collection that implements many generic methods, reusable by most maps.</p>
+
+                
+            </div>
+        
+        
+            <div class="detail" id="detail-method-push">
+                <h2 class="name">push(...values)</h2>
+                <p>Adds values to the end of a collection.</p>
+
+                <p>For purposes of genericity, collections that have an intrinsic relative order
+for their values, like a <code>SortedSet</code>, support the <code>push</code> method but do not
+necessarily add the new values to the end of the collection.</p>
+<p>As of version 1.1.0 and 2.0.1, <code>Heap</code> does not yet support <code>push</code> for multiple
+values.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-pop">
+                <h2 class="name">pop()</h2>
+                <p>Removes a value from the end of a collection, and returns that value.</p>
+
+                <p>For a <code>SortedSet</code> and a <code>Heap</code>, this is equivalent to removing the maximum value
+of the collection.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-shift">
+                <h2 class="name">shift()</h2>
+                <p>Removes a value from the beginning of a collection, and returns that value.</p>
+
+                <p>For a <code>SortedSet</code>, this is equivalent to removing the minimum value of the
+collection.</p>
+<p>For <code>List</code> and <code>Deque</code>, this operation is very fast.
+For an <code>Array</code>, this operation will require all subsequent values to be
+shifted to the left to fill the void at index zero.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-unshift">
+                <h2 class="name">unshift(...values)</h2>
+                <p>Adds values to the beginning of a collection.</p>
+
+                <p>For purposes of genericity, collections that have an intrinsic relative order
+for their values, like a <code>SortedSet</code>, support the <code>unsfhit</code> method but do
+not necessarily add the new values to the beginning of the collection.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-peek">
+                <h2 class="name">peek()</h2>
+                <p>Returns the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-poke">
+                <h2 class="name">poke(value)</h2>
+                <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-peek-back">
+                <h2 class="name">peekBack()</h2>
+                <p>Returns the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-poke-back">
+                <h2 class="name">pokeBack(value)</h2>
+                <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-has-value">
+                <h2 class="name">has(value)</h2>
+                <p>Whether an equivalent value exists in this collection.</p>
+
+                <p>This operation is very fast for sets because they are backed by a hash table.
+The operation is fast for <code>SortedSet</code> and <code>SortedArraySet</code> by virtue of a binary
+search.</p>
+<p>To avoid confusion with the linear search available as <code>has(value, equals)</code> on
+<code>Array</code>, <code>List</code>, and <code>Deque</code>, if you pass a second argument, this method will
+throw an exception.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-has-value-equals">
+                <h2 class="name">has(value, equals?)</h2>
+                <p>Returns whether an equivalent value exists in this collection.</p>
+
+                <p>This is a slow operation that visits each value in the collection.
+By default, the equality operator is <code>Object.equals</code>.</p>
+<p>There is an analogous implementation provided by <code>Set</code>, <code>SortedSet</code>, and
+<code>SortedArraySet</code>, but those collections have an intrisinc order and uniqueness,
+so they do not support the second argument, <code>equals</code>.
+This method is also distinct from the <code>has</code> method provided by maps.</p>
+<p>For the purposes of the <code>has</code> method, an <code>Array</code> behaves like a <code>List</code>, even
+though the <code>Array</code> implements <code>get</code> and <code>set</code> as if it were a <code>Map</code>.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> found = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].<span class="hljs-keyword">has</span>(<span class="hljs-number">1</span>);
+expect(found).toBe(<span class="hljs-keyword">true</span>);
+</code></pre>
+
+            </div>
+        
+            <div class="detail" id="detail-method-get-value">
+                <h2 class="name">get(value)</h2>
+                <p>Retrieves the equivalent value from the collection.</p>
+
+                <p>This is a very fast operation for <code>Set</code>, <code>FastSet</code>, <code>LruSet</code>, and <code>LfuSet</code>,
+which are backed by hash tables.
+This is also fast for <code>SortedArray</code> and <code>SortedArraySet</code> by virtue of a binary
+search, and <code>SortedSet</code>, which is backed by a <a href="http://en.wikipedia.org/wiki/Splay_tree">splay tree</a>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-get-value-equals">
+                <h2 class="name">get(value, equals?)</h2>
+                <p>Retrieves the equivalent value from this collection.</p>
+
+                <p>This is a slow operation that visits each value in the collection.
+By default, the equality operator is <code>Object.equals</code>.</p>
+<p>Note that <code>Array</code> does not subscribe to this interpretation of the <code>get</code> method.
+For the purposes of <code>get</code>, an array behaves like a map from indexes to the
+values at those indexes.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-add-value">
+                <h2 class="name">add(value)</h2>
+                <p>Adds a value to a collection.</p>
+
+                <p>Ignores the operation if the value already exists within a set.
+Regardless of the collection, returns whether the value was in fact added to the
+set.</p>
+<p>Generic collection methods often invoke this method as <code>add(value, key)</code> or
+<code>add(value, index)</code>, in which case these collections ignore the second argument.
+The genericity of <code>add</code> allows generic methods like <code>addEach</code>, <code>filter</code>, and
+<code>clone</code> to use the same treatment for sets and maps, where the key or index may
+or may not be meaningful.
+Consider the implementation of filter.</p>
+<pre><code class="lang-js">GenericCollection.prototype.filter = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback <span class="hljs-comment">/*, thisp*/</span>)</span> {</span>
+    <span class="hljs-keyword">var</span> thisp = <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">this</span>.constructClone();
+    <span class="hljs-keyword">this</span>.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(undefined, value, key, object, depth)</span> {</span>
+        <span class="hljs-keyword">if</span> (callback.call(thisp, value, key, object, depth)) {
+            result.add(value, key);
+        }
+    }, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span> result;
+};
+</code></pre>
+<p>The result will have the same type as this collection, which may be a map or a
+set for example, because each of these have a <code>constructClone()</code> method that
+will return an instance of their own type.
+If the collection is a set, the keys will be meaningless and ignored.
+If the collection is a map, the resulting map will have the entries, both key
+and value, of the original map, except those for do not pass the test.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-delete-value">
+                <h2 class="name">delete(value)</h2>
+                <p>Deletes the first equivalent value. Returns whether the key was found and successfully deleted.</p>
+
+                <p>This is a very fast operation for <code>Set</code>, <code>LruSet</code>, and <code>FastSet</code> because they
+are backed by hash tables.
+This is a fast operation for <code>SortedSet</code> because it is backed by a splay tree,
+fast for <code>SortedArray</code> and <code>SortedArraySet</code> beause they use a binary search,
+and fast for <code>Heap</code> because it is backed by a binary search tree projected on an
+array.</p>
+<p>However, <code>delete(value)</code> for these collections does not support the
+<code>delete(value, equals)</code> overload.
+Providing a second argument to <code>delete</code> in these collections will throw an
+error.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-delete-value-equals">
+                <h2 class="name">delete(value, equals?)</h2>
+                <p>Seeks out and deletes an equivalent value. Returns whether the value was found and successfully deleted.</p>
+
+                <p>This is a slow operation because it involves a linear walk to find the
+equivalent value.
+For an array, the hole left by the deletion will be filled by shifting
+subsequent values leftward.</p>
+<p>By default, the eqality comparison is performed by <code>Object.equals</code>, with the
+reference value first.</p>
+<p>In versions 1.1.1 and 2.0.1, <code>delete</code> favors the last found value for lists, and
+the first found value for arrays.
+This behavior is inconsistent subject to change, pending discovery of whether
+FIFO or LIFO semantics are more useful by default.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-remove">
+                <h2 class="name">remove(value)</h2>
+                <p>An alias for <code>delete(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-contains">
+                <h2 class="name">contains(value)</h2>
+                <p>An alias for <code>has(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-toggle">
+                <h2 class="name">toggle(value)</h2>
+                <p>Toggles the existence of a value in a set.</p>
+
+                <p>If the value exists, deletes it.
+if the value does not exist, adds it.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-has-key">
+                <h2 class="name">has(key)</h2>
+                <p>Returns whether an entry with the given key exists in a <code>Map</code>.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-get-key">
+                <h2 class="name">get(key|index, default?)</h2>
+                <p>Gets the value for a key in a map.</p>
+
+                <p>If there is no entry with the request key, and the user calls <code>get</code> with a
+second argument <em>even if that argument is undefined</em>, the second argument will
+be returned instead.
+Otherwise, <code>get</code> will return the result of <code>getDefault(key)</code>, which itself
+defaults to returning undefined.</p>
+<p>Every map implementation gives an opportunity to override <code>getDefault</code> through
+the constructor, but it can always be overridden on either the instance or the
+prototype.
+It is often useful to provide a <code>getDefault</code> that will create, save, and return
+a default instance for a given key.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> Dict();
+users.getDefault = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(id)</span> {</span>
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">new</span> User(id);
+    <span class="hljs-keyword">this</span>.<span class="hljs-keyword">set</span>(id, user);
+    <span class="hljs-keyword">return</span> user;
+};
+</code></pre>
+<p>For the purposes of the <code>get</code> and <code>set</code> methods, an <code>Array</code> behaves like a map
+from index to the value at that index.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].<span class="hljs-keyword">get</span>(<span class="hljs-number">1</span>);
+expect(<span class="hljs-keyword">value</span>).toBe(<span class="hljs-number">2</span>);
+</code></pre>
+<p>In contrast, for the purposes of the <code>has</code> method, an <code>Array</code> behaves as a list
+of values.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> found = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].<span class="hljs-keyword">has</span>(<span class="hljs-number">1</span>);
+expect(found).toBe(<span class="hljs-keyword">true</span>);
+</code></pre>
+
+            </div>
+        
+            <div class="detail" id="detail-method-set">
+                <h2 class="name">set(key, value)</h2>
+                <p>Sets the value for a given key.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-add-value-key">
+                <h2 class="name">add(value, key)</h2>
+                <p>Adds a value for a given key to a map.</p>
+
+                <p>This is an alias for <code>set(key, value)</code> that does not have an obvious reason to
+exist.
+The purpose of this method is to allow certain generic collection methods
+including <code>addEach</code>, <code>filter</code>, and <code>clone</code>, to treat sets and maps in the same
+fashion, without regard for whether the keys are or not meaningful for the
+collection.
+For example, sets implement <code>add(value)</code>, but maps implement <code>add(value, key)</code>.
+Iterating a <code>List</code> provides meaningful indexes that can be used for keys if they
+are converted to maps.
+Consider this excerpt from <code>addEach(values)</code> for generic collections.</p>
+<pre><code class="lang-js">values.forEach(<span class="hljs-keyword">this</span>.add, <span class="hljs-keyword">this</span>);
+</code></pre>
+<p>This copies values from an abitrary collection into this one.
+Regardless of whether this collection is a map or a set, and whether the values
+come from a map or a set, <code>add</code> is able to bridge the gap.
+This is particularly important since <code>addEach(values)</code> is the last operation of
+every collection constructor.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-delete-key">
+                <h2 class="name">delete(key)</h2>
+                <p>Deletes the value for a given key. Returns whether the key was found and successfully deleted.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-keys">
+                <h2 class="name">keys()</h2>
+                <p>Returns an array of the keys of this map.</p>
+
+                <p>The ES6 standard stipulates that this method should return an iterator.
+This library does not yet comply, but may in version 2.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-values">
+                <h2 class="name">values()</h2>
+                <p>Returns an array of the values of this map.</p>
+
+                <p>The ES6 standard stipulates that this method should return an iterator.
+This library does not yet comply, but may in version 2.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-entries">
+                <h2 class="name">entries()</h2>
+                <p>Returns an array of all <em>[key, value]</em> entries for this map.</p>
+
+                <p>Previous versions called this method <code>items()</code>.
+This name has been deprecated in version 1, and removed in version 2.</p>
+<p>The ES6 standard stipulates that this method should return an iterator.
+This library does not yet comply, but may in version 2.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-add-each">
+                <h2 class="name">addEach(values|map)</h2>
+                <p>Copies values or entries from another collection into this collection, and then returns this.</p>
+
+                <p>If the argument is an object that implements <code>forEach</code>, for example, most
+collections including <code>Map</code> and <code>Array</code>, the behavior of <code>addEach</code> varies by
+whether each involved collection supports keys or indexes.</p>
+<p>In the simple cases, values get added in order, and map entries get set in
+order.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">set</span> = <span class="hljs-keyword">new</span> Set();
+<span class="hljs-keyword">set</span>.addEach(array);
+expect(<span class="hljs-keyword">set</span>.toArray()).toEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]);
+
+<span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> Map({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>});
+<span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict();
+dict.addEach(map);
+expect(dict.entries()).toEqual([[<span class="hljs-string">"a"</span>, <span class="hljs-number">10</span>], [<span class="hljs-string">"b"</span>, <span class="hljs-number">20</span>]]);
+</code></pre>
+<p>If this collection is a map and the source is not, the source must contain key
+to value entries, which will then be copied to this map in order.</p>
+<pre><code class="lang-js">var list = new List(<span class="hljs-string">[[0, "a"], [1, "b"], [2, "c"]]</span>);
+var dict = new Dict();
+dict.addEach(list);
+expect(dict.entries()).toEqual(<span class="hljs-string">[["0", "a"], ["1", "b"], ["2", "c"]]</span>);
+</code></pre>
+<p>If the argument is an object that has a length and that length is a number, for
+example arguments or object literals masquerading as arrays, the object is
+treated as a map from index to value at that index.</p>
+<pre><code class="lang-js">var map = new Map();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">argue</span><span class="hljs-params">()</span></span> { <span class="hljs-keyword">return</span> arguments; }
+map.addEach(argue(<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>));
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "a"], [1, "b"], [2, "c"]]</span>);
+
+var list = new List();
+list.addEach(argue(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>));
+expect(list.toArray()).toEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);
+
+map.addEach({<span class="hljs-number">0</span>: <span class="hljs-string">"g"</span>, <span class="hljs-number">1</span>: <span class="hljs-string">"h"</span>, <span class="hljs-number">2</span>: <span class="hljs-string">"i"</span>, length: <span class="hljs-number">3</span>});
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "g"], [1, "h"], [2, "i"]]</span>);
+</code></pre>
+<p>After versions <code>1.1.1</code> and <code>2.0.1</code>, the argument may also be a string and
+receive
+the same treatment.</p>
+<pre><code class="lang-js">map.addEach(<span class="hljs-string">"def"</span>);
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "d"], [1, "e"], [2, "f"]]</span>);
+</code></pre>
+<p>If the argument is any other kind of object, it is treated as a mapping from
+property name to value, where the property name is the key.
+If this collection supports keys, the keys will be preserved.</p>
+<pre><code class="lang-js">var dict = new Dict();
+dict.addEach({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>, c: <span class="hljs-number">30</span>});
+expect(dict.entries()).toEqual(<span class="hljs-string">[["a", 10], ["b", 20], ["c", 30]]</span>);
+</code></pre>
+<p>Otherwise, the values will be added to this collection in the order they appear.</p>
+<pre><code><span class="hljs-keyword">var</span> <span class="hljs-keyword">array</span> = [];
+<span class="hljs-keyword">array</span>.addEach({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>, c: <span class="hljs-number">30</span>});
+expect(<span class="hljs-keyword">array</span>).toEqual([<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>]);
+</code></pre><p>Null and undefined are ignored.
+Since <code>addEach</code> is an implementation detail for all collection constructors,
+this allows the first argument, the values to copy upon construction, to be
+elided.</p>
+<p>At time of writing, all other values are ignored as well, but the implementors
+have a free hand to throw a <code>TypeError</code> in a future version.</p>
+<p>In addition, <code>Object.addEach(target, source)</code> behaves in the same fashion as
+above except the source is used in place of the context object and is treated as
+a mapping from property names to values.
+Also, if the source owns a property <code>forEach</code>, it is ignored.
+This makes <code>addEach</code> suitable for prototype mixins.</p>
+<pre><code class="lang-js">Object<span class="hljs-preprocessor">.addEach</span>(<span class="hljs-keyword">Set</span><span class="hljs-preprocessor">.prototype</span>, GenericCollection<span class="hljs-preprocessor">.prototype</span>)<span class="hljs-comment">;</span>
+</code></pre>
+
+            </div>
+        
+            <div class="detail" id="detail-method-delete-each">
+                <h2 class="name">deleteEach(values|keys, equals?)</h2>
+                <p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
+
+                <p>If provided an <code>equals</code> argument, it will forward that operator to the
+underlying <code>delete</code> implementation, which may or may not be appropriate
+depending on the collection.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-slice">
+                <h2 class="name">slice(start?, end?)</h2>
+                <p>Returns an array of the values contained in the half-open interval [start, end), that is, including the start and excluding the end.</p>
+
+                <p>For <code>Array</code>, <code>List</code>, and <code>Deque</code>, both terms may be numeric positive or negative
+indicies.</p>
+<p>For a <code>List</code>, either term may be a node.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-splice">
+                <h2 class="name">splice(start, length, ...values)</h2>
+                <p>Replaces a length of values from a starting position with the given variadic values, and returns the values that were replaced as an array.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-swap">
+                <h2 class="name">swap(start, length, values?)</h2>
+                <p>Replaces a length of values from a starting position with the given values.</p>
+
+                <p>Unlike <code>splice</code>, if the start index is beyond the length of an array, <code>swap</code>
+will extend the array to the given start index, leaving holes between the old
+length and the start index.</p>
+<p>In version 2, <code>swap</code> no longer returns an array of the removed length of values,
+which further distinguishes it from <code>splice</code>, making it less wasteful in some
+cases.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-clear">
+                <h2 class="name">clear()</h2>
+                <p>Deletes all of the values in the collection.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-index-of">
+                <h2 class="name">indexOf(value)</h2>
+                <p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>
+
+                <p>Returns the position of the first of equivalent values.
+Equivalence is defined by the equality operator intrinsic to the collection,
+either the one given as the <code>equals</code> argument to its constructor, or
+<code>Object.equals</code> by default.</p>
+<p>For a <code>SortedSet</code>, this operation is fast, because it is backed by a binary
+search tree.
+For a <code>SortedArray</code>, or <code>SortedArraySet</code>, this is also fast, employing a binary
+search.</p>
+<p>The implementation of <code>indexOf</code> for <code>Array</code>, <code>List</code>, and <code>Deque</code> is slower
+but more flexible.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-last-index-of">
+                <h2 class="name">lastIndexOf(value)</h2>
+                <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
+
+                <p>Returns the position of the last of equivalent values.
+Equivalence is defined by the equality operator intrinsic to the collection,
+either the one given as the <code>equals</code> argument to its constructor, or
+<code>Object.equals</code> by default.</p>
+<p>For a <code>SortedSet</code>, this operation is fast, because it is backed by a binary
+search tree.
+For a <code>SortedArray</code>, or <code>SortedArraySet</code>, this is also fast, employing a binary
+search.</p>
+<p>The implementation of <code>indexOf</code> for <code>Array</code>, <code>List</code>, and <code>Deque</code> is slower
+but more flexible.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-index-of-start">
+                <h2 class="name">indexOf(value, start?)</h2>
+                <p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>
+
+                <p>Returns the position of the first of equivalent values.
+The second argument is an optional index from which to start seeking, and
+defaults to 0, meaning search the entire collection.</p>
+<p>For arrays, equivalence is defined by the <code>===</code> operator.
+For all other collections, equivalence is defined by <code>contentEquals</code>, which
+can be overridden with an argument to the collection’s constructor, or by
+assigning a property to either the instance or prototype.
+The default <code>contentEquals</code> is <code>Object.equals</code>, which performs a deep equality
+comparison.</p>
+<p>This method is slow, requiring a linear walk.
+Fast implementations of <code>indexOf(value)</code> exist for <code>SortedSet</code>, <code>SortedArray</code>,
+and <code>SortedArraySet</code>, but do not support a start index.</p>
+<p>The precedent for the <code>indexOf</code> method is the JavaScript Array method, as
+described on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">MDN</a>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-last-index-of-start">
+                <h2 class="name">lastIndexOf(value, start?)</h2>
+                <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
+
+                <p>Returns the position of the last of equivalent values.  The second argument
+is an optional index from which to start seeking, the upper bound of the
+search, and defaults to <em>length - 1</em>, meaning search the entire collection.</p>
+<p>For arrays, equivalence is defined by the <code>===</code> operator.
+For all other collections, equivalence is defined by <code>contentEquals</code>, which
+can be overridden with an argument to the collection’s constructor, or by
+assigning a property to either the instance or prototype.
+The default <code>contentEquals</code> is <code>Object.equals</code>, which performs a deep equality
+comparison.</p>
+<p>This method is slow, requiring a linear walk.
+Fast implementations of <code>lastIndexOf(value)</code> exist for <code>SortedSet</code>, <code>SortedArray</code>,
+and <code>SortedArraySet</code>, but do not support a start index.</p>
+<p>The precedent for the <code>lastIndexOf</code> method is the JavaScript Array method, as
+described on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf">MDN</a>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find">
+                <h2 class="name">find(callback, thisp?)</h2>
+                <p>Finds the first value within a collection that passes a test.</p>
+
+                <p>This method is defined by an ECMAScript 6 proposal and documented on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">MDN</a>.</p>
+<p>Version 1 of collections supports a deprecated alternative to <code>find(callback,
+thisp)</code>, [find(value, equals, start)][find-value].
+In version 2, this method has been renamed <code>findValue</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-last">
+                <h2 class="name">findLast(callback, thisp?)</h2>
+                <p>Finds the last value within a collection that passes a test, searching from the right.</p>
+
+                <p>At time of writing, no collection implements this method, but it would be be a
+logical addition triangulated from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">find</a> (an ECMA6 Proposal) and
+<code>lastIndexOf</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-index">
+                <h2 class="name">findIndex(callback, thisp?)</h2>
+                <p>Finds the first index within a collection that passes a test.</p>
+
+                <p>This is a method implemented by some JavaScript engines, but not yet provided by
+MontageJS Collections nor its Array shims.</p>
+<p>This method is defined by an ECMAScript 6 proposal and documented on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">MDN</a>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-last-index">
+                <h2 class="name">findLastIndex(callback, thisp?)</h2>
+                <p>Finds the last index within a collection that passes a test, searching from the right.</p>
+
+                <p>At time of writing, no collection implements this method, but it would be be a
+logical addition triangulated from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">findIndex</a> (an ECMA6 Proposal) and
+<code>lastIndexOf</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-value">
+                <h2 class="name"></h2>
+                <p>Finds the first equivalent value.</p>
+
+                <p>For <code>List</code> and <code>SortedSet</code>, returns the node at which the value was found, or
+<code>null</code> if no equivalent value exists.
+For other collections, returns the index of the found value or <em>-1</em> if no
+equivalent value exists.
+Regardless of the collection, the value returned is suitable for passing to
+other methods like <code>slice</code>, <code>splice</code>, and <code>swap</code>.</p>
+<p>The optional <code>equals</code> argument is alternative for <code>Object.equals</code>.</p>
+<p>The optional <code>start</code> is the index from which to begin searching.
+Values to the left of the start index will not be considered.</p>
+<p><code>SortedSet</code>, <code>SortedArray</code>, and <code>SortedArraySet</code> do not support overriding the
+<code>equals</code> operator nor the <code>start</code> index, and will throw an exception if provided
+either.
+A meaningful implementation with these parameters may be provided in a future
+release.</p>
+<p>In version 1, this method is called <code>find</code>, which conflicts with the definition
+of <code>find</code> provided by ECMAScript 6.
+In version 2, this method is called <code>findValue</code> to eliminate the conflict.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-last-value">
+                <h2 class="name"></h2>
+                <p>Finds the last equivalent value, searching from the right.</p>
+
+                <p>For <code>List</code> and <code>SortedSet</code>, returns the node at which the value was found, or
+<code>null</code> if no equivalent value exists.
+For other collections, returns the index of the found value or <em>-1</em> if no
+equivalent value exists.
+Regardless of the collection, the value returned is suitable for passing to
+other methods like <code>slice</code>, <code>splice</code>, and <code>swap</code>.</p>
+<p>The optional <code>equals</code> argument is alternative for <code>Object.equals</code>.</p>
+<p>The optional <code>start</code> is the index from which to begin searching.
+Values to the right of the start index will not be considered.</p>
+<p><code>SortedSet</code>, <code>SortedArray</code>, and <code>SortedArraySet</code> do not support overriding the
+<code>equals</code> operator nor the <code>start</code> index, and will throw an exception if provided
+either.
+A meaningful implementation with these parameters may be provided in a future
+release.</p>
+<p>In version 1, this method is called <code>findLast</code>.
+It has been renamed <code>findLastValue</code> in version 2 to avoid a conflict with
+<code>find</code> as proposed for ECMAScript 6.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-least">
+                <h2 class="name">findLeast()</h2>
+                <p>Finds the smallest value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and performs no rotations of the splay tree backing
+the <code>SortedSet</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-least-greater-than">
+                <h2 class="name">findLeastGreaterThan(value)</h2>
+                <p>Finds the smallest value greater than the given value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and may rotate the underlying splay tree.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-least-greater-than-or-equal">
+                <h2 class="name">findLeastGreaterThanOrEqual(value)</h2>
+                <p>Finds the smallest value greater than or equal to the given value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and may rotate the underlying splay tree.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-greatest">
+                <h2 class="name">findGreatest()</h2>
+                <p>Finds the largest value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and performs no rotations of the splay tree backing
+the <code>SortedSet</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-greatest-less-than">
+                <h2 class="name">findLGreatestLessThan(value)</h2>
+                <p>Finds the largest value less than the given value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and may rotate the underlying splay tree.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-find-greatest-less-than-or-equal">
+                <h2 class="name">findGreatestLessThanOrEqual(value)</h2>
+                <p>Finds the largest value less than or equal to the given value, returning the node at which it was found, or undefined.</p>
+
+                <p>Values are compared using the collection’s intrinsic <code>contentEquals</code> and
+<code>contentCompare</code>, determined at time of construction.</p>
+<p>This is fast (logarithmic) and may rotate the underlying splay tree.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-map-iterator">
+                <h2 class="name">mapIterator(callback, thisp?)</h2>
+                <p>Returns an iterator for the respective return values of a callback for each value from this iteration.</p>
+
+                <p>The given callback receives the value for each entry, its index, and the
+iterator itself.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-filter-iterator">
+                <h2 class="name">filterIterator(callback, thisp?)</h2>
+                <p>Returns an iterator for all values from this iterator that pass a test.</p>
+
+                <p>THe given callback receives the value for each entry, its index, and the
+iterator itself.
+The callback is expected to return a truthy value if the entry is to be
+retained.
+The <code>next</code> method on the iterator will consume values from this iterator until
+it finds a value that passes.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-drop-while">
+                <h2 class="name">dropWhile(callback, thisp?)</h2>
+                <p>Returns an iterator that will begin with the first value from this iteration that passes a test.</p>
+
+                <p>The callback receives a value, its index, and this iterator.
+The callback is expected to return whether this value should be excluded.
+Once a value has been included, all subsequent entries from this iteration will
+pass through.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-take-while">
+                <h2 class="name">takeWhile(callback, thisp?)</h2>
+                <p>Returns an iterator that will produce every value from this iteration until an entry fails a test.</p>
+
+                <p>The callback receives a value, its index, and this iterator.
+The callback is expected to return whether this value should be included.
+Once a value has been excluded, the returned iteration is done.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-zip-iterator">
+                <h2 class="name">zipIterator(...iterables)</h2>
+                <p>Returns an iterator that will produce an array of values with the value at the same index of this iterator and each given iterable.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-enumerate-iterator">
+                <h2 class="name">enumerateIterator(start?)</h2>
+                <p>Creates an iterator that will produce <em>[index, value]</em> for each value in this iterator, on demand.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-iterate">
+                <h2 class="name">iterate()</h2>
+                <p>Iterates every value in this collection.</p>
+
+                <p>:warning: The <code>iterate</code> method and its notion of iterators only applies to
+version 2. See [iterator][iterator] for version 1.</p>
+<p>The <code>iterate</code> method returns an <code>Iterator</code>.</p>
+<p>An iterator is an object that implements <code>next</code>, and though the <code>Iterator</code> provided
+by collections supports a much more rich set of methods, the <code>next</code> method is
+the sufficient kernel for any iterator.</p>
+<p>The <code>next</code> method returns an iteration.
+An iteration will have a <code>value</code> property signifying the next value in the
+iteration.
+If the iteration has passed the end of the collection, it will have a <code>done</code>
+property equal to <em>true</em>.</p>
+<p>A “done” iteration may also have a <code>value</code> but the meaning of a completion value
+varies.
+Completion values make the most sense for iterators returned by generator
+functions.
+The completion value is the value returned by the generator.
+However, certain iterator functions like <code>forEach</code> will pass this completion
+value through to the next iterator.</p>
+<p>Iterators from collections may also have an <code>index</code> property, representing
+either the key or the index of the value.
+This library adds an <code>iterate</code> method to <code>Array</code> that supports this feature, and
+supports it in every collection that tracks indexes and maps that have keys.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-iterate-start-end">
+                <h2 class="name">iterate(start?, end?)</h2>
+                <p>Iterates from start to end within a collection.</p>
+
+                <p>Returns an iterator that will start at the given index and stop when it reaches
+the end.
+The iterator will not produce the value at the end index.</p>
+<p>The optional <code>end</code> argument defaults to the length of the collection.</p>
+<p>The optional <code>start</code> argument defaults to zero, the beginning of the collection.</p>
+<p>Although many collections implement <code>iterate</code>, not all support the <code>start</code> and
+<code>end</code> indexes.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-iterator">
+                <h2 class="name">iterator()</h2>
+                <p>Iterates every value in this collection.</p>
+
+                <p>Returns an iterator with the version 1 <code>Iterator</code> protocol.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-for-each">
+                <h2 class="name">forEach(callback, thisp?)</h2>
+                <p>Calls the callback for each entry in the collection.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.
+It is not obliged to return anything, and <code>forEach</code> returns nothing.</p>
+<p>The iteration of lists is resilient to changes to the list during iteration.
+Nodes added after the current node will be visited.
+Nodes removed before the current node will not affect subsequent iterations.</p>
+<p>If this collection is an array with holes, those entries will not be visited.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-map">
+                <h2 class="name">map(callback, thisp?)</h2>
+                <p>Returns an array of the respective return values of a callback for each entry in this collection.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.</p>
+<p>If this collection is an array with holes, those entries will not be visited.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-filter">
+                <h2 class="name">filter(callback, thisp?)</h2>
+                <p>Returns an array with each value from this collection that passes the given test.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.
+If the return value of the callback is truthy, the value will be included in the
+resulting array.</p>
+<p>The index of the value will be ignored and the resulting array will be compact,
+even if this collection is an array with holes.
+Positions in this array that are holes will not be visited.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-reduce">
+                <h2 class="name">reduce(callback, basis)</h2>
+                <p>Aggregates every value in this collection with the result collected up to that index.</p>
+
+                <p>The callback argument is a function that will accept the result collected so
+far, the value for each entry, the key or index, and the collection itself.
+Its return value will become the new accumulated result.
+<code>reduce</code> will return the accumulated result upon visiting every index.</p>
+<p>The second argument is a <code>basis</code>, the aggregate result before any value has been
+visited, and the ultimate result if this collection is empty.</p>
+<p>The <code>Array</code> implementation establishes a precedent that the basis should be
+optional.
+If the user provides no basis and the collection is empty, <code>reduce</code> throws an
+error.
+However, at time of writing, all other collections in this library require an
+initial <code>basis</code>.
+This is a shortcoming that should be rectified in version 2.</p>
+<p><code>reduce</code> and <code>iterate</code> are the basis for many generic collection methods
+including <code>forEach</code>, <code>map</code>, and <code>filter</code>.
+<code>iterate</code> is more appropriate for <code>some</code> and <code>every</code>, which may finish before
+visiting every entry in the collection.</p>
+<p>Also, on <code>Array</code>, <code>reduceRight</code> does not accept an optional <code>thisp</code> argument.
+Other collections do.</p>
+<p>If this collection is an array with holes, those entries will not be visited.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-reduce-right">
+                <h2 class="name">reduceRight(callback, basis)</h2>
+                <p>Aggregates every value in this collection, from right to left.</p>
+
+                <p>The callback argument is a function that will accept the result collected so
+far, the value for each entry, the key or index, and the collection itself.
+Its return value will become the new accumulated result.
+<code>reduceRight</code> will return the accumulated result upon visiting every index.</p>
+<p>The second argument is a <code>basis</code>, the aggregate result before any value has been
+visited, and the ultimate result if this collection is empty.</p>
+<p>The <code>Array</code> implementation establishes a precedent that the basis should be
+optional.
+If the user provides no basis and the collection is empty, <code>reduceRight</code> throws
+an error.
+However, at time of writing, all other collections in this library require an
+initial <code>basis</code>.
+This is a shortcoming that should be rectified in version 2.</p>
+<p>Also, on <code>Array</code>, <code>reduceRight</code> does not accept an optional <code>thisp</code> argument.
+Other collections do.</p>
+<p>If this collection is an array with holes, those entries will not be visited.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-group">
+                <h2 class="name">group(callback, thisp?, equals?)</h2>
+                <p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-some">
+                <h2 class="name">some(callback, thisp?)</h2>
+                <p>Returns whether every entry in this collection passes a given test.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.
+<code>every</code> stops visiting entries upon reaching an entry for which the guard
+returns a falsy value, and returns <em>false</em>.
+Otherwise it will return <em>true</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-every">
+                <h2 class="name">every(callback, thisp?)</h2>
+                <p>Returns whether any entry in this collection passes a given test.</p>
+
+                <p>The given callback receives the value for each entry, the key or index, and the
+collection itself.
+<code>some</code> stops visiting entries upon reaching an entry for which the guard returns
+a truthy value, and returns <em>true</em>.
+Otherwise it will return <em>false</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-any">
+                <h2 class="name">any()</h2>
+                <p>Returns whether any value in the collection is truthy.</p>
+
+                <p>:warning: This method is deprecated in version 1 and removed in version 2.
+Use <code>some(Boolean)</code> instead.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-all">
+                <h2 class="name">all()</h2>
+                <p>Returns whether all values in the collection are truthy.</p>
+
+                <p>:warning: This method is deprecated in version 1 and removed in version 2.
+Use <code>every(Boolean)</code> instead.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-one">
+                <h2 class="name">one()</h2>
+                <p>Returns one, arbitrary value from this collection, or <em>undefined</em> if there are none.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-only">
+                <h2 class="name">only()</h2>
+                <p>Returns the only value in this collection, or <em>undefined</em> if there is more than one value, or if there are no values in the collection.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-sort">
+                <h2 class="name">sort(compare?)</h2>
+                <p>Sorts a collection in place.</p>
+
+                <p>:warning: The default comparator for <code>sort</code> on <code>Array</code> is defined by the
+JavaScript language specification and is almost never appropriate.
+The left and right values are coerced to strings and compared lexicographically.
+Consider using <code>Object.compare</code>.
+For all other collections that implement <code>sort</code>, <code>Object.compare</code> is the
+default.</p>
+<p>The comparator must be a function that accepts two values and returns a number.</p>
+<ul>
+<li>less than zero if the left is less than the right</li>
+<li>more than zero if the left is more than the right</li>
+<li>equal to zero if the left is either incomparable or equivalent to the right</li>
+</ul>
+<p>A comparator for numbers should subtract the right from the left and expresses
+both the direction and magnitude of the difference.
+If the magnitude of the difference is not meaningful, a comparator <em>should</em>
+return only <em>Infinity</em>, <em>-Infinity</em>, or <em>0</em>, to increase the usefulness of the
+comparator.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-sorted">
+                <h2 class="name">sorted(compare?)</h2>
+                <p>Returns a sorted array of the values in this collection.</p>
+
+                <p>The comparator must be a function that accepts two values and returns a number.</p>
+<ul>
+<li>less than zero if the left is less than the right</li>
+<li>more than zero if the left is more than the right</li>
+<li>equal to zero if the left is either incomparable or equivalent to the right</li>
+</ul>
+<p>A comparator for numbers should subtract the right from the left and expresses
+both the direction and magnitude of the difference.
+If the magnitude of the difference is not meaningful, a comparator <em>should</em>
+return only <em>Infinity</em>, <em>-Infinity</em>, or <em>0</em>, to increase the usefulness of the
+comparator.</p>
+<p>The default comparator is <code>Object.compare</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-reverse">
+                <h2 class="name">reverse()</h2>
+                <p>Reverses the order of this collection in place.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-reversed">
+                <h2 class="name">reversed()</h2>
+                <p>Returns a copy of this collection with the values in reverse order.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-join">
+                <h2 class="name">join(delimiter?)</h2>
+                <p>Returns a string of all the values in the collection delimited by the given string.</p>
+
+                <p>The default delimiter is an empty string.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-split">
+                <h2 class="name">split(delimiter)</h2>
+                <p>Returns an array of all the non-overlapping strings between the given delimiter.
+The delimiter may be either a string or a regular expression.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-sum">
+                <h2 class="name">sum(zero?)</h2>
+                <p>Returns the sum of all values in this collection.</p>
+
+                <p>The zero argument is the initial value to begin accumulating the sum, and
+defaults to <em>0</em>.
+The sum is aggregated with the plus operator, so an empty string is an equally
+viable zero for a collection of strings.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-average">
+                <h2 class="name">average()</h2>
+                <p>Returns the arithmetic mean of the collection, by computing its sum and the count of values and returning the quotient.</p>
+
+                <p>The optional zero argument is the initial value for both the sum and count, and
+defaults to <em>0</em>.</p>
+<p>Note that for arrays with holes, the count is distinct from the length.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-min">
+                <h2 class="name">min()</h2>
+                <p>Returns the smallest value in this collection.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-max">
+                <h2 class="name">max()</h2>
+                <p>Returns the largest value in this collection.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-zip">
+                <h2 class="name">zip(...iterables)</h2>
+                <p>Returns an array of the respective values in this collection and in each collection provided as an argument.</p>
+
+                <p>Thus, if this collection contains numbers and another collection contains
+corresponding letters, <code>zip</code> would return an array of number to letter pairs.</p>
+<p><code>unzip</code> is the non-variadic cousin of <code>zip</code> and is equivalent to a matrix
+transpose.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-unzip">
+                <h2 class="name">unzip(collections)</h2>
+                <p>Given a collection of collections, returns the respective an array containing the respective values from each inner collection.
+<code>unzip</code> is equivalent to a matrix transpose.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-enumerate">
+                <h2 class="name">enumerate(start?)</h2>
+                <p>Returns an array of [index, value] entries for each value in this collection, counting all values from the given index.</p>
+
+                <p>The default start index is <em>0</em>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-concat">
+                <h2 class="name">concat(...iterables)</h2>
+                <p>Returns a new collection of the same type containing all the values of itself and the values of any number of other iterable collections in order.</p>
+
+                <p>For collections that do not allow duplicate values, like <code>Set</code>, <code>concat</code> will
+favor the last of all duplicates.
+For maps, the iterables are treated as map-like objects and each successively
+updates the result.
+For iterators, <code>concat</code> constructs a new iterator that will exhaust the values
+from each iterable in order, starting with this iterator.</p>
+<p><code>concat</code> is the variadic cousin of <code>flatten</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-flatten">
+                <h2 class="name">flatten()</h2>
+                <p>Assuming that this is a collection of collections, returns a new collection that contains all the values of each nested collection in order.</p>
+
+                <p>For collections that do not allow duplicate values, like <code>Set</code>, <code>concat</code> will
+favor the last of all duplicates.
+For maps, the iterables are treated as map-like objects and each successively
+updates the result.</p>
+<p>Flattening nested arrays is equivalent to concatenating each of them to an empty
+array.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-to-array">
+                <h2 class="name">toArray()</h2>
+                <p>Returns an array of each value in this collection.</p>
+
+                <p>For a map, this operation is equivalent to calling <code>values()</code>.
+For an array, this is equivalent to calling <code>slice()</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-to-object">
+                <h2 class="name">toObject()</h2>
+                <p>Returns an object with each property name and value corresponding to the entries in this collection.</p>
+
+                <p>For collections that are not maps, the generated property names correspond to
+each index.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-equals">
+                <h2 class="name">equals(value, equals?)</h2>
+                <p>Returns whether this collection is equivalent to the given collection.</p>
+
+                <p>In general, collections are equivalent if they have the same content.
+However, length, order, and uniqueness must also be equivalent if this collection,
+or the collection on the left for <code>Object.equals</code>, discriminate those
+attributes.</p>
+<p>For example, if the left operand is a <code>List</code>, <code>Deque</code>, or <code>Array</code>, order will be
+significant.
+If the left operand is a <code>Set</code>, uniqueness will matter, but order will not.</p>
+<p>The optional second argument is the equality operator to use when comparing the
+content of these collections, and defaults to <code>Object.equals</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-compare">
+                <h2 class="name">compare(value, compare?)</h2>
+                <p>Compares two values and returns a number having the same relative value to zero.</p>
+
+                <p>Compare will return a number</p>
+<ul>
+<li>less than zero if the left is less than the right</li>
+<li>more than zero if the right is more than the left</li>
+<li>equal to zero if the left is either incomparable or equivalent to the right</li>
+</ul>
+<p><code>Object.compare</code> delegates to <code>compare</code> methods of objects when they are
+available, and returns <em>0</em> if neither the left or right object support
+comparison.</p>
+<p>When comparing numbers, <code>compare</code> returns the difference between the left and
+right, which expresses both the direction and magnitude of the relative values.
+If the magnitude of the difference is not meaningful, compare <em>should</em> return
+only <em>Infinity</em>, <em>-Infinity</em>, or <em>0</em>, but there is a long established precedent
+from C of returning <em>-1</em> and <em>1</em> instead.</p>
+<p>Note that comparison is not sufficient to distinguish equality, since <em>0</em> can
+mean that the values are incomparable.</p>
+<p>The optional second argument is an alternate comparator to use on the content of
+the left collection, and defaults to <code>Object.compare</code>.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-hash">
+                <h2 class="name">hash(value)</h2>
+                <p>Consistently returns the same string for the same object.</p>
+
+                <p>To support maps and sets in advance of the <code>Map</code> and <code>Set</code> soon to be provided
+by JavaScript, <code>hash</code> allows us to emulate these collections.
+The <code>Object.hash</code> algorithm depends on a <code>WeakMap</code> shim to assign random
+consistent hashes to objects.</p>
+<p>In other languages, the hash function would return an integer since it would be
+used to index into an array.
+In JavaScript, more ready access to a hash table exists through objects, so
+<code>hash</code> must return strings suitable for property names.</p>
+<p>Because arrays are also used as tuples, the consistent hash takes into account
+the array’s content, so equivalent tuples will return the same consistent hash.
+This allows tuples to be used in sets and map keys, provided they are not
+modified.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-clone">
+                <h2 class="name">clone(depth?, memo?)</h2>
+                <p>Creates a deep replica of this collection.</p>
+
+                <p>Clones values deeply, to the specified depth, using the memo map to connect
+reference cycles.</p>
+<p>The default depth is <code>Infinity</code>, in which case, clone will explore every
+transitive reference of this object graph, producing a mirror image in the clone
+graph.
+A depth of <em>1</em> signifies a shallow clone, and a depth of <em>0</em> signifies no clone
+at all and this collection returns itself.</p>
+<p>The memo is only required to implement <code>has</code> and <code>set</code>, and accept arbitrary
+objects for keys.
+<code>Map</code> is sufficient and can be thrown away immediately to recover memory.
+The map can however serve a secondary purpose of being able to look up an object
+in the clone graph by its corresponding object in this graph.
+A memo can also be primed with pre-determined replicas of certain objects,
+particularly useful for non-clonable objects, or to extend an existing clone
+graph.
+The default memo may be a <code>Map</code> or <code>WeakMap</code>.</p>
+<p>Clone will delegate to objects that implement the <code>clone</code> method, passing the
+next depth and the memo.
+Clone replicates object literals that inherit directly from <em>Object.prototype</em>
+or <em>null</em>.
+However, if an object does is not clonable, <code>clone</code> will throw a <code>TypeError</code>.</p>
+<p>Though <code>clone</code> can and should be overridden for specific types, it should be
+consumed through <code>Object.clone</code>, which handles the default depth and memo cases,
+so clone methods do not need to.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-construct-clone">
+                <h2 class="name">constructClone(values?)</h2>
+                <p>Creates a shallow clone of this collection.</p>
+
+                <p><code>constructClone</code> is a utility for other generic collection methods, particularly
+<code>clone</code> and <code>filter</code>.
+<code>constructClone</code> must invoke its own constructor with the same parameters as
+were used to construct itself, so a <code>Set</code> with a particular hash and
+equality operator would produce a <code>Set</code> with the same operators.</p>
+<p><code>constructClone</code> will populate the copy with the given values if provided.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-content-compare">
+                <h2 class="name">contentCompare(left, right)</h2>
+                <p>The <code>compare</code> function used by this collection to determine how to order its own values.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-content-equals">
+                <h2 class="name">contentEquals(left, right)</h2>
+                <p>The <code>equals</code> function used to check whether values in this collection are equivalent.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-content-hash">
+                <h2 class="name">contentHash(value)</h2>
+                <p>The <code>hash</code> function used by this collection to hash its own values.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-ensure-capacity">
+                <h2 class="name">ensureCapacity(capacity)</h2>
+                <p>An internal method of <code>Deque</code> that will grow the backing store if necessary.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-grow">
+                <h2 class="name">grow(capacity)</h2>
+                <p>An implementation detail of a <code>Deque</code> that will increase the size of its backing store.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-scan">
+                <h2 class="name">scan(index, default)</h2>
+                <p>An internal utility of <code>List</code> coercing indexes to nodes.</p>
+
+                <p>Returns the <code>index</code> if it is a node.
+Returns the <code>default</code> if the index is not defined.
+Otherwise, scans to the given index.
+The index may be negative, in which case it will scan backward from the head
+node.</p>
+
+            </div>
+        
+            <div class="detail" id="detail-method-splay">
+                <h2 class="name">splay(value)</h2>
+                <p>Rotates a splay tree until the value is at the root, or would be between the root and one of its children.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-splay-index">
+                <h2 class="name">splayIndex(index)</h2>
+                <p>Rotates the tree until the node at a given index floats to the top.</p>
+
+                
+            </div>
+        
+            <div class="detail" id="detail-method-sorted-set-log">
+                <h2 class="name">sortedSetLog(...)</h2>
+                <p>Writes a tree describing the internal state of the sorted set splay tree.</p>
+
+                <p><code>charmap</code> is an object that notes which characters to use to draw
+lines.  By default, this is the <code>TreeLog.unicodeRound</code> property from the
+<code>tree-log</code> module.  <code>TreeLog.unicodeSharp</code> and <code>TreeLog.ascii</code> are
+alternatives.  The properties are:</p>
+<ul>
+<li>intersection: ╋</li>
+<li>through: ━</li>
+<li>branchUp: ┻</li>
+<li>branchDown: ┳</li>
+<li>fromBelow: ╭</li>
+<li>fromAbove: ╰</li>
+<li>fromBoth: ┣</li>
+<li>strafe: ┃</li>
+</ul>
+<p><code>callback</code> is a customizable function for rendering each node of the tree.
+By default, it just writes the value of the node.  It accepts the node and
+a writer functions.  The <code>write</code> function produces the line on which the
+node joins the tree, and each subsequent line.  The <code>writeAbove</code> function
+can write lines before the branch.</p>
+<p><code>log</code> and <code>logger</code> default to <code>console.log</code> and <code>console</code>.  To write
+the representation to an array instead, they can be <code>array.push</code> and
+<code>array</code>.</p>
+
+            </div>
+        
+        </div>
+
+        <div class="panel" id="methods">
+        
+            <div class="card method" id="method-push">
+                
+                <div class="name">push(...values)</div>
+                <p>Adds values to the end of a collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-pop">
+                
+                <div class="name">pop()</div>
+                <p>Removes a value from the end of a collection, and returns that value.</p>
+
+            </div>
+        
+            <div class="card method" id="method-shift">
+                
+                <div class="name">shift()</div>
+                <p>Removes a value from the beginning of a collection, and returns that value.</p>
+
+            </div>
+        
+            <div class="card method" id="method-unshift">
+                
+                <div class="name">unshift(...values)</div>
+                <p>Adds values to the beginning of a collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-peek">
+                
+                <div class="name">peek()</div>
+                <p>Returns the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-poke">
+                
+                <div class="name">poke(value)</div>
+                <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-peek-back">
+                
+                <div class="name">peekBack()</div>
+                <p>Returns the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-poke-back">
+                
+                <div class="name">pokeBack(value)</div>
+                <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-has-value">
+                
+                <div class="name">has(value)</div>
+                <p>Whether an equivalent value exists in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-has-value-equals">
+                
+                <div class="name">has(value, equals?)</div>
+                <p>Returns whether an equivalent value exists in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-get-value">
+                
+                <div class="name">get(value)</div>
+                <p>Retrieves the equivalent value from the collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-get-value-equals">
+                
+                <div class="name">get(value, equals?)</div>
+                <p>Retrieves the equivalent value from this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-add-value">
+                
+                <div class="name">add(value)</div>
+                <p>Adds a value to a collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-delete-value">
+                
+                <div class="name">delete(value)</div>
+                <p>Deletes the first equivalent value. Returns whether the key was found and successfully deleted.</p>
+
+            </div>
+        
+            <div class="card method" id="method-delete-value-equals">
+                
+                <div class="name">delete(value, equals?)</div>
+                <p>Seeks out and deletes an equivalent value. Returns whether the value was found and successfully deleted.</p>
+
+            </div>
+        
+            <div class="card method" id="method-remove">
+                
+                <div class="name">remove(value)</div>
+                <p>An alias for <code>delete(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-contains">
+                
+                <div class="name">contains(value)</div>
+                <p>An alias for <code>has(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-toggle">
+                
+                <div class="name">toggle(value)</div>
+                <p>Toggles the existence of a value in a set.</p>
+
+            </div>
+        
+            <div class="card method" id="method-has-key">
+                
+                <div class="name">has(key)</div>
+                <p>Returns whether an entry with the given key exists in a <code>Map</code>.</p>
+
+            </div>
+        
+            <div class="card method" id="method-get-key">
+                
+                <div class="name">get(key|index, default?)</div>
+                <p>Gets the value for a key in a map.</p>
+
+            </div>
+        
+            <div class="card method" id="method-set">
+                
+                <div class="name">set(key, value)</div>
+                <p>Sets the value for a given key.</p>
+
+            </div>
+        
+            <div class="card method" id="method-add-value-key">
+                
+                <div class="name">add(value, key)</div>
+                <p>Adds a value for a given key to a map.</p>
+
+            </div>
+        
+            <div class="card method" id="method-delete-key">
+                
+                <div class="name">delete(key)</div>
+                <p>Deletes the value for a given key. Returns whether the key was found and successfully deleted.</p>
+
+            </div>
+        
+            <div class="card method" id="method-keys">
+                
+                <div class="name">keys()</div>
+                <p>Returns an array of the keys of this map.</p>
+
+            </div>
+        
+            <div class="card method" id="method-values">
+                
+                <div class="name">values()</div>
+                <p>Returns an array of the values of this map.</p>
+
+            </div>
+        
+            <div class="card method" id="method-entries">
+                
+                <div class="name">entries()</div>
+                <p>Returns an array of all <em>[key, value]</em> entries for this map.</p>
+
+            </div>
+        
+            <div class="card method" id="method-add-each">
+                
+                <div class="name">addEach(values|map)</div>
+                <p>Copies values or entries from another collection into this collection, and then returns this.</p>
+
+            </div>
+        
+            <div class="card method" id="method-delete-each">
+                
+                <div class="name">deleteEach(values|keys, equals?)</div>
+                <p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
+
+            </div>
+        
+            <div class="card method" id="method-slice">
+                
+                <div class="name">slice(start?, end?)</div>
+                <p>Returns an array of the values contained in the half-open interval [start, end), that is, including the start and excluding the end.</p>
+
+            </div>
+        
+            <div class="card method" id="method-splice">
+                
+                <div class="name">splice(start, length, ...values)</div>
+                <p>Replaces a length of values from a starting position with the given variadic values, and returns the values that were replaced as an array.</p>
+
+            </div>
+        
+            <div class="card method" id="method-swap">
+                
+                <div class="name">swap(start, length, values?)</div>
+                <p>Replaces a length of values from a starting position with the given values.</p>
+
+            </div>
+        
+            <div class="card method" id="method-clear">
+                
+                <div class="name">clear()</div>
+                <p>Deletes all of the values in the collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-index-of">
+                
+                <div class="name">indexOf(value)</div>
+                <p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>
+
+            </div>
+        
+            <div class="card method" id="method-last-index-of">
+                
+                <div class="name">lastIndexOf(value)</div>
+                <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
+
+            </div>
+        
+            <div class="card method" id="method-index-of-start">
+                
+                <div class="name">indexOf(value, start?)</div>
+                <p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>
+
+            </div>
+        
+            <div class="card method" id="method-last-index-of-start">
+                
+                <div class="name">lastIndexOf(value, start?)</div>
+                <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find">
+                
+                <span class="badge">+</span>
+                
+                <div class="name">find(callback, thisp?)</div>
+                <p>Finds the first value within a collection that passes a test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-last">
+                
+                <span class="badge">+</span>
+                
+                <div class="name">findLast(callback, thisp?)</div>
+                <p>Finds the last value within a collection that passes a test, searching from the right.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-index">
+                
+                <span class="badge">+</span>
+                
+                <div class="name">findIndex(callback, thisp?)</div>
+                <p>Finds the first index within a collection that passes a test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-last-index">
+                
+                <span class="badge">+</span>
+                
+                <div class="name">findLastIndex(callback, thisp?)</div>
+                <p>Finds the last index within a collection that passes a test, searching from the right.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-value">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">find(value, equals?, start?)</div>
+                <p>Finds the first equivalent value.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-value">
+                
+                <span class="badge">v2</span>
+                
+                <div class="name">findValue(value, equals?, start?)</div>
+                <p>Finds the first equivalent value.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-last-value">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">findLast(value, equals?, start?)</div>
+                <p>Finds the last equivalent value, searching from the right.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-last-value">
+                
+                <span class="badge">v2</span>
+                
+                <div class="name">findLastValue(value, equals?, start?)</div>
+                <p>Finds the last equivalent value, searching from the right.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-least">
+                
+                <div class="name">findLeast()</div>
+                <p>Finds the smallest value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-least-greater-than">
+                
+                <div class="name">findLeastGreaterThan(value)</div>
+                <p>Finds the smallest value greater than the given value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-least-greater-than-or-equal">
+                
+                <div class="name">findLeastGreaterThanOrEqual(value)</div>
+                <p>Finds the smallest value greater than or equal to the given value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-greatest">
+                
+                <div class="name">findGreatest()</div>
+                <p>Finds the largest value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-greatest-less-than">
+                
+                <div class="name">findLGreatestLessThan(value)</div>
+                <p>Finds the largest value less than the given value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-find-greatest-less-than-or-equal">
+                
+                <div class="name">findGreatestLessThanOrEqual(value)</div>
+                <p>Finds the largest value less than or equal to the given value, returning the node at which it was found, or undefined.</p>
+
+            </div>
+        
+            <div class="card method" id="method-map-iterator">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">mapIterator(callback, thisp?)</div>
+                <p>Returns an iterator for the respective return values of a callback for each value from this iteration.</p>
+
+            </div>
+        
+            <div class="card method" id="method-filter-iterator">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">filterIterator(callback, thisp?)</div>
+                <p>Returns an iterator for all values from this iterator that pass a test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-drop-while">
+                
+                <div class="name">dropWhile(callback, thisp?)</div>
+                <p>Returns an iterator that will begin with the first value from this iteration that passes a test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-take-while">
+                
+                <div class="name">takeWhile(callback, thisp?)</div>
+                <p>Returns an iterator that will produce every value from this iteration until an entry fails a test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-zip-iterator">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">zipIterator(...iterables)</div>
+                <p>Returns an iterator that will produce an array of values with the value at the same index of this iterator and each given iterable.</p>
+
+            </div>
+        
+            <div class="card method" id="method-enumerate-iterator">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">enumerateIterator(start?)</div>
+                <p>Creates an iterator that will produce <em>[index, value]</em> for each value in this iterator, on demand.</p>
+
+            </div>
+        
+            <div class="card method" id="method-iterate">
+                
+                <span class="badge">v2</span>
+                
+                <div class="name">iterate()</div>
+                <p>Iterates every value in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-iterate-start-end">
+                
+                <span class="badge">v2</span>
+                
+                <div class="name">iterate(start?, end?)</div>
+                <p>Iterates from start to end within a collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-iterator">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">iterator()</div>
+                <p>Iterates every value in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-for-each">
+                
+                <div class="name">forEach(callback, thisp?)</div>
+                <p>Calls the callback for each entry in the collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-map">
+                
+                <div class="name">map(callback, thisp?)</div>
+                <p>Returns an array of the respective return values of a callback for each entry in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-filter">
+                
+                <div class="name">filter(callback, thisp?)</div>
+                <p>Returns an array with each value from this collection that passes the given test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-reduce">
+                
+                <div class="name">reduce(callback, basis)</div>
+                <p>Aggregates every value in this collection with the result collected up to that index.</p>
+
+            </div>
+        
+            <div class="card method" id="method-reduce-right">
+                
+                <div class="name">reduceRight(callback, basis)</div>
+                <p>Aggregates every value in this collection, from right to left.</p>
+
+            </div>
+        
+            <div class="card method" id="method-group">
+                
+                <div class="name">group(callback, thisp?, equals?)</div>
+                <p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>
+
+            </div>
+        
+            <div class="card method" id="method-some">
+                
+                <div class="name">some(callback, thisp?)</div>
+                <p>Returns whether every entry in this collection passes a given test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-every">
+                
+                <div class="name">every(callback, thisp?)</div>
+                <p>Returns whether any entry in this collection passes a given test.</p>
+
+            </div>
+        
+            <div class="card method" id="method-any">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">any()</div>
+                <p>Returns whether any value in the collection is truthy.</p>
+
+            </div>
+        
+            <div class="card method" id="method-all">
+                
+                <span class="badge">v1</span>
+                
+                <div class="name">all()</div>
+                <p>Returns whether all values in the collection are truthy.</p>
+
+            </div>
+        
+            <div class="card method" id="method-one">
+                
+                <div class="name">one()</div>
+                <p>Returns one, arbitrary value from this collection, or <em>undefined</em> if there are none.</p>
+
+            </div>
+        
+            <div class="card method" id="method-only">
+                
+                <div class="name">only()</div>
+                <p>Returns the only value in this collection, or <em>undefined</em> if there is more than one value, or if there are no values in the collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-sort">
+                
+                <div class="name">sort(compare?)</div>
+                <p>Sorts a collection in place.</p>
+
+            </div>
+        
+            <div class="card method" id="method-sorted">
+                
+                <div class="name">sorted(compare?)</div>
+                <p>Returns a sorted array of the values in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-reverse">
+                
+                <div class="name">reverse()</div>
+                <p>Reverses the order of this collection in place.</p>
+
+            </div>
+        
+            <div class="card method" id="method-reversed">
+                
+                <div class="name">reversed()</div>
+                <p>Returns a copy of this collection with the values in reverse order.</p>
+
+            </div>
+        
+            <div class="card method" id="method-join">
+                
+                <div class="name">join(delimiter?)</div>
+                <p>Returns a string of all the values in the collection delimited by the given string.</p>
+
+            </div>
+        
+            <div class="card method" id="method-split">
+                
+                <div class="name">split(delimiter)</div>
+                <p>Returns an array of all the non-overlapping strings between the given delimiter.
+The delimiter may be either a string or a regular expression.</p>
+
+            </div>
+        
+            <div class="card method" id="method-sum">
+                
+                <div class="name">sum(zero?)</div>
+                <p>Returns the sum of all values in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-average">
+                
+                <div class="name">average()</div>
+                <p>Returns the arithmetic mean of the collection, by computing its sum and the count of values and returning the quotient.</p>
+
+            </div>
+        
+            <div class="card method" id="method-min">
+                
+                <div class="name">min()</div>
+                <p>Returns the smallest value in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-max">
+                
+                <div class="name">max()</div>
+                <p>Returns the largest value in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-zip">
+                
+                <div class="name">zip(...iterables)</div>
+                <p>Returns an array of the respective values in this collection and in each collection provided as an argument.</p>
+
+            </div>
+        
+            <div class="card method" id="method-unzip">
+                
+                <div class="name">unzip(collections)</div>
+                <p>Given a collection of collections, returns the respective an array containing the respective values from each inner collection.
+<code>unzip</code> is equivalent to a matrix transpose.</p>
+
+            </div>
+        
+            <div class="card method" id="method-enumerate">
+                
+                <div class="name">enumerate(start?)</div>
+                <p>Returns an array of [index, value] entries for each value in this collection, counting all values from the given index.</p>
+
+            </div>
+        
+            <div class="card method" id="method-concat">
+                
+                <div class="name">concat(...iterables)</div>
+                <p>Returns a new collection of the same type containing all the values of itself and the values of any number of other iterable collections in order.</p>
+
+            </div>
+        
+            <div class="card method" id="method-flatten">
+                
+                <div class="name">flatten()</div>
+                <p>Assuming that this is a collection of collections, returns a new collection that contains all the values of each nested collection in order.</p>
+
+            </div>
+        
+            <div class="card method" id="method-to-array">
+                
+                <div class="name">toArray()</div>
+                <p>Returns an array of each value in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-to-object">
+                
+                <div class="name">toObject()</div>
+                <p>Returns an object with each property name and value corresponding to the entries in this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-equals">
+                
+                <div class="name">equals(value, equals?)</div>
+                <p>Returns whether this collection is equivalent to the given collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-compare">
+                
+                <div class="name">compare(value, compare?)</div>
+                <p>Compares two values and returns a number having the same relative value to zero.</p>
+
+            </div>
+        
+            <div class="card method" id="method-hash">
+                
+                <div class="name">hash(value)</div>
+                <p>Consistently returns the same string for the same object.</p>
+
+            </div>
+        
+            <div class="card method" id="method-clone">
+                
+                <div class="name">clone(depth?, memo?)</div>
+                <p>Creates a deep replica of this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-construct-clone">
+                
+                <div class="name">constructClone(values?)</div>
+                <p>Creates a shallow clone of this collection.</p>
+
+            </div>
+        
+            <div class="card method" id="method-content-compare">
+                
+                <div class="name">contentCompare(left, right)</div>
+                <p>The <code>compare</code> function used by this collection to determine how to order its own values.</p>
+
+            </div>
+        
+            <div class="card method" id="method-content-equals">
+                
+                <div class="name">contentEquals(left, right)</div>
+                <p>The <code>equals</code> function used to check whether values in this collection are equivalent.</p>
+
+            </div>
+        
+            <div class="card method" id="method-content-hash">
+                
+                <div class="name">contentHash(value)</div>
+                <p>The <code>hash</code> function used by this collection to hash its own values.</p>
+
+            </div>
+        
+            <div class="card method" id="method-ensure-capacity">
+                
+                <div class="name">ensureCapacity(capacity)</div>
+                <p>An internal method of <code>Deque</code> that will grow the backing store if necessary.</p>
+
+            </div>
+        
+            <div class="card method" id="method-grow">
+                
+                <div class="name">grow(capacity)</div>
+                <p>An implementation detail of a <code>Deque</code> that will increase the size of its backing store.</p>
+
+            </div>
+        
+            <div class="card method" id="method-scan">
+                
+                <div class="name">scan(index, default)</div>
+                <p>An internal utility of <code>List</code> coercing indexes to nodes.</p>
+
+            </div>
+        
+            <div class="card method" id="method-splay">
+                
+                <div class="name">splay(value)</div>
+                <p>Rotates a splay tree until the value is at the root, or would be between the root and one of its children.</p>
+
+            </div>
+        
+            <div class="card method" id="method-splay-index">
+                
+                <div class="name">splayIndex(index)</div>
+                <p>Rotates the tree until the node at a given index floats to the top.</p>
+
+            </div>
+        
+            <div class="card method" id="method-sorted-set-log">
+                
+                <div class="name">sortedSetLog(...)</div>
+                <p>Writes a tree describing the internal state of the sorted set splay tree.</p>
+
+            </div>
+        
+        </div>
+
+    </body>
+</html>

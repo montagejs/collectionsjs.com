@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>reduce(callback, basis) method - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+
+</head>
+<body class="method">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2 >reduce(callback, basis)</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                
+
+                <p>Aggregates every value in this collection with the result collected up to that index.</p>
+
+
+                <p>The callback argument is a function that will accept the result collected so
+far, the value for each entry, the key or index, and the collection itself.
+Its return value will become the new accumulated result.
+<code>reduce</code> will return the accumulated result upon visiting every index.</p>
+<p>The second argument is a <code>basis</code>, the aggregate result before any value has been
+visited, and the ultimate result if this collection is empty.</p>
+<p>The <code>Array</code> implementation establishes a precedent that the basis should be
+optional.
+If the user provides no basis and the collection is empty, <code>reduce</code> throws an
+error.
+However, at time of writing, all other collections in this library require an
+initial <code>basis</code>.
+This is a shortcoming that should be rectified in version 2.</p>
+<p><code>reduce</code> and <code>iterate</code> are the basis for many generic collection methods
+including <code>forEach</code>, <code>map</code>, and <code>filter</code>.
+<code>iterate</code> is more appropriate for <code>some</code> and <code>every</code>, which may finish before
+visiting every entry in the collection.</p>
+<p>Also, on <code>Array</code>, <code>reduceRight</code> does not accept an optional <code>thisp</code> argument.
+Other collections do.</p>
+<p>If this collection is an array with holes, those entries will not be visited.</p>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Arguments</h3>
+
+                <ul>
+                
+                    <li>reduce(callback)</li>
+                
+                    <li>reduce(callback, basis)</li>
+                
+                    <li>reduce(callback, basis, thisp)</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    
+                    <li><a href="/list">List</a> </li>
+                    
+                    <li><a href="/deque">Deque</a> </li>
+                    
+                    <li><a href="/map">Map</a> </li>
+                    
+                    <li><a href="/set">Set</a> </li>
+                    
+                    <li><a href="/heap">Heap</a> </li>
+                    
+                    <li><a href="/dict">Dict</a> </li>
+                    
+                    <li><a href="/sorted-array">SortedArray</a> </li>
+                    
+                    <li><a href="/fast-set">FastSet</a> </li>
+                    
+                    <li><a href="/lru-set">LruSet</a> </li>
+                    
+                    <li><a href="/lfu-set">LfuSet</a> </li>
+                    
+                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                    
+                    <li><a href="/sorted-set">SortedSet</a> </li>
+                    
+                    <li><a href="/fast-map">FastMap</a> </li>
+                    
+                    <li><a href="/lfu-map">LfuMap</a> </li>
+                    
+                    <li><a href="/lru-map">LruMap</a> </li>
+                    
+                    <li><a href="/multi-map">MultiMap</a> </li>
+                    
+                    <li><a href="/sorted-map">SortedMap</a> </li>
+                    
+                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                    
+                    <li><a href="/iterator-1">Iterator</a> </li>
+                    
+                    <li><a href="/generic-map">GenericMap</a> </li>
+                    
+                    <li><a href="/weak-map">WeakMap</a> </li>
+                    
+                    <li><a href="/array">Array</a> </li>
+                    
+                    <li><a href="/object">Object</a> </li>
+                    
+                    <li><a href="/generic-collection">GenericCollection</a> </li>
+                    
+                    <li><a href="/generic-order">GenericOrder</a> </li>
+                    
+                    <li><a href="/generic-set">GenericSet</a> </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

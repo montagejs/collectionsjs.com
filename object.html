@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Object - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+</head>
+<body class="collection">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2>Object</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                <p>The native JavaScript object, with some additional constructor methods shimmed.</p>
+
+
+                
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                
+
+                <pre>&#x276F; var Dict = require("collections/dict");
+&#x276F; var dict = new Dict();</pre>
+                <pre>&#x276F; var dict = new Dict(null, function (key) {
+    return this.get(key.slice(0, key.length - 1));
+});
+&#x276F; dict.set("a", 10);
+true
+&#x276F; dict.get("abcdefg")
+10</pre>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Constructors</h3>
+
+                <ul>
+                
+                    <li>Object</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>Methods</h3>
+
+                <dl>
+                    
+                    <dt><a href="/method/set">set(key, value)</a></dt>
+                    <dd><p><p>Sets the value for a given key.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/values">values()</a></dt>
+                    <dd><p><p>Returns an array of the values of this map.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/add-each">addEach(values)</a></dt>
+                    <dd><p><p>Copies values or entries from another collection into this collection, and then returns this.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/add-each">addEach(map)</a></dt>
+                    <dd><p><p>Copies values or entries from another collection into this collection, and then returns this.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/clear">clear()</a></dt>
+                    <dd><p><p>Deletes all of the values in the collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/for-each">forEach(callback)</a></dt>
+                    <dd><p><p>Calls the callback for each entry in the collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/for-each">forEach(callback, thisp)</a></dt>
+                    <dd><p><p>Calls the callback for each entry in the collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/map">map(callback)</a></dt>
+                    <dd><p><p>Returns an array of the respective return values of a callback for each entry in this collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/map">map(callback, thisp)</a></dt>
+                    <dd><p><p>Returns an array of the respective return values of a callback for each entry in this collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/concat">concat(...iterables)</a></dt>
+                    <dd><p><p>Returns a new collection of the same type containing all the values of itself and the values of any number of other iterable collections in order.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/equals">equals(value)</a></dt>
+                    <dd><p><p>Returns whether this collection is equivalent to the given collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/equals">equals(value, equals)</a></dt>
+                    <dd><p><p>Returns whether this collection is equivalent to the given collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/compare">compare(value)</a></dt>
+                    <dd><p><p>Compares two values and returns a number having the same relative value to zero.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/compare">compare(value, compare)</a></dt>
+                    <dd><p><p>Compares two values and returns a number having the same relative value to zero.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/hash">hash(value)</a></dt>
+                    <dd><p><p>Consistently returns the same string for the same object.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/clone">clone()</a></dt>
+                    <dd><p><p>Creates a deep replica of this collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/clone">clone(null, memo)</a></dt>
+                    <dd><p><p>Creates a deep replica of this collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/clone">clone(depth)</a></dt>
+                    <dd><p><p>Creates a deep replica of this collection.</p>
+</p></dd>
+                    
+                    <dt><a href="/method/clone">clone(depth, memo)</a></dt>
+                    <dd><p><p>Creates a deep replica of this collection.</p>
+</p></dd>
+                    
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/script/recollections.js"></script>
+</body>
+</html>

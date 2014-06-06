@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>addEach(values|map) method - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+
+</head>
+<body class="method">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2 >addEach(values|map)</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                
+
+                <p>Copies values or entries from another collection into this collection, and then returns this.</p>
+
+
+                <p>If the argument is an object that implements <code>forEach</code>, for example, most
+collections including <code>Map</code> and <code>Array</code>, the behavior of <code>addEach</code> varies by
+whether each involved collection supports keys or indexes.</p>
+<p>In the simple cases, values get added in order, and map entries get set in
+order.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">set</span> = <span class="hljs-keyword">new</span> Set();
+<span class="hljs-keyword">set</span>.addEach(array);
+expect(<span class="hljs-keyword">set</span>.toArray()).toEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]);
+
+<span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> Map({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>});
+<span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict();
+dict.addEach(map);
+expect(dict.entries()).toEqual([[<span class="hljs-string">"a"</span>, <span class="hljs-number">10</span>], [<span class="hljs-string">"b"</span>, <span class="hljs-number">20</span>]]);
+</code></pre>
+<p>If this collection is a map and the source is not, the source must contain key
+to value entries, which will then be copied to this map in order.</p>
+<pre><code class="lang-js">var list = new List(<span class="hljs-string">[[0, "a"], [1, "b"], [2, "c"]]</span>);
+var dict = new Dict();
+dict.addEach(list);
+expect(dict.entries()).toEqual(<span class="hljs-string">[["0", "a"], ["1", "b"], ["2", "c"]]</span>);
+</code></pre>
+<p>If the argument is an object that has a length and that length is a number, for
+example arguments or object literals masquerading as arrays, the object is
+treated as a map from index to value at that index.</p>
+<pre><code class="lang-js">var map = new Map();
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">argue</span><span class="hljs-params">()</span></span> { <span class="hljs-keyword">return</span> arguments; }
+map.addEach(argue(<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>));
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "a"], [1, "b"], [2, "c"]]</span>);
+
+var list = new List();
+list.addEach(argue(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>));
+expect(list.toArray()).toEqual([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);
+
+map.addEach({<span class="hljs-number">0</span>: <span class="hljs-string">"g"</span>, <span class="hljs-number">1</span>: <span class="hljs-string">"h"</span>, <span class="hljs-number">2</span>: <span class="hljs-string">"i"</span>, length: <span class="hljs-number">3</span>});
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "g"], [1, "h"], [2, "i"]]</span>);
+</code></pre>
+<p>After versions <code>1.1.1</code> and <code>2.0.1</code>, the argument may also be a string and
+receive
+the same treatment.</p>
+<pre><code class="lang-js">map.addEach(<span class="hljs-string">"def"</span>);
+expect(map.entries()).toEqual(<span class="hljs-string">[[0, "d"], [1, "e"], [2, "f"]]</span>);
+</code></pre>
+<p>If the argument is any other kind of object, it is treated as a mapping from
+property name to value, where the property name is the key.
+If this collection supports keys, the keys will be preserved.</p>
+<pre><code class="lang-js">var dict = new Dict();
+dict.addEach({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>, c: <span class="hljs-number">30</span>});
+expect(dict.entries()).toEqual(<span class="hljs-string">[["a", 10], ["b", 20], ["c", 30]]</span>);
+</code></pre>
+<p>Otherwise, the values will be added to this collection in the order they appear.</p>
+<pre><code><span class="hljs-keyword">var</span> <span class="hljs-keyword">array</span> = [];
+<span class="hljs-keyword">array</span>.addEach({a: <span class="hljs-number">10</span>, b: <span class="hljs-number">20</span>, c: <span class="hljs-number">30</span>});
+expect(<span class="hljs-keyword">array</span>).toEqual([<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>]);
+</code></pre><p>Null and undefined are ignored.
+Since <code>addEach</code> is an implementation detail for all collection constructors,
+this allows the first argument, the values to copy upon construction, to be
+elided.</p>
+<p>At time of writing, all other values are ignored as well, but the implementors
+have a free hand to throw a <code>TypeError</code> in a future version.</p>
+<p>In addition, <code>Object.addEach(target, source)</code> behaves in the same fashion as
+above except the source is used in place of the context object and is treated as
+a mapping from property names to values.
+Also, if the source owns a property <code>forEach</code>, it is ignored.
+This makes <code>addEach</code> suitable for prototype mixins.</p>
+<pre><code class="lang-js">Object<span class="hljs-preprocessor">.addEach</span>(<span class="hljs-keyword">Set</span><span class="hljs-preprocessor">.prototype</span>, GenericCollection<span class="hljs-preprocessor">.prototype</span>)<span class="hljs-comment">;</span>
+</code></pre>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Arguments</h3>
+
+                <ul>
+                
+                    <li>addEach(values)</li>
+                
+                    <li>addEach(map)</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    
+                    <li><a href="/list">List</a> </li>
+                    
+                    <li><a href="/deque">Deque</a> </li>
+                    
+                    <li><a href="/map">Map</a> </li>
+                    
+                    <li><a href="/set">Set</a> </li>
+                    
+                    <li><a href="/heap">Heap</a> </li>
+                    
+                    <li><a href="/dict">Dict</a> </li>
+                    
+                    <li><a href="/sorted-array">SortedArray</a> </li>
+                    
+                    <li><a href="/fast-set">FastSet</a> </li>
+                    
+                    <li><a href="/lru-set">LruSet</a> </li>
+                    
+                    <li><a href="/lfu-set">LfuSet</a> </li>
+                    
+                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                    
+                    <li><a href="/sorted-set">SortedSet</a> </li>
+                    
+                    <li><a href="/fast-map">FastMap</a> </li>
+                    
+                    <li><a href="/lfu-map">LfuMap</a> </li>
+                    
+                    <li><a href="/lru-map">LruMap</a> </li>
+                    
+                    <li><a href="/multi-map">MultiMap</a> </li>
+                    
+                    <li><a href="/sorted-map">SortedMap</a> </li>
+                    
+                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                    
+                    <li><a href="/array">Array</a> </li>
+                    
+                    <li><a href="/object">Object</a> </li>
+                    
+                    <li><a href="/generic-collection">GenericCollection</a> </li>
+                    
+                    <li><a href="/generic-map">GenericMap</a> </li>
+                    
+                    <li><a href="/weak-map">WeakMap</a> </li>
+                    
+                    <li><a href="/iterator-1">Iterator</a> </li>
+                    
+                    <li><a href="/generic-order">GenericOrder</a> </li>
+                    
+                    <li><a href="/generic-set">GenericSet</a> </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

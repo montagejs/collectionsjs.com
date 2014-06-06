@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>get(key|index, default?) method - Collections</title>
+
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+
+</head>
+<body class="method">
+    <div class="container">
+        <nav class="row" role="navigation">
+            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
+            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
+            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
+        </nav>
+
+        <h2 >get(key|index, default?)</h2>
+
+        <div class="row">
+            <div class="col-sm-6">
+
+                
+
+                <p>Gets the value for a key in a map.</p>
+
+
+                <p>If there is no entry with the request key, and the user calls <code>get</code> with a
+second argument <em>even if that argument is undefined</em>, the second argument will
+be returned instead.
+Otherwise, <code>get</code> will return the result of <code>getDefault(key)</code>, which itself
+defaults to returning undefined.</p>
+<p>Every map implementation gives an opportunity to override <code>getDefault</code> through
+the constructor, but it can always be overridden on either the instance or the
+prototype.
+It is often useful to provide a <code>getDefault</code> that will create, save, and return
+a default instance for a given key.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> users = <span class="hljs-keyword">new</span> Dict();
+users.getDefault = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(id)</span> {</span>
+    <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">new</span> User(id);
+    <span class="hljs-keyword">this</span>.<span class="hljs-keyword">set</span>(id, user);
+    <span class="hljs-keyword">return</span> user;
+};
+</code></pre>
+<p>For the purposes of the <code>get</code> and <code>set</code> methods, an <code>Array</code> behaves like a map
+from index to the value at that index.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].<span class="hljs-keyword">get</span>(<span class="hljs-number">1</span>);
+expect(<span class="hljs-keyword">value</span>).toBe(<span class="hljs-number">2</span>);
+</code></pre>
+<p>In contrast, for the purposes of the <code>has</code> method, an <code>Array</code> behaves as a list
+of values.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> found = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].<span class="hljs-keyword">has</span>(<span class="hljs-number">1</span>);
+expect(found).toBe(<span class="hljs-keyword">true</span>);
+</code></pre>
+
+            </div>
+
+            <div class="col-sm-6">
+                <h3 class="visible-xs">Examples</h3>
+
+                <pre>&#x276F; ?</pre>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-6">
+                <h3>Arguments</h3>
+
+                <ul>
+                
+                    <li>get(key)</li>
+                
+                    <li>get(key, default)</li>
+                
+                    <li>get(index)</li>
+                
+                    <li>get(index, default)</li>
+                
+                </ul>
+
+                <h3>Related</h3>
+
+                <ul>
+                    <li><a href="#">Todo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6">
+                <h3>On collections</h3>
+
+                <ul>
+                    
+                    <li><a href="/map">Map</a> </li>
+                    
+                    <li><a href="/dict">Dict</a> </li>
+                    
+                    <li><a href="/fast-map">FastMap</a> </li>
+                    
+                    <li><a href="/lfu-map">LfuMap</a> </li>
+                    
+                    <li><a href="/lru-map">LruMap</a> </li>
+                    
+                    <li><a href="/multi-map">MultiMap</a> </li>
+                    
+                    <li><a href="/sorted-map">SortedMap</a> </li>
+                    
+                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                    
+                    <li><a href="/array">Array</a> </li>
+                    
+                    <li><a href="/generic-map">GenericMap</a> </li>
+                    
+                    <li><a href="/list">List</a> </li>
+                    
+                    <li><a href="/deque">Deque</a> </li>
+                    
+                    <li><a href="/set">Set</a> </li>
+                    
+                    <li><a href="/heap">Heap</a> </li>
+                    
+                    <li><a href="/sorted-array">SortedArray</a> </li>
+                    
+                    <li><a href="/fast-set">FastSet</a> </li>
+                    
+                    <li><a href="/lru-set">LruSet</a> </li>
+                    
+                    <li><a href="/lfu-set">LfuSet</a> </li>
+                    
+                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                    
+                    <li><a href="/sorted-set">SortedSet</a> </li>
+                    
+                    <li><a href="/weak-map">WeakMap</a> </li>
+                    
+                    <li><a href="/iterator-1">Iterator</a> </li>
+                    
+                    <li><a href="/object">Object</a> </li>
+                    
+                    <li><a href="/generic-collection">GenericCollection</a> </li>
+                    
+                    <li><a href="/generic-order">GenericOrder</a> </li>
+                    
+                    <li><a href="/generic-set">GenericSet</a> </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

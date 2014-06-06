@@ -1,0 +1,125 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.panel {
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 13px;
+    padding-bottom: 10px;
+    margin-right: 2px;
+    overflow: auto;
+}
+
+#interfaces {
+    width: 200px;
+    height: 100%;
+}
+
+#collections {
+    width: 200px;
+    height: 100%;
+}
+
+#details {
+    width: 600px;
+    width: calc(100% - 708px);
+    width: -webkit-calc(100% - 708px);
+    width: -moz-calc(100% - 708px);
+    width: -o-calc(100% - 708px);
+    height: 100%;
+}
+
+#methods {
+    width: 300px;
+    height: 100%;
+}
+
+body.javascript .card {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+}
+
+.card {
+    padding: 6px;
+    border: solid black 1px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.card--active {
+    background-color: #eee;
+}
+
+.interface {
+    height: 80px;
+}
+
+.collection {
+    height: 80px;
+}
+
+.detail {
+    padding: 6px;
+    margin-bottom: 6px;
+    border: solid black 1px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.method {
+    height: 60px;
+}
+
+.name {
+    font-size: 120%;
+    padding: 0;
+    margin: 0;
+}
+
+.card > p {
+    padding: 0;
+    margin: 0;
+    font-size: 80%;
+}
+
+.badge {
+    float: right;
+    border: solid black 1px;
+    border-radius: 10px;
+    min-width: 10px;
+}
+
+.selected {
+    border-color: blue;
+    background-color: #ddddff;
+}
+
+.very-fast {
+    background-color: #ddffdd;
+}
+
+.fast {
+    background-color: #ffffdd;
+}
+
+.slow {
+    background-color: #ffdddd;
+}
+
+.not-implemented {
+    background-color: #dddddd;
+}
+
