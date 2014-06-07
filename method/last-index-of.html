@@ -5,31 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>lastIndexOf(value) method - Collections</title>
-
+    
+    <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/tomorrow.css">
-
 </head>
 <body class="method">
-    <div class="container">
-        <nav class="row" role="navigation">
-            <div class="col-sm-3 col-xs-6"><a href="/">Collections</a></div>
-            <a class="col-sm-3 col-xs-6" href="/documenation">Documentation</a>
-            <div class="col-sm-6"><input type="text" placeholder="Search" style="width: 100%"></div>
-        </nav>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <nav class="col-sm-8 col-xs-6" role="navigation">
+                    <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
+                    <a class="header-name" href="/">collections.js</a>
+                    <a href="/documenation">Documentation</a>
+                </nav>
+                <div class="col-sm-4 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+            </div>
+        </div>
+    </header>
+    <div class="container content">
+        
 
-        <h2 >lastIndexOf(value)</h2>
+    <h2 >lastIndexOf(value)</h2>
 
-        <div class="row">
-            <div class="col-sm-6">
+    <div class="row">
+        <div class="col-sm-6">
+            
 
-                
-
-                <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
+            <p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>
 
 
-                <p>Returns the position of the last of equivalent values.
+            <p>Returns the position of the last of equivalent values.
 Equivalence is defined by the equality operator intrinsic to the collection,
 either the one given as the <code>equals</code> argument to its constructor, or
 <code>Object.equals</code> by default.</p>
@@ -40,94 +47,102 @@ search.</p>
 <p>The implementation of <code>indexOf</code> for <code>Array</code>, <code>List</code>, and <code>Deque</code> is slower
 but more flexible.</p>
 
-            </div>
-
-            <div class="col-sm-6">
-                <h3 class="visible-xs">Examples</h3>
-
-                <pre>&#x276F; ?</pre>
-
-            </div>
         </div>
 
+        <div class="col-sm-6">
+            <h3 class="visible-xs">Examples</h3>
 
-        <div class="row">
-            <div class="col-sm-6 col-sm-push-6">
-                <h3>Arguments</h3>
+            
 
-                <ul>
-                
-                    <li>lastIndexOf(value)</li>
-                
-                </ul>
-
-                <h3>Related</h3>
-
-                <ul>
-                    <li><a href="#">Todo</a></li>
-                </ul>
-            </div>
-
-            <div class="col-sm-6 col-sm-pull-6">
-                <h3>On collections</h3>
-
-                <ul>
-                    
-                    <li><a href="/deque">Deque</a> </li>
-                    
-                    <li><a href="/sorted-array">SortedArray</a> </li>
-                    
-                    <li><a href="/sorted-array-set">SortedArraySet</a> </li>
-                    
-                    <li><a href="/list">List</a> </li>
-                    
-                    <li><a href="/map">Map</a> </li>
-                    
-                    <li><a href="/set">Set</a> </li>
-                    
-                    <li><a href="/heap">Heap</a> </li>
-                    
-                    <li><a href="/dict">Dict</a> </li>
-                    
-                    <li><a href="/fast-set">FastSet</a> </li>
-                    
-                    <li><a href="/lru-set">LruSet</a> </li>
-                    
-                    <li><a href="/lfu-set">LfuSet</a> </li>
-                    
-                    <li><a href="/sorted-set">SortedSet</a> </li>
-                    
-                    <li><a href="/fast-map">FastMap</a> </li>
-                    
-                    <li><a href="/lfu-map">LfuMap</a> </li>
-                    
-                    <li><a href="/lru-map">LruMap</a> </li>
-                    
-                    <li><a href="/multi-map">MultiMap</a> </li>
-                    
-                    <li><a href="/sorted-map">SortedMap</a> </li>
-                    
-                    <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
-                    
-                    <li><a href="/weak-map">WeakMap</a> </li>
-                    
-                    <li><a href="/iterator-1">Iterator</a> </li>
-                    
-                    <li><a href="/array">Array</a> </li>
-                    
-                    <li><a href="/object">Object</a> </li>
-                    
-                    <li><a href="/generic-collection">GenericCollection</a> </li>
-                    
-                    <li><a href="/generic-order">GenericOrder</a> </li>
-                    
-                    <li><a href="/generic-set">GenericSet</a> </li>
-                    
-                    <li><a href="/generic-map">GenericMap</a> </li>
-                    
-                </ul>
-            </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-push-6">
+            <h3>Arguments</h3>
+
+            <ul>
+            
+                <li>lastIndexOf(value)</li>
+            
+            </ul>
+
+            <h3>Related</h3>
+
+            <ul>
+                <li><a href="#">Todo</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-6 col-sm-pull-6">
+            <h3>On collections</h3>
+
+            <ul>
+                
+                <li><a href="/deque">Deque</a> </li>
+                
+                <li><a href="/sorted-array">SortedArray</a> </li>
+                
+                <li><a href="/sorted-array-set">SortedArraySet</a> </li>
+                
+                <li><a href="/list">List</a> </li>
+                
+                <li><a href="/map">Map</a> </li>
+                
+                <li><a href="/set">Set</a> </li>
+                
+                <li><a href="/heap">Heap</a> </li>
+                
+                <li><a href="/dict">Dict</a> </li>
+                
+                <li><a href="/fast-set">FastSet</a> </li>
+                
+                <li><a href="/lru-set">LruSet</a> </li>
+                
+                <li><a href="/lfu-set">LfuSet</a> </li>
+                
+                <li><a href="/sorted-set">SortedSet</a> </li>
+                
+                <li><a href="/fast-map">FastMap</a> </li>
+                
+                <li><a href="/lfu-map">LfuMap</a> </li>
+                
+                <li><a href="/lru-map">LruMap</a> </li>
+                
+                <li><a href="/multi-map">MultiMap</a> </li>
+                
+                <li><a href="/sorted-map">SortedMap</a> </li>
+                
+                <li><a href="/sorted-array-map">SortedArrayMap</a> </li>
+                
+                <li><a href="/weak-map">WeakMap</a> </li>
+                
+                <li><a href="/iterator-1">Iterator</a> </li>
+                
+                <li><a href="/array">Array</a> </li>
+                
+                <li><a href="/object">Object</a> </li>
+                
+                <li><a href="/generic-collection">GenericCollection</a> </li>
+                
+                <li><a href="/generic-order">GenericOrder</a> </li>
+                
+                <li><a href="/generic-set">GenericSet</a> </li>
+                
+                <li><a href="/generic-map">GenericMap</a> </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    </div>
+    <footer class="footer">
+        <h3 class="footer-title">collections.js is brought to you by</h3>
+        <a href="http://montagestudio.com"><img class="footer-logo" src="/images/montagestudio.png" alt="Montage Studio"></a>
+    </footer>
+    
+    <script type="text/javascript" src="/script/collections.js"></script>
 </body>
 </html>
+

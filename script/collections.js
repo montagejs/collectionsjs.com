@@ -43,10 +43,11 @@ global = this;
     Module.prototype.bundle = bundle;
 
     return modules[0].getExports();
-})((function (global){return[["collections-website","assets/script/index",{"./repl":14},function (require, exports, module){
+})((function (global){return[["collections-website","lib/collections",{"./repl":19},function (require, exports, module){
 
-// collections-website assets/script/index
-// ---------------------------------------
+// collections-website lib/collections
+// -----------------------------------
+
 
 var repl = require("./repl");
 
@@ -54,7 +55,8 @@ var repls = document.querySelectorAll(".repl");
 for (var i = 0; i < repls.length; i++) {
     repl(repls[i]);
 }
-}],["collections","dict",{"./shim":9,"./generic-collection":2,"./generic-map":3,"./listen/property-changes":7,"dict":1},function (require, exports, module){
+
+}],["collections","dict",{"./shim":13,"./generic-collection":3,"./generic-map":4,"./listen/property-changes":9,"dict":1},function (require, exports, module){
 
 // collections dict
 // ----------------
@@ -201,7 +203,201 @@ Dict.prototype.one = function () {
     }
 };
 
-}],["collections","generic-collection",{"./shim-array":10},function (require, exports, module){
+}],["collections","fast-set",{"./shim":13,"./dict":1,"./list":7,"./generic-collection":3,"./generic-set":6,"./tree-log":18,"./listen/property-changes":9,"fast-set":2},function (require, exports, module){
+
+// collections fast-set
+// --------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var Dict = require("./dict");
+var List = require("./list");
+var GenericCollection = require("./generic-collection");
+var GenericSet = require("./generic-set");
+var TreeLog = require("./tree-log");
+var PropertyChanges = require("./listen/property-changes");
+
+var object_has = Object.prototype.hasOwnProperty;
+
+module.exports = FastSet;
+
+function FastSet(values, equals, hash, getDefault) {
+    if (!(this instanceof FastSet)) {
+        return new FastSet(values, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.buckets = new this.Buckets(null, this.Bucket);
+    this.length = 0;
+    this.addEach(values);
+}
+
+FastSet.FastSet = FastSet; // hack so require("fast-set").FastSet will work in MontageJS
+
+Object.addEach(FastSet.prototype, GenericCollection.prototype);
+Object.addEach(FastSet.prototype, GenericSet.prototype);
+Object.addEach(FastSet.prototype, PropertyChanges.prototype);
+
+FastSet.prototype.Buckets = Dict;
+FastSet.prototype.Bucket = List;
+
+FastSet.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+FastSet.prototype.has = function (value) {
+    var hash = this.contentHash(value);
+    return this.buckets.get(hash).has(value);
+};
+
+FastSet.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("FastSet#get does not support second argument: equals");
+    }
+    var hash = this.contentHash(value);
+    var buckets = this.buckets;
+    if (buckets.has(hash)) {
+        return buckets.get(hash).get(value);
+    } else {
+        return this.getDefault(value);
+    }
+};
+
+FastSet.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("FastSet#delete does not support second argument: equals");
+    }
+    var hash = this.contentHash(value);
+    var buckets = this.buckets;
+    if (buckets.has(hash)) {
+        var bucket = buckets.get(hash);
+        if (bucket["delete"](value)) {
+            this.length--;
+            if (bucket.length === 0) {
+                buckets["delete"](hash);
+            }
+            return true;
+        }
+    }
+    return false;
+};
+
+FastSet.prototype.clear = function () {
+    this.buckets.clear();
+    this.length = 0;
+};
+
+FastSet.prototype.add = function (value) {
+    var hash = this.contentHash(value);
+    var buckets = this.buckets;
+    if (!buckets.has(hash)) {
+        buckets.set(hash, new this.Bucket(null, this.contentEquals));
+    }
+    if (!buckets.get(hash).has(value)) {
+        buckets.get(hash).add(value);
+        this.length++;
+        return true;
+    }
+    return false;
+};
+
+FastSet.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var buckets = this.buckets;
+    var index = 0;
+    return buckets.reduce(function (basis, bucket) {
+        return bucket.reduce(function (basis, value) {
+            return callback.call(thisp, basis, value, index++, this);
+        }, basis, this);
+    }, basis, this);
+};
+
+FastSet.prototype.one = function () {
+    if (this.length > 0) {
+        return this.buckets.one().one();
+    }
+};
+
+FastSet.prototype.iterate = function () {
+    return this.buckets.values().flatten().iterate();
+};
+
+FastSet.prototype.log = function (charmap, logNode, callback, thisp) {
+    charmap = charmap || TreeLog.unicodeSharp;
+    logNode = logNode || this.logNode;
+    if (!callback) {
+        callback = console.log;
+        thisp = console;
+    }
+    callback = callback.bind(thisp);
+
+    var buckets = this.buckets;
+    var hashes = buckets.keys();
+    hashes.forEach(function (hash, index) {
+        var branch;
+        var leader;
+        if (index === hashes.length - 1) {
+            branch = charmap.fromAbove;
+            leader = ' ';
+        } else if (index === 0) {
+            branch = charmap.branchDown;
+            leader = charmap.strafe;
+        } else {
+            branch = charmap.fromBoth;
+            leader = charmap.strafe;
+        }
+        var bucket = buckets.get(hash);
+        callback.call(thisp, branch + charmap.through + charmap.branchDown + ' ' + hash);
+        bucket.forEach(function (value, node) {
+            var branch, below;
+            if (node === bucket.head.prev) {
+                branch = charmap.fromAbove;
+                below = ' ';
+            } else {
+                branch = charmap.fromBoth;
+                below = charmap.strafe;
+            }
+            var written;
+            logNode(
+                node,
+                function (line) {
+                    if (!written) {
+                        callback.call(thisp, leader + ' ' + branch + charmap.through + charmap.through + line);
+                        written = true;
+                    } else {
+                        callback.call(thisp, leader + ' ' + below + '  ' + line);
+                    }
+                },
+                function (line) {
+                    callback.call(thisp, leader + ' ' + charmap.strafe + '  ' + line);
+                }
+            );
+        });
+    });
+};
+
+FastSet.prototype.logNode = function (node, write) {
+    var value = node.value;
+    if (Object(value) === value) {
+        JSON.stringify(value, null, 4).split("\n").forEach(function (line) {
+            write(" " + line);
+        });
+    } else {
+        write(" " + value);
+    }
+};
+
+}],["collections","generic-collection",{"./shim-array":14},function (require, exports, module){
 
 // collections generic-collection
 // ------------------------------
@@ -467,7 +663,7 @@ GenericCollection.prototype.iterator = function () {
 
 require("./shim-array");
 
-}],["collections","generic-map",{"./shim-object":12,"./listen/map-changes":6,"./listen/property-changes":7},function (require, exports, module){
+}],["collections","generic-map",{"./shim-object":16,"./listen/map-changes":8,"./listen/property-changes":9},function (require, exports, module){
 
 // collections generic-map
 // -----------------------
@@ -658,7 +854,7 @@ Item.prototype.compare = function (that) {
     return Object.compare(this.key, that.key);
 };
 
-}],["collections","generic-order",{"./shim-object":12},function (require, exports, module){
+}],["collections","generic-order",{"./shim-object":16},function (require, exports, module){
 
 // collections generic-order
 // -------------------------
@@ -718,7 +914,73 @@ GenericOrder.prototype.compare = function (that, compare) {
     return comparison;
 };
 
-}],["collections","list",{"./shim":9,"./generic-collection":2,"./generic-order":4,"./listen/property-changes":7,"./listen/range-changes":8,"list":5},function (require, exports, module){
+}],["collections","generic-set",{},function (require, exports, module){
+
+// collections generic-set
+// -----------------------
+
+
+module.exports = GenericSet;
+function GenericSet() {
+    throw new Error("Can't construct. GenericSet is a mixin.");
+}
+
+GenericSet.prototype.isSet = true;
+
+GenericSet.prototype.union = function (that) {
+    var union =  this.constructClone(this);
+    union.addEach(that);
+    return union;
+};
+
+GenericSet.prototype.intersection = function (that) {
+    return this.constructClone(this.filter(function (value) {
+        return that.has(value);
+    }));
+};
+
+GenericSet.prototype.difference = function (that) {
+    var union =  this.constructClone(this);
+    union.deleteEach(that);
+    return union;
+};
+
+GenericSet.prototype.symmetricDifference = function (that) {
+    var union = this.union(that);
+    var intersection = this.intersection(that);
+    return union.difference(intersection);
+};
+
+GenericSet.prototype.equals = function (that, equals) {
+    var self = this;
+    return (
+        that && typeof that.reduce === "function" &&
+        this.length === that.length &&
+        that.reduce(function (equal, value) {
+            return equal && self.has(value, equals);
+        }, true)
+    );
+};
+
+// W3C DOMTokenList API overlap (does not handle variadic arguments)
+
+GenericSet.prototype.contains = function (value) {
+    return this.has(value);
+};
+
+GenericSet.prototype.remove = function (value) {
+    return this["delete"](value);
+};
+
+GenericSet.prototype.toggle = function (value) {
+    if (this.has(value)) {
+        this["delete"](value);
+    } else {
+        this.add(value);
+    }
+};
+
+}],["collections","list",{"./shim":13,"./generic-collection":3,"./generic-order":5,"./listen/property-changes":9,"./listen/range-changes":10,"list":7},function (require, exports, module){
 
 // collections list
 // ----------------
@@ -1166,7 +1428,7 @@ Node.prototype.addAfter = function (node) {
     node.prev = this;
 };
 
-}],["collections","listen/map-changes",{"weak-map":15,"../list":5,"../dict":1},function (require, exports, module){
+}],["collections","listen/map-changes",{"weak-map":20,"../list":7,"../dict":1},function (require, exports, module){
 
 // collections listen/map-changes
 // ------------------------------
@@ -1318,7 +1580,7 @@ MapChanges.prototype.dispatchBeforeMapChange = function (key, value) {
     return this.dispatchMapChange(key, value, true);
 };
 
-}],["collections","listen/property-changes",{"../shim":9,"weak-map":15},function (require, exports, module){
+}],["collections","listen/property-changes",{"../shim":13,"weak-map":20},function (require, exports, module){
 
 // collections listen/property-changes
 // -----------------------------------
@@ -1770,7 +2032,7 @@ PropertyChanges.makePropertyUnobservable = function (object, key) {
     }
 };
 
-}],["collections","listen/range-changes",{"weak-map":15,"../dict":1},function (require, exports, module){
+}],["collections","listen/range-changes",{"weak-map":20,"../dict":1},function (require, exports, module){
 
 // collections listen/range-changes
 // --------------------------------
@@ -1917,7 +2179,256 @@ RangeChanges.prototype.dispatchBeforeRangeChange = function (plus, minus, index)
     return this.dispatchRangeChange(plus, minus, index, true);
 };
 
-}],["collections","shim",{"./shim-array":10,"./shim-object":12,"./shim-function":11,"./shim-regexp":13},function (require, exports, module){
+}],["collections","map",{"./shim":13,"./set":12,"./generic-collection":3,"./generic-map":4,"./listen/property-changes":9,"map":11},function (require, exports, module){
+
+// collections map
+// ---------------
+
+"use strict";
+
+var Shim = require("./shim");
+var Set = require("./set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = Map;
+
+function Map(values, equals, hash, getDefault) {
+    if (!(this instanceof Map)) {
+        return new Map(values, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.store = new Set(
+        undefined,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function keyHash(item) {
+            return hash(item.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+Map.Map = Map; // hack so require("map").Map will work in MontageJS
+
+Object.addEach(Map.prototype, GenericCollection.prototype);
+Object.addEach(Map.prototype, GenericMap.prototype); // overrides GenericCollection
+Object.addEach(Map.prototype, PropertyChanges.prototype);
+
+Map.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+Map.prototype.log = function (charmap, logNode, callback, thisp) {
+    logNode = logNode || this.logNode;
+    this.store.log(charmap, function (node, log, logBefore) {
+        logNode(node.value.value, log, logBefore);
+    }, callback, thisp);
+};
+
+Map.prototype.logNode = function (node, log) {
+    log(' key: ' + node.key);
+    log(' value: ' + node.value);
+};
+
+}],["collections","set",{"./shim":13,"./list":7,"./fast-set":2,"./generic-collection":3,"./generic-set":6,"./listen/property-changes":9,"./listen/range-changes":10,"set":12},function (require, exports, module){
+
+// collections set
+// ---------------
+
+"use strict";
+
+var Shim = require("./shim");
+var List = require("./list");
+var FastSet = require("./fast-set");
+var GenericCollection = require("./generic-collection");
+var GenericSet = require("./generic-set");
+var PropertyChanges = require("./listen/property-changes");
+var RangeChanges = require("./listen/range-changes");
+
+module.exports = Set;
+
+function Set(values, equals, hash, getDefault) {
+    if (!(this instanceof Set)) {
+        return new Set(values, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    // a list of values in insertion order, used for all operations that depend
+    // on iterating in insertion order
+    this.order = new this.Order(undefined, equals);
+    // a set of nodes from the order list, indexed by the corresponding value,
+    // used for all operations that need to quickly seek  value in the list
+    this.store = new this.Store(
+        undefined,
+        function (a, b) {
+            return equals(a.value, b.value);
+        },
+        function (node) {
+            return hash(node.value);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+Set.Set = Set; // hack so require("set").Set will work in MontageJS
+
+Object.addEach(Set.prototype, GenericCollection.prototype);
+Object.addEach(Set.prototype, GenericSet.prototype);
+Object.addEach(Set.prototype, PropertyChanges.prototype);
+Object.addEach(Set.prototype, RangeChanges.prototype);
+
+Set.prototype.Order = List;
+Set.prototype.Store = FastSet;
+
+Set.prototype.constructClone = function (values) {
+    return new this.constructor(values, this.contentEquals, this.contentHash, this.getDefault);
+};
+
+Set.prototype.has = function (value) {
+    var node = new this.order.Node(value);
+    return this.store.has(node);
+};
+
+Set.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("Set#get does not support second argument: equals");
+    }
+    var node = new this.order.Node(value);
+    node = this.store.get(node);
+    if (node) {
+        return node.value;
+    } else {
+        return this.getDefault(value);
+    }
+};
+
+Set.prototype.add = function (value) {
+    var node = new this.order.Node(value);
+    if (!this.store.has(node)) {
+        var index = this.length;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([value], [], index);
+        }
+        this.order.add(value);
+        node = this.order.head.prev;
+        this.store.add(node);
+        this.length++;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([value], [], index);
+        }
+        return true;
+    }
+    return false;
+};
+
+Set.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("Set#delete does not support second argument: equals");
+    }
+    var node = new this.order.Node(value);
+    if (this.store.has(node)) {
+        var node = this.store.get(node);
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([], [value], node.index);
+        }
+        this.store["delete"](node); // removes from the set
+        this.order.splice(node, 1); // removes the node from the list
+        this.length--;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([], [value], node.index);
+        }
+        return true;
+    }
+    return false;
+};
+
+Set.prototype.pop = function () {
+    if (this.length) {
+        var result = this.order.head.prev.value;
+        this["delete"](result);
+        return result;
+    }
+};
+
+Set.prototype.shift = function () {
+    if (this.length) {
+        var result = this.order.head.next.value;
+        this["delete"](result);
+        return result;
+    }
+};
+
+Set.prototype.one = function () {
+    if (this.length > 0) {
+        return this.store.one().value;
+    }
+};
+
+Set.prototype.clear = function () {
+    var clearing;
+    if (this.dispatchesRangeChanges) {
+        clearing = this.toArray();
+        this.dispatchBeforeRangeChange([], clearing, 0);
+    }
+    this.store.clear();
+    this.order.clear();
+    this.length = 0;
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], clearing, 0);
+    }
+};
+
+Set.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var list = this.order;
+    var index = 0;
+    return list.reduce(function (basis, value) {
+        return callback.call(thisp, basis, value, index++, this);
+    }, basis, this);
+};
+
+Set.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var list = this.order;
+    var index = this.length - 1;
+    return list.reduceRight(function (basis, value) {
+        return callback.call(thisp, basis, value, index--, this);
+    }, basis, this);
+};
+
+Set.prototype.iterate = function () {
+    return this.order.iterate();
+};
+
+Set.prototype.log = function () {
+    var set = this.store;
+    return set.log.apply(set, arguments);
+};
+
+Set.prototype.makeObservable = function () {
+    this.order.makeObservable();
+};
+
+}],["collections","shim",{"./shim-array":14,"./shim-object":16,"./shim-function":15,"./shim-regexp":17},function (require, exports, module){
 
 // collections shim
 // ----------------
@@ -1928,7 +2439,7 @@ var Object = require("./shim-object");
 var Function = require("./shim-function");
 var RegExp = require("./shim-regexp");
 
-}],["collections","shim-array",{"./shim-function":11,"./generic-collection":2,"./generic-order":4,"weak-map":15},function (require, exports, module){
+}],["collections","shim-array",{"./shim-function":15,"./generic-collection":3,"./generic-order":5,"weak-map":20},function (require, exports, module){
 
 // collections shim-array
 // ----------------------
@@ -2334,7 +2845,7 @@ Function.get = function (key) {
     };
 };
 
-}],["collections","shim-object",{"weak-map":15},function (require, exports, module){
+}],["collections","shim-object",{"weak-map":20},function (require, exports, module){
 
 // collections shim-object
 // -----------------------
@@ -2873,14 +3384,61 @@ if (!RegExp.escape) {
     };
 }
 
-}],["collections-website","assets/script/repl",{"collections/dict":1},function (require, exports, module){
+}],["collections","tree-log",{},function (require, exports, module){
 
-// collections-website assets/script/repl
-// --------------------------------------
+// collections tree-log
+// --------------------
+
+"use strict";
+
+module.exports = TreeLog;
+
+function TreeLog() {
+}
+
+TreeLog.ascii = {
+    intersection: "+",
+    through: "-",
+    branchUp: "+",
+    branchDown: "+",
+    fromBelow: ".",
+    fromAbove: "'",
+    fromBoth: "+",
+    strafe: "|"
+};
+
+TreeLog.unicodeRound = {
+    intersection: "\u254b",
+    through: "\u2501",
+    branchUp: "\u253b",
+    branchDown: "\u2533",
+    fromBelow: "\u256d", // round corner
+    fromAbove: "\u2570", // round corner
+    fromBoth: "\u2523",
+    strafe: "\u2503"
+};
+
+TreeLog.unicodeSharp = {
+    intersection: "\u254b",
+    through: "\u2501",
+    branchUp: "\u253b",
+    branchDown: "\u2533",
+    fromBelow: "\u250f", // sharp corner
+    fromAbove: "\u2517", // sharp corner
+    fromBoth: "\u2523",
+    strafe: "\u2503"
+};
+
+}],["collections-website","lib/repl",{"collections/dict":1,"collections/map":11},function (require, exports, module){
+
+// collections-website lib/repl
+// ----------------------------
+
 
 var globalEval = eval;
 
 window.Dict = require("collections/dict");
+window.Map = require("collections/map");
 
 module.exports = function (element) {
     evalSample(element);
@@ -2908,10 +3466,14 @@ function evaluate(source) {
     var result;
     try {
         result = globalEval(source);
-        try {
-            result = JSON.stringify(result);
-        } catch (error) {
-            result = "<Unable to stringify " + result.toString() + ">";
+        if (typeof result === "function") {
+            result = result.toString();
+        } else {
+            try {
+                result = JSON.stringify(result);
+            } catch (error) {
+                result = "<Unable to stringify " + result.toString() + ">";
+            }
         }
     } catch (error) {
         result = error.name + ": " + error.message;
@@ -2954,7 +3516,9 @@ function addInput(element) {
             var input = createInputElement(this.value);
             element.insertBefore(input, container);
             var output = createOutputElement(evaluate(this.value));
-            element.insertBefore(output, container);
+            if (output) {
+                element.insertBefore(output, container);
+            }
             this.value = "";
         }
     });
@@ -2962,6 +3526,7 @@ function addInput(element) {
 
     element.appendChild(container);
 }
+
 }],["weak-map","weak-map",{},function (require, exports, module){
 
 // weak-map weak-map

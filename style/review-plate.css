@@ -9,27 +9,37 @@ body {
     margin-left: 10px;
 }
 
-.panel {
+.column {
     float: left;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 13px;
     padding-bottom: 10px;
     margin-right: 2px;
-    overflow: auto;
 }
 
-#interfaces {
+header {
+    height: 30px;
+    border-bottom: 1px solid black;
+    margin-bottom: 6px;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+#interfacesColumn {
     width: 200px;
     height: 100%;
 }
 
-#collections {
+#collectionsColumn {
     width: 200px;
     height: 100%;
 }
 
-#details {
+#detailsColumn {
     width: 600px;
     width: calc(100% - 708px);
     width: -webkit-calc(100% - 708px);
@@ -38,9 +48,17 @@ body {
     height: 100%;
 }
 
-#methods {
+#methodsColumn {
     width: 300px;
     height: 100%;
+}
+
+.panel {
+    overflow: auto;
+    height: calc(100% - 30px);
+    height: -webkit-calc(100% - 30px);
+    height: -moz-calc(100% - 30px);
+    height: -o-calc(100% - 30px);
 }
 
 body.javascript .card {

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Collections</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+</head>
+<body class="index">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <nav class="col-sm-8 col-xs-6" role="navigation">
+                    <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
+                    <a class="header-name" href="/">collections.js</a>
+                    <a href="/documenation">Documentation</a>
+                </nav>
+                <div class="col-sm-4 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+            </div>
+        </div>
+    </header>
+    <div class="container content">
+        
+
+    <div class="row">
+        <div class="col-md-6">
+            <p>JavaScript implementations of common data structures with idiomatic iterfaces, including extensions for Array and Object. TODO</p>
+        </div>
+        <div class="col-md-6">
+            <p>Add to your project with npm:</p>
+            <pre>npm install --save collections</pre>
+            <p>Works in Node.js, Browserify and Mr.</p>
+        </div>
+    </div>
+    <div class="row search">
+        <input class="col-md-9 col-sm-8 col-xs-11" type="text" placeholder="Search">
+        <a class="col-md-3 col-sm-4 col-xs-12" href="/all">All collections and methods</a>
+    </div>
+    <h2>Choose a collection</h2>
+    <div class="row">
+        <div class="col-sm-8 questions"><form id="choose">
+
+            <div class="row" id="shape">
+                <p class="col-sm-6 col-xs-12">What kind of collection are you looking for?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="shape" value="map"> I need to look up values by key.</label><br>
+                    <label><input type="radio" name="shape" value="flat"> I need a flat collection of values.</label><br>
+                    <label><input type="radio" name="shape" value="iterator"> Enough, I just need an iterator.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="keys">
+                <p class="col-sm-6 col-xs-12">What with the keys be?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="keys" value="any" checked> Anything.</label><br>
+                    <label><input type="radio" name="keys" value="numbers"> Only numbers.</label><br>
+                    <label><input type="radio" name="keys" value="objects"> Only objects.</label><br>
+                    <label><input type="radio" name="keys" value="strings"> Only strings.</label><br>
+                </div>
+            </div>
+
+            <div class="row hide" id="weak">
+                <p class="col-sm-6 col-xs-12">Can you sacrifice iterability to gain better garbage collection?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="weak"> Values should be garbage collected if the keys are lost.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="unique">
+                <p class="col-sm-6 col-xs-12">Do you need the collection to prevent duplicate values? </p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="unique"> All values should be <em>unique</em></label>
+                </div>
+            </div>
+
+            <div class="row hide" id="ordered">
+                <p class="col-sm-6 col-xs-12">Will you ever need to visit every value in the collection in order?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="ordered" checked> Should be <em>ordered</em> and <em>iterable</em>.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="sorted">
+                <p class="col-sm-6 col-xs-12">Do you need the collection to keep the values in sorted order?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="sorted"> All values should be <em>sorted</em>.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="capacity">
+                <p class="col-sm-6 col-xs-12">Do you need to limit the size of the collection and automatically evict stale values? </p>
+                <p class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="capacity"> Limit the capacity</label>
+                </p>
+            </div>
+
+            <div class="row hide" id="strategy">
+                <p class="col-sm-6 col-xs-12">Is it better to forget a value if it wasn't used recently, or if thasn't been used frequently?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="strategy" value="recency"> Evict the least <em>recently</em> used.</label><br>
+                    <label><input type="radio" name="strategy" value="frequency"> Evict the least <em>frequently</em> used.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="multi">
+                <p class="col-sm-6 col-xs-12">Would it be convenient if the values were always a particular collection, like a map from keys to sets?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="multi"> The value will always be another collection.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="long">
+                <p class="col-sm-6 col-xs-12">Will this collection get big, bigger than around 1000 values?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="long"> This collection will get very big.</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="access">
+                <p class="col-sm-6 col-xs-12">Where will you need to access values quickly?</p>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="first" disabled> first</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="index"> index</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="last" disabled> last</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="mutate">
+                <p class="col-sm-6 col-xs-12">Where will you need to make changes quickly?</p>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="shift"> shift/unshift</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="splice"> splice</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="pop" disabled> push/pop</label>
+                </div>
+            </div>
+
+            <div class="row hide" id="churn">
+                <p class="col-sm-6 col-xs-12">Is it better to waste time on garbage collection or shifting values around?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="churn" value="garbage"> Take the hit collecting dropped nodes.</label><br>
+                    <label><input type="radio" name="churn" value="shift"> Take the hit when splicing, shifting values around. </label>
+                </div>
+            </div>
+
+        </form></div>
+        <div class="col-sm-2">
+            <a class="card collection unavailable" id="list" href="list.html">List</a>
+            <a class="card collection unavailable" id="object" href="object.html">Object</a>
+            <a class="card collection unavailable" id="map" href="map.html">Map</a>
+            <a class="card collection unavailable" id="fast-map" href="fast-map.html">FastMap</a>
+            <a class="card collection unavailable" id="lru-map" href="lru-map.html">LruMap</a>
+            <a class="card collection unavailable" id="lfu-map" href="lfu-map.html">LfuMap</a>
+            <a class="card collection unavailable" id="sorted-map" href="sorted-map.html">SortedMap</a>
+            <a class="card collection unavailable" id="sorted-array-map" href="sorted-array-map.html">SortedArrayMap</a>
+            <a class="card collection unavailable" id="dict" href="dict.html">Dict</a>
+            <a class="card collection unavailable" id="multi-map" href="multi-map.html">MultiMap</a>
+            <a class="card collection unavailable" id="weak-map" href="weak-map.html">WeakMap</a>
+        </div>
+        <div class="col-sm-2">
+            <a class="card collection unavailable" id="deque" href="deque.html">Deque</a>
+            <a class="card collection unavailable" id="array" href="array.html">Array</a>
+            <a class="card collection unavailable" id="set" href="set.html">Set</a>
+            <a class="card collection unavailable" id="fast-set" href="fast-set.html">FastSet</a>
+            <a class="card collection unavailable" id="lru-set" href="lru-set.html">LruSet</a>
+            <a class="card collection unavailable" id="lfu-set" href="lfu-set.html">LfuSet</a>
+            <a class="card collection unavailable" id="sorted-set" href="sorted-set.html">SortedSet</a>
+            <a class="card collection unavailable" id="sorted-array-set" href="sorted-array-set.html">SortedArraySet</a>
+            <a class="card collection unavailable" id="sorted-array" href="sorted-array.html">SortedArray</a>
+            <a class="card collection unavailable" id="heap" href="heap.html">Heap</a>
+            <a class="card collection unavailable" id="iterator" href="iterator.html">Iterator</a>
+        </div>
+    </div>
+
+ 
+    </div>
+    <footer class="footer">
+        <h3 class="footer-title">collections.js is brought to you by</h3>
+        <a href="http://montagestudio.com"><img class="footer-logo" src="/images/montagestudio.png" alt="Montage Studio"></a>
+    </footer>
+    
+    <script type="text/javascript" src="/script/index.js"></script>
+</body>
+</html>
+
