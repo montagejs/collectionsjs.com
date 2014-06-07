@@ -1,3 +1,4 @@
+
 var globalEval = eval;
 
 window.Dict = require("collections/dict");
@@ -89,3 +90,4 @@ function addInput(element) {
 
     element.appendChild(container);
 }
+

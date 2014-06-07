@@ -4,6 +4,7 @@ var fs = require("q-io/fs");
 var Reader = require("q-io/reader");
 var path = require("path");
 var Handlebars = require("handlebars");
+var mrs = require("mr/build");
 
 var data = require("./scrape");
 
@@ -35,7 +36,8 @@ function setup(siteFs) {
     })
     .then(function () {
         return Q.all([
-            siteFs.makeTree("method")
+            siteFs.makeTree("method"),
+            siteFs.makeTree("script")
         ]);
     });
 }
@@ -116,10 +118,12 @@ function generate(siteFs, templates) {
 }
 
 function buildJavascript(siteFs) {
-    var build = require("mr/build");
-    return build("assets/script/index.js")
-    .then(function (bundle) {
-        return siteFs.write(path.join("script", "recollections.js"), bundle);
+    return Reader(["index.js", "collections.js"])
+    .forEach(function (entry) {
+        return mrs(path.join("lib", entry))
+        .then(function (bundle) {
+            return siteFs.write(path.join("script", entry), bundle);
+        });
     });
 }
 
@@ -132,6 +136,7 @@ function serve(siteFs) {
     .use(httpApps.Log)
     .use(httpApps.HandleHtmlFragmentResponses)
     .use(function HtmlRedirect(next) {
+        // TODO remove
         return function (request) {
             return next(request)
             .then(function (response) {

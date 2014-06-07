@@ -1,4 +1,4 @@
-{{#include "layout" title=name bodyClass="index"}}
+{{#include "layout" title=name bodyClass="index" bundle="index"}}
 
     <div class="row">
         <div class="col-md-6">
@@ -16,27 +16,106 @@
     </div>
     <h2>Choose a collection</h2>
     <div class="row">
-        <div class="col-sm-9 questions">
+        <div class="col-sm-8 questions">
+
             <div class="row">
-                <p class="col-sm-4 col-xs-12">Do you want a map or a list? <a href="#">Explain…</a></p>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value="" checked> Doesn't matter</label>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value=""> A key => value mapping</label>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="type" value=""> A list</label>
+                <p class="col-sm-6 col-xs-12">What kind of collection are you looking for?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="shape" value="map"> I need to look up values by key.</label><br>
+                    <label><input type="radio" name="shape" value="flat"> I need a flat collection of values.</label><br>
+                    <label><input type="radio" name="shape" value="iterator"> I need an iterator.</label>
+                </div>
             </div>
+
             <div class="row">
-                <p class="col-sm-4 col-xs-12">Which items do you need quick access to? <a href="#">Explain…</a></p>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value="" checked> Doesn't matter</label>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> All items</label>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> Just the first or last item</label>
-                <label class="col-sm-4 col-xs-12"><input type="radio" name="speed" value=""> The smallest or largest item</label>
+                <p class="col-sm-6 col-xs-12">Do you need to limit the size of the collection and automatically evict stale values? </p>
+                <p class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="capacity"> Limit the capacity</label>
+                </p>
             </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Is it better to forget a value if it wasn't used recently, or if thasn't been used frequently?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="strategy" value="recency" checked> Evict the least <em>recently</em> used.</label><br>
+                    <label><input type="radio" name="strategy" value="frequency"> Evict the least <em>frequently</em> used.</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Do you need the collection to prevent duplicate values? </p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="unique"> All values should be <em>unique</em></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Will you ever need to visit every value in the collection in order?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="ordered"> Should be <em>ordered</em> and <em>iterable</em>.</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Do you need the collection to keep the values in sorted order?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="sorted"> All values should be <em>sorted</em>.</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Would it be convenient if the values were always a particular collection, like a map from keys to sets?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="multi"> The value will always be another collection.</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Will this collection get big, bigger than around 1000 values?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="checkbox" name="big"> This collection will get very big.</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Is it better to waste time on garbage collection or shifting values around?</p>
+                <div class="col-sm-6 col-xs-12">
+                    <label><input type="radio" name="churn" value="garbage" checked> Take the hit collecting dropped nodes.</label><br>
+                    <label><input type="radio" name="churn" value="shift"> Take the hit when splicing, shifting values around. </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Where will you need to access values quickly?</p>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="beginning"> beginning</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="slice"> slice</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="end"> end</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="col-sm-6 col-xs-12">Where will you need to make changes quickly?</p>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="shift"> shift/unshift</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="swap"> swap/splice</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label><input type="checkbox" name="push"> push/pop</label>
+                </div>
+            </div>
+
         </div>
-        <div class="col-sm-3">
-            <ul>
+        <div class="col-sm-4">
             {{#each collections}}
-                <li><a href="/{{ref}}">{{name}}</a></li>
+            <div class="col-sm-6"><a href="/{{ref}}">{{name}}</a></div>
             {{/each}}
-            </ul>
         </div>
     </div>
 
