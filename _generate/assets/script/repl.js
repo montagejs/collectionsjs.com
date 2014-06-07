@@ -1,6 +1,7 @@
 var globalEval = eval;
 
 window.Dict = require("collections/dict");
+window.Map = require("collections/map");
 
 module.exports = function (element) {
     evalSample(element);
@@ -28,10 +29,14 @@ function evaluate(source) {
     var result;
     try {
         result = globalEval(source);
-        try {
-            result = JSON.stringify(result);
-        } catch (error) {
-            result = "<Unable to stringify " + result.toString() + ">";
+        if (typeof result === "function") {
+            result = result.toString();
+        } else {
+            try {
+                result = JSON.stringify(result);
+            } catch (error) {
+                result = "<Unable to stringify " + result.toString() + ">";
+            }
         }
     } catch (error) {
         result = error.name + ": " + error.message;
