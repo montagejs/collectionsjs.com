@@ -131,7 +131,6 @@ nav a:active {
     width: 100%;
 }
 
-
 /* Footer -------------------------- */
 
 .footer {
@@ -166,4 +165,23 @@ nav a:active {
         background: #181724 url(/images/bg-footer--vertical.jpg) no-repeat top center;
         background-size: 100% auto;
     }
+}
+
+.card.collection {
+    display: block;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    text-height: 40px;
+    border: solid black 1px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.card.collection.unavailable {
+    background-color: #dddddd;
+}
+
+.card.collection.recommended {
+    background-color: #ffffdd;
 }
