@@ -1,7 +1,7 @@
 
 var path = require("path");
 var GitFs = require("q-git/fs");
-var Generate = require("./generate");
+var generate = require("./generate");
 var fs = require("q-io/fs");
 
 var repo = {};
@@ -20,7 +20,7 @@ gitFs.load("refs/remotes/origin/gh-pages")
     return gitFs.removeTree("/");
 })
 .then(function () {
-    return Generate.build(gitFs);
+    return generate(gitFs);
 })
 .then(function () {
     return gitFs.commit({

@@ -198,6 +198,24 @@ function collectCollections(myCollections, refs, note) {
     });
 }
 
+var search = collections.map(function (collection, ref) {
+    return [{
+        search: collection.name.toLowerCase(),
+        name: collection.name,
+        type: "collection",
+        ref: ref,
+        summary: collection.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, "")
+    }].concat(collection.methodIndex.map(function (method) {
+        return {
+            search: method.normal,
+            name: method.name,
+            type: "method",
+            ref: method.ref,
+            summary: method.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, "")
+        };
+    }));
+}).flatten();
+
 // Construct a global method search index
 //var methodVersions = methods.map(function (method, ref) {
 //    return method.versions.map(function (method, version) {
@@ -232,6 +250,7 @@ function render(markdown) {
 module.exports = {
     interfaces: interfaces,
     collections: collections,
-    methods: methods
+    methods: methods,
+    search: search
 };
 
