@@ -81,6 +81,7 @@ function handleChange() {
     query.sorted = query.ordered && form.sorted.checked;
     query.multi = form.multi.checked;
     query.index = form.index.checked;
+    query.shift = form.shift.checked;
     query.splice = form.splice.checked;
     query.long = form.long.checked;
     query.churn = form.churn.value;
