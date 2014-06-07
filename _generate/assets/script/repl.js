@@ -79,7 +79,9 @@ function addInput(element) {
             var input = createInputElement(this.value);
             element.insertBefore(input, container);
             var output = createOutputElement(evaluate(this.value));
-            element.insertBefore(output, container);
+            if (output) {
+                element.insertBefore(output, container);
+            }
             this.value = "";
         }
     });
