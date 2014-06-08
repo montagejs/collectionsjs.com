@@ -26,6 +26,9 @@ function generate(siteFs) {
     .then(loadTemplates)
     .then(buildPages.bind(null, siteFs))
     .then(buildJavascript.bind(null, siteFs))
+    .then(function () {
+        console.log("Generated.");
+    });
 }
 
 function setup(siteFs) {
@@ -119,14 +122,11 @@ function buildPages(siteFs, templates) {
         .forEach(function (details, name) {
             return siteFs.write(path.join("method", name + ".html"), methodTemplate(details));
         });
-    })
-    .then(function () {
-        console.log("Generated.");
     });
 }
 
 function buildJavascript(siteFs) {
-    return Reader(["index.js", "collections.js"])
+    return Reader(["index.js", "autocomplete.js", "collections.js"])
     .forEach(function (entry) {
         return mrs(path.join("lib", entry))
         .then(function (bundle) {

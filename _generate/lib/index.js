@@ -2,8 +2,6 @@
 var Query = require("./choose").Query;
 var questions = require("./choose").questions;
 
-var search = require("./search"); // TODO
-
 var existingClasses = {
     shape: "hide",
     keys: "hide",

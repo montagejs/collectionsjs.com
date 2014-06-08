@@ -20,6 +20,8 @@
     "esprima": "^1.2.2",
     "js-git": "git://github.com/creationix/js-git.git",
     "q-git": "0.0.2",
-    "git-node-fs": "0.0.2"
+    "git-node-fs": "0.0.2",
+    "typeahead.js": "~0.10.2",
+    "jquery": "~2.1.1"
   }
 }
