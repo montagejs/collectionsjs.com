@@ -126,7 +126,7 @@ function buildPages(siteFs, templates) {
 }
 
 function buildJavascript(siteFs) {
-    return Reader(["index.js", "collections.js"])
+    return Reader(["index.js", "autocomplete.js", "collections.js"])
     .forEach(function (entry) {
         return mrs(path.join("lib", entry))
         .then(function (bundle) {

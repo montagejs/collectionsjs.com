@@ -95,6 +95,19 @@ nav a:active {
     border-color: hsla(0, 0%, 0%, 0.4);
 }
 
+/* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
+.tt-dropdown-menu {
+    color: #000;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    padding: 2px 0.4em
+}
+
+.tt-cursor {
+    background: #AAA;
+}
+
 /* Content -------------------------- */
 
 .questions > div {
