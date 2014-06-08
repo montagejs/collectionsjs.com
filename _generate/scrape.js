@@ -5,6 +5,7 @@ var yaml = require("js-yaml");
 var marked = require("marked");
 var highlight = require("highlight.js");
 var Dict = require("collections/dict");
+var Set = require("collections/set");
 var MultiMap = require("collections/multi-map");
 var parseSample = require("./parse-sample.js");
 
@@ -119,7 +120,7 @@ collections = new Dict(collections.map(function (collection, ref) {
         return methods.get(implementation.ref).versions.map(function (method, version) {
             return method.names.map(function (name) {
                 return {
-                    normal: name.toLowerCase().replace(/\W+/g, " ").trim(),
+                    search: name.toLowerCase().replace(/\W+/g, " ").trim(),
                     name: name,
                     summary: method.summary,
                     ref: method.ref,
@@ -198,23 +199,44 @@ function collectCollections(myCollections, refs, note) {
     });
 }
 
-var search = collections.map(function (collection, ref) {
-    return [{
+var collectionSearch = collections.map(function (collection, ref) {
+    return {
         search: collection.name.toLowerCase(),
         name: collection.name,
         type: "collection",
         ref: ref,
-        summary: collection.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, "")
-    }].concat(collection.methodIndex.map(function (method) {
-        return {
-            search: method.normal,
-            name: method.name,
-            type: "method",
-            ref: method.ref,
-            summary: method.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, "")
-        };
-    }));
-}).flatten();
+        summary: collection.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, ""),
+        methods: new Set(collection.methodIndex.map(function (method) {
+            var paren = method.name.indexOf("(");
+            var name = method.name.slice(0, paren);
+            return name;
+        })).toArray().join(" ")
+    };
+});
+
+var methodSearch = new Set(collections.map(function (collection, ref) {
+    return collection.methodIndex.map(function (method) {
+        return [
+            method.search,
+            method.name,
+            method.ref
+        ];
+    });
+}).flatten()).map(function (tuple) {
+    var method = methods.get(tuple[2]);
+    return {
+        search: tuple[0],
+        name: tuple[1],
+        type: "method",
+        ref: tuple[2],
+        summary: method.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, ""),
+        collections: method.collections.map(function (collection) {
+            return collection.name;
+        }).join(" ")
+    };
+})
+
+var search = collectionSearch.concat(methodSearch);
 
 // Construct a global method search index
 //var methodVersions = methods.map(function (method, ref) {
