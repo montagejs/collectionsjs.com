@@ -34,6 +34,15 @@ nav a:active {
     color: hsl(316, 72%, 78%);
 }
 
+.logo {
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .logo {
+        text-align: left;
+    }
+}
+
 .header-logo {
     display: inline-block;
     height: 60px;
@@ -76,10 +85,16 @@ nav a:active {
 }
 
 .github {
-    vertical-align: center;
-    text-align: right;
+    text-align: center;
+    vertical-align: middle;
     margin: 26px 0;
 }
+@media (min-width: 768px) {
+    .github {
+        text-align: right;
+    }
+}
+
 
 /* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
 
