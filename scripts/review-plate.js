@@ -15,7 +15,6 @@ fs.writeFileSync("assets/review-plate.html", template({
     }).flatten()
 }), "utf-8");
 
-
 fs.writeFileSync("assets/script/data.js", "data=" + JSON.stringify({
     interfaces: data.interfaces.map(function (interface, ref) {
         return {id: "interface-" + ref, className: "card interface"};

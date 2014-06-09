@@ -4,11 +4,11 @@ var httpApps = require("q-io/http-apps");
 var generate = require("./generate");
 
 if (require.main === module) {
-    var siteFs = fs.reroot("_site");
-    return fs.removeTree("_site")
+    var siteFs = fs.reroot(fs.join(__dirname, "..", "_site"));
+    return fs.removeTree(fs.join(__dirname, "..", "_site"))
     .catch(function () {})
     .then(function () {
-        return fs.makeTree("_site");
+        return fs.makeTree(fs.join(__dirname, "..", "_site"));
     })
     .then(generate.bind(null, siteFs))
     .then(serve.bind(null, siteFs))

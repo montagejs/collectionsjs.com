@@ -1,9 +1,10 @@
+
 var Q = require("q");
 var path = require("path");
 var fs = require("q-io/fs");
 var yaml = require("js-yaml");
 
-Q.all([loadDirectory("../collection", parseCollectionDocument), loadDirectory("../method", parseMethodDocument)])
+Q.all([loadDirectory("collection", parseCollectionDocument), loadDirectory("method", parseMethodDocument)])
 .spread(function (collectionDocuments, methodDocuments) {
     var warningsCount = 0;
     Object.keys(collectionDocuments).forEach(function (collectionName) {
@@ -21,7 +22,7 @@ Q.all([loadDirectory("../collection", parseCollectionDocument), loadDirectory(".
 function loadDirectory(pathname, parse) {
     var documents = {};
 
-    return fs.list(pathname)
+    return fs.list(fs.join(__dirname, "..", pathname))
     .then(function (list) {
         return Q.all(list.map(function (filename) {
             var name = path.basename(filename, ".md");

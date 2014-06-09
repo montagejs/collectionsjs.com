@@ -9,7 +9,7 @@ var data = require("./scrape");
 
 if (require.main === module) {
     var siteFs = fs.reroot("_site");
-    return fs.removeTree("_site")
+    return fs.removeTree(fs.join(__dirname, "..", "_site"))
     .catch(function () {})
     .then(function () {
         return fs.makeTree("_site");
@@ -34,7 +34,7 @@ function generate(siteFs) {
 function setup(siteFs) {
     return Q()
     .then(function () {
-        return fs.copyTree("assets", ".", siteFs);
+        return fs.copyTree(fs.join(__dirname, "..", "assets"), ".", siteFs);
     })
     .then(function () {
         return Q.all([
@@ -45,17 +45,18 @@ function setup(siteFs) {
 }
 
 function loadTemplates() {
-    return fs.list("./templates/includes")
+    return fs.list(fs.join(__dirname, "..", "templates", "includes"))
     .then(function (list) {
         // Compile all includes
         var includes = {};
-        return Q.all(list.map(function (filename) {
+        return Reader(list)
+        .forEach(function (filename) {
             var name = path.basename(filename, ".html");
-            return fs.read(path.join("./templates/includes", filename))
+            return fs.read(path.join(__dirname, "..", "templates", "includes", filename))
             .then(function (include) {
                 includes[name] = Handlebars.compile(include.toString("utf8"));
             });
-        }))
+        })
         .thenResolve(includes);
     })
     .then(function (includes) {
@@ -82,9 +83,9 @@ function loadTemplates() {
     })
     .then(function () {
         return Q.all([
-            fs.read("./templates/index.html"),
-            fs.read("./templates/collection.html"),
-            fs.read("./templates/method.html"),
+            fs.read(fs.join(__dirname, "..", "templates", "index.html")),
+            fs.read(fs.join(__dirname, "..", "templates", "collection.html")),
+            fs.read(fs.join(__dirname, "..", "templates", "method.html")),
         ]);
     })
     .spread(function (index, collection, method) {
@@ -98,7 +99,7 @@ function loadTemplates() {
 
 function buildData(siteFs) {
     return fs.write(
-        path.join(__dirname, "lib", "data.js"),
+        fs.join(__dirname, "..", "lib", "data.js"),
         "module.exports=" + JSON.stringify({
             methodIndex: data.methodIndex,
             searchIndex: data.searchIndex
