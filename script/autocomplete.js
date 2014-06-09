@@ -86,17 +86,13 @@ function findMatches(q, cb) {
     // contains the substring `q`, add it to the `matches` array
     var matches = [];
 
-    q = " " + q.toLowerCase().replace(/\W+/g, " ");
+    q = q.toLowerCase().replace(/\W+/g, " ");
 
     for (var i = 0; i < data.searchIndex.length; i++) {
         var thing = data.searchIndex[i];
         if (thing.search.indexOf(q) >= 0) {
             matches.push(thing);
         }
-    }
-
-    if (matches.length > 0) {
-        return cb(matches);
     }
 
     for (var i = 0; i < data.methodIndex.length; i++) {
@@ -111,11 +107,7 @@ function findMatches(q, cb) {
         }
     }
 
-    if (matches.length > 10) {
-        cb([]);
-    } else {
-        cb(matches);
-    }
+    cb(matches.slice(0, 10));
 }
 
 }],["collections-website","lib/data",{},function (require, exports, module){
@@ -130,7 +122,7 @@ module.exports={
             "type": "method",
             "name": "push(...values)",
             "searches": [
-                " push values  "
+                "push values "
             ],
             "summary": "<p>Adds values to the end of a collection.</p>\n"
         },
@@ -139,7 +131,7 @@ module.exports={
             "type": "method",
             "name": "pop()",
             "searches": [
-                " pop  "
+                "pop "
             ],
             "summary": "<p>Removes a value from the end of a collection, and returns that value.</p>\n"
         },
@@ -148,7 +140,7 @@ module.exports={
             "type": "method",
             "name": "shift()",
             "searches": [
-                " shift  "
+                "shift "
             ],
             "summary": "<p>Removes a value from the beginning of a collection, and returns that value.</p>\n"
         },
@@ -157,7 +149,7 @@ module.exports={
             "type": "method",
             "name": "unshift(...values)",
             "searches": [
-                " unshift values  "
+                "unshift values "
             ],
             "summary": "<p>Adds values to the beginning of a collection.</p>\n"
         },
@@ -166,7 +158,7 @@ module.exports={
             "type": "method",
             "name": "peek()",
             "searches": [
-                " peek  "
+                "peek "
             ],
             "summary": "<p>Returns the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>\n"
         },
@@ -175,7 +167,7 @@ module.exports={
             "type": "method",
             "name": "poke(value)",
             "searches": [
-                " poke value  "
+                "poke value "
             ],
             "summary": "<p>Replaces the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>\n"
         },
@@ -184,7 +176,7 @@ module.exports={
             "type": "method",
             "name": "peekBack()",
             "searches": [
-                " peekback  "
+                "peekback "
             ],
             "summary": "<p>Returns the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>\n"
         },
@@ -193,7 +185,7 @@ module.exports={
             "type": "method",
             "name": "pokeBack(value)",
             "searches": [
-                " pokeback value  "
+                "pokeback value "
             ],
             "summary": "<p>Replaces the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>\n"
         },
@@ -202,7 +194,7 @@ module.exports={
             "type": "method",
             "name": "has(value)",
             "searches": [
-                " has value  "
+                "has value "
             ],
             "summary": "<p>Whether an equivalent value exists in this collection.</p>\n"
         },
@@ -211,8 +203,8 @@ module.exports={
             "type": "method",
             "name": "has(value, equals?)",
             "searches": [
-                " has value  ",
-                " has value equals  "
+                "has value ",
+                "has value equals "
             ],
             "summary": "<p>Returns whether an equivalent value exists in this collection.</p>\n"
         },
@@ -221,7 +213,7 @@ module.exports={
             "type": "method",
             "name": "get(value)",
             "searches": [
-                " get value  "
+                "get value "
             ],
             "summary": "<p>Retrieves the equivalent value from the collection.</p>\n"
         },
@@ -230,8 +222,8 @@ module.exports={
             "type": "method",
             "name": "get(value, equals?)",
             "searches": [
-                " get value  ",
-                " get value equals  "
+                "get value ",
+                "get value equals "
             ],
             "summary": "<p>Retrieves the equivalent value from this collection.</p>\n"
         },
@@ -240,7 +232,7 @@ module.exports={
             "type": "method",
             "name": "add(value)",
             "searches": [
-                " add value  "
+                "add value "
             ],
             "summary": "<p>Adds a value to a collection.</p>\n"
         },
@@ -249,7 +241,7 @@ module.exports={
             "type": "method",
             "name": "delete(value)",
             "searches": [
-                " delete value  "
+                "delete value "
             ],
             "summary": "<p>Deletes the first equivalent value. Returns whether the key was found and successfully deleted.</p>\n"
         },
@@ -258,8 +250,8 @@ module.exports={
             "type": "method",
             "name": "delete(value, equals?)",
             "searches": [
-                " delete value  ",
-                " delete value equals  "
+                "delete value ",
+                "delete value equals "
             ],
             "summary": "<p>Seeks out and deletes an equivalent value. Returns whether the value was found and successfully deleted.</p>\n"
         },
@@ -268,7 +260,7 @@ module.exports={
             "type": "method",
             "name": "remove(value)",
             "searches": [
-                " remove value  "
+                "remove value "
             ],
             "summary": "<p>An alias for <code>delete(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>\n"
         },
@@ -277,7 +269,7 @@ module.exports={
             "type": "method",
             "name": "contains(value)",
             "searches": [
-                " contains value  "
+                "contains value "
             ],
             "summary": "<p>An alias for <code>has(value)</code> on sets that increases the overlap with the W3C <code>DOMTokenList</code> interface, implemented by <code>classList</code>.</p>\n"
         },
@@ -286,7 +278,7 @@ module.exports={
             "type": "method",
             "name": "toggle(value)",
             "searches": [
-                " toggle value  "
+                "toggle value "
             ],
             "summary": "<p>Toggles the existence of a value in a set.</p>\n"
         },
@@ -295,7 +287,7 @@ module.exports={
             "type": "method",
             "name": "has(key)",
             "searches": [
-                " has key  "
+                "has key "
             ],
             "summary": "<p>Returns whether an entry with the given key exists in a <code>Map</code>.</p>\n"
         },
@@ -304,10 +296,10 @@ module.exports={
             "type": "method",
             "name": "get(key|index, default?)",
             "searches": [
-                " get key  ",
-                " get key default  ",
-                " get index  ",
-                " get index default  "
+                "get key ",
+                "get key default ",
+                "get index ",
+                "get index default "
             ],
             "summary": "<p>Gets the value for a key in a map.</p>\n"
         },
@@ -316,7 +308,7 @@ module.exports={
             "type": "method",
             "name": "set(key, value)",
             "searches": [
-                " set key value  "
+                "set key value "
             ],
             "summary": "<p>Sets the value for a given key.</p>\n"
         },
@@ -325,7 +317,7 @@ module.exports={
             "type": "method",
             "name": "add(value, key)",
             "searches": [
-                " add value key  "
+                "add value key "
             ],
             "summary": "<p>Adds a value for a given key to a map.</p>\n"
         },
@@ -334,7 +326,7 @@ module.exports={
             "type": "method",
             "name": "delete(key)",
             "searches": [
-                " delete key  "
+                "delete key "
             ],
             "summary": "<p>Deletes the value for a given key. Returns whether the key was found and successfully deleted.</p>\n"
         },
@@ -343,7 +335,7 @@ module.exports={
             "type": "method",
             "name": "keys()",
             "searches": [
-                " keys  "
+                "keys "
             ],
             "summary": "<p>Returns an array of the keys of this map.</p>\n"
         },
@@ -352,7 +344,7 @@ module.exports={
             "type": "method",
             "name": "values()",
             "searches": [
-                " values  "
+                "values "
             ],
             "summary": "<p>Returns an array of the values of this map.</p>\n"
         },
@@ -361,8 +353,8 @@ module.exports={
             "type": "method",
             "name": "entries()",
             "searches": [
-                " entries  ",
-                " items  "
+                "entries ",
+                "items "
             ],
             "summary": "<p>Returns an array of all <em>[key, value]</em> entries for this map.</p>\n"
         },
@@ -371,8 +363,8 @@ module.exports={
             "type": "method",
             "name": "addEach(values|map)",
             "searches": [
-                " addeach values  ",
-                " addeach map  "
+                "addeach values ",
+                "addeach map "
             ],
             "summary": "<p>Copies values or entries from another collection into this collection, and then returns this.</p>\n"
         },
@@ -381,10 +373,10 @@ module.exports={
             "type": "method",
             "name": "deleteEach(values|keys, equals?)",
             "searches": [
-                " deleteeach values  ",
-                " deleteeach values equals  ",
-                " deleteeach keys  ",
-                " deleteeach keys equals  "
+                "deleteeach values ",
+                "deleteeach values equals ",
+                "deleteeach keys ",
+                "deleteeach keys equals "
             ],
             "summary": "<p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>\n"
         },
@@ -393,9 +385,9 @@ module.exports={
             "type": "method",
             "name": "slice(start?, end?)",
             "searches": [
-                " slice  ",
-                " slice start  ",
-                " slice start end  "
+                "slice ",
+                "slice start ",
+                "slice start end "
             ],
             "summary": "<p>Returns an array of the values contained in the half-open interval [start, end), that is, including the start and excluding the end.</p>\n"
         },
@@ -404,8 +396,8 @@ module.exports={
             "type": "method",
             "name": "splice(start, length, ...values)",
             "searches": [
-                " splice start length  ",
-                " splice start length values  "
+                "splice start length ",
+                "splice start length values "
             ],
             "summary": "<p>Replaces a length of values from a starting position with the given variadic values, and returns the values that were replaced as an array.</p>\n"
         },
@@ -414,8 +406,8 @@ module.exports={
             "type": "method",
             "name": "swap(start, length, values?)",
             "searches": [
-                " swap start length  ",
-                " swap start length values  "
+                "swap start length ",
+                "swap start length values "
             ],
             "summary": "<p>Replaces a length of values from a starting position with the given values.</p>\n"
         },
@@ -424,7 +416,7 @@ module.exports={
             "type": "method",
             "name": "clear()",
             "searches": [
-                " clear  "
+                "clear "
             ],
             "summary": "<p>Deletes all of the values in the collection.</p>\n"
         },
@@ -433,7 +425,7 @@ module.exports={
             "type": "method",
             "name": "indexOf(value)",
             "searches": [
-                " indexof value  "
+                "indexof value "
             ],
             "summary": "<p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>\n"
         },
@@ -442,7 +434,7 @@ module.exports={
             "type": "method",
             "name": "lastIndexOf(value)",
             "searches": [
-                " lastindexof value  "
+                "lastindexof value "
             ],
             "summary": "<p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>\n"
         },
@@ -451,8 +443,8 @@ module.exports={
             "type": "method",
             "name": "indexOf(value, start?)",
             "searches": [
-                " indexof value  ",
-                " indexof value start  "
+                "indexof value ",
+                "indexof value start "
             ],
             "summary": "<p>Returns the position of a value, or <em>-1</em> if the value is not found.</p>\n"
         },
@@ -461,8 +453,8 @@ module.exports={
             "type": "method",
             "name": "lastIndexOf(value, start?)",
             "searches": [
-                " lastindexof value  ",
-                " lastindexof value start  "
+                "lastindexof value ",
+                "lastindexof value start "
             ],
             "summary": "<p>Returns the last position of a value, or <em>-1</em> if the value is not found.</p>\n"
         },
@@ -471,8 +463,8 @@ module.exports={
             "type": "method",
             "name": "find(callback, thisp?)",
             "searches": [
-                " find callback  ",
-                " find callback thisp  "
+                "find callback ",
+                "find callback thisp "
             ],
             "summary": "<p>Finds the first value within a collection that passes a test.</p>\n"
         },
@@ -481,8 +473,8 @@ module.exports={
             "type": "method",
             "name": "findLast(callback, thisp?)",
             "searches": [
-                " findlast callback  ",
-                " findlast callback thisp  "
+                "findlast callback ",
+                "findlast callback thisp "
             ],
             "summary": "<p>Finds the last value within a collection that passes a test, searching from the right.</p>\n"
         },
@@ -491,8 +483,8 @@ module.exports={
             "type": "method",
             "name": "findIndex(callback, thisp?)",
             "searches": [
-                " findindex callback  ",
-                " findindex callback thisp  "
+                "findindex callback ",
+                "findindex callback thisp "
             ],
             "summary": "<p>Finds the first index within a collection that passes a test.</p>\n"
         },
@@ -501,8 +493,8 @@ module.exports={
             "type": "method",
             "name": "findLastIndex(callback, thisp?)",
             "searches": [
-                " findlastindex callback  ",
-                " findlastindex callback thisp  "
+                "findlastindex callback ",
+                "findlastindex callback thisp "
             ],
             "summary": "<p>Finds the last index within a collection that passes a test, searching from the right.</p>\n"
         },
@@ -511,12 +503,12 @@ module.exports={
             "type": "method",
             "name": "find|findValue(value, equals?, start?)",
             "searches": [
-                " find value  ",
-                " find value equals  ",
-                " find value equals start  ",
-                " findvalue value  ",
-                " findvalue value equals  ",
-                " findvalue value equals start  "
+                "find value ",
+                "find value equals ",
+                "find value equals start ",
+                "findvalue value ",
+                "findvalue value equals ",
+                "findvalue value equals start "
             ],
             "summary": "<p>Finds the first equivalent value.</p>\n"
         },
@@ -525,12 +517,12 @@ module.exports={
             "type": "method",
             "name": "findLast|findLastValue(value, equals?, start?)",
             "searches": [
-                " findlast value  ",
-                " findlast value equals  ",
-                " findlast value equals start  ",
-                " findlastvalue value  ",
-                " findlastvalue value equals  ",
-                " findlastvalue value equals start  "
+                "findlast value ",
+                "findlast value equals ",
+                "findlast value equals start ",
+                "findlastvalue value ",
+                "findlastvalue value equals ",
+                "findlastvalue value equals start "
             ],
             "summary": "<p>Finds the last equivalent value, searching from the right.</p>\n"
         },
@@ -539,7 +531,7 @@ module.exports={
             "type": "method",
             "name": "findLeast()",
             "searches": [
-                " findleast  "
+                "findleast "
             ],
             "summary": "<p>Finds the smallest value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -548,7 +540,7 @@ module.exports={
             "type": "method",
             "name": "findLeastGreaterThan(value)",
             "searches": [
-                " findleastgreaterthan value  "
+                "findleastgreaterthan value "
             ],
             "summary": "<p>Finds the smallest value greater than the given value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -557,7 +549,7 @@ module.exports={
             "type": "method",
             "name": "findLeastGreaterThanOrEqual(value)",
             "searches": [
-                " findleastgreaterthanorequal value  "
+                "findleastgreaterthanorequal value "
             ],
             "summary": "<p>Finds the smallest value greater than or equal to the given value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -566,7 +558,7 @@ module.exports={
             "type": "method",
             "name": "findGreatest()",
             "searches": [
-                " findgreatest  "
+                "findgreatest "
             ],
             "summary": "<p>Finds the largest value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -575,7 +567,7 @@ module.exports={
             "type": "method",
             "name": "findLGreatestLessThan(value)",
             "searches": [
-                " findlgreatestlessthan value  "
+                "findlgreatestlessthan value "
             ],
             "summary": "<p>Finds the largest value less than the given value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -584,7 +576,7 @@ module.exports={
             "type": "method",
             "name": "findGreatestLessThanOrEqual(value)",
             "searches": [
-                " findgreatestlessthanorequal value  "
+                "findgreatestlessthanorequal value "
             ],
             "summary": "<p>Finds the largest value less than or equal to the given value, returning the node at which it was found, or undefined.</p>\n"
         },
@@ -593,8 +585,8 @@ module.exports={
             "type": "method",
             "name": "mapIterator(callback, thisp?)",
             "searches": [
-                " mapiterator callback  ",
-                " mapiterator callback thisp  "
+                "mapiterator callback ",
+                "mapiterator callback thisp "
             ],
             "summary": "<p>Returns an iterator for the respective return values of a callback for each value from this iteration.</p>\n"
         },
@@ -603,8 +595,8 @@ module.exports={
             "type": "method",
             "name": "filterIterator(callback, thisp?)",
             "searches": [
-                " filteriterator callback  ",
-                " filteriterator callback thisp  "
+                "filteriterator callback ",
+                "filteriterator callback thisp "
             ],
             "summary": "<p>Returns an iterator for all values from this iterator that pass a test.</p>\n"
         },
@@ -613,8 +605,8 @@ module.exports={
             "type": "method",
             "name": "dropWhile(callback, thisp?)",
             "searches": [
-                " dropwhile callback  ",
-                " dropwhile callback thisp  "
+                "dropwhile callback ",
+                "dropwhile callback thisp "
             ],
             "summary": "<p>Returns an iterator that will begin with the first value from this iteration that passes a test.</p>\n"
         },
@@ -623,8 +615,8 @@ module.exports={
             "type": "method",
             "name": "takeWhile(callback, thisp?)",
             "searches": [
-                " takewhile callback  ",
-                " takewhile callback thisp  "
+                "takewhile callback ",
+                "takewhile callback thisp "
             ],
             "summary": "<p>Returns an iterator that will produce every value from this iteration until an entry fails a test.</p>\n"
         },
@@ -633,7 +625,7 @@ module.exports={
             "type": "method",
             "name": "zipIterator(...iterables)",
             "searches": [
-                " zipiterator iterables  "
+                "zipiterator iterables "
             ],
             "summary": "<p>Returns an iterator that will produce an array of values with the value at the same index of this iterator and each given iterable.</p>\n"
         },
@@ -642,8 +634,8 @@ module.exports={
             "type": "method",
             "name": "enumerateIterator(start?)",
             "searches": [
-                " enumerateiterator  ",
-                " enumerateiterator start  "
+                "enumerateiterator ",
+                "enumerateiterator start "
             ],
             "summary": "<p>Creates an iterator that will produce <em>[index, value]</em> for each value in this iterator, on demand.</p>\n"
         },
@@ -652,7 +644,7 @@ module.exports={
             "type": "method",
             "name": "iterate()",
             "searches": [
-                " iterate  "
+                "iterate "
             ],
             "summary": "<p>Iterates every value in this collection.</p>\n"
         },
@@ -661,9 +653,9 @@ module.exports={
             "type": "method",
             "name": "iterate(start?, end?)",
             "searches": [
-                " iterate  ",
-                " iterate start  ",
-                " iterate start end  "
+                "iterate ",
+                "iterate start ",
+                "iterate start end "
             ],
             "summary": "<p>Iterates from start to end within a collection.</p>\n"
         },
@@ -672,7 +664,7 @@ module.exports={
             "type": "method",
             "name": "iterator()",
             "searches": [
-                " iterator  "
+                "iterator "
             ],
             "summary": "<p>Iterates every value in this collection.</p>\n"
         },
@@ -681,8 +673,8 @@ module.exports={
             "type": "method",
             "name": "forEach(callback, thisp?)",
             "searches": [
-                " foreach callback  ",
-                " foreach callback thisp  "
+                "foreach callback ",
+                "foreach callback thisp "
             ],
             "summary": "<p>Calls the callback for each entry in the collection.</p>\n"
         },
@@ -691,8 +683,8 @@ module.exports={
             "type": "method",
             "name": "map(callback, thisp?)",
             "searches": [
-                " map callback  ",
-                " map callback thisp  "
+                "map callback ",
+                "map callback thisp "
             ],
             "summary": "<p>Returns an array of the respective return values of a callback for each entry in this collection.</p>\n"
         },
@@ -701,8 +693,8 @@ module.exports={
             "type": "method",
             "name": "filter(callback, thisp?)",
             "searches": [
-                " filter callback  ",
-                " filter callback thisp  "
+                "filter callback ",
+                "filter callback thisp "
             ],
             "summary": "<p>Returns an array with each value from this collection that passes the given test.</p>\n"
         },
@@ -711,9 +703,9 @@ module.exports={
             "type": "method",
             "name": "reduce(callback, basis)",
             "searches": [
-                " reduce callback  ",
-                " reduce callback basis  ",
-                " reduce callback basis thisp  "
+                "reduce callback ",
+                "reduce callback basis ",
+                "reduce callback basis thisp "
             ],
             "summary": "<p>Aggregates every value in this collection with the result collected up to that index.</p>\n"
         },
@@ -722,9 +714,9 @@ module.exports={
             "type": "method",
             "name": "reduceRight(callback, basis)",
             "searches": [
-                " reduceright callback  ",
-                " reduceright callback basis  ",
-                " reduceright callback basis thisp  "
+                "reduceright callback ",
+                "reduceright callback basis ",
+                "reduceright callback basis thisp "
             ],
             "summary": "<p>Aggregates every value in this collection, from right to left.</p>\n"
         },
@@ -733,9 +725,9 @@ module.exports={
             "type": "method",
             "name": "group(callback, thisp?, equals?)",
             "searches": [
-                " group callback  ",
-                " group callback thisp  ",
-                " group callback thisp equals  "
+                "group callback ",
+                "group callback thisp ",
+                "group callback thisp equals "
             ],
             "summary": "<p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>\n"
         },
@@ -744,8 +736,8 @@ module.exports={
             "type": "method",
             "name": "some(callback, thisp?)",
             "searches": [
-                " some callback  ",
-                " some callback thisp  "
+                "some callback ",
+                "some callback thisp "
             ],
             "summary": "<p>Returns whether every entry in this collection passes a given test.</p>\n"
         },
@@ -754,8 +746,8 @@ module.exports={
             "type": "method",
             "name": "every(callback, thisp?)",
             "searches": [
-                " every callback  ",
-                " every callback thisp  "
+                "every callback ",
+                "every callback thisp "
             ],
             "summary": "<p>Returns whether any entry in this collection passes a given test.</p>\n"
         },
@@ -764,7 +756,7 @@ module.exports={
             "type": "method",
             "name": "any()",
             "searches": [
-                " any  "
+                "any "
             ],
             "summary": "<p>Returns whether any value in the collection is truthy.</p>\n"
         },
@@ -773,7 +765,7 @@ module.exports={
             "type": "method",
             "name": "all()",
             "searches": [
-                " all  "
+                "all "
             ],
             "summary": "<p>Returns whether all values in the collection are truthy.</p>\n"
         },
@@ -782,7 +774,7 @@ module.exports={
             "type": "method",
             "name": "one()",
             "searches": [
-                " one  "
+                "one "
             ],
             "summary": "<p>Returns one, arbitrary value from this collection, or <em>undefined</em> if there are none.</p>\n"
         },
@@ -791,7 +783,7 @@ module.exports={
             "type": "method",
             "name": "only()",
             "searches": [
-                " only  "
+                "only "
             ],
             "summary": "<p>Returns the only value in this collection, or <em>undefined</em> if there is more than one value, or if there are no values in the collection.</p>\n"
         },
@@ -800,8 +792,8 @@ module.exports={
             "type": "method",
             "name": "sort(compare?)",
             "searches": [
-                " sort  ",
-                " sort compare  "
+                "sort ",
+                "sort compare "
             ],
             "summary": "<p>Sorts a collection in place.</p>\n"
         },
@@ -810,8 +802,8 @@ module.exports={
             "type": "method",
             "name": "sorted(compare?)",
             "searches": [
-                " sorted  ",
-                " sorted compare  "
+                "sorted ",
+                "sorted compare "
             ],
             "summary": "<p>Returns a sorted array of the values in this collection.</p>\n"
         },
@@ -820,7 +812,7 @@ module.exports={
             "type": "method",
             "name": "reverse()",
             "searches": [
-                " reverse  "
+                "reverse "
             ],
             "summary": "<p>Reverses the order of this collection in place.</p>\n"
         },
@@ -829,7 +821,7 @@ module.exports={
             "type": "method",
             "name": "reversed()",
             "searches": [
-                " reversed  "
+                "reversed "
             ],
             "summary": "<p>Returns a copy of this collection with the values in reverse order.</p>\n"
         },
@@ -838,8 +830,8 @@ module.exports={
             "type": "method",
             "name": "join(delimiter?)",
             "searches": [
-                " join  ",
-                " join delimiter  "
+                "join ",
+                "join delimiter "
             ],
             "summary": "<p>Returns a string of all the values in the collection delimited by the given string.</p>\n"
         },
@@ -848,7 +840,7 @@ module.exports={
             "type": "method",
             "name": "split(delimiter)",
             "searches": [
-                " split delimiter  "
+                "split delimiter "
             ],
             "summary": "<p>Returns an array of all the non-overlapping strings between the given delimiter.\nThe delimiter may be either a string or a regular expression.</p>\n"
         },
@@ -857,8 +849,8 @@ module.exports={
             "type": "method",
             "name": "sum(zero?)",
             "searches": [
-                " sum  ",
-                " sum zero  "
+                "sum ",
+                "sum zero "
             ],
             "summary": "<p>Returns the sum of all values in this collection.</p>\n"
         },
@@ -867,8 +859,8 @@ module.exports={
             "type": "method",
             "name": "average()",
             "searches": [
-                " average  ",
-                " average zero  "
+                "average ",
+                "average zero "
             ],
             "summary": "<p>Returns the arithmetic mean of the collection, by computing its sum and the count of values and returning the quotient.</p>\n"
         },
@@ -877,7 +869,7 @@ module.exports={
             "type": "method",
             "name": "min()",
             "searches": [
-                " min  "
+                "min "
             ],
             "summary": "<p>Returns the smallest value in this collection.</p>\n"
         },
@@ -886,7 +878,7 @@ module.exports={
             "type": "method",
             "name": "max()",
             "searches": [
-                " max  "
+                "max "
             ],
             "summary": "<p>Returns the largest value in this collection.</p>\n"
         },
@@ -895,7 +887,7 @@ module.exports={
             "type": "method",
             "name": "zip(...iterables)",
             "searches": [
-                " zip iterables  "
+                "zip iterables "
             ],
             "summary": "<p>Returns an array of the respective values in this collection and in each collection provided as an argument.</p>\n"
         },
@@ -904,7 +896,7 @@ module.exports={
             "type": "method",
             "name": "unzip(collections)",
             "searches": [
-                " unzip collections  "
+                "unzip collections "
             ],
             "summary": "<p>Given a collection of collections, returns the respective an array containing the respective values from each inner collection.\n<code>unzip</code> is equivalent to a matrix transpose.</p>\n"
         },
@@ -913,8 +905,8 @@ module.exports={
             "type": "method",
             "name": "enumerate(start?)",
             "searches": [
-                " enumerate  ",
-                " enumerate start  "
+                "enumerate ",
+                "enumerate start "
             ],
             "summary": "<p>Returns an array of [index, value] entries for each value in this collection, counting all values from the given index.</p>\n"
         },
@@ -923,7 +915,7 @@ module.exports={
             "type": "method",
             "name": "concat(...iterables)",
             "searches": [
-                " concat iterables  "
+                "concat iterables "
             ],
             "summary": "<p>Returns a new collection of the same type containing all the values of itself and the values of any number of other iterable collections in order.</p>\n"
         },
@@ -932,7 +924,7 @@ module.exports={
             "type": "method",
             "name": "flatten()",
             "searches": [
-                " flatten  "
+                "flatten "
             ],
             "summary": "<p>Assuming that this is a collection of collections, returns a new collection that contains all the values of each nested collection in order.</p>\n"
         },
@@ -941,7 +933,7 @@ module.exports={
             "type": "method",
             "name": "toArray()",
             "searches": [
-                " toarray  "
+                "toarray "
             ],
             "summary": "<p>Returns an array of each value in this collection.</p>\n"
         },
@@ -950,7 +942,7 @@ module.exports={
             "type": "method",
             "name": "toObject()",
             "searches": [
-                " toobject  "
+                "toobject "
             ],
             "summary": "<p>Returns an object with each property name and value corresponding to the entries in this collection.</p>\n"
         },
@@ -959,8 +951,8 @@ module.exports={
             "type": "method",
             "name": "equals(value, equals?)",
             "searches": [
-                " equals value  ",
-                " equals value equals  "
+                "equals value ",
+                "equals value equals "
             ],
             "summary": "<p>Returns whether this collection is equivalent to the given collection.</p>\n"
         },
@@ -969,8 +961,8 @@ module.exports={
             "type": "method",
             "name": "compare(value, compare?)",
             "searches": [
-                " compare value  ",
-                " compare value compare  "
+                "compare value ",
+                "compare value compare "
             ],
             "summary": "<p>Compares two values and returns a number having the same relative value to zero.</p>\n"
         },
@@ -979,7 +971,7 @@ module.exports={
             "type": "method",
             "name": "hash(value)",
             "searches": [
-                " hash value  "
+                "hash value "
             ],
             "summary": "<p>Consistently returns the same string for the same object.</p>\n"
         },
@@ -988,10 +980,10 @@ module.exports={
             "type": "method",
             "name": "clone(depth?, memo?)",
             "searches": [
-                " clone  ",
-                " clone null memo  ",
-                " clone depth  ",
-                " clone depth memo  "
+                "clone ",
+                "clone null memo ",
+                "clone depth ",
+                "clone depth memo "
             ],
             "summary": "<p>Creates a deep replica of this collection.</p>\n"
         },
@@ -1000,8 +992,8 @@ module.exports={
             "type": "method",
             "name": "constructClone(values?)",
             "searches": [
-                " constructclone  ",
-                " constructclone values  "
+                "constructclone ",
+                "constructclone values "
             ],
             "summary": "<p>Creates a shallow clone of this collection.</p>\n"
         },
@@ -1010,7 +1002,7 @@ module.exports={
             "type": "method",
             "name": "contentCompare(left, right)",
             "searches": [
-                " contentcompare left right  "
+                "contentcompare left right "
             ],
             "summary": "<p>The <code>compare</code> function used by this collection to determine how to order its own values.</p>\n"
         },
@@ -1019,7 +1011,7 @@ module.exports={
             "type": "method",
             "name": "contentEquals(left, right)",
             "searches": [
-                " contentequals left right  "
+                "contentequals left right "
             ],
             "summary": "<p>The <code>equals</code> function used to check whether values in this collection are equivalent.</p>\n"
         },
@@ -1028,7 +1020,7 @@ module.exports={
             "type": "method",
             "name": "contentHash(value)",
             "searches": [
-                " contenthash value  "
+                "contenthash value "
             ],
             "summary": "<p>The <code>hash</code> function used by this collection to hash its own values.</p>\n"
         },
@@ -1037,7 +1029,7 @@ module.exports={
             "type": "method",
             "name": "ensureCapacity(capacity)",
             "searches": [
-                " ensurecapacity capacity  "
+                "ensurecapacity capacity "
             ],
             "summary": "<p>An internal method of <code>Deque</code> that will grow the backing store if necessary.</p>\n"
         },
@@ -1046,7 +1038,7 @@ module.exports={
             "type": "method",
             "name": "grow(capacity)",
             "searches": [
-                " grow capacity  "
+                "grow capacity "
             ],
             "summary": "<p>An implementation detail of a <code>Deque</code> that will increase the size of its backing store.</p>\n"
         },
@@ -1055,7 +1047,7 @@ module.exports={
             "type": "method",
             "name": "scan(index, default)",
             "searches": [
-                " scan index default  "
+                "scan index default "
             ],
             "summary": "<p>An internal utility of <code>List</code> coercing indexes to nodes.</p>\n"
         },
@@ -1064,7 +1056,7 @@ module.exports={
             "type": "method",
             "name": "splay(value)",
             "searches": [
-                " splay value  "
+                "splay value "
             ],
             "summary": "<p>Rotates a splay tree until the value is at the root, or would be between the root and one of its children.</p>\n"
         },
@@ -1073,7 +1065,7 @@ module.exports={
             "type": "method",
             "name": "splayIndex(index)",
             "searches": [
-                " splayindex index  "
+                "splayindex index "
             ],
             "summary": "<p>Rotates the tree until the node at a given index floats to the top.</p>\n"
         },
@@ -1082,7 +1074,7 @@ module.exports={
             "type": "method",
             "name": "sortedSetLog(...)",
             "searches": [
-                " sortedsetlog  "
+                "sortedsetlog "
             ],
             "summary": "<p>Writes a tree describing the internal state of the sorted set splay tree.</p>\n"
         }
@@ -1092,182 +1084,182 @@ module.exports={
             "ref": "list",
             "type": "collection",
             "name": "List",
-            "search": " list ",
+            "search": "list",
             "summary": "<p>An ordered list of values.</p>\n"
         },
         {
             "ref": "deque",
             "type": "collection",
             "name": "Deque",
-            "search": " deque ",
+            "search": "deque",
             "summary": "<p>An ordered collection of values with fast random access, push, pop, shift, and unshift, but slow to splice.</p>\n"
         },
         {
             "ref": "map",
             "type": "collection",
             "name": "Map",
-            "search": " map ",
+            "search": "map",
             "summary": "<p>A map of <em>[key, value]</em> entries, where keys may be arbitrary values including objects.</p>\n"
         },
         {
             "ref": "set",
             "type": "collection",
             "name": "Set",
-            "search": " set ",
+            "search": "set",
             "summary": "<p>A collection of unique values.</p>\n"
         },
         {
             "ref": "heap",
             "type": "collection",
             "name": "Heap",
-            "search": " heap ",
+            "search": "heap",
             "summary": "<p>A collection of values with the largest always on top.</p>\n"
         },
         {
             "ref": "dict",
             "type": "collection",
             "name": "Dict",
-            "search": " dict ",
+            "search": "dict",
             "summary": "<p>A mapping from string keys to values.</p>\n"
         },
         {
             "ref": "sorted-array",
             "type": "collection",
             "name": "SortedArray",
-            "search": " sortedarray ",
+            "search": "sortedarray",
             "summary": "<p>A collection of values stored in stable stored order, backed by an array.</p>\n"
         },
         {
             "ref": "fast-set",
             "type": "collection",
             "name": "FastSet",
-            "search": " fastset ",
+            "search": "fastset",
             "summary": "<p>The backing store for <code>Set</code> and <code>FastMap</code>.</p>\n"
         },
         {
             "ref": "lru-set",
             "type": "collection",
             "name": "LruSet",
-            "search": " lruset ",
+            "search": "lruset",
             "summary": "<p>A set with a maximum capacity that will evict the least recently used value.</p>\n"
         },
         {
             "ref": "lfu-set",
             "type": "collection",
             "name": "LfuSet",
-            "search": " lfuset ",
+            "search": "lfuset",
             "summary": "<p>A set with a maximum capacity that will evict the least frequently used value.</p>\n"
         },
         {
             "ref": "sorted-array-set",
             "type": "collection",
             "name": "SortedArraySet",
-            "search": " sortedarrayset ",
+            "search": "sortedarrayset",
             "summary": "<p>A collection of unique values stored in sorted order, backed by a plain array.</p>\n"
         },
         {
             "ref": "sorted-set",
             "type": "collection",
             "name": "SortedSet",
-            "search": " sortedset ",
+            "search": "sortedset",
             "summary": "<p>A collection of values stored in sorted order using a binary tree.</p>\n"
         },
         {
             "ref": "fast-map",
             "type": "collection",
             "name": "FastMap",
-            "search": " fastmap ",
+            "search": "fastmap",
             "summary": "<p>The backing store for a <code>Map</code>.</p>\n"
         },
         {
             "ref": "lfu-map",
             "type": "collection",
             "name": "LfuMap",
-            "search": " lfumap ",
+            "search": "lfumap",
             "summary": "<p>A map with a maximum capacity that will evict the least frequently used entry.</p>\n"
         },
         {
             "ref": "lru-map",
             "type": "collection",
             "name": "LruMap",
-            "search": " lrumap ",
+            "search": "lrumap",
             "summary": "<p>A map with a maximum capacity that will evict the least recently used entry.</p>\n"
         },
         {
             "ref": "multi-map",
             "type": "collection",
             "name": "MultiMap",
-            "search": " multimap ",
+            "search": "multimap",
             "summary": "<p>A map from keys to buckets, typically arrays.</p>\n"
         },
         {
             "ref": "sorted-map",
             "type": "collection",
             "name": "SortedMap",
-            "search": " sortedmap ",
+            "search": "sortedmap",
             "summary": "<p>A map with entries sorted by key.</p>\n"
         },
         {
             "ref": "sorted-array-map",
             "type": "collection",
             "name": "SortedArrayMap",
-            "search": " sortedarraymap ",
+            "search": "sortedarraymap",
             "summary": "<p>A map of key value pairs, sorted by key, backed by an array.</p>\n"
         },
         {
             "ref": "weak-map",
             "type": "collection",
             "name": "WeakMap",
-            "search": " weakmap ",
+            "search": "weakmap",
             "summary": "<p>A map of object keys to values with good garbage collection behavior.\nSee <a href=\"https://github.com/drses/weak-map\">WeakMap</a>.</p>\n"
         },
         {
             "ref": "iterator-1",
             "type": "collection",
             "name": "Iterator",
-            "search": " iterator ",
+            "search": "iterator",
             "summary": "<p>Produces values in order on demand.</p>\n"
         },
         {
             "ref": "array",
             "type": "collection",
             "name": "Array",
-            "search": " array ",
+            "search": "array",
             "summary": "<p>An ordered collection of values with fast random access, <code>push(...values)</code>, and <code>pop()</code>, but can be slow to splice when sufficiently massive.</p>\n"
         },
         {
             "ref": "object",
             "type": "collection",
             "name": "Object",
-            "search": " object ",
+            "search": "object",
             "summary": "<p>The native JavaScript object, with some additional constructor methods shimmed.</p>\n"
         },
         {
             "ref": "generic-collection",
             "type": "collection",
             "name": "GenericCollection",
-            "search": " genericcollection ",
+            "search": "genericcollection",
             "summary": "<p>An abstract collection that implements many generic methods, reusable by most collections.</p>\n"
         },
         {
             "ref": "generic-order",
             "type": "collection",
             "name": "GenericOrder",
-            "search": " genericorder ",
+            "search": "genericorder",
             "summary": "<p>An abstract collection that implements generic methods that can be used by any collection that keeps its values in a meaningful order.</p>\n"
         },
         {
             "ref": "generic-set",
             "type": "collection",
             "name": "GenericSet",
-            "search": " genericset ",
+            "search": "genericset",
             "summary": "<p>An abstract collection that implements many generic methods, reusable by most sets.</p>\n"
         },
         {
             "ref": "generic-map",
             "type": "collection",
             "name": "GenericMap",
-            "search": " genericmap ",
+            "search": "genericmap",
             "summary": "<p>An abstract collection that implements many generic methods, reusable by most maps.</p>\n"
         }
     ]
