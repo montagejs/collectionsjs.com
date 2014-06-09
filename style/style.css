@@ -34,6 +34,15 @@ nav a:active {
     color: hsl(316, 72%, 78%);
 }
 
+.logo {
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .logo {
+        text-align: left;
+    }
+}
+
 .header-logo {
     display: inline-block;
     height: 60px;
@@ -76,10 +85,38 @@ nav a:active {
 }
 
 .github {
-    vertical-align: center;
-    text-align: right;
+    text-align: center;
+    vertical-align: middle;
     margin: 26px 0;
 }
+@media (min-width: 768px) {
+    .github {
+        text-align: right;
+    }
+}
+
+.header-intro {
+    font-size: 24px;
+    padding: 0 15px;
+    font-weight: 300;
+    display: none;
+}
+@media (min-width: 768px) {
+    .header-intro {
+        font-size: 32px;
+        padding: .5em 15px 1em 15px;
+    }
+}
+@media (min-width: 992px) {
+    .header-intro {
+        font-size: 36px;
+        padding: .5em 120px 1em 120px;
+    }
+}
+.index .header-intro {
+    display: block;
+}
+
 
 /* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
 

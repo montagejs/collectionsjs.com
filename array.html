@@ -15,12 +15,15 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <nav class="col-sm-7 col-xs-6" role="navigation">
+                <nav class="col-sm-7 col-xs-12 logo" role="navigation">
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
-                <div class="col-sm-4 search"><input type="text" placeholder="Search" style="width: 100%"></div>
-                <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+                <div class="col-sm-4 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-1 col-xs-12 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+            </div>
+            <div class="row">
+                <p class="header-intro">This package provides JavaScript implementations of common collections, with many useful features.</p>
             </div>
         </div>
     </header>
@@ -80,11 +83,7 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Whether an equivalent value exists in this collection.</p>
 </dd>
                 
-                <dt><a href="/method/has-value-equals">has(value)</a></dt>
-                <dd><p>Returns whether an equivalent value exists in this collection.</p>
-</dd>
-                
-                <dt><a href="/method/has-value-equals">has(value, equals)</a></dt>
+                <dt><a href="/method/has-value-equals">has(value, equals?)</a></dt>
                 <dd><p>Returns whether an equivalent value exists in this collection.</p>
 </dd>
                 
@@ -92,27 +91,11 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Deletes the first equivalent value. Returns whether the key was found and successfully deleted.</p>
 </dd>
                 
-                <dt><a href="/method/delete-value-equals">delete(value)</a></dt>
+                <dt><a href="/method/delete-value-equals">delete(value, equals?)</a></dt>
                 <dd><p>Seeks out and deletes an equivalent value. Returns whether the value was found and successfully deleted.</p>
 </dd>
                 
-                <dt><a href="/method/delete-value-equals">delete(value, equals)</a></dt>
-                <dd><p>Seeks out and deletes an equivalent value. Returns whether the value was found and successfully deleted.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(key)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(key, default)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(index)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(index, default)</a></dt>
+                <dt><a href="/method/get-key">get(key|index, default?)</a></dt>
                 <dd><p>Gets the value for a key in a map.</p>
 </dd>
                 
@@ -120,35 +103,15 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Sets the value for a given key.</p>
 </dd>
                 
-                <dt><a href="/method/add-each">addEach(values)</a></dt>
+                <dt><a href="/method/add-each">addEach(values|map)</a></dt>
                 <dd><p>Copies values or entries from another collection into this collection, and then returns this.</p>
 </dd>
                 
-                <dt><a href="/method/add-each">addEach(map)</a></dt>
-                <dd><p>Copies values or entries from another collection into this collection, and then returns this.</p>
-</dd>
-                
-                <dt><a href="/method/delete-each">deleteEach(values)</a></dt>
+                <dt><a href="/method/delete-each">deleteEach(values|keys, equals?)</a></dt>
                 <dd><p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
 </dd>
                 
-                <dt><a href="/method/delete-each">deleteEach(values, equals)</a></dt>
-                <dd><p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
-</dd>
-                
-                <dt><a href="/method/delete-each">deleteEach(keys)</a></dt>
-                <dd><p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
-</dd>
-                
-                <dt><a href="/method/delete-each">deleteEach(keys, equals)</a></dt>
-                <dd><p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
-</dd>
-                
-                <dt><a href="/method/swap">swap(start, length)</a></dt>
-                <dd><p>Replaces a length of values from a starting position with the given values.</p>
-</dd>
-                
-                <dt><a href="/method/swap">swap(start, length, values)</a></dt>
+                <dt><a href="/method/swap">swap(start, length, values?)</a></dt>
                 <dd><p>Replaces a length of values from a starting position with the given values.</p>
 </dd>
                 
@@ -156,63 +119,23 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Deletes all of the values in the collection.</p>
 </dd>
                 
-                <dt><a href="/method/find-value">find(value)</a></dt>
+                <dt><a href="/method/find-value">find(value, equals?, start?)</a></dt>
                 <dd><p>Finds the first equivalent value.</p>
 </dd>
                 
-                <dt><a href="/method/find-value">find(value, equals)</a></dt>
+                <dt><a href="/method/find-value">findValue(value, equals?, start?)</a></dt>
                 <dd><p>Finds the first equivalent value.</p>
 </dd>
                 
-                <dt><a href="/method/find-value">find(value, equals, start)</a></dt>
-                <dd><p>Finds the first equivalent value.</p>
-</dd>
-                
-                <dt><a href="/method/find-value">findValue(value)</a></dt>
-                <dd><p>Finds the first equivalent value.</p>
-</dd>
-                
-                <dt><a href="/method/find-value">findValue(value, equals)</a></dt>
-                <dd><p>Finds the first equivalent value.</p>
-</dd>
-                
-                <dt><a href="/method/find-value">findValue(value, equals, start)</a></dt>
-                <dd><p>Finds the first equivalent value.</p>
-</dd>
-                
-                <dt><a href="/method/find-last-value">findLast(value)</a></dt>
+                <dt><a href="/method/find-last-value">findLast(value, equals?, start?)</a></dt>
                 <dd><p>Finds the last equivalent value, searching from the right.</p>
 </dd>
                 
-                <dt><a href="/method/find-last-value">findLast(value, equals)</a></dt>
+                <dt><a href="/method/find-last-value">findLastValue(value, equals?, start?)</a></dt>
                 <dd><p>Finds the last equivalent value, searching from the right.</p>
 </dd>
                 
-                <dt><a href="/method/find-last-value">findLast(value, equals, start)</a></dt>
-                <dd><p>Finds the last equivalent value, searching from the right.</p>
-</dd>
-                
-                <dt><a href="/method/find-last-value">findLastValue(value)</a></dt>
-                <dd><p>Finds the last equivalent value, searching from the right.</p>
-</dd>
-                
-                <dt><a href="/method/find-last-value">findLastValue(value, equals)</a></dt>
-                <dd><p>Finds the last equivalent value, searching from the right.</p>
-</dd>
-                
-                <dt><a href="/method/find-last-value">findLastValue(value, equals, start)</a></dt>
-                <dd><p>Finds the last equivalent value, searching from the right.</p>
-</dd>
-                
-                <dt><a href="/method/group">group(callback)</a></dt>
-                <dd><p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>
-</dd>
-                
-                <dt><a href="/method/group">group(callback, thisp)</a></dt>
-                <dd><p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>
-</dd>
-                
-                <dt><a href="/method/group">group(callback, thisp, equals)</a></dt>
+                <dt><a href="/method/group">group(callback, thisp?, equals?)</a></dt>
                 <dd><p>Returns an array of <em>[key, class]</em> entries where every value from the collection is placed into the same equivalence class if they return the same key through the given callback.</p>
 </dd>
                 
@@ -232,11 +155,7 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Returns the only value in this collection, or <em>undefined</em> if there is more than one value, or if there are no values in the collection.</p>
 </dd>
                 
-                <dt><a href="/method/sorted">sorted()</a></dt>
-                <dd><p>Returns a sorted array of the values in this collection.</p>
-</dd>
-                
-                <dt><a href="/method/sorted">sorted(compare)</a></dt>
+                <dt><a href="/method/sorted">sorted(compare?)</a></dt>
                 <dd><p>Returns a sorted array of the values in this collection.</p>
 </dd>
                 
@@ -244,19 +163,11 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Returns a copy of this collection with the values in reverse order.</p>
 </dd>
                 
-                <dt><a href="/method/sum">sum()</a></dt>
-                <dd><p>Returns the sum of all values in this collection.</p>
-</dd>
-                
-                <dt><a href="/method/sum">sum(zero)</a></dt>
+                <dt><a href="/method/sum">sum(zero?)</a></dt>
                 <dd><p>Returns the sum of all values in this collection.</p>
 </dd>
                 
                 <dt><a href="/method/average">average()</a></dt>
-                <dd><p>Returns the arithmetic mean of the collection, by computing its sum and the count of values and returning the quotient.</p>
-</dd>
-                
-                <dt><a href="/method/average">average(zero)</a></dt>
                 <dd><p>Returns the arithmetic mean of the collection, by computing its sum and the count of values and returning the quotient.</p>
 </dd>
                 
@@ -272,11 +183,7 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Returns an array of the respective values in this collection and in each collection provided as an argument.</p>
 </dd>
                 
-                <dt><a href="/method/enumerate">enumerate()</a></dt>
-                <dd><p>Returns an array of [index, value] entries for each value in this collection, counting all values from the given index.</p>
-</dd>
-                
-                <dt><a href="/method/enumerate">enumerate(start)</a></dt>
+                <dt><a href="/method/enumerate">enumerate(start?)</a></dt>
                 <dd><p>Returns an array of [index, value] entries for each value in this collection, counting all values from the given index.</p>
 </dd>
                 
@@ -292,43 +199,19 @@ onto the array prototype if they are not natively implemented.</p>
                 <dd><p>Returns an object with each property name and value corresponding to the entries in this collection.</p>
 </dd>
                 
-                <dt><a href="/method/equals">equals(value)</a></dt>
+                <dt><a href="/method/equals">equals(value, equals?)</a></dt>
                 <dd><p>Returns whether this collection is equivalent to the given collection.</p>
 </dd>
                 
-                <dt><a href="/method/equals">equals(value, equals)</a></dt>
-                <dd><p>Returns whether this collection is equivalent to the given collection.</p>
-</dd>
-                
-                <dt><a href="/method/compare">compare(value)</a></dt>
+                <dt><a href="/method/compare">compare(value, compare?)</a></dt>
                 <dd><p>Compares two values and returns a number having the same relative value to zero.</p>
 </dd>
                 
-                <dt><a href="/method/compare">compare(value, compare)</a></dt>
-                <dd><p>Compares two values and returns a number having the same relative value to zero.</p>
-</dd>
-                
-                <dt><a href="/method/clone">clone()</a></dt>
+                <dt><a href="/method/clone">clone(depth?, memo?)</a></dt>
                 <dd><p>Creates a deep replica of this collection.</p>
 </dd>
                 
-                <dt><a href="/method/clone">clone(null, memo)</a></dt>
-                <dd><p>Creates a deep replica of this collection.</p>
-</dd>
-                
-                <dt><a href="/method/clone">clone(depth)</a></dt>
-                <dd><p>Creates a deep replica of this collection.</p>
-</dd>
-                
-                <dt><a href="/method/clone">clone(depth, memo)</a></dt>
-                <dd><p>Creates a deep replica of this collection.</p>
-</dd>
-                
-                <dt><a href="/method/construct-clone">constructClone()</a></dt>
-                <dd><p>Creates a shallow clone of this collection.</p>
-</dd>
-                
-                <dt><a href="/method/construct-clone">constructClone(values)</a></dt>
+                <dt><a href="/method/construct-clone">constructClone(values?)</a></dt>
                 <dd><p>Creates a shallow clone of this collection.</p>
 </dd>
                 
@@ -340,6 +223,9 @@ onto the array prototype if they are not natively implemented.</p>
             
 
             <h3>Usage</h3>
+            <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-title">require</span><span class="hljs-params">(<span class="hljs-string">"collections/shim-array"</span>)</span></span>
+</code></pre>
+
             <ul>
             
                 <li>Array()</li>

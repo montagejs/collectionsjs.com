@@ -15,12 +15,15 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <nav class="col-sm-7 col-xs-6" role="navigation">
+                <nav class="col-sm-7 col-xs-12 logo" role="navigation">
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
-                <div class="col-sm-4 search"><input type="text" placeholder="Search" style="width: 100%"></div>
-                <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+                <div class="col-sm-4 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-1 col-xs-12 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+            </div>
+            <div class="row">
+                <p class="header-intro">This package provides JavaScript implementations of common collections, with many useful features.</p>
             </div>
         </div>
     </header>
@@ -43,19 +46,7 @@
                 <dd><p>Returns whether an entry with the given key exists in a <code>Map</code>.</p>
 </dd>
                 
-                <dt><a href="/method/get-key">get(key)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(key, default)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(index)</a></dt>
-                <dd><p>Gets the value for a key in a map.</p>
-</dd>
-                
-                <dt><a href="/method/get-key">get(index, default)</a></dt>
+                <dt><a href="/method/get-key">get(key|index, default?)</a></dt>
                 <dd><p>Gets the value for a key in a map.</p>
 </dd>
                 
@@ -83,15 +74,7 @@
                 <dd><p>Returns an array of all <em>[key, value]</em> entries for this map.</p>
 </dd>
                 
-                <dt><a href="/method/entries">items()</a></dt>
-                <dd><p>Returns an array of all <em>[key, value]</em> entries for this map.</p>
-</dd>
-                
-                <dt><a href="/method/add-each">addEach(values)</a></dt>
-                <dd><p>Copies values or entries from another collection into this collection, and then returns this.</p>
-</dd>
-                
-                <dt><a href="/method/add-each">addEach(map)</a></dt>
+                <dt><a href="/method/add-each">addEach(values|map)</a></dt>
                 <dd><p>Copies values or entries from another collection into this collection, and then returns this.</p>
 </dd>
                 
@@ -99,35 +82,15 @@
                 <dd><p>Deletes all of the values in the collection.</p>
 </dd>
                 
-                <dt><a href="/method/reduce">reduce(callback)</a></dt>
-                <dd><p>Aggregates every value in this collection with the result collected up to that index.</p>
-</dd>
-                
                 <dt><a href="/method/reduce">reduce(callback, basis)</a></dt>
                 <dd><p>Aggregates every value in this collection with the result collected up to that index.</p>
-</dd>
-                
-                <dt><a href="/method/reduce">reduce(callback, basis, thisp)</a></dt>
-                <dd><p>Aggregates every value in this collection with the result collected up to that index.</p>
-</dd>
-                
-                <dt><a href="/method/reduce-right">reduceRight(callback)</a></dt>
-                <dd><p>Aggregates every value in this collection, from right to left.</p>
 </dd>
                 
                 <dt><a href="/method/reduce-right">reduceRight(callback, basis)</a></dt>
                 <dd><p>Aggregates every value in this collection, from right to left.</p>
 </dd>
                 
-                <dt><a href="/method/reduce-right">reduceRight(callback, basis, thisp)</a></dt>
-                <dd><p>Aggregates every value in this collection, from right to left.</p>
-</dd>
-                
-                <dt><a href="/method/equals">equals(value)</a></dt>
-                <dd><p>Returns whether this collection is equivalent to the given collection.</p>
-</dd>
-                
-                <dt><a href="/method/equals">equals(value, equals)</a></dt>
+                <dt><a href="/method/equals">equals(value, equals?)</a></dt>
                 <dd><p>Returns whether this collection is equivalent to the given collection.</p>
 </dd>
                 
@@ -139,6 +102,10 @@
             
 
             <h3>Usage</h3>
+            <pre><code class="lang-js">
+
+</code></pre>
+
             <ul>
             
                 <li>GenericMap</li>
