@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>delete(value) method - Collections</title>
+    <title>union(values) method - Collections</title>
 
     <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
@@ -26,25 +26,18 @@
     <div class="container content">
         
 
-    <h2 >delete(value)</h2>
+    <h2 >union(values)</h2>
 
     <div class="row">
         <div class="col-sm-6">
             
 
-            <p>Deletes the first equivalent value. Returns whether the key was found and successfully deleted.</p>
+            <p>Returns the set of values including all values from both of these sets.</p>
 
 
-            <p>This is a very fast operation for <code>Set</code>, <code>LruSet</code>, and <code>FastSet</code> because they
-are backed by hash tables.
-This is a fast operation for <code>SortedSet</code> because it is backed by a splay tree,
-fast for <code>SortedArray</code> and <code>SortedArraySet</code> beause they use a binary search,
-and fast for <code>Heap</code> because it is backed by a binary search tree projected on an
-array.</p>
-<p>However, <code>delete(value)</code> for these collections does not support the
-<code>delete(value, equals)</code> overload.
-Providing a second argument to <code>delete</code> in these collections will throw an
-error.</p>
+            <p>The given values may be any iterable.</p>
+<p>The returned set will be the same type of this set, for any kind of set that
+inherits <code>GenericSet</code>.</p>
 
         </div>
 
@@ -62,7 +55,7 @@ error.</p>
 
             <ul>
             
-                <li>delete(value)</li>
+                <li>union(values)</li>
             
             </ul>
 
@@ -76,19 +69,7 @@ error.</p>
             <ul>
                 
                 
-                <li><a href="/list">List</a> </li>
-                
-                
-                
                 <li><a href="/set">Set</a> </li>
-                
-                
-                
-                <li><a href="/heap">Heap</a> </li>
-                
-                
-                
-                <li><a href="/sorted-array">SortedArray</a> </li>
                 
                 
                 
@@ -112,7 +93,13 @@ error.</p>
                 
                 
                 
-                <li><a href="/array">Array</a> </li>
+                <li><a href="/generic-set">GenericSet</a> </li>
+                
+                
+                
+                
+                
+                
                 
                 
                 

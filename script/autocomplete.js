@@ -190,6 +190,42 @@ module.exports={
             "summary": "<p>Replaces the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>\n"
         },
         {
+            "ref": "union",
+            "type": "method",
+            "name": "union(values)",
+            "searches": [
+                "union values "
+            ],
+            "summary": "<p>Returns the set of values including all values from both of these sets.</p>\n"
+        },
+        {
+            "ref": "intersection",
+            "type": "method",
+            "name": "intersection(values)",
+            "searches": [
+                "intersection values "
+            ],
+            "summary": "<p>Returns the set of values that are in both of these sets.</p>\n"
+        },
+        {
+            "ref": "difference",
+            "type": "method",
+            "name": "difference(values)",
+            "searches": [
+                "difference values "
+            ],
+            "summary": "<p>Returns the set of values that are in this set, excluding the values that are also in the other set.</p>\n"
+        },
+        {
+            "ref": "symmetric-difference",
+            "type": "method",
+            "name": "symmetricDifference(values)",
+            "searches": [
+                "symmetricdifference values "
+            ],
+            "summary": "<p>Returns the set of values that are only in one of these sets.</p>\n"
+        },
+        {
             "ref": "has-value",
             "type": "method",
             "name": "has(value)",
