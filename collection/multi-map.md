@@ -2,6 +2,9 @@
 
 name: MultiMap
 
+usage: |
+    var MultiMap = require("collections/multi-map");
+
 names:
 -   MultiMap()
 -   MultiMap(values)

@@ -2,6 +2,9 @@
 
 name: LruMap
 
+usage: |
+    var LruMap = require("collections/lru-map");
+
 names:
 -   LruMap()
 -   LruMap(values)

@@ -2,6 +2,9 @@
 
 name: SortedSet
 
+usage: |
+    var SortedSet = require("collections/sorted-set");
+
 names:
 -   SortedSet()
 -   SortedSet(values)

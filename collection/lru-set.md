@@ -2,6 +2,9 @@
 
 name: LruSet
 
+usage: |
+    var LruSet = require("collections/lru-set");
+
 names:
 -   LruSet(values)
 -   LruSet(values, capacity)

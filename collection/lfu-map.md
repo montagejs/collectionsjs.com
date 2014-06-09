@@ -2,6 +2,9 @@
 
 name: LfuMap
 
+usage: |
+    var LfuMap = require("collections/lfu-map");
+
 names:
 -   LfuMap()
 -   LfuMap(values)

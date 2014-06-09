@@ -10,7 +10,7 @@
 
             <h3>Methods</h3>
             <dl>
-                {{#each methodIndex}}
+                {{#each methods}}
                 <dt><a href="/method/{{ref}}">{{name}}</a></dt>
                 <dd>{{{summary}}}</dd>
                 {{/each}}
@@ -25,6 +25,7 @@
             {{/if}}
 
             <h3>Usage</h3>
+            {{{usage}}}
             <ul>
             {{#each names}}
                 <li>{{this}}</li>

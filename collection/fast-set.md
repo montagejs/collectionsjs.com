@@ -2,6 +2,9 @@
 
 name: FastSet
 
+usage: |
+    var FastSet = require("collections/fast-set");
+
 names:
 -   FastSet(values)
 -   FastSet(values, equals, hash)

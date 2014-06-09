@@ -54,6 +54,7 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
         samples: (front.samples || []).map(parseSample),
+        usage: render("```js\n" + (front.usage || "").trim() + "\n```"),
         see: front.see || []
     }];
 }));
@@ -118,25 +119,11 @@ collections = new Dict(collections.map(function (collection, ref) {
                 type: "collection",
                 name: method.name,
                 prototype: implementation.prototype,
+                summary: method.summary,
                 version: version
             };
         });
     }).flatten();
-    // The collection specific method search index
-    var methodIndex = implementations.map(function (implementation) {
-        return methods.get(implementation.ref).versions.map(function (method, version) {
-            return method.names.map(function (name) {
-                return {
-                    search: name.toLowerCase().replace(/\W+/g, " ").trim(),
-                    name: name,
-                    summary: method.summary,
-                    ref: method.ref,
-                    type: "method",
-                    version: method.version
-                };
-            });
-        });
-    }).flatten().flatten();
     return [ref, {
         ref: ref,
         type: "collection",
@@ -145,6 +132,7 @@ collections = new Dict(collections.map(function (collection, ref) {
         summary: collection.summary,
         detail: collection.detail,
         samples: collection.samples,
+        usage: collection.usage,
         see: collection.see.map(function (see) {
             var collection = collections.get(see);
             if (!collection) {
@@ -158,8 +146,7 @@ collections = new Dict(collections.map(function (collection, ref) {
                 summary: collection.summary
             };
         }).filter(Boolean),
-        methods: collectionMethods,
-        methodIndex: methodIndex
+        methods: collectionMethods
     }];
 }));
 

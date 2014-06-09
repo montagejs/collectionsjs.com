@@ -2,6 +2,9 @@
 
 name: Deque
 
+usage: |
+    var Deque = require("collections/deque");
+
 names:
 -   Deque()
 -   Deque(values)

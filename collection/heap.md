@@ -2,6 +2,9 @@
 
 name: Heap
 
+usage: |
+    var Heap = require("collections/heap");
+
 names:
 -   Heap()
 -   Heap(values)

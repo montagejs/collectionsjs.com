@@ -2,6 +2,9 @@
 
 name: Map
 
+usage: |
+    var Map = require("collections/map");
+
 names:
 -   Map()
 -   Map(values)

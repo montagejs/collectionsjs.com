@@ -2,6 +2,9 @@
 
 name: Object
 
+usage: |
+    require("collections/shim-object");
+
 methods:
 -   is-object
 -   clone

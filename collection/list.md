@@ -2,6 +2,9 @@
 
 name: List
 
+usage: |
+    var List = require("collections/list");
+
 names:
 -   List()
 -   List(values)

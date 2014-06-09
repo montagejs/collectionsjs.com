@@ -1,6 +1,9 @@
 
 name: WeakMap
 
+usage: |
+    var WeakMap = require("collections/weak-map");
+
 names:
 -   WeakMap()
 

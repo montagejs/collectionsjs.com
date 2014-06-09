@@ -2,6 +2,9 @@
 
 name: LfuSet
 
+usage: |
+    var LfuSet = require("collections/lfu-set");
+
 names:
 -   LfuSet(values)
 -   LfuSet(values, capacity)

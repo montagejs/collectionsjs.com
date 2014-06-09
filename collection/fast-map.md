@@ -2,6 +2,9 @@
 
 name: FastMap
 
+usage: |
+    var FastMap = require("collections/fast-map");
+
 names:
 -   FastMap()
 -   FastMap(values)

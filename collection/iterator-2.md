@@ -7,6 +7,9 @@ version: v2
 see:
 -   iterator
 
+usage: |
+    var Iterator = require("collections/iterator");
+
 ---
 
 Produces values in order on demand.

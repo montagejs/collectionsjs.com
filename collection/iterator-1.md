@@ -7,6 +7,9 @@ version: v1
 see:
 -   iterator-2
 
+usage: |
+    var Iterator = require("collections/iterator");
+
 names:
 -   Iterator(iterable)
 -   Iterator(iterator)

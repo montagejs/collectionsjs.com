@@ -2,6 +2,9 @@
 
 name: Set
 
+usage: |
+    var Set = require("collections/set");
+
 names:
 -   Set(values)
 -   Set(values, equals, hash)

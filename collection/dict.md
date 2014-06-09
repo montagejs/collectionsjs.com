@@ -2,6 +2,9 @@
 
 name: Dict
 
+usage: |
+    var Dict = require("collections/dict");
+
 names:
 -   Dict()
 -   Dict(entries)

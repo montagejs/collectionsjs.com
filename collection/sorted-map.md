@@ -2,6 +2,9 @@
 
 name: SortedMap
 
+usage: |
+    var SortedMap = require("collections/sorted-map");
+
 names:
 -   SortedMap()
 -   SortedMap(entries)
