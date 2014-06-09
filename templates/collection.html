@@ -1,50 +1,47 @@
 {{#include "layout" title=name bodyClass="collection" bundle="collections"}}
 
-    <h2>{{name}}</h2>
+    <div class="col-sm-6">
 
-    <div class="row">
-        <div class="col-sm-6">
+        <h2>{{name}}</h2>
 
-            {{{summary}}}
+        {{{summary}}}
 
-            {{{detail}}}
+        {{{detail}}}
 
-        </div>
+        <h3>Methods</h3>
+        <dl>
+            {{#each methodIndex}}
+            <dt><a href="/method/{{ref}}">{{name}}</a></dt>
+            <dd><p>{{{summary}}}</p></dd>
+            {{/each}}
+        </dl>
 
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
-
-            {{include "repl" samples=samples}}
-        </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Constructors</h3>
+    <div class="col-sm-6">
+        <h3 class="visible-xs">Examples</h3>
 
-            <ul>
-            {{#each names}}
-                <li>{{this}}</li>
-            {{/each}}
-            </ul>
+        {{include "repl" samples=samples}}
 
-            <h3>Related</h3>
+        <h3>Usage</h3>
+        <ul>
+        {{#each names}}
+            <li>{{this}}</li>
+        {{/each}}
+        </ul>
 
-            <ul>
-                <li><a href="#">Todo</a></li>
-            </ul>
-        </div>
+        {{#if see.length }}
+        <h3>Related</h3>
+        {{#each see}}
+        <ul>
+            <li>
+                <a href="{{ref}}">{{name}}</a>
+                {{{summary}}}
+            </li>
+        </ul>
+        {{/each}}
+        {{/if}}
 
-        <div class="col-sm-6 col-sm-pull-6">
-            <h3>Methods</h3>
-
-            <dl>
-                {{#each methodIndex}}
-                <dt><a href="/method/{{ref}}">{{name}}</a></dt>
-                <dd><p>{{{summary}}}</p></dd>
-                {{/each}}
-            </dl>
-        </div>
     </div>
 
 {{/include}}

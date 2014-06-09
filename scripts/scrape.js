@@ -53,7 +53,8 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         methods: front.methods || [],
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
-        samples: (front.samples || []).map(parseSample)
+        samples: (front.samples || []).map(parseSample),
+        see: front.see || []
     }];
 }));
 
@@ -97,6 +98,8 @@ var methods = new Dict(methodRefs.map(function (ref) {
 
 // Collection complete list of implemented methods and the prototype used for
 // each method
+// Also generate "see" cross reference
+// TODO Also generate "deepSee" cross reference
 
 var collectionsByMethod = new MultiMap();
 collections = new Dict(collections.map(function (collection, ref) {
@@ -142,6 +145,19 @@ collections = new Dict(collections.map(function (collection, ref) {
         summary: collection.summary,
         detail: collection.detail,
         samples: collection.samples,
+        see: collection.see.map(function (see) {
+            var collection = collections.get(see);
+            if (!collection) {
+                console.log("Bad reference in " + ref + " to " + see);
+                return;
+            }
+            return {
+                ref: see,
+                type: "collection",
+                name: collection.name,
+                summary: collection.summary
+            };
+        }).filter(Boolean),
         methods: collectionMethods,
         methodIndex: methodIndex
     }];

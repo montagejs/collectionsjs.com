@@ -1,60 +1,52 @@
 {{#include "layout" title=name afterTitle="method" bodyClass="method" bundle="collections"}}
 
-    <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
+    <div class="col-sm-6">
 
-    <div class="row">
-        <div class="col-sm-6">
-            {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
+        <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
 
-            {{{summary}}}
+        {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
 
-            {{{detail}}}
-        </div>
+        {{{summary}}}
 
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
+        {{{detail}}}
 
-            {{include "repl" samples=samples}}
-        </div>
+        <h3>On collections</h3>
+        <ul>
+            {{#each collections}}
+            {{#if implemented}}
+            <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+
     </div>
 
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Arguments</h3>
+    <div class="col-sm-6">
+        <h3 class="visible-xs">Examples</h3>
 
-            <ul>
-            {{#each names}}
-                <li>{{this}}</li>
-            {{else}}
-                <li>{{name}}</li>
-            {{/each}}
-            </ul>
+        {{include "repl" samples=samples}}
 
-            {{#if related.length }}
-            <h3>Related</h3>
-            {{#each see}}
-            <ul>
-                <li>
-                    <a href="{{ref}}">{{name}}</a>
-                    {{{summary}}}
-                </li>
-            </ul>
-            {{/each}}
-            {{/if}}
+        <h3>Usage</h3>
+        <ul>
+        {{#each names}}
+            <li>{{this}}</li>
+        {{else}}
+            <li>{{name}}</li>
+        {{/each}}
+        </ul>
 
-        </div>
+        {{#if see.length }}
+        <h3>Related</h3>
+        {{#each see}}
+        <ul>
+            <li>
+                <a href="{{ref}}">{{name}}</a>
+                {{{summary}}}
+            </li>
+        </ul>
+        {{/each}}
+        {{/if}}
 
-        <div class="col-sm-6 col-sm-pull-6">
-            <h3>On collections</h3>
-
-            <ul>
-                {{#each collections}}
-                {{#if implemented}}
-                <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
-                {{/if}}
-                {{/each}}
-            </ul>
-        </div>
     </div>
 
 {{/include}}

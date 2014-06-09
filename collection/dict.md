@@ -6,6 +6,8 @@ names:
 -   Dict()
 -   Dict(entries)
 -   Dict(map)
+-   Dict(entries, getDefault)
+-   Dict(map, getDefault)
 
 inherits:
 -   generic-collection
