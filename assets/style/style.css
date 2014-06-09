@@ -82,6 +82,11 @@ nav a:active {
 }
 
 /* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
+
+.twitter-typeahead {
+    width: 100%;
+}
+
 .tt-dropdown-menu {
     color: #000;
     background-color: #f5f5f5;
