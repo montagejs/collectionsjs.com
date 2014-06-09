@@ -44,8 +44,7 @@ methods:
 -   max
 -   one
 -   clear
--   iterate
--   iterate-start-end
+-   iterator
 -   sorted-set-summary
 -   sorted-set-log
 -   sorted-set-log-node

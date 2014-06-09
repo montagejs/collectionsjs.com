@@ -26,7 +26,7 @@ methods:
 -   clear
 -   reduce
 -   reduce-right
--   iterate
+-   iterator
 -   content-equals
 -   content-hash
 

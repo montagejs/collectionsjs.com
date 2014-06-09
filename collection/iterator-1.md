@@ -33,7 +33,6 @@ mixin:
 -   generic-collection/to-array
 -   generic-collection/to-object
 -   generic-collection/iterator
--   generic-collection/iterate
 
 methods:
 -   construct-clone

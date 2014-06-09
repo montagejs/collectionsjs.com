@@ -51,7 +51,6 @@ methods:
 -   equals
 -   construct-clone
 -   clone
--   iterate-start-end
 
 ---
 

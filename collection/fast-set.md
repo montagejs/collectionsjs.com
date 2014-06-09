@@ -21,7 +21,7 @@ methods:
 -   clear
 -   reduce
 -   one
--   iterate
+-   iterator
 -   construct-clone
 -   fast-set-log
 -   fast-set-log-node

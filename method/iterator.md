@@ -2,7 +2,11 @@
 
 version: v1
 
-name: iterator()
+name: iterate|iterator()
+
+names:
+-   iterator()
+-   iterate()
 
 see:
 -   iterate

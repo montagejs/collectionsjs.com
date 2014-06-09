@@ -39,7 +39,6 @@ methods:
 -   clear
 -   equals
 -   compare
--   iterate-start-end
 -   construct-clone
 -   content-equals
 -   content-compare

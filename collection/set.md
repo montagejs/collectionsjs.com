@@ -26,7 +26,7 @@ methods:
 -   clear
 -   reduce
 -   reduce-right
--   iterate
+-   iterator
 -   set-log
 -   make-observable
 -   construct-clone

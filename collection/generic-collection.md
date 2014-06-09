@@ -28,7 +28,6 @@ methods:
 -   reversed
 -   clone
 -   only
--   iterate
 -   iterator
 
 ---

@@ -42,7 +42,6 @@ methods:
 -   reduce-right
 -   update-indexes
 -   make-observable
--   iterate
 -   construct-clone
 
 todo:
