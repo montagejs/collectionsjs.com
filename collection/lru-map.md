@@ -23,6 +23,14 @@ methods:
 -   content-equals
 -   content-hash
 
+samples:
+- |
+    var lruMap = new LruMap({a: 1, b: 2, c: 3}, 3);
+    lruMap.get("a");
+    lruMap.get("c");
+    lruMap.set("d", 4);
+    lruMap.toObject();
+
 ---
 
 A map with a maximum capacity that will evict the least recently used entry.

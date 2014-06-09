@@ -21,6 +21,22 @@ methods:
 -   content-equals
 -   content-hash
 
+samples:
+- |
+    var map = new Map({a: 1, b: 2});
+    map.set("c", 3);
+    map.toObject();
+    var key = {x: "hello"};
+    map.set(key, 4);
+    map.get(key);
+    map.entries();
+- |
+    var defaultMap = new Map({a: 1}, null, null, function (key) {
+        return "default: " + key;
+    });
+    defaultMap.get("a");
+    defaultMap.get("missing");
+
 ---
 
 A map of *[key, value]* entries, where keys may be arbitrary values including
