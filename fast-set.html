@@ -30,7 +30,6 @@
 
     <div class="row">
         <div class="col-sm-6">
-
             <p>The backing store for <code>Set</code> and <code>FastMap</code>.</p>
 
 
@@ -41,40 +40,7 @@ The order of iteration is depth first through this structure, so not a faithful
 emulation of a proper ECMAScript 6 <code>Set</code> if there are hash collisions.</p>
 
 
-        </div>
-
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
-
-            
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Constructors</h3>
-
-            <ul>
-            
-                <li>FastSet(values)</li>
-            
-                <li>FastSet(values, equals, hash)</li>
-            
-                <li>FastSet(values, equals, hash, getDefault)</li>
-            
-            </ul>
-
-            <h3>Related</h3>
-
-            <ul>
-                <li><a href="#">Todo</a></li>
-            </ul>
-        </div>
-
-        <div class="col-sm-6 col-sm-pull-6">
             <h3>Methods</h3>
-
             <dl>
                 
                 <dt><a href="/method/union">union(values)</a></dt>
@@ -149,11 +115,11 @@ emulation of a proper ECMAScript 6 <code>Set</code> if there are hash collisions
                 <dd><p><p>Deletes all of the values in the collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterate">iterate()</a></dt>
+                <dt><a href="/method/iterator">iterator()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterator">iterator()</a></dt>
+                <dt><a href="/method/iterator">iterate()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
@@ -350,6 +316,25 @@ emulation of a proper ECMAScript 6 <code>Set</code> if there are hash collisions
 </p></dd>
                 
             </dl>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            
+
+            <h3>Usage</h3>
+            <ul>
+            
+                <li>FastSet(values)</li>
+            
+                <li>FastSet(values, equals, hash)</li>
+            
+                <li>FastSet(values, equals, hash, getDefault)</li>
+            
+            </ul>
+
+            
+
         </div>
     </div>
 

@@ -30,7 +30,6 @@
 
     <div class="row">
         <div class="col-sm-6">
-
             <p>A map of <em>[key, value]</em> entries, where keys may be arbitrary values including objects.</p>
 
 
@@ -43,42 +42,7 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
 <code>contentHash</code> overridden to only consider the <em>key</em>.</p>
 
 
-        </div>
-
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
-
-            
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Constructors</h3>
-
-            <ul>
-            
-                <li>Map()</li>
-            
-                <li>Map(values)</li>
-            
-                <li>Map(values, equals, hash)</li>
-            
-                <li>Map(values, equals, hash, getDefault)</li>
-            
-            </ul>
-
-            <h3>Related</h3>
-
-            <ul>
-                <li><a href="#">Todo</a></li>
-            </ul>
-        </div>
-
-        <div class="col-sm-6 col-sm-pull-6">
             <h3>Methods</h3>
-
             <dl>
                 
                 <dt><a href="/method/has-key">has(key)</a></dt>
@@ -157,11 +121,11 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
                 <dd><p><p>Deletes all of the values in the collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterate">iterate()</a></dt>
+                <dt><a href="/method/iterator">iterator()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterator">iterator()</a></dt>
+                <dt><a href="/method/iterator">iterate()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
@@ -366,6 +330,43 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
 </p></dd>
                 
             </dl>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            
+            <h3 class="visible-xs">Examples</h3>
+            <pre class="repl"><span class="repl-input">var map = new Map({a: 1, b: 2});</span>
+<span class="repl-input">map.set(&quot;c&quot;, 3);</span>
+<span class="repl-input">map.toObject();</span>
+<span class="repl-input">var key = {x: &quot;hello&quot;};</span>
+<span class="repl-input">map.set(key, 4);</span>
+<span class="repl-input">map.get(key);</span>
+<span class="repl-input">map.entries();</span>
+</pre><pre class="repl"><span class="repl-input">var defaultMap = new Map({a: 1}, null, null, function (key) {
+    return &quot;default: &quot; + key;
+});</span>
+<span class="repl-input">defaultMap.get(&quot;a&quot;);</span>
+<span class="repl-input">defaultMap.get(&quot;missing&quot;);</span>
+</pre>
+
+            
+
+            <h3>Usage</h3>
+            <ul>
+            
+                <li>Map()</li>
+            
+                <li>Map(values)</li>
+            
+                <li>Map(values, equals, hash)</li>
+            
+                <li>Map(values, equals, hash, getDefault)</li>
+            
+            </ul>
+
+            
+
         </div>
     </div>
 

@@ -698,9 +698,10 @@ module.exports={
         {
             "ref": "iterator",
             "type": "method",
-            "name": "iterator()",
+            "name": "iterate|iterator()",
             "searches": [
-                "iterator "
+                "iterator ",
+                "iterate "
             ],
             "summary": "<p>Iterates every value in this collection.</p>\n"
         },

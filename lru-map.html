@@ -30,7 +30,6 @@
 
     <div class="row">
         <div class="col-sm-6">
-
             <p>A map with a maximum capacity that will evict the least recently used entry.</p>
 
 
@@ -38,44 +37,7 @@
 <code>contentEquals</code> and <code>contentHash</code> overriden to only consider the <em>key</em>.</p>
 
 
-        </div>
-
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
-
-            
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Constructors</h3>
-
-            <ul>
-            
-                <li>LruMap()</li>
-            
-                <li>LruMap(values)</li>
-            
-                <li>LruMap(values, capacity)</li>
-            
-                <li>LruMap(values, capacity, equals, hash)</li>
-            
-                <li>LruMap(values, capacity, equals, hash, getDefault)</li>
-            
-            </ul>
-
-            <h3>Related</h3>
-
-            <ul>
-                <li><a href="#">Todo</a></li>
-            </ul>
-        </div>
-
-        <div class="col-sm-6 col-sm-pull-6">
             <h3>Methods</h3>
-
             <dl>
                 
                 <dt><a href="/method/has-key">has(key)</a></dt>
@@ -154,11 +116,11 @@
                 <dd><p><p>Deletes all of the values in the collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterate">iterate()</a></dt>
+                <dt><a href="/method/iterator">iterator()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterator">iterator()</a></dt>
+                <dt><a href="/method/iterator">iterate()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
@@ -363,6 +325,38 @@
 </p></dd>
                 
             </dl>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            
+            <h3 class="visible-xs">Examples</h3>
+            <pre class="repl"><span class="repl-input">var lruMap = new LruMap({a: 1, b: 2, c: 3}, 3);</span>
+<span class="repl-input">lruMap.get(&quot;a&quot;);</span>
+<span class="repl-input">lruMap.get(&quot;c&quot;);</span>
+<span class="repl-input">lruMap.set(&quot;d&quot;, 4);</span>
+<span class="repl-input">lruMap.toObject();</span>
+</pre>
+
+            
+
+            <h3>Usage</h3>
+            <ul>
+            
+                <li>LruMap()</li>
+            
+                <li>LruMap(values)</li>
+            
+                <li>LruMap(values, capacity)</li>
+            
+                <li>LruMap(values, capacity, equals, hash)</li>
+            
+                <li>LruMap(values, capacity, equals, hash, getDefault)</li>
+            
+            </ul>
+
+            
+
         </div>
     </div>
 

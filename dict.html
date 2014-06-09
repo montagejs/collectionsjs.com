@@ -30,7 +30,6 @@
 
     <div class="row">
         <div class="col-sm-6">
-
             <p>A mapping from string keys to values.</p>
 
 
@@ -61,45 +60,7 @@ expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abc
 </code></pre>
 
 
-        </div>
-
-        <div class="col-sm-6">
-            <h3 class="visible-xs">Examples</h3>
-
-            <pre class="repl"><span class="repl-input">var dict = new Dict(null, function (key) {
-    return this.get(key.slice(0, key.length - 1));
-});</span>
-<span class="repl-input">dict.set(&quot;a&quot;, 10);</span>
-<span class="repl-input">dict.get(&quot;abcdefg&quot;)</span>
-</pre>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 col-sm-push-6">
-            <h3>Constructors</h3>
-
-            <ul>
-            
-                <li>Dict()</li>
-            
-                <li>Dict(entries)</li>
-            
-                <li>Dict(map)</li>
-            
-            </ul>
-
-            <h3>Related</h3>
-
-            <ul>
-                <li><a href="#">Todo</a></li>
-            </ul>
-        </div>
-
-        <div class="col-sm-6 col-sm-pull-6">
             <h3>Methods</h3>
-
             <dl>
                 
                 <dt><a href="/method/has-key">has(key)</a></dt>
@@ -178,11 +139,11 @@ expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abc
                 <dd><p><p>Deletes all of the values in the collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterate">iterate()</a></dt>
+                <dt><a href="/method/iterator">iterator()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
-                <dt><a href="/method/iterator">iterator()</a></dt>
+                <dt><a href="/method/iterator">iterate()</a></dt>
                 <dd><p><p>Iterates every value in this collection.</p>
 </p></dd>
                 
@@ -383,6 +344,38 @@ expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abc
 </p></dd>
                 
             </dl>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            
+            <h3 class="visible-xs">Examples</h3>
+            <pre class="repl"><span class="repl-input">var dict = new Dict({a: 1}, function (key) {
+    return &quot;default: &quot; + key;
+});</span>
+<span class="repl-input">dict.get(&quot;a&quot;);</span>
+<span class="repl-input">dict.get(&quot;b&quot;);</span>
+</pre>
+
+            
+
+            <h3>Usage</h3>
+            <ul>
+            
+                <li>Dict()</li>
+            
+                <li>Dict(entries)</li>
+            
+                <li>Dict(map)</li>
+            
+                <li>Dict(entries, getDefault)</li>
+            
+                <li>Dict(map, getDefault)</li>
+            
+            </ul>
+
+            
+
         </div>
     </div>
 

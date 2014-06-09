@@ -43,10 +43,34 @@ global = this;
     Module.prototype.bundle = bundle;
 
     return modules[0].getExports();
-})((function (global){return[["collections-website","lib/collections",{"./repl":19},function (require, exports, module){
+})((function (global){return[["collections-website","lib/collections",{"collections/shim-object":26,"collections/shim-array":24,"collections/list":13,"collections/map":20,"collections/fast-map":3,"collections/lru-map":18,"collections/lfu-map":11,"collections/sorted-map":31,"collections/sorted-array-map":29,"collections/dict":2,"collections/multi-map":21,"collections/weak-map":35,"collections/deque":1,"collections/set":22,"collections/fast-set":4,"collections/lru-set":19,"collections/lfu-set":12,"collections/sorted-set":32,"collections/sorted-array-set":30,"collections/sorted-array":28,"collections/heap":9,"collections/iterator":10,"./repl":34},function (require, exports, module){
 
 // collections-website lib/collections
 // -----------------------------------
+
+require("collections/shim-object");
+require("collections/shim-array");
+
+window.List = require("collections/list");
+window.Map = require("collections/map");
+window.FastMap = require("collections/fast-map");
+window.LruMap = require("collections/lru-map");
+window.LfuMap = require("collections/lfu-map");
+window.SortedMap = require("collections/sorted-map");
+window.SortedArrayMap = require("collections/sorted-array-map");
+window.Dict = require("collections/dict");
+window.MultiMap = require("collections/multi-map");
+window.WeakMap = require("collections/weak-map");
+window.Deque = require("collections/deque");
+window.Set = require("collections/set");
+window.FastSet = require("collections/fast-set");
+window.LruSet = require("collections/lru-set");
+window.LfuSet = require("collections/lfu-set");
+window.SortedSet = require("collections/sorted-set");
+window.SortedArraySet = require("collections/sorted-array-set");
+window.SortedArray = require("collections/sorted-array");
+window.Heap = require("collections/heap");
+window.Iterator = require("collections/iterator");
 
 
 var repl = require("./repl");
@@ -55,8 +79,455 @@ var repls = document.querySelectorAll(".repl");
 for (var i = 0; i < repls.length; i++) {
     repl(repls[i]);
 }
+}],["collections","deque",{"./shim-object":26,"./generic-collection":5,"./generic-order":7,"./listen/range-changes":17},function (require, exports, module){
 
-}],["collections","dict",{"./shim":13,"./generic-collection":3,"./generic-map":4,"./listen/property-changes":9,"dict":1},function (require, exports, module){
+// collections deque
+// -----------------
+
+"use strict";
+
+require("./shim-object");
+var GenericCollection = require("./generic-collection");
+var GenericOrder = require("./generic-order");
+var GenericOrder = require("./generic-order");
+var RangeChanges = require("./listen/range-changes");
+
+// by Petka Antonov
+// https://github.com/petkaantonov/deque/blob/master/js/deque.js
+// Deque specifically uses
+// http://en.wikipedia.org/wiki/Circular_buffer#Use_a_Fill_Count
+// 1. Incrementally maintained length
+// 2. Modulus avoided by using only powers of two for the capacity
+
+module.exports = Deque;
+function Deque(values, capacity) {
+    if (!(this instanceof Deque)) {
+        return new Deque(values, capacity);
+    }
+    this.capacity = this.snap(capacity);
+    this.init();
+    this.length = 0;
+    this.front = 0;
+    this.addEach(values);
+}
+
+Object.addEach(Deque.prototype, GenericCollection.prototype);
+Object.addEach(Deque.prototype, GenericOrder.prototype);
+Object.addEach(Deque.prototype, RangeChanges.prototype);
+
+Deque.prototype.maxCapacity = (1 << 30) | 0;
+Deque.prototype.minCapacity = 16;
+
+Deque.prototype.constructClone = function (values) {
+    return new this.constructor(values, this.capacity)
+};
+
+Deque.prototype.add = function (value) {
+    this.push(value);
+};
+
+Deque.prototype.push = function (value /* or ...values */) {
+    var argsLength = arguments.length;
+    var length = this.length;
+
+    if (this.dispatchesRangeChanges) {
+        var plus = new Array(argsLength);
+        for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
+            plus[argIndex] = arguments[argIndex];
+        }
+        var minus = [];
+        this.dispatchBeforeRangeChange(plus, minus, length);
+    }
+
+    if (argsLength > 1) {
+        var capacity = this.capacity;
+        if (length + argsLength > capacity) {
+            for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
+                this.ensureCapacity(length + 1);
+                var j = (this.front + length) & (this.capacity - 1);
+                this[j] = arguments[argIndex];
+                length++;
+                this.length = length;
+            }
+        }
+        else {
+            var j = this.front;
+            for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
+                this[(j + length) & (capacity - 1)] = arguments[argIndex];
+                j++;
+            }
+            this.length = length + argsLength;
+        }
+
+    } else if (argsLength === 1) {
+        this.ensureCapacity(length + 1);
+        var index = (this.front + length) & (this.capacity - 1);
+        this[index] = value;
+        this.length = length + 1;
+    }
+
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange(plus, minus, length);
+    }
+
+    return this.length;
+};
+
+Deque.prototype.pop = function () {
+    var length = this.length;
+    if (length === 0) {
+        return;
+    }
+    var index = (this.front + length - 1) & (this.capacity - 1);
+    var result = this[index];
+
+    if (this.dispatchesRangeChanges) {
+        this.dispatchBeforeRangeChange([], [result], length - 1);
+    }
+
+    this[index] = void 0;
+    this.length = length - 1;
+
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], [result], length - 1);
+    }
+
+    return result;
+};
+
+Deque.prototype.shift = function () {
+    if (this.length !== 0) {
+        var front = this.front;
+        var result = this[front];
+
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([], [result], 0);
+        }
+
+        this[front] = void 0;
+        this.front = (front + 1) & (this.capacity - 1);
+        this.length--;
+
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([], [result], 0);
+        }
+
+        return result;
+    }
+};
+
+Deque.prototype.unshift = function (value /* or ...values */) {
+    var length = this.length;
+    var argsLength = arguments.length;
+
+    if (this.dispatchesRangeChanges) {
+        var plus = new Array(argsLength);
+        for (var argIndex = 0; argIndex < argsLength; ++argIndex) {
+            plus[argIndex] = arguments[argIndex];
+        }
+        var minus = [];
+        this.dispatchBeforeRangeChange(plus, minus, 0);
+    }
+
+    if (argsLength > 1) {
+        var capacity = this.capacity;
+        if (length + argsLength > capacity) {
+            for (var argIndex = argsLength - 1; argIndex >= 0; argIndex--) {
+                this.ensureCapacity(length + 1);
+                var capacity = this.capacity;
+                var index = (
+                    (
+                        (
+                            ( this.front - 1 ) &
+                            ( capacity - 1)
+                        ) ^ capacity
+                    ) - capacity
+                );
+                this[index] = arguments[argIndex];
+                length++;
+                this.front = index;
+                this.length = length;
+            }
+        } else {
+            var front = this.front;
+            for (var argIndex = argsLength - 1; argIndex >= 0; argIndex--) {
+                var index = (
+                    (
+                        (
+                            (front - 1) &
+                            (capacity - 1)
+                        ) ^ capacity
+                    ) - capacity
+                );
+                this[index] = arguments[argIndex];
+                front = index;
+            }
+            this.front = front;
+            this.length = length + argsLength;
+        }
+    } else if (argsLength === 1) {
+        this.ensureCapacity(length + 1);
+        var capacity = this.capacity;
+        var index = (
+            (
+                (
+                    (this.front - 1) &
+                    (capacity - 1)
+                ) ^ capacity
+            ) - capacity
+        );
+        this[index] = value;
+        this.length = length + 1;
+        this.front = index;
+    }
+
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange(plus, minus, 0);
+    }
+
+    return this.length;
+};
+
+Deque.prototype.clear = function () {
+    this.length = 0;
+    this.front = 0;
+    this.init();
+};
+
+Deque.prototype.ensureCapacity = function (capacity) {
+    if (this.capacity < capacity) {
+        this.grow(this.snap(this.capacity * 1.5 + 16));
+    }
+};
+
+Deque.prototype.grow = function (capacity) {
+    var oldFront = this.front;
+    var oldCapacity = this.capacity;
+    var oldContent = new Array(oldCapacity);
+    var length = this.length;
+
+    copy(this, 0, oldContent, 0, oldCapacity);
+    this.capacity = capacity;
+    this.init();
+    this.front = 0;
+    if (oldFront + length <= oldCapacity) {
+        // Can perform direct linear copy.
+        copy(oldContent, oldFront, this, 0, length);
+    } else {
+        // Cannot perform copy directly, perform as much as possible at the
+        // end, and then copy the rest to the beginning of the buffer.
+        var lengthBeforeWrapping = length - ((oldFront + length) & (oldCapacity - 1));
+        copy(oldContent, oldFront, this, 0, lengthBeforeWrapping);
+        copy(oldContent, 0, this, lengthBeforeWrapping, length - lengthBeforeWrapping);
+    }
+};
+
+Deque.prototype.init = function () {
+    for (var index = 0; index < this.capacity; ++index) {
+        this[index] = "nil"; // TODO void 0
+    }
+};
+
+Deque.prototype.snap = function (capacity) {
+    if (typeof capacity !== "number") {
+        return this.minCapacity;
+    }
+    return pow2AtLeast(
+        Math.min(this.maxCapacity, Math.max(this.minCapacity, capacity))
+    );
+};
+
+Deque.prototype.one = function () {
+    if (this.length > 0) {
+        return this[this.front];
+    }
+};
+
+Deque.prototype.peek = function () {
+    if (this.length === 0) {
+        return;
+    }
+    return this[this.front];
+};
+
+Deque.prototype.poke = function (value) {
+    if (this.length === 0) {
+        return;
+    }
+    this[this.front] = value;
+};
+
+Deque.prototype.peekBack = function () {
+    var length = this.length;
+    if (length === 0) {
+        return;
+    }
+    var index = (this.front + length - 1) & (this.capacity - 1);
+    return this[index];
+};
+
+Deque.prototype.pokeBack = function (value) {
+    var length = this.length;
+    if (length === 0) {
+        return;
+    }
+    var index = (this.front + length - 1) & (this.capacity - 1);
+    this[index] = value;
+};
+
+Deque.prototype.get = function (index) {
+    // Domain only includes integers
+    if (index !== (index | 0)) {
+        return;
+    }
+    // Support negative indicies
+    if (index < 0) {
+        index = index + this.length;
+    }
+    // Out of bounds
+    if (index < 0 || index >= this.length) {
+        return;
+    }
+    return this[(this.front + index) & (this.capacity - 1)];
+};
+
+Deque.prototype.indexOf = function (value, index) {
+    // Default start index at beginning
+    if (index == null) {
+        index = 0;
+    }
+    // Support negative indicies
+    if (index < 0) {
+        index = index + this.length;
+    }
+    // Left to right walk
+    var mask = this.capacity - 1;
+    for (; index < this.length; index++) {
+        var offset = (this.front + index) & mask;
+        if (this[offset] === value) {
+            return index;
+        }
+    }
+    return -1;
+};
+
+Deque.prototype.lastIndexOf = function (value, index) {
+    // Default start position at the end
+    if (index == null) {
+        index = this.length - 1;
+    }
+    // Support negative indicies
+    if (index < 0) {
+        index = index + this.length;
+    }
+    // Right to left walk
+    var mask = this.capacity - 1;
+    for (; index >= 0; index--) {
+        var offset = (this.front + index) & mask;
+        if (this[offset] === value) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+// TODO rename findValue
+Deque.prototype.find = function (value, equals, index) {
+    equals = equals || Object.equals;
+    // Default start index at beginning
+    if (index == null) {
+        index = 0;
+    }
+    // Support negative indicies
+    if (index < 0) {
+        index = index + this.length;
+    }
+    // Left to right walk
+    var mask = this.capacity - 1;
+    for (; index < this.length; index++) {
+        var offset = (this.front + index) & mask;
+        if (equals(value, this[offset])) {
+            return index;
+        }
+    }
+    return -1;
+};
+
+// TODO rename findLastValue
+Deque.prototype.findLast = function (value, equals, index) {
+    equals = equals || Object.equals;
+    // Default start position at the end
+    if (index == null) {
+        index = this.length - 1;
+    }
+    // Support negative indicies
+    if (index < 0) {
+        index = index + this.length;
+    }
+    // Right to left walk
+    var mask = this.capacity - 1;
+    for (; index >= 0; index--) {
+        var offset = (this.front + index) & mask;
+        if (equals(value, this[offset])) {
+            return index;
+        }
+    }
+    return -1;
+};
+
+Deque.prototype.has = function (value, equals) {
+    equals = equals || Object.equals;
+    // Left to right walk
+    var mask = this.capacity - 1;
+    for (var index = 0; index < this.length; index++) {
+        var offset = (this.front + index) & mask;
+        if (this[offset] === value) {
+            return true;
+        }
+    }
+    return false;
+};
+
+Deque.prototype.reduce = function (callback, basis /*, thisp*/) {
+    // TODO account for missing basis argument
+    var thisp = arguments[2];
+    var mask = this.capacity - 1;
+    for (var index = 0; index < this.length; index++) {
+        var offset = (this.front + index) & mask;
+        basis = callback.call(thisp, basis, this[offset], index, this);
+    }
+    return basis;
+};
+
+Deque.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    // TODO account for missing basis argument
+    var thisp = arguments[2];
+    var mask = this.capacity - 1;
+    for (var index = this.length - 1; index >= 0; index--) {
+        var offset = (this.front + index) & mask;
+        basis = callback.call(thisp, basis, this[offset], index, this);
+    }
+    return basis;
+};
+
+function copy(source, sourceIndex, target, targetIndex, length) {
+    for (var index = 0; index < length; ++index) {
+        target[index + targetIndex] = source[index + sourceIndex];
+    }
+}
+
+function pow2AtLeast(n) {
+    n = n >>> 0;
+    n = n - 1;
+    n = n | (n >> 1);
+    n = n | (n >> 2);
+    n = n | (n >> 4);
+    n = n | (n >> 8);
+    n = n | (n >> 16);
+    return n + 1;
+}
+
+}],["collections","dict",{"./shim":23,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"dict":2},function (require, exports, module){
 
 // collections dict
 // ----------------
@@ -203,7 +674,69 @@ Dict.prototype.one = function () {
     }
 };
 
-}],["collections","fast-set",{"./shim":13,"./dict":1,"./list":7,"./generic-collection":3,"./generic-set":6,"./tree-log":18,"./listen/property-changes":9,"fast-set":2},function (require, exports, module){
+}],["collections","fast-map",{"./shim":23,"./fast-set":4,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"fast-map":3},function (require, exports, module){
+
+// collections fast-map
+// --------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var Set = require("./fast-set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = FastMap;
+
+function FastMap(values, equals, hash, getDefault) {
+    if (!(this instanceof FastMap)) {
+        return new FastMap(values, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.store = new Set(
+        undefined,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function keyHash(item) {
+            return hash(item.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+FastMap.FastMap = FastMap; // hack so require("fast-map").FastMap will work in MontageJS
+
+Object.addEach(FastMap.prototype, GenericCollection.prototype);
+Object.addEach(FastMap.prototype, GenericMap.prototype);
+Object.addEach(FastMap.prototype, PropertyChanges.prototype);
+
+FastMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+FastMap.prototype.log = function (charmap, stringify) {
+    stringify = stringify || this.stringify;
+    this.store.log(charmap, stringify);
+};
+
+FastMap.prototype.stringify = function (item, leader) {
+    return leader + JSON.stringify(item.key) + ": " + JSON.stringify(item.value);
+}
+
+}],["collections","fast-set",{"./shim":23,"./dict":2,"./list":13,"./generic-collection":5,"./generic-set":8,"./tree-log":33,"./listen/property-changes":16,"fast-set":4},function (require, exports, module){
 
 // collections fast-set
 // --------------------
@@ -397,7 +930,7 @@ FastSet.prototype.logNode = function (node, write) {
     }
 };
 
-}],["collections","generic-collection",{"./shim-array":14},function (require, exports, module){
+}],["collections","generic-collection",{"./shim-array":24},function (require, exports, module){
 
 // collections generic-collection
 // ------------------------------
@@ -663,7 +1196,7 @@ GenericCollection.prototype.iterator = function () {
 
 require("./shim-array");
 
-}],["collections","generic-map",{"./shim-object":16,"./listen/map-changes":8,"./listen/property-changes":9},function (require, exports, module){
+}],["collections","generic-map",{"./shim-object":26,"./listen/map-changes":15,"./listen/property-changes":16},function (require, exports, module){
 
 // collections generic-map
 // -----------------------
@@ -854,7 +1387,7 @@ Item.prototype.compare = function (that) {
     return Object.compare(this.key, that.key);
 };
 
-}],["collections","generic-order",{"./shim-object":16},function (require, exports, module){
+}],["collections","generic-order",{"./shim-object":26},function (require, exports, module){
 
 // collections generic-order
 // -------------------------
@@ -980,7 +1513,961 @@ GenericSet.prototype.toggle = function (value) {
     }
 };
 
-}],["collections","list",{"./shim":13,"./generic-collection":3,"./generic-order":5,"./listen/property-changes":9,"./listen/range-changes":10,"list":7},function (require, exports, module){
+}],["collections","heap",{"./listen/array-changes":14,"./shim":23,"./generic-collection":5,"./listen/map-changes":15,"./listen/range-changes":17,"./listen/property-changes":16,"heap":9},function (require, exports, module){
+
+// collections heap
+// ----------------
+
+
+// Adapted from Eloquent JavaScript by Marijn Haverbeke
+// http://eloquentjavascript.net/appendix2.html
+
+var ArrayChanges = require("./listen/array-changes");
+var Shim = require("./shim");
+var GenericCollection = require("./generic-collection");
+var MapChanges = require("./listen/map-changes");
+var RangeChanges = require("./listen/range-changes");
+var PropertyChanges = require("./listen/property-changes");
+
+// Max Heap by default.  Comparison can be reversed to produce a Min Heap.
+
+module.exports = Heap;
+
+function Heap(values, equals, compare) {
+    if (!(this instanceof Heap)) {
+        return new Heap(values, equals, compare);
+    }
+    this.contentEquals = equals || Object.equals;
+    this.contentCompare = compare || Object.compare;
+    this.content = [];
+    this.length = 0;
+    this.addEach(values);
+}
+
+Heap.Heap = Heap; // hack so require("heap").Heap will work in MontageJS
+
+Object.addEach(Heap.prototype, GenericCollection.prototype);
+Object.addEach(Heap.prototype, PropertyChanges.prototype);
+Object.addEach(Heap.prototype, RangeChanges.prototype);
+Object.addEach(Heap.prototype, MapChanges.prototype);
+
+Heap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentCompare
+    );
+};
+
+Heap.prototype.push = function (value) {
+    this.content.push(value);
+    this.float(this.content.length - 1);
+    this.length++;
+};
+
+Heap.prototype.pop = function () {
+    // Store the first value so we can return it later.  This will leave a gap
+    // at index 0 that must be filled.
+    var result = this.content[0];
+    // Remove the value at the end of the array.  The value most be removed
+    // from the end to preserve the completness of the tree, despite that the
+    // last child is also among the most likely to need to sink back to the
+    // bottom.
+    var top = this.content.pop();
+    // If there are any values remaining, put the last value on the top and
+    // let it sink back down.
+    if (this.content.length > 0) {
+        this.content.set(0, top);
+        this.sink(0);
+    }
+    this.length--;
+    return result;
+};
+
+Heap.prototype.add = function (value) {
+    this.push(value);
+};
+
+// indexOf must do a linear search since a binary heap does not preserve a
+// strict sort order.  Thus, deletion takes linear time for all values except
+// for the max value.
+
+Heap.prototype.indexOf = function (value) {
+    for (var index = 0; index < this.length; index++) {
+        if (this.contentEquals(this.content[index], value)) {
+            return index;
+        }
+    }
+    return -1;
+};
+
+Heap.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("Heap#delete does not support second argument: equals");
+    }
+    var index = this.indexOf(value);
+    if (index === -1)
+        return false;
+    var top = this.content.pop();
+    this.length = this.content.length;
+    if (index === this.content.length)
+        return true;
+    this.content.set(index, top);
+    var comparison = this.contentCompare(top, value);
+    if (comparison > 0) {
+        this.float(index);
+    } else if (comparison < 0) {
+        this.sink(index);
+    }
+    return true;
+};
+
+Heap.prototype.peek = function () {
+    if (this.length) {
+        return this.content[0];
+    }
+};
+
+Heap.prototype.max = function () {
+    return this.peek();
+};
+
+Heap.prototype.one = function () {
+    return this.peek();
+};
+
+// Brings a value up until its parent is greater than it
+Heap.prototype.float = function (index) {
+    // Grab the value that is being adjusted
+    var value = this.content[index];
+    // A value can go no higher that the top: index 0
+    while (index > 0) {
+        // Compute the parent value's index and fetch it
+        var parentIndex = Math.floor((index + 1) / 2) - 1;
+        var parent = this.content[parentIndex];
+        // If the parent is less than it
+        if (this.contentCompare(parent, value) < 0) {
+            this.content.set(parentIndex, value);
+            this.content.set(index, parent);
+        } else {
+            // Stop propagating if the parent is greater than the value.
+            break;
+        }
+        // Proceed upward
+        index = parentIndex;
+    }
+};
+
+// Brings a value down until its children are both less than it
+Heap.prototype.sink = function (index) {
+    // Moves a value downward until it is greater than its children.
+    var length = this.content.length;
+    var value = this.content[index];
+    var left, right, leftIndex, rightIndex, swapIndex, needsSwap;
+
+    while (true) {
+        // Invariant: the value is at index.
+        // Variant: the index proceedes down the tree.
+
+        // Compute the indicies of the children.
+        rightIndex = (index + 1) * 2;
+        leftIndex = rightIndex - 1;
+
+        // If the left child exists, determine whether it is greater than the
+        // parent (value) and thus whether it can be floated upward.
+        needsSwap = false;
+        if (leftIndex < length) {
+            // Look it up and compare it.
+            var left = this.content[leftIndex];
+            var comparison = this.contentCompare(left, value);
+            // If the child is greater than the parent, it can be floated.
+            if (comparison > 0) {
+                swapIndex = leftIndex;
+                needsSwap = true;
+            }
+        }
+
+        // If the right child exists, determine whether it is greater than the
+        // parent (value), or even greater than the left child.
+        if (rightIndex < length) {
+            var right = this.content[rightIndex];
+            var comparison = this.contentCompare(right, needsSwap ? left : value);
+            if (comparison > 0) {
+                swapIndex = rightIndex;
+                needsSwap = true;
+            }
+        }
+
+        // if there is a child that is less than the value, float the child and
+        // sink the value.
+        if (needsSwap) {
+            this.content.set(index, this.content[swapIndex]);
+            this.content.set(swapIndex, value);
+            index = swapIndex;
+            // and continue sinking
+        } else {
+            // if the children are both less than the value
+            break;
+        }
+
+    }
+
+};
+
+Heap.prototype.clear = function () {
+    this.content.clear();
+    this.length = 0;
+};
+
+Heap.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    return this.content.reduce(function (basis, value, key) {
+        return callback.call(thisp, basis, value, key, this);
+    }, basis, this);
+};
+
+Heap.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    return this.content.reduceRight(function (basis, value, key) {
+        return callback.call(thisp, basis, value, key, this);
+    }, basis, this);
+};
+
+Heap.prototype.makeObservable = function () {
+    // TODO refactor dispatchers to allow direct forwarding
+    this.content.addRangeChangeListener(this, "content");
+    this.content.addBeforeRangeChangeListener(this, "content");
+    this.content.addMapChangeListener(this, "content");
+    this.content.addBeforeMapChangeListener(this, "content");
+};
+
+Heap.prototype.handleContentRangeChange = function (plus, minus, index) {
+    this.dispatchRangeChange(plus, minus, index);
+};
+
+Heap.prototype.handleContentRangeWillChange = function (plus, minus, index) {
+    this.dispatchBeforeRangeChange(plus, minus, index);
+};
+
+Heap.prototype.handleContentMapChange = function (value, key) {
+    this.dispatchMapChange(key, value);
+};
+
+Heap.prototype.handleContentMapWillChange = function (value, key) {
+    this.dispatchBeforeMapChange(key, value);
+};
+}],["collections","iterator",{"./shim-object":26,"./generic-collection":5},function (require, exports, module){
+
+// collections iterator
+// --------------------
+
+"use strict";
+
+module.exports = Iterator;
+
+var Object = require("./shim-object");
+var GenericCollection = require("./generic-collection");
+
+// upgrades an iterable to a Iterator
+function Iterator(iterable) {
+
+    if (!(this instanceof Iterator)) {
+        return new Iterator(iterable);
+    }
+
+    if (Array.isArray(iterable) || typeof iterable === "string")
+        return Iterator.iterate(iterable);
+
+    iterable = Object(iterable);
+
+    if (iterable instanceof Iterator) {
+        return iterable;
+    } else if (iterable.next) {
+        this.next = function () {
+            return iterable.next();
+        };
+    } else if (iterable.iterate) {
+        var iterator = iterable.iterate();
+        this.next = function () {
+            return iterator.next();
+        };
+    } else if (Object.prototype.toString.call(iterable) === "[object Function]") {
+        this.next = iterable;
+    } else {
+        throw new TypeError("Can't iterate " + iterable);
+    }
+
+}
+
+Iterator.prototype.forEach = GenericCollection.prototype.forEach;
+Iterator.prototype.map = GenericCollection.prototype.map;
+Iterator.prototype.filter = GenericCollection.prototype.filter;
+Iterator.prototype.every = GenericCollection.prototype.every;
+Iterator.prototype.some = GenericCollection.prototype.some;
+Iterator.prototype.any = GenericCollection.prototype.any;
+Iterator.prototype.all = GenericCollection.prototype.all;
+Iterator.prototype.min = GenericCollection.prototype.min;
+Iterator.prototype.max = GenericCollection.prototype.max;
+Iterator.prototype.sum = GenericCollection.prototype.sum;
+Iterator.prototype.average = GenericCollection.prototype.average;
+Iterator.prototype.flatten = GenericCollection.prototype.flatten;
+Iterator.prototype.zip = GenericCollection.prototype.zip;
+Iterator.prototype.enumerate = GenericCollection.prototype.enumerate;
+Iterator.prototype.sorted = GenericCollection.prototype.sorted;
+Iterator.prototype.group = GenericCollection.prototype.group;
+Iterator.prototype.reversed = GenericCollection.prototype.reversed;
+Iterator.prototype.toArray = GenericCollection.prototype.toArray;
+Iterator.prototype.toObject = GenericCollection.prototype.toObject;
+Iterator.prototype.iterator = GenericCollection.prototype.iterator;
+
+// this is a bit of a cheat so flatten and such work with the generic
+// reducible
+Iterator.prototype.constructClone = function (values) {
+    var clone = [];
+    clone.addEach(values);
+    return clone;
+};
+
+Iterator.prototype.mapIterator = function (callback /*, thisp*/) {
+    var self = Iterator(this),
+        thisp = arguments[1],
+        i = 0;
+
+    if (Object.prototype.toString.call(callback) != "[object Function]")
+        throw new TypeError();
+
+    return new self.constructor(function () {
+        return callback.call(thisp, self.next(), i++, self);
+    });
+};
+
+Iterator.prototype.filterIterator = function (callback /*, thisp*/) {
+    var self = Iterator(this),
+        thisp = arguments[1],
+        i = 0;
+
+    if (Object.prototype.toString.call(callback) != "[object Function]")
+        throw new TypeError();
+
+    return new self.constructor(function () {
+        var value;
+        while (true) {
+            value = self.next();
+            if (callback.call(thisp, value, i++, self))
+                return value;
+        }
+    });
+};
+
+Iterator.prototype.reduce = function (callback /*, initial, thisp*/) {
+    var self = Iterator(this),
+        result = arguments[1],
+        thisp = arguments[2],
+        i = 0,
+        value;
+
+    if (Object.prototype.toString.call(callback) != "[object Function]")
+        throw new TypeError();
+
+    // first iteration unrolled
+    try {
+        value = self.next();
+        if (arguments.length > 1) {
+            result = callback.call(thisp, result, value, i, self);
+        } else {
+            result = value;
+        }
+        i++;
+    } catch (exception) {
+        if (isStopIteration(exception)) {
+            if (arguments.length > 1) {
+                return arguments[1]; // initial
+            } else {
+                throw TypeError("cannot reduce a value from an empty iterator with no initial value");
+            }
+        } else {
+            throw exception;
+        }
+    }
+
+    // remaining entries
+    try {
+        while (true) {
+            value = self.next();
+            result = callback.call(thisp, result, value, i, self);
+            i++;
+        }
+    } catch (exception) {
+        if (isStopIteration(exception)) {
+            return result;
+        } else {
+            throw exception;
+        }
+    }
+
+};
+
+Iterator.prototype.concat = function () {
+    return Iterator.concat(
+        Array.prototype.concat.apply(this, arguments)
+    );
+};
+
+Iterator.prototype.dropWhile = function (callback /*, thisp */) {
+    var self = Iterator(this),
+        thisp = arguments[1],
+        stopped = false,
+        stopValue;
+
+    if (Object.prototype.toString.call(callback) != "[object Function]")
+        throw new TypeError();
+
+    self.forEach(function (value, i) {
+        if (!callback.call(thisp, value, i, self)) {
+            stopped = true;
+            stopValue = value;
+            throw StopIteration;
+        }
+    });
+
+    if (stopped) {
+        return self.constructor([stopValue]).concat(self);
+    } else {
+        return self.constructor([]);
+    }
+};
+
+Iterator.prototype.takeWhile = function (callback /*, thisp*/) {
+    var self = Iterator(this),
+        thisp = arguments[1];
+
+    if (Object.prototype.toString.call(callback) != "[object Function]")
+        throw new TypeError();
+
+    return self.mapIterator(function (value, i) {
+        if (!callback.call(thisp, value, i, self))
+            throw StopIteration;
+        return value;
+    });
+};
+
+Iterator.prototype.zipIterator = function () {
+    return Iterator.unzip(
+        Array.prototype.concat.apply(this, arguments)
+    );
+};
+
+Iterator.prototype.enumerateIterator = function (start) {
+    return Iterator.count(start).zipIterator(this);
+};
+
+// creates an iterator for Array and String
+Iterator.iterate = function (iterable) {
+    var start;
+    start = 0;
+    return new Iterator(function () {
+        // advance to next owned entry
+        if (typeof iterable === "object") {
+            while (!(start in iterable)) {
+                // deliberately late bound
+                if (start >= iterable.length)
+                    throw StopIteration;
+                start += 1;
+            }
+        } else if (start >= iterable.length) {
+            throw StopIteration;
+        }
+        var result = iterable[start];
+        start += 1;
+        return result;
+    });
+};
+
+Iterator.cycle = function (cycle, times) {
+    if (arguments.length < 2)
+        times = Infinity;
+    //cycle = Iterator(cycle).toArray();
+    var next = function () {
+        throw StopIteration;
+    };
+    return new Iterator(function () {
+        var iteration;
+        try {
+            return next();
+        } catch (exception) {
+            if (isStopIteration(exception)) {
+                if (times <= 0)
+                    throw exception;
+                times--;
+                iteration = Iterator.iterate(cycle);
+                next = iteration.next.bind(iteration);
+                return next();
+            } else {
+                throw exception;
+            }
+        }
+    });
+};
+
+Iterator.concat = function (iterators) {
+    iterators = Iterator(iterators);
+    var next = function () {
+        throw StopIteration;
+    };
+    return new Iterator(function (){
+        var iteration;
+        try {
+            return next();
+        } catch (exception) {
+            if (isStopIteration(exception)) {
+                iteration = Iterator(iterators.next());
+                next = iteration.next.bind(iteration);
+                return next();
+            } else {
+                throw exception;
+            }
+        }
+    });
+};
+
+Iterator.unzip = function (iterators) {
+    iterators = Iterator(iterators).map(Iterator);
+    if (iterators.length === 0)
+        return new Iterator([]);
+    return new Iterator(function () {
+        var stopped;
+        var result = iterators.map(function (iterator) {
+            try {
+                return iterator.next();
+            } catch (exception) {
+                if (isStopIteration(exception)) {
+                    stopped = true;
+                } else {
+                    throw exception;
+                }
+            }
+        });
+        if (stopped) {
+            throw StopIteration;
+        }
+        return result;
+    });
+};
+
+Iterator.zip = function () {
+    return Iterator.unzip(
+        Array.prototype.slice.call(arguments)
+    );
+};
+
+Iterator.chain = function () {
+    return Iterator.concat(
+        Array.prototype.slice.call(arguments)
+    );
+};
+
+Iterator.range = function (start, stop, step) {
+    if (arguments.length < 3) {
+        step = 1;
+    }
+    if (arguments.length < 2) {
+        stop = start;
+        start = 0;
+    }
+    start = start || 0;
+    step = step || 1;
+    return new Iterator(function () {
+        if (start >= stop)
+            throw StopIteration;
+        var result = start;
+        start += step;
+        return result;
+    });
+};
+
+Iterator.count = function (start, step) {
+    return Iterator.range(start, Infinity, step);
+};
+
+Iterator.repeat = function (value, times) {
+    return new Iterator.range(times).mapIterator(function () {
+        return value;
+    });
+};
+
+// shim isStopIteration
+if (typeof isStopIteration === "undefined") {
+    global.isStopIteration = function (exception) {
+        return Object.prototype.toString.call(exception) === "[object StopIteration]";
+    };
+}
+
+// shim StopIteration
+if (typeof StopIteration === "undefined") {
+    global.StopIteration = {};
+    Object.prototype.toString = (function (toString) {
+        return function () {
+            if (
+                this === global.StopIteration ||
+                this instanceof global.ReturnValue
+            )
+                return "[object StopIteration]";
+            else
+                return toString.call(this, arguments);
+        };
+    })(Object.prototype.toString);
+}
+
+// shim ReturnValue
+if (typeof ReturnValue === "undefined") {
+    global.ReturnValue = function ReturnValue(value) {
+        this.message = "Iteration stopped with " + value;
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, ReturnValue);
+        }
+        if (!(this instanceof global.ReturnValue))
+            return new global.ReturnValue(value);
+        this.value = value;
+    };
+    ReturnValue.prototype = Error.prototype;
+}
+
+}],["collections","lfu-map",{"./shim":23,"./lfu-set":12,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"lfu-map":11},function (require, exports, module){
+
+// collections lfu-map
+// -------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var LfuSet = require("./lfu-set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = LfuMap;
+
+function LfuMap(values, maxLength, equals, hash, getDefault) {
+    if (!(this instanceof LfuMap)) {
+        return new LfuMap(values, maxLength, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.store = new LfuSet(
+        undefined,
+        maxLength,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function keyHash(item) {
+            return hash(item.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+LfuMap.LfuMap = LfuMap; // hack so require("lfu-map").LfuMap will work in MontageJS
+
+Object.addEach(LfuMap.prototype, GenericCollection.prototype);
+Object.addEach(LfuMap.prototype, GenericMap.prototype);
+Object.addEach(LfuMap.prototype, PropertyChanges.prototype);
+
+LfuMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.maxLength,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+LfuMap.prototype.log = function (charmap, stringify) {
+    stringify = stringify || this.stringify;
+    this.store.log(charmap, stringify);
+};
+
+LfuMap.prototype.stringify = function (item, leader) {
+    return leader + JSON.stringify(item.key) + ": " + JSON.stringify(item.value);
+};
+
+LfuMap.prototype.addMapChangeListener = function () {
+    if (!this.dispatchesMapChanges) {
+        // Detect LFU deletions in the LfuSet and emit as MapChanges.
+        // Array and Heap have no store.
+        // Dict and FastMap define no listeners on their store.
+        var self = this;
+        this.store.addBeforeRangeChangeListener(function(plus, minus) {
+            if (plus.length && minus.length) {  // LFU item pruned
+                self.dispatchBeforeMapChange(minus[0].key, undefined);
+            }
+        });
+        this.store.addRangeChangeListener(function(plus, minus) {
+            if (plus.length && minus.length) {
+                self.dispatchMapChange(minus[0].key, undefined);
+            }
+        });
+    }
+    GenericMap.prototype.addMapChangeListener.apply(this, arguments);
+};
+
+}],["collections","lfu-set",{"./shim":23,"./set":22,"./generic-collection":5,"./generic-set":8,"./listen/property-changes":16,"./listen/range-changes":17,"lfu-set":12},function (require, exports, module){
+
+// collections lfu-set
+// -------------------
+
+"use strict";
+
+// Based on http://dhruvbird.com/lfu.pdf
+
+var Shim = require("./shim");
+var Set = require("./set");
+var GenericCollection = require("./generic-collection");
+var GenericSet = require("./generic-set");
+var PropertyChanges = require("./listen/property-changes");
+var RangeChanges = require("./listen/range-changes");
+
+module.exports = LfuSet;
+
+function LfuSet(values, capacity, equals, hash, getDefault) {
+    if (!(this instanceof LfuSet)) {
+        return new LfuSet(values, capacity, equals, hash, getDefault);
+    }
+    capacity = capacity || Infinity;
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+
+    // TODO
+    this.store = new Set(
+        undefined,
+        function valueEqual(a, b) {
+            return equals(a.value, b.value);
+        },
+        function valueHash(node) {
+            return hash(node.value);
+        }
+    );
+    this.frequencyHead = new this.FrequencyNode(0);
+
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.capacity = capacity;
+    this.length = 0;
+    this.addEach(values);
+}
+
+LfuSet.LfuSet = LfuSet; // hack so require("lfu-set").LfuSet will work in MontageJS
+
+Object.addEach(LfuSet.prototype, GenericCollection.prototype);
+Object.addEach(LfuSet.prototype, GenericSet.prototype);
+Object.addEach(LfuSet.prototype, PropertyChanges.prototype);
+Object.addEach(LfuSet.prototype, RangeChanges.prototype);
+
+LfuSet.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.capacity,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+LfuSet.prototype.has = function (value) {
+    return this.store.has(new this.Node(value));
+};
+
+LfuSet.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("LfuSet#get does not support second argument: equals");
+    }
+
+    var node = this.store.get(new this.Node(value));
+    if (node !== undefined) {
+        var frequencyNode = node.frequencyNode;
+        var nextFrequencyNode = frequencyNode.next;
+        if (nextFrequencyNode.frequency !== frequencyNode.frequency + 1) {
+            nextFrequencyNode = new this.FrequencyNode(frequencyNode.frequency + 1, frequencyNode, nextFrequencyNode);
+        }
+
+        nextFrequencyNode.values.add(node);
+        node.frequencyNode = nextFrequencyNode;
+        frequencyNode.values["delete"](node);
+
+        if (frequencyNode.values.length === 0) {
+            frequencyNode.prev.next = frequencyNode.next;
+            frequencyNode.next.prev = frequencyNode.prev;
+        }
+
+        return node.value;
+    } else {
+        return this.getDefault(value);
+    }
+};
+
+LfuSet.prototype.add = function (value) {
+    // if the value already exists, get it so that its frequency increases
+    if (this.has(value)) {
+        this.get(value);
+        return false;
+    }
+
+    var plus = [], minus = [], leastFrequentNode, leastFrequent;
+    if (this.capacity > 0) {
+        plus.push(value);
+        if (this.length + 1 > this.capacity) {
+            leastFrequentNode = this.frequencyHead.next;
+            leastFrequent = leastFrequentNode.values.order.head.next.value;
+            minus.push(leastFrequent.value);
+        }
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange(plus, minus, 0);
+        }
+
+        // removal must happen before addition, otherwise we could remove
+        // the value we are about to add
+        if (minus.length > 0) {
+            this.store["delete"](leastFrequent);
+            leastFrequentNode.values["delete"](leastFrequent);
+            // Don't remove the frequencyNode with value of 1, because we
+            // are about to use it again in the addition.
+            if (leastFrequentNode.value !== 1 && leastFrequentNode.values.length === 0) {
+                this.frequencyHead.next = leastFrequentNode.next;
+                leastFrequentNode.next.prev = this.frequencyHead;
+            }
+        }
+
+        var node = new this.Node(value);
+        var frequencyNode = this.frequencyHead.next;
+        if (frequencyNode.frequency !== 1) {
+            frequencyNode = new this.FrequencyNode(1, this.frequencyHead, frequencyNode);
+        }
+        this.store.add(node);
+        frequencyNode.values.add(node);
+        node.frequencyNode = frequencyNode;
+
+        this.length = this.length + plus.length - minus.length;
+
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange(plus, minus, 0);
+        }
+    }
+
+    // whether it grew
+    return plus.length !== minus.length;
+};
+
+LfuSet.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("LfuSet#delete does not support second argument: equals");
+    }
+
+    var node = this.store.get(new this.Node(value));
+    var found = !!node;
+    if (found) {
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([], [value], 0);
+        }
+        var frequencyNode = node.frequencyNode;
+
+        this.store["delete"](node);
+        frequencyNode.values["delete"](node);
+        if (frequencyNode.values.length === 0) {
+            frequencyNode.prev.next = frequencyNode.next;
+            frequencyNode.next.prev = frequencyNode.prev;
+        }
+        this.length--;
+
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([], [value], 0);
+        }
+    }
+
+    return found;
+};
+
+LfuSet.prototype.one = function () {
+    if (this.length > 0) {
+        return this.frequencyHead.next.values.one().value;
+    }
+};
+
+LfuSet.prototype.clear = function () {
+    this.store.clear();
+    this.frequencyHead.next = this.frequencyHead;
+    this.length = 0;
+};
+
+LfuSet.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var index = 0;
+    var frequencyNode = this.frequencyHead.next;
+
+    while (frequencyNode.frequency !== 0) {
+        var set = frequencyNode.values;
+        basis = set.reduce(function (basis, node) {
+            return callback.call(thisp, basis, node.value, index++, this);
+        }, basis, this);
+
+        frequencyNode = frequencyNode.next;
+    }
+
+    return basis;
+};
+
+LfuSet.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var index = this.length - 1;
+    var frequencyNode = this.frequencyHead.prev;
+
+    while (frequencyNode.frequency !== 0) {
+        var set = frequencyNode.values;
+        basis = set.reduceRight(function (basis, node) {
+            return callback.call(thisp, basis, node.value, index--, this);
+        }, basis, this);
+
+        frequencyNode = frequencyNode.prev;
+    }
+
+    return basis;
+};
+
+LfuSet.prototype.iterate = function () {
+    return this.store.map(function (node) {
+        return node.value;
+    }).iterate();
+};
+
+LfuSet.prototype.Node = Node;
+
+function Node(value, frequencyNode) {
+    this.value = value;
+    this.frequencyNode = frequencyNode;
+}
+
+LfuSet.prototype.FrequencyNode = FrequencyNode;
+
+function FrequencyNode(frequency, prev, next) {
+    this.frequency = frequency;
+    this.values = new Set();
+    this.prev = prev || this;
+    this.next = next || this;
+    if (prev) {
+        prev.next = this;
+    }
+    if (next) {
+        next.prev = this;
+    }
+}
+
+}],["collections","list",{"./shim":23,"./generic-collection":5,"./generic-order":7,"./listen/property-changes":16,"./listen/range-changes":17,"list":13},function (require, exports, module){
 
 // collections list
 // ----------------
@@ -1428,7 +2915,304 @@ Node.prototype.addAfter = function (node) {
     node.prev = this;
 };
 
-}],["collections","listen/map-changes",{"weak-map":20,"../list":7,"../dict":1},function (require, exports, module){
+}],["collections","listen/array-changes",{"../shim":23,"../list":13,"weak-map":35,"./property-changes":16,"./range-changes":17,"./map-changes":15},function (require, exports, module){
+
+// collections listen/array-changes
+// --------------------------------
+
+/*
+    Based in part on observable arrays from Motorola Mobility’s Montage
+    Copyright (c) 2012, Motorola Mobility LLC. All Rights Reserved.
+    3-Clause BSD License
+    https://github.com/motorola-mobility/montage/blob/master/LICENSE.md
+*/
+
+/*
+    This module is responsible for observing changes to owned properties of
+    objects and changes to the content of arrays caused by method calls.
+    The interface for observing array content changes establishes the methods
+    necessary for any collection with observable content.
+*/
+
+require("../shim");
+var List = require("../list");
+var WeakMap = require("weak-map");
+var PropertyChanges = require("./property-changes");
+var RangeChanges = require("./range-changes");
+var MapChanges = require("./map-changes");
+
+var array_splice = Array.prototype.splice;
+var array_slice = Array.prototype.slice;
+var array_reverse = Array.prototype.reverse;
+var array_sort = Array.prototype.sort;
+var array_swap = Array.prototype.swap;
+
+var EMPTY_ARRAY = [];
+
+// use different strategies for making arrays observable between Internet
+// Explorer and other browsers.
+var protoIsSupported = {}.__proto__ === Object.prototype;
+var array_makeObservable;
+if (protoIsSupported) {
+    array_makeObservable = function () {
+        this.__proto__ = ChangeDispatchArray;
+    };
+} else {
+    array_makeObservable = function () {
+        Object.defineProperties(this, observableArrayProperties);
+    };
+}
+
+Object.defineProperty(Array.prototype, "makeObservable", {
+    value: array_makeObservable,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+function defineEach(prototype) {
+    for (var name in prototype) {
+        Object.defineProperty(Array.prototype, name, {
+            value: prototype[name],
+            writable: true,
+            configurable: true,
+            enumerable: false
+        });
+    }
+}
+
+defineEach(PropertyChanges.prototype);
+defineEach(RangeChanges.prototype);
+defineEach(MapChanges.prototype);
+
+var observableArrayProperties = {
+
+    isObservable: {
+        value: true,
+        writable: true,
+        configurable: true
+    },
+
+    makeObservable: {
+        value: Function.noop, // idempotent
+        writable: true,
+        configurable: true
+    },
+
+    reverse: {
+        value: function reverse() {
+
+            var reversed = this.constructClone(this);
+            reversed.reverse();
+            this.swap(0, this.length, reversed);
+
+            return this;
+        },
+        writable: true,
+        configurable: true
+    },
+
+    sort: {
+        value: function sort() {
+
+            // dispatch before change events
+            this.dispatchBeforeRangeChange(this, this, 0);
+            for (var i = 0; i < this.length; i++) {
+                PropertyChanges.dispatchBeforeOwnPropertyChange(this, i, this[i]);
+                this.dispatchBeforeMapChange(i, this[i]);
+            }
+
+            // actual work
+            array_sort.apply(this, arguments);
+
+            // dispatch after change events
+            for (var i = 0; i < this.length; i++) {
+                PropertyChanges.dispatchOwnPropertyChange(this, i, this[i]);
+                this.dispatchMapChange(i, this[i]);
+            }
+            this.dispatchRangeChange(this, this, 0);
+
+            return this;
+        },
+        writable: true,
+        configurable: true
+    },
+
+    swap: {
+        value: function swap(start, length, plus) {
+            if (plus) {
+                if (!Array.isArray(plus)) {
+                    plus = array_slice.call(plus);
+                }
+            } else {
+                plus = EMPTY_ARRAY;
+            }
+
+            if (start < 0) {
+                start = this.length + start;
+            } else if (start > this.length) {
+                var holes = start - this.length;
+                var newPlus = Array(holes + plus.length);
+                for (var i = 0, j = holes; i < plus.length; i++, j++) {
+                    if (i in plus) {
+                        newPlus[j] = plus[i];
+                    }
+                }
+                plus = newPlus;
+                start = this.length;
+            }
+
+            var minus;
+            if (length === 0) {
+                // minus will be empty
+                if (plus.length === 0) {
+                    // at this point if plus is empty there is nothing to do.
+                    return []; // [], but spare us an instantiation
+                }
+                minus = EMPTY_ARRAY;
+            } else {
+                minus = array_slice.call(this, start, start + length);
+            }
+            var diff = plus.length - minus.length;
+            var oldLength = this.length;
+            var newLength = Math.max(this.length + diff, start + plus.length);
+            var longest = Math.max(oldLength, newLength);
+
+            // dispatch before change events
+            if (diff) {
+                PropertyChanges.dispatchBeforeOwnPropertyChange(this, "length", this.length);
+            }
+            this.dispatchBeforeRangeChange(plus, minus, start);
+            if (diff === 0) { // substring replacement
+                for (var i = start; i < start + plus.length; i++) {
+                    PropertyChanges.dispatchBeforeOwnPropertyChange(this, i, this[i]);
+                    this.dispatchBeforeMapChange(i, this[i]);
+                }
+            } else if (PropertyChanges.hasOwnPropertyChangeDescriptor(this)) {
+                // all subsequent values changed or shifted.
+                // avoid (longest - start) long walks if there are no
+                // registered descriptors.
+                for (var i = start; i < longest; i++) {
+                    PropertyChanges.dispatchBeforeOwnPropertyChange(this, i, this[i]);
+                    this.dispatchBeforeMapChange(i, this[i]);
+                }
+            }
+
+            // actual work
+            if (start > oldLength) {
+                this.length = start;
+            }
+            var result = array_swap.call(this, start, length, plus);
+
+            // dispatch after change events
+            if (diff === 0) { // substring replacement
+                for (var i = start; i < start + plus.length; i++) {
+                    PropertyChanges.dispatchOwnPropertyChange(this, i, this[i]);
+                    this.dispatchMapChange(i, this[i]);
+                }
+            } else if (PropertyChanges.hasOwnPropertyChangeDescriptor(this)) {
+                // all subsequent values changed or shifted.
+                // avoid (longest - start) long walks if there are no
+                // registered descriptors.
+                for (var i = start; i < longest; i++) {
+                    PropertyChanges.dispatchOwnPropertyChange(this, i, this[i]);
+                    this.dispatchMapChange(i, this[i]);
+                }
+            }
+            this.dispatchRangeChange(plus, minus, start);
+            if (diff) {
+                PropertyChanges.dispatchOwnPropertyChange(this, "length", this.length);
+            }
+
+            return result;
+        },
+        writable: true,
+        configurable: true
+    },
+
+    splice: {
+        value: function splice(start, length) {
+            // start parameter should be min(start, this.length)
+            // http://www.ecma-international.org/ecma-262/5.1/#sec-15.4.4.12
+            if (start > this.length) {
+                start = this.length;
+            }
+            return this.swap.call(this, start, length, array_slice.call(arguments, 2));
+        },
+        writable: true,
+        configurable: true
+    },
+
+    // splice is the array content change utility belt.  forward all other
+    // content changes to splice so we only have to write observer code in one
+    // place
+
+    set: {
+        value: function set(index, value) {
+            this.swap(index, index >= this.length ? 0 : 1, [value]);
+            return true;
+        },
+        writable: true,
+        configurable: true
+    },
+
+    shift: {
+        value: function shift() {
+            return this.splice(0, 1)[0];
+        },
+        writable: true,
+        configurable: true
+    },
+
+    pop: {
+        value: function pop() {
+            if (this.length) {
+                return this.splice(this.length - 1, 1)[0];
+            }
+        },
+        writable: true,
+        configurable: true
+    },
+
+    push: {
+        value: function push(arg) {
+            if (arguments.length === 1) {
+                return this.splice(this.length, 0, arg);
+            } else {
+                var args = array_slice.call(arguments);
+                return this.swap(this.length, 0, args);
+            }
+        },
+        writable: true,
+        configurable: true
+    },
+
+    unshift: {
+        value: function unshift(arg) {
+            if (arguments.length === 1) {
+                return this.splice(0, 0, arg);
+            } else {
+                var args = array_slice.call(arguments);
+                return this.swap(0, 0, args);
+            }
+        },
+        writable: true,
+        configurable: true
+    },
+
+    clear: {
+        value: function clear() {
+            return this.splice(0, this.length);
+        },
+        writable: true,
+        configurable: true
+    }
+
+};
+
+var ChangeDispatchArray = Object.create(Array.prototype, observableArrayProperties);
+
+}],["collections","listen/map-changes",{"weak-map":35,"../list":13,"../dict":2},function (require, exports, module){
 
 // collections listen/map-changes
 // ------------------------------
@@ -1580,7 +3364,7 @@ MapChanges.prototype.dispatchBeforeMapChange = function (key, value) {
     return this.dispatchMapChange(key, value, true);
 };
 
-}],["collections","listen/property-changes",{"../shim":13,"weak-map":20},function (require, exports, module){
+}],["collections","listen/property-changes",{"../shim":23,"weak-map":35},function (require, exports, module){
 
 // collections listen/property-changes
 // -----------------------------------
@@ -2032,7 +3816,7 @@ PropertyChanges.makePropertyUnobservable = function (object, key) {
     }
 };
 
-}],["collections","listen/range-changes",{"weak-map":20,"../dict":1},function (require, exports, module){
+}],["collections","listen/range-changes",{"weak-map":35,"../dict":2},function (require, exports, module){
 
 // collections listen/range-changes
 // --------------------------------
@@ -2179,7 +3963,244 @@ RangeChanges.prototype.dispatchBeforeRangeChange = function (plus, minus, index)
     return this.dispatchRangeChange(plus, minus, index, true);
 };
 
-}],["collections","map",{"./shim":13,"./set":12,"./generic-collection":3,"./generic-map":4,"./listen/property-changes":9,"map":11},function (require, exports, module){
+}],["collections","lru-map",{"./shim":23,"./lru-set":19,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"lru-map":18},function (require, exports, module){
+
+// collections lru-map
+// -------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var LruSet = require("./lru-set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = LruMap;
+
+function LruMap(values, maxLength, equals, hash, getDefault) {
+    if (!(this instanceof LruMap)) {
+        return new LruMap(values, maxLength, equals, hash, getDefault);
+    }
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.store = new LruSet(
+        undefined,
+        maxLength,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function keyHash(item) {
+            return hash(item.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+LruMap.LruMap = LruMap; // hack so require("lru-map").LruMap will work in MontageJS
+
+Object.addEach(LruMap.prototype, GenericCollection.prototype);
+Object.addEach(LruMap.prototype, GenericMap.prototype);
+Object.addEach(LruMap.prototype, PropertyChanges.prototype);
+
+LruMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.maxLength,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+LruMap.prototype.log = function (charmap, stringify) {
+    stringify = stringify || this.stringify;
+    this.store.log(charmap, stringify);
+};
+
+LruMap.prototype.stringify = function (item, leader) {
+    return leader + JSON.stringify(item.key) + ": " + JSON.stringify(item.value);
+};
+
+LruMap.prototype.addMapChangeListener = function () {
+    if (!this.dispatchesMapChanges) {
+        // Detect LRU deletions in the LruSet and emit as MapChanges.
+        // Array and Heap have no store.
+        // Dict and FastMap define no listeners on their store.
+        var self = this;
+        this.store.addBeforeRangeChangeListener(function(plus, minus) {
+            if (plus.length && minus.length) {  // LRU item pruned
+                self.dispatchBeforeMapChange(minus[0].key, undefined);
+            }
+        });
+        this.store.addRangeChangeListener(function(plus, minus) {
+            if (plus.length && minus.length) {
+                self.dispatchMapChange(minus[0].key, undefined);
+            }
+        });
+    }
+    GenericMap.prototype.addMapChangeListener.apply(this, arguments);
+};
+
+}],["collections","lru-set",{"./shim":23,"./set":22,"./generic-collection":5,"./generic-set":8,"./listen/property-changes":16,"./listen/range-changes":17,"lru-set":19},function (require, exports, module){
+
+// collections lru-set
+// -------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var Set = require("./set");
+var GenericCollection = require("./generic-collection");
+var GenericSet = require("./generic-set");
+var PropertyChanges = require("./listen/property-changes");
+var RangeChanges = require("./listen/range-changes");
+
+module.exports = LruSet;
+
+function LruSet(values, capacity, equals, hash, getDefault) {
+    if (!(this instanceof LruSet)) {
+        return new LruSet(values, capacity, equals, hash, getDefault);
+    }
+    capacity = capacity || Infinity;
+    equals = equals || Object.equals;
+    hash = hash || Object.hash;
+    getDefault = getDefault || Function.noop;
+    this.store = new Set(undefined, equals, hash);
+    this.contentEquals = equals;
+    this.contentHash = hash;
+    this.getDefault = getDefault;
+    this.capacity = capacity;
+    this.length = 0;
+    this.addEach(values);
+}
+
+LruSet.LruSet = LruSet; // hack so require("lru-set").LruSet will work in MontageJS
+
+Object.addEach(LruSet.prototype, GenericCollection.prototype);
+Object.addEach(LruSet.prototype, GenericSet.prototype);
+Object.addEach(LruSet.prototype, PropertyChanges.prototype);
+Object.addEach(LruSet.prototype, RangeChanges.prototype);
+
+LruSet.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.capacity,
+        this.contentEquals,
+        this.contentHash,
+        this.getDefault
+    );
+};
+
+LruSet.prototype.has = function (value) {
+    return this.store.has(value);
+};
+
+LruSet.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("LruSet#get does not support second argument: equals");
+    }
+    value = this.store.get(value);
+    if (value !== undefined) {
+        this.store["delete"](value);
+        this.store.add(value);
+    } else {
+        value = this.getDefault(value);
+    }
+    return value;
+};
+
+LruSet.prototype.add = function (value) {
+    var found = this.store.has(value);
+    var plus = [], minus = [], eldest;
+    // if the value already exists, we delete it and add it back again so it
+    // appears at the end of the list of values to truncate
+    if (found) {    // update
+        this.store["delete"](value);
+        this.store.add(value);
+    } else if (this.capacity > 0) {    // add
+        // because minus is constructed before adding value, we must ensure the
+        // set has positive length. hence the capacity check.
+        plus.push(value);
+        if (this.length >= this.capacity) {
+            eldest = this.store.order.head.next;
+            minus.push(eldest.value);
+        }
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange(plus, minus, 0);
+        }
+        this.store.add(value);
+        if (minus.length > 0) {
+            this.store['delete'](eldest.value);
+        }
+        // only assign to length once to avoid jitter on length observers
+        this.length = this.length + plus.length - minus.length;
+        // after change
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange(plus, minus, 0);
+        }
+    }
+    // whether it grew
+    return plus.length !== minus.length;
+};
+
+LruSet.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("LruSet#delete does not support second argument: equals");
+    }
+    var found = this.store.has(value);
+    if (found) {
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([], [value], 0);
+        }
+        this.store["delete"](value);
+        this.length--;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([], [value], 0);
+        }
+    }
+    return found;
+};
+
+LruSet.prototype.one = function () {
+    if (this.length > 0) {
+        return this.store.one();
+    }
+};
+
+LruSet.prototype.clear = function () {
+    this.store.clear();
+    this.length = 0;
+};
+
+LruSet.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var set = this.store;
+    var index = 0;
+    return set.reduce(function (basis, value) {
+        return callback.call(thisp, basis, value, index++, this);
+    }, basis, this);
+};
+
+LruSet.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    var set = this.store;
+    var index = this.length - 1;
+    return set.reduceRight(function (basis, value) {
+        return callback.call(thisp, basis, value, index--, this);
+    }, basis, this);
+};
+
+LruSet.prototype.iterate = function () {
+    return this.store.iterate();
+};
+
+}],["collections","map",{"./shim":23,"./set":22,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"map":20},function (require, exports, module){
 
 // collections map
 // ---------------
@@ -2244,7 +4265,53 @@ Map.prototype.logNode = function (node, log) {
     log(' value: ' + node.value);
 };
 
-}],["collections","set",{"./shim":13,"./list":7,"./fast-set":2,"./generic-collection":3,"./generic-set":6,"./listen/property-changes":9,"./listen/range-changes":10,"set":12},function (require, exports, module){
+}],["collections","multi-map",{"./map":20,"multi-map":21},function (require, exports, module){
+
+// collections multi-map
+// ---------------------
+
+"use strict";
+
+var Map = require("./map");
+
+module.exports = MultiMap;
+function MultiMap(values, bucket, equals, hash) {
+    if (!(this instanceof MultiMap)) {
+        return new MultiMap(values, bucket, equals, hash);
+    }
+    this.bucket = bucket || this.bucket;
+    Map.call(this, values, equals, hash, function getDefault(key) {
+        var bucket = this.bucket();
+        Map.prototype.set.call(this, key, bucket);
+        return bucket;
+    });
+}
+
+MultiMap.MultiMap = MultiMap; // hack so require("multi-map").MultiMap will work in MontageJS
+
+MultiMap.prototype = Object.create(Map.prototype);
+
+MultiMap.prototype.constructor = MultiMap;
+
+MultiMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.bucket,
+        this.contentEquals,
+        this.contentHash
+    );
+};
+
+MultiMap.prototype.set = function (key, newValues) {
+    var values = this.get(key);
+    values.swap(0, values.length, newValues);
+};
+
+MultiMap.prototype.bucket = function (key) {
+    return [];
+};
+
+}],["collections","set",{"./shim":23,"./list":13,"./fast-set":4,"./generic-collection":5,"./generic-set":8,"./listen/property-changes":16,"./listen/range-changes":17,"set":22},function (require, exports, module){
 
 // collections set
 // ---------------
@@ -2428,7 +4495,7 @@ Set.prototype.makeObservable = function () {
     this.order.makeObservable();
 };
 
-}],["collections","shim",{"./shim-array":14,"./shim-object":16,"./shim-function":15,"./shim-regexp":17},function (require, exports, module){
+}],["collections","shim",{"./shim-array":24,"./shim-object":26,"./shim-function":25,"./shim-regexp":27},function (require, exports, module){
 
 // collections shim
 // ----------------
@@ -2439,7 +4506,7 @@ var Object = require("./shim-object");
 var Function = require("./shim-function");
 var RegExp = require("./shim-regexp");
 
-}],["collections","shim-array",{"./shim-function":15,"./generic-collection":3,"./generic-order":5,"weak-map":20},function (require, exports, module){
+}],["collections","shim-array",{"./shim-function":25,"./generic-collection":5,"./generic-order":7,"weak-map":35},function (require, exports, module){
 
 // collections shim-array
 // ----------------------
@@ -2845,7 +4912,7 @@ Function.get = function (key) {
     };
 };
 
-}],["collections","shim-object",{"weak-map":20},function (require, exports, module){
+}],["collections","shim-object",{"weak-map":35},function (require, exports, module){
 
 // collections shim-object
 // -----------------------
@@ -3384,6 +5451,1247 @@ if (!RegExp.escape) {
     };
 }
 
+}],["collections","sorted-array",{"./shim":23,"./generic-collection":5,"./listen/property-changes":16,"./listen/range-changes":17,"sorted-array":28},function (require, exports, module){
+
+// collections sorted-array
+// ------------------------
+
+"use strict";
+
+module.exports = SortedArray;
+
+var Shim = require("./shim");
+var GenericCollection = require("./generic-collection");
+var PropertyChanges = require("./listen/property-changes");
+var RangeChanges = require("./listen/range-changes");
+
+function SortedArray(values, equals, compare, getDefault) {
+    if (!(this instanceof SortedArray)) {
+        return new SortedArray(values, equals, compare, getDefault);
+    }
+    if (Array.isArray(values)) {
+        this.array = values;
+        values = values.splice(0, values.length);
+    } else {
+        this.array = [];
+    }
+    this.contentEquals = equals || Object.equals;
+    this.contentCompare = compare || Object.compare;
+    this.getDefault = getDefault || Function.noop;
+
+    this.length = 0;
+    this.addEach(values);
+}
+
+// hack so require("sorted-array").SortedArray will work in MontageJS
+SortedArray.SortedArray = SortedArray;
+
+Object.addEach(SortedArray.prototype, GenericCollection.prototype);
+Object.addEach(SortedArray.prototype, PropertyChanges.prototype);
+Object.addEach(SortedArray.prototype, RangeChanges.prototype);
+
+SortedArray.prototype.isSorted = true;
+
+function search(array, value, compare) {
+    var first = 0;
+    var last = array.length - 1;
+    while (first <= last) {
+        var middle = (first + last) >> 1; // Math.floor( / 2)
+        var comparison = compare(value, array[middle]);
+        if (comparison > 0) {
+            first = middle + 1;
+        } else if (comparison < 0) {
+            last = middle - 1;
+        } else {
+            return middle;
+        }
+    }
+    return -(first + 1);
+}
+
+function searchFirst(array, value, compare, equals) {
+    var index = search(array, value, compare);
+    if (index < 0) {
+        return -1;
+    } else {
+        while (index > 0 && equals(value, array[index - 1])) {
+            index--;
+        }
+        if (!equals(value, array[index])) {
+            return -1;
+        } else {
+            return index;
+        }
+    }
+}
+
+function searchLast(array, value, compare, equals) {
+    var index = search(array, value, compare);
+    if (index < 0) {
+        return -1;
+    } else {
+        while (index < array.length - 1 && equals(value, array[index + 1])) {
+            index++;
+        }
+        if (!equals(value, array[index])) {
+            return -1;
+        } else {
+            return index;
+        }
+    }
+}
+
+function searchForInsertionIndex(array, value, compare) {
+    var index = search(array, value, compare);
+    if (index < 0) {
+        return -index - 1;
+    } else {
+        var last = array.length - 1;
+        while (index < last && compare(value, array[index + 1]) === 0) {
+            index++;
+        }
+        return index;
+    }
+}
+
+SortedArray.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentCompare,
+        this.getDefault
+    );
+};
+
+SortedArray.prototype.has = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedSet#has does not support second argument: equals");
+    }
+    var index = search(this.array, value, this.contentCompare);
+    return index >= 0 && this.contentEquals(this.array[index], value);
+};
+
+SortedArray.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedArray#get does not support second argument: equals");
+    }
+    var index = searchFirst(this.array, value, this.contentCompare, this.contentEquals);
+    if (index !== -1) {
+        return this.array[index];
+    } else {
+        return this.getDefault(value);
+    }
+};
+
+SortedArray.prototype.add = function (value) {
+    var index = searchForInsertionIndex(this.array, value, this.contentCompare);
+    if (this.dispatchesRangeChanges) {
+        this.dispatchBeforeRangeChange([value], [], index);
+    }
+    this.array.splice(index, 0, value);
+    this.length++;
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([value], [], index);
+    }
+    return true;
+};
+
+SortedArray.prototype["delete"] = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedArray#delete does not support second argument: equals");
+    }
+    var index = searchFirst(this.array, value, this.contentCompare, this.contentEquals);
+    if (index !== -1) {
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([], [value], index);
+        }
+        this.array.splice(index, 1);
+        this.length--;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([], [value], index);
+        }
+        return true;
+    } else {
+        return false;
+    }
+};
+
+SortedArray.prototype.indexOf = function (value) {
+    return searchFirst(this.array, value, this.contentCompare, this.contentEquals);
+};
+
+SortedArray.prototype.lastIndexOf = function (value) {
+    return searchLast(this.array, value, this.contentCompare, this.contentEquals);
+};
+
+SortedArray.prototype.find = function (value, equals, index) {
+    if (equals) {
+        throw new Error("SortedArray#find does not support second argument: equals");
+    }
+    if (index) {
+        throw new Error("SortedArray#find does not support third argument: index");
+    }
+    return searchFirst(this.array, value, this.contentCompare, this.contentEquals);
+};
+
+SortedArray.prototype.findLast = function (value, equals, index) {
+    if (equals) {
+        throw new Error("SortedArray#findLast does not support second argument: equals");
+    }
+    if (index) {
+        throw new Error("SortedArray#findLast does not support third argument: index");
+    }
+    return searchLast(this.array, value, this.contentCompare, this.contentEquals);
+};
+
+SortedArray.prototype.push = function () {
+    this.addEach(arguments);
+};
+
+SortedArray.prototype.unshift = function () {
+    this.addEach(arguments);
+};
+
+SortedArray.prototype.pop = function () {
+    var val = this.array.pop();
+    this.length = this.array.length;
+    return val;
+};
+
+SortedArray.prototype.shift = function () {
+    var val = this.array.shift();
+    this.length = this.array.length;
+    return val;
+};
+
+SortedArray.prototype.slice = function () {
+    return this.array.slice.apply(this.array, arguments);
+};
+
+SortedArray.prototype.splice = function (index, length /*...plus*/) {
+    return this.swap(index, length, Array.prototype.slice.call(arguments, 2));
+};
+
+SortedArray.prototype.swap = function (index, length, plus) {
+    if (index === undefined && length === undefined) {
+        return [];
+    }
+    index = index || 0;
+    if (index < 0) {
+        index += this.length;
+    }
+    if (length === undefined) {
+        length = Infinity;
+    }
+    var minus = this.slice(index, index + length);
+    if (this.dispatchesRangeChanges) {
+        this.dispatchBeforeRangeChange(plus, minus, index);
+    }
+    this.array.splice(index, length);
+    this.addEach(plus);
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange(plus, minus, index);
+    }
+    return minus;
+};
+
+SortedArray.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var thisp = arguments[2];
+    return this.array.reduce(function (basis, value, key) {
+        return callback.call(thisp, basis, value, key, this);
+    }, basis, this);
+};
+
+SortedArray.prototype.reduceRight = function () {
+    var thisp = arguments[2];
+    return this.array.reduceRight(function (basis, value, key) {
+        return callback.call(thisp, basis, value, key, this);
+    }, basis, this);
+};
+
+SortedArray.prototype.min = function () {
+    if (this.length) {
+        return this.array[0];
+    }
+};
+
+SortedArray.prototype.max = function () {
+    if (this.length) {
+        return this.array[this.length - 1];
+    }
+};
+
+SortedArray.prototype.one = function () {
+    return this.array.one();
+};
+
+SortedArray.prototype.clear = function () {
+    var minus;
+    if (this.dispatchesRangeChanges) {
+        minus = this.array.slice();
+        this.dispatchBeforeRangeChange([], minus, 0);
+    }
+    this.length = 0;
+    this.array.clear();
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], minus, 0);
+    }
+};
+
+SortedArray.prototype.equals = function (that, equals) {
+    return this.array.equals(that, equals);
+};
+
+SortedArray.prototype.compare = function (that, compare) {
+    return this.array.compare(that, compare);
+};
+
+SortedArray.prototype.iterate = function (start, end) {
+    return new this.Iterator(this.array, start, end);
+};
+
+SortedArray.prototype.Iterator = Array.prototype.Iterator;
+}],["collections","sorted-array-map",{"./shim":23,"./sorted-array-set":30,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"sorted-array-map":29},function (require, exports, module){
+
+// collections sorted-array-map
+// ----------------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var SortedArraySet = require("./sorted-array-set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = SortedArrayMap;
+
+function SortedArrayMap(values, equals, compare, getDefault) {
+    if (!(this instanceof SortedArrayMap)) {
+        return new SortedArrayMap(values, equals, compare, getDefault);
+    }
+    equals = equals || Object.equals;
+    compare = compare || Object.compare;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentCompare = compare;
+    this.getDefault = getDefault;
+    this.store = new SortedArraySet(
+        null,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function compareKeys(a, b) {
+            return compare(a.key, b.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+// hack so require("sorted-array-map").SortedArrayMap will work in MontageJS
+SortedArrayMap.SortedArrayMap = SortedArrayMap;
+
+Object.addEach(SortedArrayMap.prototype, GenericCollection.prototype);
+Object.addEach(SortedArrayMap.prototype, GenericMap.prototype);
+Object.addEach(SortedArrayMap.prototype, PropertyChanges.prototype);
+
+SortedArrayMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentCompare,
+        this.getDefault
+    );
+};
+
+}],["collections","sorted-array-set",{"./shim":23,"./sorted-array":28,"./generic-set":8,"./listen/property-changes":16},function (require, exports, module){
+
+// collections sorted-array-set
+// ----------------------------
+
+"use strict";
+
+module.exports = SortedArraySet;
+
+var Shim = require("./shim");
+var SortedArray = require("./sorted-array");
+var GenericSet = require("./generic-set");
+var PropertyChanges = require("./listen/property-changes");
+
+function SortedArraySet(values, equals, compare, getDefault) {
+    if (!(this instanceof SortedArraySet)) {
+        return new SortedArraySet(values, equals, compare, getDefault);
+    }
+    SortedArray.call(this, values, equals, compare, getDefault);
+}
+
+// hack so require("sorted-array-set".SortedArraySet works in MontageJS
+SortedArraySet.SortedArraySet = SortedArraySet;
+
+SortedArraySet.prototype = Object.create(SortedArray.prototype);
+
+SortedArraySet.prototype.constructor = SortedArraySet;
+
+Object.addEach(SortedArraySet.prototype, GenericSet.prototype);
+Object.addEach(SortedArraySet.prototype, PropertyChanges.prototype);
+
+SortedArraySet.prototype.isSorted = true;
+
+SortedArraySet.prototype.add = function (value) {
+    if (!this.has(value)) {
+        SortedArray.prototype.add.call(this, value);
+        return true;
+    } else {
+        return false;
+    }
+};
+
+SortedArraySet.prototype.reduce = function (callback, basis /*, thisp*/) {
+    var self = this;
+    var thisp = arguments[2];
+    return this.array.reduce(function (basis, value, index) {
+        return callback.call(thisp, basis, value, index, self);
+    }, basis);
+};
+
+SortedArraySet.prototype.reduceRight = function (callback, basis /*, thisp*/) {
+    var self = this;
+    var thisp = arguments[2];
+    return this.array.reduceRight(function (basis, value, index) {
+        return callback.call(thisp, basis, value, index, self);
+    }, basis);
+};
+
+}],["collections","sorted-map",{"./shim":23,"./sorted-set":32,"./generic-collection":5,"./generic-map":6,"./listen/property-changes":16,"sorted-map":31},function (require, exports, module){
+
+// collections sorted-map
+// ----------------------
+
+"use strict";
+
+var Shim = require("./shim");
+var SortedSet = require("./sorted-set");
+var GenericCollection = require("./generic-collection");
+var GenericMap = require("./generic-map");
+var PropertyChanges = require("./listen/property-changes");
+
+module.exports = SortedMap;
+
+function SortedMap(values, equals, compare, getDefault) {
+    if (!(this instanceof SortedMap)) {
+        return new SortedMap(values, equals, compare, getDefault);
+    }
+    equals = equals || Object.equals;
+    compare = compare || Object.compare;
+    getDefault = getDefault || Function.noop;
+    this.contentEquals = equals;
+    this.contentCompare = compare;
+    this.getDefault = getDefault;
+    this.store = new SortedSet(
+        null,
+        function keysEqual(a, b) {
+            return equals(a.key, b.key);
+        },
+        function compareKeys(a, b) {
+            return compare(a.key, b.key);
+        }
+    );
+    this.length = 0;
+    this.addEach(values);
+}
+
+// hack so require("sorted-map").SortedMap will work in MontageJS
+SortedMap.SortedMap = SortedMap;
+
+Object.addEach(SortedMap.prototype, GenericCollection.prototype);
+Object.addEach(SortedMap.prototype, GenericMap.prototype);
+Object.addEach(SortedMap.prototype, PropertyChanges.prototype);
+
+SortedMap.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentCompare,
+        this.getDefault
+    );
+};
+
+SortedMap.prototype.log = function (charmap, logNode, callback, thisp) {
+    logNode = logNode || this.logNode
+    this.store.log(charmap, function (node, log, logBefore) {
+        logNode(node.value, log, logBefore);
+    }, callback, thisp);
+};
+
+SortedMap.prototype.logNode = function (node, log) {
+    log(" key: " + node.key);
+    log(" value: " + node.value);
+};
+
+}],["collections","sorted-set",{"./shim":23,"./generic-collection":5,"./generic-set":8,"./listen/property-changes":16,"./listen/range-changes":17,"./tree-log":33,"sorted-set":32},function (require, exports, module){
+
+// collections sorted-set
+// ----------------------
+
+"use strict";
+
+module.exports = SortedSet;
+
+var Shim = require("./shim");
+var GenericCollection = require("./generic-collection");
+var GenericSet = require("./generic-set");
+var PropertyChanges = require("./listen/property-changes");
+var RangeChanges = require("./listen/range-changes");
+var TreeLog = require("./tree-log");
+
+function SortedSet(values, equals, compare, getDefault) {
+    if (!(this instanceof SortedSet)) {
+        return new SortedSet(values, equals, compare, getDefault);
+    }
+    this.contentEquals = equals || Object.equals;
+    this.contentCompare = compare || Object.compare;
+    this.getDefault = getDefault || Function.noop;
+    this.root = null;
+    this.length = 0;
+    this.addEach(values);
+}
+
+// hack so require("sorted-set").SortedSet will work in MontageJS
+SortedSet.SortedSet = SortedSet;
+
+Object.addEach(SortedSet.prototype, GenericCollection.prototype);
+Object.addEach(SortedSet.prototype, GenericSet.prototype);
+Object.addEach(SortedSet.prototype, PropertyChanges.prototype);
+Object.addEach(SortedSet.prototype, RangeChanges.prototype);
+
+SortedSet.prototype.isSorted = true;
+
+SortedSet.prototype.constructClone = function (values) {
+    return new this.constructor(
+        values,
+        this.contentEquals,
+        this.contentCompare,
+        this.getDefault
+    );
+};
+
+SortedSet.prototype.has = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedSet#has does not support second argument: equals");
+    }
+    if (this.root) {
+        this.splay(value);
+        return this.contentEquals(value, this.root.value);
+    } else {
+        return false;
+    }
+};
+
+SortedSet.prototype.get = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedSet#get does not support second argument: equals");
+    }
+    if (this.root) {
+        this.splay(value);
+        if (this.contentEquals(value, this.root.value)) {
+            return this.root.value;
+        }
+    }
+    return this.getDefault(value);
+};
+
+SortedSet.prototype.add = function (value) {
+    var node = new this.Node(value);
+    if (this.root) {
+        this.splay(value);
+        if (!this.contentEquals(value, this.root.value)) {
+            var comparison = this.contentCompare(value, this.root.value);
+            if (comparison === 0) {
+                throw new Error("SortedSet cannot contain incomparable but inequal values: " + value + " and " + this.root.value);
+            }
+            if (this.dispatchesRangeChanges) {
+                this.dispatchBeforeRangeChange([value], [], this.root.index);
+            }
+            if (comparison < 0) {
+                // rotate right
+                //   R        N
+                //  / \  ->  / \
+                // l   r    l   R
+                // :   :    :    \
+                //                r
+                //                :
+                node.right = this.root;
+                node.left = this.root.left;
+                this.root.left = null;
+                this.root.touch();
+            } else {
+                // rotate left
+                //   R        N
+                //  / \  ->  / \
+                // l   r    R   r
+                // :   :   /    :
+                //        l
+                //        :
+                node.left = this.root;
+                node.right = this.root.right;
+                this.root.right = null;
+                this.root.touch();
+            }
+            node.touch();
+            this.root = node;
+            this.length++;
+            if (this.dispatchesRangeChanges) {
+                this.dispatchRangeChange([value], [], this.root.index);
+            }
+            return true;
+        }
+    } else {
+        if (this.dispatchesRangeChanges) {
+            this.dispatchBeforeRangeChange([value], [], 0);
+        }
+        this.root = node;
+        this.length++;
+        if (this.dispatchesRangeChanges) {
+            this.dispatchRangeChange([value], [], 0);
+        }
+        return true;
+    }
+    return false;
+};
+
+SortedSet.prototype['delete'] = function (value, equals) {
+    if (equals) {
+        throw new Error("SortedSet#delete does not support second argument: equals");
+    }
+    if (this.root) {
+        this.splay(value);
+        if (this.contentEquals(value, this.root.value)) {
+            var index = this.root.index;
+            if (this.dispatchesRangeChanges) {
+                this.dispatchBeforeRangeChange([], [value], index);
+            }
+            if (!this.root.left) {
+                this.root = this.root.right;
+            } else {
+                // remove the right side of the tree,
+                var right = this.root.right;
+                this.root = this.root.left;
+                // the tree now only contains the left side of the tree, so all
+                // values are less than the value deleted.
+                // splay so that the root has an empty right child
+                this.splay(value);
+                // put the right side of the tree back
+                this.root.right = right;
+            }
+            this.length--;
+            if (this.root) {
+                this.root.touch();
+            }
+            if (this.dispatchesRangeChanges) {
+                this.dispatchRangeChange([], [value], index);
+            }
+            return true;
+        }
+    }
+    return false;
+};
+
+SortedSet.prototype.indexOf = function (value, index) {
+    if (index) {
+        throw new Error("SortedSet#indexOf does not support second argument: startIndex");
+    }
+    if (this.root) {
+        this.splay(value);
+        if (this.contentEquals(value, this.root.value)) {
+            return this.root.index;
+        }
+    }
+    return -1;
+};
+
+SortedSet.prototype.find = function (value, equals, index) {
+    if (equals) {
+        throw new Error("SortedSet#find does not support second argument: equals");
+    }
+    if (index) {
+        // TODO contemplate using splayIndex to isolate a subtree in
+        // which to search.
+        throw new Error("SortedSet#find does not support third argument: index");
+    }
+    if (this.root) {
+        this.splay(value);
+        if (this.contentEquals(value, this.root.value)) {
+            return this.root;
+        }
+    }
+};
+
+SortedSet.prototype.findGreatest = function (at) {
+    if (this.root) {
+        at = at || this.root;
+        while (at.right) {
+            at = at.right;
+        }
+        return at;
+    }
+};
+
+SortedSet.prototype.findLeast = function (at) {
+    if (this.root) {
+        at = at || this.root;
+        while (at.left) {
+            at = at.left;
+        }
+        return at;
+    }
+};
+
+SortedSet.prototype.findGreatestLessThanOrEqual = function (value) {
+    if (this.root) {
+        this.splay(value);
+        // assert root.value <= value
+        return this.root;
+    }
+};
+
+SortedSet.prototype.findGreatestLessThan = function (value) {
+    if (this.root) {
+        this.splay(value);
+        // assert root.value <= value
+        return this.root.getPrevious();
+    }
+};
+
+SortedSet.prototype.findLeastGreaterThanOrEqual = function (value) {
+    if (this.root) {
+        this.splay(value);
+        // assert root.value <= value
+        var comparison = this.contentCompare(value, this.root.value);
+        if (comparison === 0) {
+            return this.root;
+        } else {
+            return this.root.getNext();
+        }
+    }
+};
+
+SortedSet.prototype.findLeastGreaterThan = function (value) {
+    if (this.root) {
+        this.splay(value);
+        // assert root.value <= value
+        var comparison = this.contentCompare(value, this.root.value);
+        return this.root.getNext();
+    }
+};
+
+SortedSet.prototype.pop = function () {
+    if (this.root) {
+        var found = this.findGreatest();
+        this["delete"](found.value);
+        return found.value;
+    }
+};
+
+SortedSet.prototype.shift = function () {
+    if (this.root) {
+        var found = this.findLeast();
+        this["delete"](found.value);
+        return found.value;
+    }
+};
+
+SortedSet.prototype.push = function () {
+    this.addEach(arguments);
+};
+
+SortedSet.prototype.unshift = function () {
+    this.addEach(arguments);
+};
+
+SortedSet.prototype.slice = function (start, end) {
+    var temp;
+    start = start || 0;
+    end = end || this.length;
+    if (start < 0) {
+        start += this.length;
+    }
+    if (end < 0) {
+        end += this.length;
+    }
+    var sliced = [];
+    if (this.root) {
+        this.splayIndex(start);
+        while (this.root.index < end) {
+            sliced.push(this.root.value);
+            if (!this.root.right) {
+                break;
+            }
+            this.splay(this.root.getNext().value);
+        }
+    }
+    return sliced;
+};
+
+SortedSet.prototype.splice = function (at, length /*...plus*/) {
+    return this.swap(at, length, Array.prototype.slice.call(arguments, 2));
+};
+
+SortedSet.prototype.swap = function (start, length, plus) {
+    if (start === undefined && length === undefined) {
+        return [];
+    }
+    start = start || 0;
+    if (start < 0) {
+        start += this.length;
+    }
+    if (length === undefined) {
+        length = Infinity;
+    }
+    var swapped = [];
+
+    if (this.root) {
+
+        // start
+        this.splayIndex(start);
+
+        // minus length
+        for (var i = 0; i < length; i++) {
+            swapped.push(this.root.value);
+            var next = this.root.getNext();
+            this["delete"](this.root.value);
+            if (!next) {
+                break;
+            }
+            this.splay(next.value);
+        }
+    }
+
+    // plus
+    this.addEach(plus);
+
+    return swapped;
+};
+
+// This is the simplified top-down splaying algorithm from: "Self-adjusting
+// Binary Search Trees" by Sleator and Tarjan guarantees that the root.value <=
+// value if root exists
+// - as described in https://github.com/hij1nx/forest
+SortedSet.prototype.splay = function (value) {
+    var stub, left, right, temp, root, history;
+
+    if (!this.root) {
+        return;
+    }
+
+    // Create a stub node.  The use of the stub node is a bit
+    // counter-intuitive: The right child of the stub node will hold the L tree
+    // of the algorithm.  The left child of the stub node will hold the R tree
+    // of the algorithm.  Using a stub node, left and right will always be
+    // nodes and we avoid special cases.
+    // - http://code.google.com/p/v8/source/browse/branches/bleeding_edge/src/splay-tree-inl.h
+    stub = left = right = new this.Node();
+    // The history is an upside down tree used to propagate new tree sizes back
+    // up the left and right arms of a traversal.  The right children of the
+    // transitive left side of the tree will be former roots while linking
+    // left.  The left children of the transitive walk to the right side of the
+    // history tree will all be previous roots from linking right.  The last
+    // node of the left and right traversal will each become a child of the new
+    // root.
+    history = new this.Node();
+    root = this.root;
+
+    while (true) {
+        var comparison = this.contentCompare(value, root.value);
+        if (comparison < 0) {
+            if (root.left) {
+                if (this.contentCompare(value, root.left.value) < 0) {
+                    // rotate right
+                    //        Root         L(temp)
+                    //      /     \       / \
+                    //     L(temp) R    LL    Root
+                    //    / \                /    \
+                    //  LL   LR            LR      R
+                    temp = root.left;
+                    root.left = temp.right;
+                    root.touch();
+                    temp.right = root;
+                    temp.touch();
+                    root = temp;
+                    if (!root.left) {
+                        break;
+                    }
+                }
+                // remember former root for repropagating length
+                temp = new Node();
+                temp.right = root;
+                temp.left = history.left;
+                history.left = temp;
+                // link left
+                right.left = root;
+                right.touch();
+                right = root;
+                root = root.left;
+            } else {
+                break;
+            }
+        } else if (comparison > 0) {
+            if (root.right) {
+                if (this.contentCompare(value, root.right.value) > 0) {
+                    // rotate left
+                    //        Root         L(temp)
+                    //      /     \       / \
+                    //     L(temp) R    LL    Root
+                    //    / \                /    \
+                    //  LL   LR            LR      R
+                    temp = root.right;
+                    root.right = temp.left;
+                    root.touch();
+                    temp.left = root;
+                    temp.touch();
+                    root = temp;
+                    if (!root.right) {
+                        break;
+                    }
+                }
+                // remember former root for repropagating length
+                temp = new Node();
+                temp.left = root;
+                temp.right = history.right;
+                history.right = temp;
+                // link right
+                left.right = root;
+                left.touch();
+                left = root;
+                root = root.right;
+            } else {
+                break;
+            }
+        } else { // equal or incomparable
+            break;
+        }
+    }
+
+    // reassemble
+    left.right = root.left;
+    left.touch();
+    right.left = root.right;
+    right.touch();
+    root.left = stub.right;
+    root.right = stub.left;
+
+    // propagate new lengths
+    while (history.left) {
+        history.left.right.touch();
+        history.left = history.left.left;
+    }
+    while (history.right) {
+        history.right.left.touch();
+        history.right = history.right.right;
+    }
+    root.touch();
+
+    this.root = root;
+};
+
+// an internal utility for splaying a node based on its index
+SortedSet.prototype.splayIndex = function (index) {
+    if (this.root) {
+        var at = this.root;
+        var atIndex = this.root.index;
+
+        while (atIndex !== index) {
+            if (atIndex > index && at.left) {
+                at = at.left;
+                atIndex -= 1 + (at.right ? at.right.length : 0);
+            } else if (atIndex < index && at.right) {
+                at = at.right;
+                atIndex += 1 + (at.left ? at.left.length : 0);
+            } else {
+                break;
+            }
+        }
+
+        this.splay(at.value);
+
+        return this.root.index === index;
+    }
+    return false;
+};
+
+SortedSet.prototype.reduce = function (callback, basis, thisp) {
+    if (this.root) {
+        basis = this.root.reduce(callback, basis, 0, thisp, this);
+    }
+    return basis;
+};
+
+SortedSet.prototype.reduceRight = function (callback, basis, thisp) {
+    if (this.root) {
+        basis = this.root.reduceRight(callback, basis, this.length - 1, thisp, this);
+    }
+    return basis;
+};
+
+SortedSet.prototype.min = function (at) {
+    var least = this.findLeast(at);
+    if (least) {
+        return least.value;
+    }
+};
+
+SortedSet.prototype.max = function (at) {
+    var greatest = this.findGreatest(at);
+    if (greatest) {
+        return greatest.value;
+    }
+};
+
+SortedSet.prototype.one = function () {
+    return this.min();
+};
+
+SortedSet.prototype.clear = function () {
+    var minus;
+    if (this.dispatchesRangeChanges) {
+        minus = this.toArray();
+        this.dispatchBeforeRangeChange([], minus, 0);
+    }
+    this.root = null;
+    this.length = 0;
+    if (this.dispatchesRangeChanges) {
+        this.dispatchRangeChange([], minus, 0);
+    }
+};
+
+SortedSet.prototype.iterate = function (start, end) {
+    return new this.Iterator(this, start, end);
+};
+
+SortedSet.prototype.Iterator = Iterator;
+
+SortedSet.prototype.summary = function () {
+    if (this.root) {
+        return this.root.summary();
+    } else {
+        return "()";
+    }
+};
+
+SortedSet.prototype.log = function (charmap, logNode, callback, thisp) {
+    charmap = charmap || TreeLog.unicodeRound;
+    logNode = logNode || this.logNode;
+    if (!callback) {
+        callback = console.log;
+        thisp = console;
+    }
+    callback = callback.bind(thisp);
+    if (this.root) {
+        this.root.log(charmap, logNode, callback, callback);
+    }
+};
+
+SortedSet.prototype.logNode = function (node, log, logBefore) {
+    log(" " + node.value);
+};
+
+SortedSet.logCharsets = TreeLog;
+
+SortedSet.prototype.Node = Node;
+
+function Node(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+    this.length = 1;
+}
+
+// TODO case where no basis is provided for reduction
+
+Node.prototype.reduce = function (callback, basis, index, thisp, tree, depth) {
+    depth = depth || 0;
+    if (this.left) {
+        // prerecord length to be resistant to mutation
+        var length = this.left.length;
+        basis = this.left.reduce(callback, basis, index, thisp, tree, depth + 1);
+        index += length;
+    }
+    basis = callback.call(thisp, basis, this.value, index, tree, this, depth);
+    index += 1;
+    if (this.right) {
+        basis = this.right.reduce(callback, basis, index, thisp, tree, depth + 1);
+    }
+    return basis;
+};
+
+Node.prototype.reduceRight = function (callback, basis, index, thisp, tree, depth) {
+    depth = depth || 0;
+    if (this.right) {
+        basis = this.right.reduce(callback, basis, index, thisp, tree, depth + 1);
+        index -= this.right.length;
+    }
+    basis = callback.call(thisp, basis, this.value, this.value, tree, this, depth);
+    index -= 1;
+    if (this.left) {
+        basis = this.left.reduce(callback, basis, index, thisp, tree, depth + 1);
+    }
+    return basis;
+};
+
+Node.prototype.touch = function () {
+    this.length = 1 +
+        (this.left ? this.left.length : 0) +
+        (this.right ? this.right.length : 0);
+    this.index = this.left ? this.left.length : 0;
+};
+
+Node.prototype.checkIntegrity = function () {
+    var length = 1;
+    length += this.left ? this.left.checkIntegrity() : 0;
+    length += this.right ? this.right.checkIntegrity() : 0;
+    if (this.length !== length)
+        throw new Error("Integrity check failed: " + this.summary());
+    return length;
+}
+
+// get the next node in this subtree
+Node.prototype.getNext = function () {
+    var node = this;
+    if (node.right) {
+        node = node.right;
+        while (node.left) {
+            node = node.left;
+        }
+        return node;
+    }
+};
+
+// get the previous node in this subtree
+Node.prototype.getPrevious = function () {
+    var node = this;
+    if (node.left) {
+        node = node.left;
+        while (node.right) {
+            node = node.right;
+        }
+        return node;
+    }
+};
+
+Node.prototype.summary = function () {
+    var value = this.value || "-";
+    value += " <" + this.length;
+    if (!this.left && !this.right) {
+        return "(" + value + ")";
+    }
+    return "(" + value + " " + (
+        this.left ? this.left.summary() : "()"
+    ) + ", " + (
+        this.right ? this.right.summary() : "()"
+    ) + ")";
+};
+
+Node.prototype.log = function (charmap, logNode, log, logAbove) {
+    var self = this;
+
+    var branch;
+    if (this.left && this.right) {
+        branch = charmap.intersection;
+    } else if (this.left) {
+        branch = charmap.branchUp;
+    } else if (this.right) {
+        branch = charmap.branchDown;
+    } else {
+        branch = charmap.through;
+    }
+
+    var loggedAbove;
+    this.left && this.left.log(
+        charmap,
+        logNode,
+        function innerWrite(line) {
+            if (!loggedAbove) {
+                loggedAbove = true;
+                // leader
+                logAbove(charmap.fromBelow + charmap.through + line);
+            } else {
+                // below
+                logAbove(charmap.strafe + " " + line);
+            }
+        },
+        function innerWriteAbove(line) {
+            // above
+            logAbove("  " + line);
+        }
+    );
+
+    var loggedOn;
+    logNode(
+        this,
+        function innerWrite(line) {
+            if (!loggedOn) {
+                loggedOn = true;
+                log(branch + line);
+            } else {
+                log((self.right ? charmap.strafe : " ") + line);
+            }
+        },
+        function innerWriteAbove(line) {
+            logAbove((self.left ? charmap.strafe : " ") + line);
+        }
+    );
+
+    var loggedBelow;
+    this.right && this.right.log(
+        charmap,
+        logNode,
+        function innerWrite(line) {
+            if (!loggedBelow) {
+                loggedBelow = true;
+                log(charmap.fromAbove + charmap.through + line);
+            } else {
+                log("  " + line);
+            }
+        },
+        function innerWriteAbove(line) {
+            log(charmap.strafe + " " + line);
+        }
+    );
+};
+
+function Iterator(set, start, end) {
+    this.set = set;
+    this.prev = null;
+    this.end = end;
+    if (start) {
+        var next = this.set.findLeastGreaterThanOrEqual(start);
+        if (next) {
+            this.set.splay(next.value);
+            this.prev = next.getPrevious();
+        }
+    }
+}
+
+Iterator.prototype.next = function () {
+    var next;
+    if (this.prev) {
+        next = this.set.findLeastGreaterThan(this.prev.value);
+    } else {
+        next = this.set.findLeast();
+    }
+    if (!next) {
+        throw StopIteration;
+    }
+    if (
+        this.end !== undefined &&
+        this.set.contentCompare(next.value, this.end) >= 0
+    ) {
+        throw StopIteration;
+    }
+    this.prev = next;
+    return next.value;
+};
+
 }],["collections","tree-log",{},function (require, exports, module){
 
 // collections tree-log
@@ -3429,16 +6737,13 @@ TreeLog.unicodeSharp = {
     strafe: "\u2503"
 };
 
-}],["collections-website","lib/repl",{"collections/dict":1,"collections/map":11},function (require, exports, module){
+}],["collections-website","lib/repl",{},function (require, exports, module){
 
 // collections-website lib/repl
 // ----------------------------
 
 
 var globalEval = eval;
-
-window.Dict = require("collections/dict");
-window.Map = require("collections/map");
 
 module.exports = function (element) {
     evalSample(element);
