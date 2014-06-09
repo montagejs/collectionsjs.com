@@ -2,6 +2,12 @@
 
 name: indexOf(value)
 
+see:
+-   index-of-start
+-   last-index-of
+-   find-index
+-   find-value
+
 ---
 
 Returns the position of a value, or *-1* if the value is not found.
