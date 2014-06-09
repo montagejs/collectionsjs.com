@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Collections</title>
-    
+
     <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
     <link rel="stylesheet" href="/style/style.css">
@@ -18,7 +18,6 @@
                 <nav class="col-sm-8 col-xs-6" role="navigation">
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
-                    <a href="/documenation">Documentation</a>
                 </nav>
                 <div class="col-sm-4 search"><input type="text" placeholder="Search" style="width: 100%"></div>
             </div>
@@ -29,17 +28,28 @@
 
     <div class="row">
         <div class="col-md-6">
-            <p>JavaScript implementations of common data structures with idiomatic iterfaces, including extensions for Array and Object. TODO</p>
+            <p>
+                These JavaScript collections provide specialized alternatives to Array and Object,
+                with uniform interfaces and special features, including observability.
+                They are useful for both Web browser and Node.js applications.
+            </p>
+            <p>
+                Some data structures are better suited for specific problems.
+                The collections package gives you the freedom to experiment
+                with different approaches, without having to change your
+                existing usage.
+            </p>
+            <p>
+                Each collection implements generic methods, many already
+                familiar from ordinary Arrays, and many new methods that will
+                enrich your toolset.
+            </p>
         </div>
         <div class="col-md-6">
             <p>Add to your project with npm:</p>
             <pre>npm install --save collections</pre>
             <p>Works in Node.js, Browserify and Mr.</p>
         </div>
-    </div>
-    <div class="row search">
-        <input class="col-md-9 col-sm-8 col-xs-11" type="text" placeholder="Search">
-        <a class="col-md-3 col-sm-4 col-xs-12" href="/all">All collections and methods</a>
     </div>
     <h2>Choose a collection</h2>
     <div class="row">
@@ -190,8 +200,9 @@
         <h3 class="footer-title">collections.js is brought to you by</h3>
         <a href="http://montagestudio.com"><img class="footer-logo" src="/images/montagestudio.png" alt="Montage Studio"></a>
     </footer>
-    
+
     <script type="text/javascript" src="/script/index.js"></script>
+    <script type="text/javascript" src="/script/autocomplete.js"></script>
 </body>
 </html>
 
