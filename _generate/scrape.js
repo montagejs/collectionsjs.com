@@ -77,6 +77,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
         samples: (front.samples || []).map(parseSample),
+        see: front.see || [],
         "very-fast": front["very-fast"],
         "fast": front["fast"],
         "slow": front["slow"],
@@ -170,6 +171,8 @@ function collectMethods(implemented, collection) {
 }
 
 // Construct full collection list for each method
+// Also construct complete "see" cross reference
+// TODO Also construct transitive "deepSee" list
 
 methods = new Dict(methods.map(function (method, ref) {
     var myCollections = new Dict();
@@ -187,6 +190,18 @@ methods = new Dict(methods.map(function (method, ref) {
         summary: method.summary,
         detail: method.detail,
         samples: method.samples,
+        see: method.see.map(function (see) {
+            var method = methods.get(see);
+            if (!method) {
+                throw new Error("Bad see reference in " + ref + " to " + see);
+            }
+            return {
+                ref: see,
+                type: "method",
+                name: method.name,
+                summary: method.summary
+            };
+        }),
         collections: myCollections.values(),
         versions: method.versions
     }];
@@ -214,7 +229,7 @@ var methodIndex = methods.map(function (method, ref) {
         name: method.name,
         searches: new Set(method.versions.map(function (version) {
             return version.names.map(function (name) {
-                return " " + name.toLowerCase().replace(/\W+/g, " ") + " ";
+                return name.toLowerCase().replace(/\W+/g, " ");
             })
         })).flatten(),
         summary: method.summary
@@ -227,7 +242,7 @@ var searchIndex = [
             ref: collection.ref,
             type: "collection",
             name: collection.name,
-            search: " " + collection.name.toLowerCase().replace(/\W+/g, " ") + " ",
+            search: collection.name.toLowerCase().replace(/\W+/g, " "),
             summary: collection.summary
         };
     }),

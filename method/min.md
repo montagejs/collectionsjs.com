@@ -4,7 +4,7 @@ name: min()
 
 see:
 -   max
--   least
+-   find-least
 
 ---
 

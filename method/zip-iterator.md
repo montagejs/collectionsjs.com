@@ -6,7 +6,7 @@ version: v1
 
 see:
 -   zip
--   mapIterator
+-   map-iterator
 
 ---
 

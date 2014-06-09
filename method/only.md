@@ -4,7 +4,7 @@ name: only()
 
 see:
 -   one
--   first
+-   peek
 
 ---
 

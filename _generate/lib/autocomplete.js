@@ -36,17 +36,13 @@ function findMatches(q, cb) {
     // contains the substring `q`, add it to the `matches` array
     var matches = [];
 
-    q = " " + q.toLowerCase().replace(/\W+/g, " ");
+    q = q.toLowerCase().replace(/\W+/g, " ");
 
     for (var i = 0; i < data.searchIndex.length; i++) {
         var thing = data.searchIndex[i];
         if (thing.search.indexOf(q) >= 0) {
             matches.push(thing);
         }
-    }
-
-    if (matches.length > 0) {
-        return cb(matches);
     }
 
     for (var i = 0; i < data.methodIndex.length; i++) {
@@ -61,10 +57,6 @@ function findMatches(q, cb) {
         }
     }
 
-    if (matches.length > 10) {
-        cb([]);
-    } else {
-        cb(matches);
-    }
+    cb(matches.slice(0, 10));
 }
 

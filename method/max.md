@@ -4,7 +4,7 @@ name: max()
 
 see:
 -   min
--   greatest
+-   find-greatest
 
 todo:
 -   rationalize difference with greatest, or eliminate one or the other

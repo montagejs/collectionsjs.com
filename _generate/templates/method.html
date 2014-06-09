@@ -30,11 +30,18 @@
             {{/each}}
             </ul>
 
+            {{#if related.length }}
             <h3>Related</h3>
-
+            {{#each see}}
             <ul>
-                <li><a href="#">Todo</a></li>
+                <li>
+                    <a href="{{ref}}">{{name}}</a>
+                    {{{summary}}}
+                </li>
             </ul>
+            {{/each}}
+            {{/if}}
+
         </div>
 
         <div class="col-sm-6 col-sm-pull-6">

@@ -10,7 +10,7 @@ names:
 
 see:
 -   map
--   filterIterator
+-   filter-iterator
 
 ---
 
