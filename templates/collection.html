@@ -19,11 +19,6 @@
         </div>
 
         <div class="col-sm-6 supplements">
-            {{#if samples}}
-            <h3 class="visible-xs">Examples</h3>
-            {{include "repl" samples=samples}}
-            {{/if}}
-
             <h3>Usage</h3>
             {{{usage}}}
             <ul>
@@ -31,6 +26,11 @@
                 <li>{{this}}</li>
             {{/each}}
             </ul>
+
+            {{#if samples}}
+            <h3>{{#if samples.[1]}}Examples{{else}}Example{{/if}}</h3>
+            {{include "repl" samples=samples}}
+            {{/if}}
 
             {{#if see.length }}
             <h3>Related</h3>
