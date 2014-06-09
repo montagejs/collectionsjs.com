@@ -15,8 +15,8 @@ see:
 
 ---
 
-Finds the last value within a collection that passes a test, searching from the
-right.
+<strong>(not implemented)</strong> Finds the last value within a collection that
+passes a test, searching from the right.
 
 --- |
 

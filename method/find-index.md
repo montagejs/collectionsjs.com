@@ -15,6 +15,8 @@ see:
 
 ---
 
+<strong>(not implemented)</strong> Finds the first value within a collection
+that passes a test.
 Finds the first index within a collection that passes a test.
 
 --- |

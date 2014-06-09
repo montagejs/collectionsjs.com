@@ -16,7 +16,8 @@ see:
 
 ---
 
-Finds the last index within a collection that passes a test, searching from the
+<strong>(not implemented)</strong> Finds the last index within a collection that
+passes a test, searching from the
 right.
 
 --- |
