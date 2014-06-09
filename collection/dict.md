@@ -29,11 +29,11 @@ methods:
 
 samples:
 - |
-    var dict = new Dict(null, function (key) {
-        return this.get(key.slice(0, key.length - 1));
+    var dict = new Dict({a: 1}, function (key) {
+        return "default: " + key;
     });
-    dict.set("a", 10);
-    dict.get("abcdefg")
+    dict.get("a");
+    dict.get("b");
 
 ---
 

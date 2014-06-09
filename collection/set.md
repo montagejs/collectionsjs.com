@@ -33,6 +33,26 @@ methods:
 -   content-equals
 -   content-hash
 
+samples:
+- |
+    var object = {x: "hello"};
+    var set = new Set(["a", object]);
+    set.add("b");
+    set.toArray();
+    set.add(object);
+    set.toArray();
+- |
+    var nameSet = new Set(null, function (a, b) {
+        return a.name === b.name;
+    }, function (object) {
+        return object.name;
+    });
+    nameSet.add({name: "Kris", github: "kriskowal"});
+    nameSet.add({name: "Stuart", github: "stuk"});
+    nameSet.get({name: "Kris"});
+    nameSet.add({name: "Stuart", github: "wrong"});
+    nameSet.get({name: "Stuart"});
+
 ---
 
 A collection of unique values.
