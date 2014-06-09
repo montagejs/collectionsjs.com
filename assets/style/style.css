@@ -95,6 +95,28 @@ nav a:active {
     }
 }
 
+.header-intro {
+    font-size: 24px;
+    padding: 0 15px;
+    font-weight: 300;
+    display: none;
+}
+@media (min-width: 768px) {
+    .header-intro {
+        font-size: 32px;
+        padding: .5em 15px 1em 15px;
+    }
+}
+@media (min-width: 992px) {
+    .header-intro {
+        font-size: 36px;
+        padding: .5em 120px 1em 120px;
+    }
+}
+.index .header-intro {
+    display: block;
+}
+
 
 /* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
 
