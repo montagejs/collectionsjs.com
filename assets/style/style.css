@@ -60,35 +60,25 @@ nav a:active {
     padding: .4em 0 0 0;
 }
 
-.header .search input {
+.search input {
     font-size: 20px;
     padding: 2px 0.4em;
     background-color: hsla(0, 0%, 100%, 0.2);
 }
 
-.header .search input:hover {
+.search input:hover {
     border-color: hsla(0, 0%, 100%, .2);
 }
 
-.header .search input:focus {
+.search input:focus {
     border-color: hsla(0, 0%, 100%, .4);
     background-color: hsla(0, 0%, 100%, 0);
 }
 
-.content .search input {
-    background-color: hsla(50, 100%, 50%, 0.3);
-    font-size: 24px;
-    line-height: 1;
-    padding: 8px 15px;
-    margin: 0;
-}
-
-.content .search input:hover {
-    border-color: hsla(0, 0%, 0%, 0.2);
-}
-
-.content .search input:focus {
-    border-color: hsla(0, 0%, 0%, 0.4);
+.github {
+    vertical-align: center;
+    text-align: right;
+    margin: 26px 0;
 }
 
 /* https://github.com/twitter/typeahead.js/blob/master/doc/jquery_typeahead.md#look-and-feel */
