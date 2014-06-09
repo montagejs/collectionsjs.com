@@ -1,52 +1,54 @@
 {{#include "layout" title=name afterTitle="method" bodyClass="method" bundle="collections"}}
 
-    <div class="col-sm-6">
+    <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
 
-        <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
 
-        {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
+            {{{summary}}}
 
-        {{{summary}}}
+            {{{detail}}}
 
-        {{{detail}}}
+            <h3>On collections</h3>
+            <ul>
+                {{#each collections}}
+                {{#if implemented}}
+                <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
+                {{/if}}
+                {{/each}}
+            </ul>
 
-        <h3>On collections</h3>
-        <ul>
-            {{#each collections}}
-            {{#if implemented}}
-            <li><a href="/{{ref}}">{{name}}</a> {{#if speed}}&mdash; {{speed}}{{/if}}</li>
+        </div>
+
+        <div class="col-sm-6 supplements">
+            {{#if samples}}
+            <h3 class="visible-xs">Examples</h3>
+            {{include "repl" samples=samples}}
             {{/if}}
+
+            <h3>Usage</h3>
+            <ul>
+            {{#each names}}
+                <li>{{this}}</li>
+            {{else}}
+                <li>{{name}}</li>
             {{/each}}
-        </ul>
+            </ul>
 
-    </div>
+            {{#if see.length }}
+            <h3>Related</h3>
+            <ul>
+                {{#each see}}
+                <li>
+                    <a href="{{ref}}">{{name}}</a>
+                    {{{summary}}}
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
 
-    <div class="col-sm-6">
-        <h3 class="visible-xs">Examples</h3>
-
-        {{include "repl" samples=samples}}
-
-        <h3>Usage</h3>
-        <ul>
-        {{#each names}}
-            <li>{{this}}</li>
-        {{else}}
-            <li>{{name}}</li>
-        {{/each}}
-        </ul>
-
-        {{#if see.length }}
-        <h3>Related</h3>
-        {{#each see}}
-        <ul>
-            <li>
-                <a href="{{ref}}">{{name}}</a>
-                {{{summary}}}
-            </li>
-        </ul>
-        {{/each}}
-        {{/if}}
-
+        </div>
     </div>
 
 {{/include}}

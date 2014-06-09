@@ -140,6 +140,15 @@ nav a:active {
     width: 100%;
 }
 
+/* Supplements --------------------- */
+/* (the right hand side on the collection/method pages) */
+
+/* Remove the top padding on the first title so that the top of title aligns
+with the text on the left */
+.supplements h3:first-child {
+    margin-top: 0;
+}
+
 /* Footer -------------------------- */
 
 .footer {
