@@ -48,6 +48,7 @@ global = this;
 // collections-website lib/autocomplete
 // ------------------------------------
 
+/*global ga */
 var data = require("./data");
 var typeahead = require("./typeahead");
 
@@ -73,11 +74,16 @@ function autocomplete(element) {
     });
 
     $element.on("typeahead:selected", function (_, suggestion) {
+        if (ga) { ga("send", "event", "search", "selected", suggestion.type + "/" + suggestion.ref); }
         if (suggestion.type === "collection") {
             location.pathname = "/" + suggestion.ref;
         } else {
             location.pathname = "/" + suggestion.type + "/" + suggestion.ref;
         }
+    });
+
+    $element.on("typeahead:closed", function () {
+        if (ga) { ga("send", "event", "search", "closed", $element.val()); }
     });
 }
 
