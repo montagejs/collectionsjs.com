@@ -22,7 +22,7 @@ module.exports = generate;
 function generate(siteFs) {
     return Q()
     .then(setup.bind(null, siteFs))
-    .then(buildSearchIndex.bind(null, siteFs))
+    .then(buildData.bind(null, siteFs))
     .then(loadTemplates)
     .then(buildPages.bind(null, siteFs))
     .then(buildJavascript.bind(null, siteFs))
@@ -96,10 +96,13 @@ function loadTemplates() {
     });
 }
 
-function buildSearchIndex(siteFs) {
+function buildData(siteFs) {
     return fs.write(
-        path.join(__dirname, "lib", "search.js"),
-        "module.exports=" + JSON.stringify(data.search, null, 4),
+        path.join(__dirname, "lib", "data.js"),
+        "module.exports=" + JSON.stringify({
+            methodIndex: data.methodIndex,
+            searchIndex: data.searchIndex
+        }, null, 4),
         {charset: "utf-8"}
     );
 }

@@ -1,5 +1,5 @@
 // *sigh*
-window.jQuery = require("jquery/dist/jquery");
+window.jQuery = require("jquery/dist/jquery.js");
 require("typeahead.js/dist/typeahead.bundle.js");
 
 module.exports = function (element /*, options */) {

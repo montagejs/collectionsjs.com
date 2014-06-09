@@ -1,5 +1,7 @@
 ---
 
+name: findLast|findLastValue(value, equals?, start?)
+
 versions:
     v1:
         name: findLast(value, equals?, start?)

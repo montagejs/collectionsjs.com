@@ -1,4 +1,4 @@
-var data = require("./search");
+var data = require("./data");
 var typeahead = require("./typeahead");
 
 var search = document.querySelector(".search input");
@@ -11,9 +11,15 @@ function autocomplete(element) {
       minLength: 1
     },
     {
-      name: 'states',
+      name: 'documents',
       displayKey: 'name',
-      source: matcher(data)
+      source: findMatches,
+      templates: {
+          empty: "No matching documents.",
+          suggestion: function (suggestion) {
+              return suggestion.name + " <em>" + suggestion.type + "</em>" + suggestion.summary;
+          }
+      }
     });
 
     $element.on("typeahead:selected", function (_, suggestion) {
@@ -25,21 +31,40 @@ function autocomplete(element) {
     });
 }
 
-function matcher(data) {
-  return function findMatches(q, cb) {
-    q = q.toLowerCase();
-
+function findMatches(q, cb) {
     // iterate through the pool of strings and for any string that
     // contains the substring `q`, add it to the `matches` array
     var matches = [];
-    data.forEach(function (thing) {
-      if (thing.search.indexOf(q) !== -1) {
-        // the typeahead jQuery plugin expects suggestions to a
-        // JavaScript object, refer to typeahead docs for more info
-        matches.push(thing);
-      }
-    });
 
-    cb(matches);
-  };
-};
+    q = " " + q.toLowerCase().replace(/\W+/g, " ");
+
+    for (var i = 0; i < data.searchIndex.length; i++) {
+        var thing = data.searchIndex[i];
+        if (thing.search.indexOf(q) >= 0) {
+            matches.push(thing);
+        }
+    }
+
+    if (matches.length > 0) {
+        return cb(matches);
+    }
+
+    for (var i = 0; i < data.methodIndex.length; i++) {
+        var method = data.methodIndex[i];
+        for (var j = 0; j < method.searches.length; j++) {
+            var name = method.searches[j];
+            var pos = name.indexOf(q);
+            if (pos >= 0) {
+                matches.push(method);
+                break;
+            }
+        }
+    }
+
+    if (matches.length > 10) {
+        cb([]);
+    } else {
+        cb(matches);
+    }
+}
+

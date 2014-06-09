@@ -70,6 +70,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
     }
     return [ref, {
         ref: ref,
+        type: "method",
         name: front.name,
         names: front.names,
         deprecated: Boolean(front.deprecated),
@@ -82,6 +83,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
         versions: new Dict(versions.map(function (versionSpecific, version) {
             return [version, {
                 ref: ref,
+                type: "method",
                 version: version,
                 name: versionSpecific.name || front.name,
                 names: versionSpecific.names || front.names || [versionSpecific.name || front.name],
@@ -109,6 +111,7 @@ collections = new Dict(collections.map(function (collection, ref) {
         return methods.get(implementation.ref).versions.map(function (method, version) {
             return {
                 ref: method.ref,
+                type: "collection",
                 name: method.name,
                 prototype: implementation.prototype,
                 version: version
@@ -124,6 +127,7 @@ collections = new Dict(collections.map(function (collection, ref) {
                     name: name,
                     summary: method.summary,
                     ref: method.ref,
+                    type: "method",
                     version: method.version
                 };
             });
@@ -131,6 +135,7 @@ collections = new Dict(collections.map(function (collection, ref) {
     }).flatten().flatten();
     return [ref, {
         ref: ref,
+        type: "collection",
         name: collection.name,
         names: collection.names,
         summary: collection.summary,
@@ -175,6 +180,7 @@ methods = new Dict(methods.map(function (method, ref) {
     collectCollections(myCollections, collectionRefs, "not-implemented");
     return [ref, {
         ref: method.ref,
+        type: "method",
         name: method.name,
         names: method.names,
         deprecated: method.deprecated,
@@ -199,67 +205,43 @@ function collectCollections(myCollections, refs, note) {
     });
 }
 
-var collectionSearch = collections.map(function (collection, ref) {
+// Create seach indexes
+
+var methodIndex = methods.map(function (method, ref) {
     return {
-        search: collection.name.toLowerCase(),
-        name: collection.name,
-        type: "collection",
         ref: ref,
-        summary: collection.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, ""),
-        methods: new Set(collection.methodIndex.map(function (method) {
-            var paren = method.name.indexOf("(");
-            var name = method.name.slice(0, paren);
-            return name;
-        })).toArray().join(" ")
+        type: "method",
+        name: method.name,
+        searches: new Set(method.versions.map(function (version) {
+            return version.names.map(function (name) {
+                return " " + name.toLowerCase().replace(/\W+/g, " ") + " ";
+            })
+        })).flatten(),
+        summary: method.summary
     };
 });
 
-var methodSearch = new Set(collections.map(function (collection, ref) {
-    return collection.methodIndex.map(function (method) {
-        return [
-            method.search,
-            method.name,
-            method.ref
-        ];
-    });
-}).flatten()).map(function (tuple) {
-    var method = methods.get(tuple[2]);
-    return {
-        search: tuple[0],
-        name: tuple[1],
-        type: "method",
-        ref: tuple[2],
-        summary: method.summary.replace(/^<p>/, "").replace(/<\/p>\n$/, ""),
-        collections: method.collections.map(function (collection) {
-            return collection.name;
-        }).join(" ")
-    };
-})
-
-var search = collectionSearch.concat(methodSearch);
-
-// Construct a global method search index
-//var methodVersions = methods.map(function (method, ref) {
-//    return method.versions.map(function (method, version) {
-//        return {
-//            ref: ref + "/" + version,
-//            version: version,
-//            name: method.name,
-//            names: method.names,
-//            summary: method.summary,
-//            detail: method.detail,
-//            samples: method.samples
-//        };
-//    });
-//}).flatten();
-
-//function defaultLink(rel, ref, viaRel, viaRef) {
-//    if (rel === viaRel) {
-//        return ref + ".html";
-//    } else {
-//        return "../" + rel + "/" + ref + ".html";
-//    }
-//}
+var searchIndex = [
+    collections.map(function (collection) {
+        return {
+            ref: collection.ref,
+            type: "collection",
+            name: collection.name,
+            search: " " + collection.name.toLowerCase().replace(/\W+/g, " ") + " ",
+            summary: collection.summary
+        };
+    }),
+    // TODO interface pages
+    //interfaces.map(function (interface) {
+    //    return {
+    //        ref: interface.ref,
+    //        type: "interface",
+    //        name: interface.name,
+    //        search: " " + interface.name.toLowerCase().replace(/\W+/g, " " ) + " ",
+    //        summary: interface.summary
+    //    };
+    //})
+].flatten();
 
 function render(markdown) {
     return marked(markdown, {
@@ -270,9 +252,13 @@ function render(markdown) {
 }
 
 module.exports = {
+    interfaceRefs: interfaceRefs,
+    collectionRefs: collectionRefs,
+    methodRefs: methodRefs,
     interfaces: interfaces,
     collections: collections,
     methods: methods,
-    search: search
+    methodIndex: methodIndex,
+    searchIndex: searchIndex
 };
 

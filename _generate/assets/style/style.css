@@ -75,10 +75,6 @@ nav a:active {
     background-color: hsla(0, 0%, 100%, 0);
 }
 
-.index .header .search {
-    display: none;
-}
-
 .content .search input {
     background-color: hsla(50, 100%, 50%, 0.3);
     font-size: 24px;

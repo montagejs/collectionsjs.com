@@ -1,5 +1,7 @@
 ---
 
+name: find|findValue(value, equals?, start?)
+
 versions:
     v1:
         name: find(value, equals?, start?)
