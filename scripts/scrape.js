@@ -214,7 +214,8 @@ function collectCollections(myCollections, refs, note) {
             myCollections.set(ref, {
                 ref: ref,
                 name: collection.name,
-                note: note
+                note: note,
+                implemented: note !== "not-implemented"
             });
         }
     });

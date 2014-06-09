@@ -10,6 +10,10 @@
 -   poke-back
 
 # set interface
+-   union
+-   intersection
+-   difference
+-   symmetric-difference
 -   has-value
 -   has-value-equals
 -   get-value
