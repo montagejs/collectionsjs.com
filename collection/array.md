@@ -3,7 +3,7 @@
 name: Array
 
 usage: |
-    require("collections/shim-array")
+    require("collections/shim-array");
 
 names:
 -   Array()
