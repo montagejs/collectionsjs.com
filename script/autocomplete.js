@@ -466,7 +466,7 @@ module.exports={
                 "find callback ",
                 "find callback thisp "
             ],
-            "summary": "<p>Finds the first value within a collection that passes a test.</p>\n"
+            "summary": "<p><strong>(not implemented)</strong> Finds the first value within a collection that passes a test.</p>\n"
         },
         {
             "ref": "find-last",
@@ -476,7 +476,7 @@ module.exports={
                 "findlast callback ",
                 "findlast callback thisp "
             ],
-            "summary": "<p>Finds the last value within a collection that passes a test, searching from the right.</p>\n"
+            "summary": "<p><strong>(not implemented)</strong> Finds the last value within a collection that passes a test, searching from the right.</p>\n"
         },
         {
             "ref": "find-index",
@@ -486,7 +486,7 @@ module.exports={
                 "findindex callback ",
                 "findindex callback thisp "
             ],
-            "summary": "<p>Finds the first index within a collection that passes a test.</p>\n"
+            "summary": "<p><strong>(not implemented)</strong> Finds the first value within a collection that passes a test. Finds the first index within a collection that passes a test.</p>\n"
         },
         {
             "ref": "find-last-index",
@@ -496,7 +496,7 @@ module.exports={
                 "findlastindex callback ",
                 "findlastindex callback thisp "
             ],
-            "summary": "<p>Finds the last index within a collection that passes a test, searching from the right.</p>\n"
+            "summary": "<p><strong>(not implemented)</strong> Finds the last index within a collection that passes a test, searching from the right.</p>\n"
         },
         {
             "ref": "find-value",
