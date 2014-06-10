@@ -38,15 +38,6 @@ nav a:active {
     color: hsl(316, 72%, 78%);
 }
 
-.logo {
-    text-align: center;
-}
-@media (min-width: 768px) {
-    .logo {
-        text-align: left;
-    }
-}
-
 .header-logo {
     display: inline-block;
     height: 40px;
@@ -62,11 +53,16 @@ nav a:active {
 
 .search input {
     line-height: 1;
-    margin: 26px 0;
+    margin: 0 0 15px 0;
     border-radius: 6px;
     outline: none;
     color: inherit;
     border: 2px solid hsla(0, 0%, 100%, 0);
+}
+@media (min-width: 768px) {
+    .search input {
+        margin: 26px 0;
+    }
 }
 
 .search input::-webkit-input-placeholder {
@@ -92,10 +88,13 @@ nav a:active {
     text-align: center;
     vertical-align: middle;
     margin: 26px 0;
+    text-align: right;
 }
-@media (min-width: 768px) {
+@media (max-width: 767px) {
     .github {
-        text-align: right;
+       position: absolute;
+       right: 0;
+       width: auto;
     }
 }
 
