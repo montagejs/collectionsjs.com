@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="128px" height="122px" viewBox="0 0 128 122" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.0.2 (7799) - http://www.bohemiancoding.com/sketch -->
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch -->
     <title>icon</title>
-    <description>Created with Sketch.</description>
-    <defs>
-        <linearGradient x1="0%" y1="33.536917%" x2="100%" y2="33.536917%" id="linearGradient-1">
-            <stop stop-color="#FFFFFF" stop-opacity="0.496603261" offset="0%"></stop>
-            <stop stop-color="#FFFFFF" offset="50.038147%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="50.276947%"></stop>
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
-        </linearGradient>
-    </defs>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Icon" sketch:type="MSLayerGroup" transform="translate(2.000000, 3.000000)">
-            <path d="M2.49614504,42.9618846 C1.1175622,41.2254306 0.920551406,38.2690739 2.05898032,36.3538468 L21.6090661,3.46390976 C22.7462095,1.55084522 25.4671212,4.00902549e-16 27.678095,8.93591926e-16 L96.2494049,1.61738977e-14 C98.4640936,1.66674149e-14 101.180005,1.5486826 102.318434,3.46390976 L121.86852,36.3538468 C123.005663,38.2669113 122.812444,41.2222741 121.431355,42.9618846 L64.459895,114.722765 C63.0813122,116.459219 60.8486938,116.462376 59.4676049,114.722765 L2.49614504,42.9618846 Z" id="Emblem" stroke="#DAC630" stroke-width="6" fill="#F7DE24" sketch:type="MSShapeGroup"></path>
-            <path d="M43.24,55.16 L43.24,32.84 C43.24,26.5466352 44.9466496,21.9200148 48.36,18.96 C51.7733504,15.9999852 56.2266392,14.52 61.72,14.52 C67.320028,14.52 71.8933156,15.9066528 75.44,18.68 C78.9866844,21.4533472 80.76,25.1333104 80.76,29.72 C80.76,31.6933432 80.360004,33.0399964 79.56,33.76 C78.759996,34.4800036 77.426676,34.84 75.56,34.84 C72.1466496,34.84 70.4133336,33.7466776 70.36,31.56 C70.3066664,30.8666632 70.2400004,30.2666692 70.16,29.76 C70.0799996,29.2533308 69.8666684,28.5866708 69.52,27.76 C69.1733316,26.9333292 68.733336,26.2400028 68.2,25.68 C67.666664,25.1199972 66.866672,24.640002 65.8,24.24 C64.733328,23.839998 63.4800072,23.64 62.04,23.64 C56.439972,23.64 53.64,26.706636 53.64,32.84 L53.64,55.16 C53.64,61.293364 56.4933048,64.36 62.2,64.36 C63.9066752,64.36 65.3333276,64.093336 66.48,63.56 C67.6266724,63.026664 68.4533308,62.2666716 68.96,61.28 C69.4666692,60.2933284 69.8133324,59.4133372 70,58.64 C70.1866676,57.8666628 70.3066664,56.9200056 70.36,55.8 C70.5200008,53.6133224 72.2266504,52.52 75.48,52.52 C77.346676,52.52 78.6933292,52.8799964 79.52,53.6 C80.3466708,54.3200036 80.76,55.6666568 80.76,57.64 C80.76,62.440024 78.9866844,66.2799856 75.44,69.16 C71.8933156,72.0400144 67.2933616,73.48 61.64,73.48 C56.1466392,73.48 51.7066836,72.0000148 48.32,69.04 C44.9333164,66.0799852 43.24,61.4533648 43.24,55.16 L43.24,55.16 Z" id="C" fill="#514807" sketch:type="MSShapeGroup"></path>
-            <path d="M6.49073037,43.6104133 C5.11513797,41.8681057 4.91619809,38.9057693 6.04329263,36.9990824 L24.0977831,6.45660386 C25.2262624,4.54757426 27.9480448,3 30.1597347,3 L93.7724427,3 C95.9918868,3 98.7072998,4.54991694 99.8343943,6.45660386 L117.888885,36.9990824 C119.017364,38.908112 118.813166,41.8730119 117.441447,43.6104133 L64.4568191,110.720063 C63.0812267,112.46237 60.8470771,112.457464 59.4753583,110.720063 L6.49073037,43.6104133 Z" id="Shiny" fill-opacity="0.25" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+        <g id="Group" sketch:type="MSLayerGroup" transform="translate(2.000000, 2.000000)">
+            <rect id="Frame" stroke-opacity="0.496603261" stroke="#FFFFFF" stroke-width="2" sketch:type="MSShapeGroup" x="-1" y="-1" width="38" height="38"></rect>
+            <rect id="Rectangle-6" fill="#FFFFFF" sketch:type="MSShapeGroup" x="5.78571429" y="5.78571429" width="10.2857143" height="10.2857143" rx="2"></rect>
+            <rect id="Rectangle-7" fill="#FFFFFF" sketch:type="MSShapeGroup" x="19.9285714" y="5.78571429" width="10.2857143" height="10.2857143" rx="2"></rect>
+            <rect id="Rectangle-8" fill="#FFFFFF" sketch:type="MSShapeGroup" x="19.9285714" y="19.9285714" width="10.2857143" height="10.2857143" rx="2"></rect>
+            <rect id="Rectangle-9" fill="#FFFFFF" sketch:type="MSShapeGroup" x="5.78571429" y="19.9285714" width="10.2857143" height="10.2857143" rx="2"></rect>
         </g>
     </g>
 </svg>

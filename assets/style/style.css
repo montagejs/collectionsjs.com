@@ -23,9 +23,10 @@ nav {
 
 nav a {
     display: inline-block;
-    margin: 0 12px;
+    margin: 0 12px 0 0;
     color: inherit;
     line-height: 60px;
+    vertical-align: middle;
 }
 
 nav a:hover {
@@ -48,8 +49,8 @@ nav a:active {
 
 .header-logo {
     display: inline-block;
-    height: 60px;
-    vertical-align: top;
+    height: 40px;
+    vertical-align: middle;
 }
 
 .header-name {
@@ -113,7 +114,6 @@ nav a:active {
 @media (min-width: 992px) {
     .header-intro {
         font-size: 36px;
-        padding: .5em 120px 1em 120px;
     }
 }
 .index .header-intro {
