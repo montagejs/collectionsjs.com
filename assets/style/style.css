@@ -176,8 +176,8 @@ nav a:active {
 
 /* Content -------------------------- */
 
-.questions > div {
-    margin-bottom: 10px;
+.questions .question {
+    margin-bottom: 14px;
 }
 
 .method h2::before {
