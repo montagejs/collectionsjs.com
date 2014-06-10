@@ -176,8 +176,8 @@ nav a:active {
 
 /* Content -------------------------- */
 
-.questions > div {
-    margin-bottom: 10px;
+.questions .question {
+    margin-bottom: 14px;
 }
 
 .method h2::before {
@@ -192,6 +192,14 @@ nav a:active {
 
 .repl-input::before {
     content: "\00276F\0000a0";
+}
+
+.repl-output::before {
+    content: "\0000a0\0000a0";
+}
+
+.repl-output {
+    color: #999;
 }
 
 .repl-output-comment {

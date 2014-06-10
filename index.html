@@ -66,7 +66,7 @@
     <div class="row">
         <div class="col-sm-8 questions"><form id="choose">
 
-            <div class="row" id="shape">
+            <div class="row question" id="shape">
                 <p class="col-sm-6 col-xs-12">What kind of collection are you looking for?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="radio" name="shape" value="map"> I need to look up values by key.</label><br>
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <div class="row hide" id="keys">
+            <div class="row question hide" id="keys">
                 <p class="col-sm-6 col-xs-12">What with the keys be?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="radio" name="keys" value="any" checked> Anything.</label><br>
@@ -85,42 +85,42 @@
                 </div>
             </div>
 
-            <div class="row hide" id="weak">
+            <div class="row question hide" id="weak">
                 <p class="col-sm-6 col-xs-12">Can you sacrifice iterability to gain better garbage collection?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="weak"> Values should be garbage collected if the keys are lost.</label>
                 </div>
             </div>
 
-            <div class="row hide" id="unique">
+            <div class="row question hide" id="unique">
                 <p class="col-sm-6 col-xs-12">Do you need the collection to prevent duplicate values? </p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="unique"> All values should be <em>unique</em></label>
                 </div>
             </div>
 
-            <div class="row hide" id="ordered">
+            <div class="row question hide" id="ordered">
                 <p class="col-sm-6 col-xs-12">Will you ever need to visit every value in the collection in order?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="ordered" checked> Should be <em>ordered</em> and <em>iterable</em>.</label>
                 </div>
             </div>
 
-            <div class="row hide" id="sorted">
+            <div class="row question hide" id="sorted">
                 <p class="col-sm-6 col-xs-12">Do you need the collection to keep the values in sorted order?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="sorted"> All values should be <em>sorted</em>.</label>
                 </div>
             </div>
 
-            <div class="row hide" id="capacity">
+            <div class="row question hide" id="capacity">
                 <p class="col-sm-6 col-xs-12">Do you need to limit the size of the collection and automatically evict stale values? </p>
                 <p class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="capacity"> Limit the capacity</label>
                 </p>
             </div>
 
-            <div class="row hide" id="strategy">
+            <div class="row question hide" id="strategy">
                 <p class="col-sm-6 col-xs-12">Is it better to forget a value if it wasn't used recently, or if thasn't been used frequently?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="radio" name="strategy" value="recency"> Evict the least <em>recently</em> used.</label><br>
@@ -128,21 +128,21 @@
                 </div>
             </div>
 
-            <div class="row hide" id="multi">
+            <div class="row question hide" id="multi">
                 <p class="col-sm-6 col-xs-12">Would it be convenient if the values were always a particular collection, like a map from keys to sets?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="multi"> The value will always be another collection.</label>
                 </div>
             </div>
 
-            <div class="row hide" id="long">
+            <div class="row question hide" id="long">
                 <p class="col-sm-6 col-xs-12">Will this collection get big, bigger than around 1000 values?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="checkbox" name="long"> This collection will get very big.</label>
                 </div>
             </div>
 
-            <div class="row hide" id="access">
+            <div class="row question hide" id="access">
                 <p class="col-sm-6 col-xs-12">Where will you need to access values quickly?</p>
                 <div class="col-sm-2 col-xs-12">
                     <label><input type="checkbox" name="first"> first</label>
@@ -155,7 +155,7 @@
                 </div>
             </div>
 
-            <div class="row hide" id="mutate">
+            <div class="row question hide" id="mutate">
                 <p class="col-sm-6 col-xs-12">Where will you need to make changes quickly?</p>
                 <div class="col-sm-2 col-xs-12">
                     <label><input type="checkbox" name="shift"> [un]shift</label>
@@ -168,7 +168,7 @@
                 </div>
             </div>
 
-            <div class="row hide" id="churn">
+            <div class="row question hide" id="churn">
                 <p class="col-sm-6 col-xs-12">Is it better to waste time on garbage collection or shifting values around?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="radio" name="churn" value="garbage"> Take the hit collecting dropped nodes.</label><br>
