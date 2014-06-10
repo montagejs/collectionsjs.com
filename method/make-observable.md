@@ -5,7 +5,7 @@ name: makeObservable()
 see:
 -   add-range-change-listener
 -   add-map-change-listener
--   add-property-change-listener
+-   add-own-property-change-listener
 
 ---
 

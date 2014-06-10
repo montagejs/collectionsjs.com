@@ -2,6 +2,7 @@
 var Q = require("q");
 var fs = require("q-io/fs");
 var Reader = require("q-io/reader");
+var Dict = require("collections/dict");
 var path = require("path");
 var Handlebars = require("handlebars");
 var mrs = require("mr/build");
@@ -82,19 +83,18 @@ function loadTemplates() {
         });
     })
     .then(function () {
-        return Q.all([
-            fs.read(fs.join(__dirname, "..", "templates", "index.html")),
-            fs.read(fs.join(__dirname, "..", "templates", "collection.html")),
-            fs.read(fs.join(__dirname, "..", "templates", "method.html")),
-        ]);
+        return Reader(["index", "all", "collection", "method"])
+        .map(function (name) {
+            return fs.read(fs.join(__dirname, "..", "templates", name + ".html"))
+            .then(function (template) {
+                return [name, Handlebars.compile(template.toString("utf-8"))];
+            })
+        })
+        .all()
+        .then(function (templates) {
+            return new Dict(templates).toObject();
+        })
     })
-    .spread(function (index, collection, method) {
-        return {
-            index: Handlebars.compile(index.toString("utf8")),
-            collection: Handlebars.compile(collection.toString("utf8")),
-            method: Handlebars.compile(method.toString("utf8"))
-        };
-    });
 }
 
 function buildData(siteFs) {
@@ -114,6 +114,11 @@ function buildPages(siteFs, templates) {
     return Q().then(function () {
         return siteFs.write("index.html", templates.index({
             collections: data.collections.toObject()
+        }));
+    }).then(function () {
+        return siteFs.write("all.html", templates.all({
+            collections: data.collections.toObject(),
+            methods: data.methods.toObject()
         }));
     }).then(function () {
         return Reader(data.collections)

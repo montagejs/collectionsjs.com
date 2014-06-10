@@ -59,6 +59,7 @@ nav a:active {
     color: inherit;
     border: 2px solid hsla(0, 0%, 100%, 0);
 }
+
 @media (min-width: 768px) {
     .search input {
         margin: 26px 0;
@@ -263,6 +264,14 @@ with the text on the left */
     }
 }
 
+/* index */
+
+#all-link {
+    font-size: 150%;
+}
+
+/* cards */
+
 .card.collection {
     display: block;
     height: 40px;
@@ -285,3 +294,4 @@ with the text on the left */
     background-color: hsla(50, 100%, 50%, 0.3);
     border: solid 1px #aaaaaa;
 }
+

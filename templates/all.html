@@ -1,0 +1,23 @@
+{{#include "layout" title=name bodyClass="collection" bundle="collections"}}
+
+    <div class="col-sm-6">
+        <h2>Collections</h2>
+        <dl>
+            {{#each collections}}
+            <dt><a href="/{{ref}}">{{name}}</a> {{#if note}}&mdash; {{note}}{{/if}}</dt>
+            <dd>{{{summary}}}
+            {{/each}}
+        </dl>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Methods</h2>
+        <dl>
+            {{#each methods}}
+            <dt><a href="/method/{{ref}}">{{name}}</a></dt>
+            <dd>{{{summary}}}</dd>
+            {{/each}}
+        </dl>
+    </div>
+
+{{/include}}

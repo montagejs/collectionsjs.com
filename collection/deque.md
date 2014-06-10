@@ -62,7 +62,7 @@ the same pace, the backing store will not create new objects.
 The store itself is an object with numeric indexes, like an array.
 The indexes of the deque are offset from the indexes within the circular buffer,
 and values spill over from the end of the buffer back to the beginning.
-As values are removed by way of shifting, it makes remove for values by way of
+As values are removed by way of shifting, it makes room for values by way of
 pushing.
 
 ```js
