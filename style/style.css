@@ -3,6 +3,9 @@ body {
     font-family: 'Fira Sans', sans-serif;
 }
 
+label {
+    font-weight: 500;
+}
 
 /* Header -------------------------- */
 
@@ -20,9 +23,10 @@ nav {
 
 nav a {
     display: inline-block;
-    margin: 0 12px;
+    margin: 0 12px 0 0;
     color: inherit;
     line-height: 60px;
+    vertical-align: middle;
 }
 
 nav a:hover {
@@ -34,19 +38,10 @@ nav a:active {
     color: hsl(316, 72%, 78%);
 }
 
-.logo {
-    text-align: center;
-}
-@media (min-width: 768px) {
-    .logo {
-        text-align: left;
-    }
-}
-
 .header-logo {
     display: inline-block;
-    height: 60px;
-    vertical-align: top;
+    height: 40px;
+    vertical-align: middle;
 }
 
 .header-name {
@@ -58,11 +53,16 @@ nav a:active {
 
 .search input {
     line-height: 1;
-    margin: 26px 0;
+    margin: 0 0 15px 0;
     border-radius: 6px;
     outline: none;
     color: inherit;
     border: 2px solid hsla(0, 0%, 100%, 0);
+}
+@media (min-width: 768px) {
+    .search input {
+        margin: 26px 0;
+    }
 }
 
 .search input::-webkit-input-placeholder {
@@ -88,10 +88,13 @@ nav a:active {
     text-align: center;
     vertical-align: middle;
     margin: 26px 0;
+    text-align: right;
 }
-@media (min-width: 768px) {
+@media (max-width: 767px) {
     .github {
-        text-align: right;
+       position: absolute;
+       right: 0;
+       width: auto;
     }
 }
 
@@ -110,7 +113,6 @@ nav a:active {
 @media (min-width: 992px) {
     .header-intro {
         font-size: 36px;
-        padding: .5em 120px 1em 120px;
     }
 }
 .index .header-intro {
@@ -125,20 +127,51 @@ nav a:active {
 }
 
 .tt-dropdown-menu {
-    color: #000;
-    background-color: #f5f5f5;
-    border: 1px solid #cccccc;
-    border-radius: 0 0 4px 4px;
-    border-top: 0;
-    margin-top: 1px;
+    width: 100%;
+    color: hsl(316, 72%, 30%);
+    background-color: hsl(316, 72%, 96%);
+    border: 2px solid hsl(316, 72%, 18%);
+    border-radius: 6px;
+    margin-top: -22px;
+}
+
+.tt-dataset-documents {
+    padding: 10px 15px;
+}
+
+.tt-suggestions {
+    margin: -10px -15px;
 }
 
 .tt-suggestion {
-    padding: 2px 0.4em;
+    padding: 10px 15px 0 15px;
+    border-bottom: 1px solid hsla(0, 0%, 0%, 0.15);
+    cursor: pointer;
+}
+
+.tt-suggestion:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.tt-suggestion:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.tt-suggestion:only-child {
+    border-radius: 6px;
+}
+
+.tt-suggestion code {
+    background: hsla(0, 0%, 0%, 0.1);
+}
+
+.tt-suggestion strong {
+    color: #000;
+    font-weight: 500;
 }
 
 .tt-cursor {
-    background: #c9c9c9;
+    background: #fff;
 }
 
 /* Content -------------------------- */

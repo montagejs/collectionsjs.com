@@ -1120,6 +1120,76 @@ module.exports={
                 "sortedsetlog "
             ],
             "summary": "<p>Writes a tree describing the internal state of the sorted set splay tree.</p>\n"
+        },
+        {
+            "ref": "add-range-change-listener",
+            "type": "method",
+            "name": "addRangeChangeListener(listener, token?, beforeChange?)",
+            "searches": [
+                "addrangechangelistener listener ",
+                "addrangechangelistener listener token ",
+                "addrangechangelistener listener token beforechange "
+            ],
+            "summary": "<p>Adds a listener for when values are added or removed at any position.</p>\n"
+        },
+        {
+            "ref": "remove-range-change-listener",
+            "type": "method",
+            "name": "removeRangeChangeListener(listener, token?, beforeChange?)",
+            "searches": [
+                "removerangechangelistener listener ",
+                "removerangechangelistener listener token ",
+                "removerangechangelistener listener token beforechange "
+            ],
+            "summary": "<p>Unregisters a range change listener provided by <a href=\"add-range-change-listener\">addRangeChangeListener</a>.</p>\n"
+        },
+        {
+            "ref": "dispatch-range-change",
+            "type": "method",
+            "name": "dispatchRangeChange(plus, minus, index, beforeChange?)",
+            "searches": [
+                "dispatchrangechange plus minus index ",
+                "dispatchrangechange plus minus index beforechange "
+            ],
+            "summary": "<p>Informs range change listeners that values were removed then added at an index.</p>\n"
+        },
+        {
+            "ref": "add-before-range-change-listener",
+            "type": "method",
+            "name": "addBeforeRangeChangeListener(listener, token?)",
+            "searches": [
+                "addbeforerangechangelistener listener ",
+                "addbeforerangechangelistener listener token "
+            ],
+            "summary": "<p>Adds a listener for before values are added or removed at any position.</p>\n"
+        },
+        {
+            "ref": "remove-before-range-change-listener",
+            "type": "method",
+            "name": "removeBeforeRangeChangeListener(listener, token?)",
+            "searches": [
+                "removebeforerangechangelistener listener ",
+                "removebeforerangechangelistener listener token "
+            ],
+            "summary": "<p>Unregisters a range change listener provided by <a href=\"add-before-range-change-listener\">addBeforeRangeChangeListener</a> or <a href=\"add-range-change-listener\">addRangeChangeListener</a> with the <code>beforeChange</code> flag.</p>\n"
+        },
+        {
+            "ref": "dispatch-before-range-change",
+            "type": "method",
+            "name": "dispatchBeforeRangeChange(plus, minus, index)",
+            "searches": [
+                "dispatchbeforerangechange plus minus index "
+            ],
+            "summary": "<p>Informs range change listeners that values will be removed then added at an index.</p>\n"
+        },
+        {
+            "ref": "make-observable",
+            "type": "method",
+            "name": "makeObservable()",
+            "searches": [
+                "makeobservable "
+            ],
+            "summary": "<p>Makes changes observable for this collection.</p>\n"
         }
     ],
     "searchIndex": [
@@ -1304,6 +1374,13 @@ module.exports={
             "name": "GenericMap",
             "search": "genericmap",
             "summary": "<p>An abstract collection that implements many generic methods, reusable by most maps.</p>\n"
+        },
+        {
+            "ref": "range-changes",
+            "type": "collection",
+            "name": "RangeChanges",
+            "search": "rangechanges",
+            "summary": "<p>An abstract collection that provides the interface for listening to and dispatching notifications when values are removed then added at an index.</p>\n"
         }
     ]
 }}],["collections-website","lib/typeahead",{"jquery/dist/jquery.js":3,"typeahead.js/dist/typeahead.bundle.js":4},function (require, exports, module){

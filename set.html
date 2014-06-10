@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Set - Collections for JavaScript</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/tomorrow.css">
@@ -20,7 +20,7 @@
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
                 <div class="col-sm-5 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
-                <div class="col-sm-1 col-xs-12 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+                <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
             </div>
             <div class="row">
                 <p class="header-intro">This package provides JavaScript implementations of common collections, with many useful features.</p>
@@ -249,6 +249,34 @@ their <code>value</code> property.</p>
                 
                 <dt><a href="/method/content-hash">contentHash(value)</a></dt>
                 <dd><p>The <code>hash</code> function used by this collection to hash its own values.</p>
+</dd>
+                
+                <dt><a href="/method/add-range-change-listener">addRangeChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Adds a listener for when values are added or removed at any position.</p>
+</dd>
+                
+                <dt><a href="/method/remove-range-change-listener">removeRangeChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Unregisters a range change listener provided by <a href="add-range-change-listener">addRangeChangeListener</a>.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-range-change">dispatchRangeChange(plus, minus, index, beforeChange?)</a></dt>
+                <dd><p>Informs range change listeners that values were removed then added at an index.</p>
+</dd>
+                
+                <dt><a href="/method/add-before-range-change-listener">addBeforeRangeChangeListener(listener, token?)</a></dt>
+                <dd><p>Adds a listener for before values are added or removed at any position.</p>
+</dd>
+                
+                <dt><a href="/method/remove-before-range-change-listener">removeBeforeRangeChangeListener(listener, token?)</a></dt>
+                <dd><p>Unregisters a range change listener provided by <a href="add-before-range-change-listener">addBeforeRangeChangeListener</a> or <a href="add-range-change-listener">addRangeChangeListener</a> with the <code>beforeChange</code> flag.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-before-range-change">dispatchBeforeRangeChange(plus, minus, index)</a></dt>
+                <dd><p>Informs range change listeners that values will be removed then added at an index.</p>
+</dd>
+                
+                <dt><a href="/method/make-observable">makeObservable()</a></dt>
+                <dd><p>Makes changes observable for this collection.</p>
 </dd>
                 
             </dl>
