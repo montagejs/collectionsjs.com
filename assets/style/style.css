@@ -181,6 +181,23 @@ nav a:active {
     margin-bottom: 14px;
 }
 
+.questions .show {
+    -webkit-animation: show .4s ease-out;
+       -moz-animation: show .4s ease-out;
+        -ms-animation: show .4s ease-out;
+            animation: show .4s ease-out;
+}
+#shape.show {
+    -webkit-animation: none;
+       -moz-animation: none;
+        -ms-animation: none;
+            animation: none;
+}
+@-webkit-keyframes show { 0% { opacity: 0; } }
+   @-moz-keyframes show { 0% { opacity: 0; } }
+    @-ms-keyframes show { 0% { opacity: 0; } }
+        @keyframes show { 0% { opacity: 0; } }
+
 .method h2::before {
     font-style: italic;
     color: #CCC;
