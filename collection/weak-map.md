@@ -7,6 +7,12 @@ usage: |
 names:
 -   WeakMap()
 
+methods:
+-   get-key
+-   set
+-   has-key
+-   delete-key
+
 summary: |
 
     A map of object keys to values with good garbage collection behavior.

@@ -2,6 +2,11 @@
 
 name: GenericOrder
 
+usage: |
+    require("collections/shim-object");
+    var GenericOrder = require("collections/generic-order");
+    Object.addEach(MyOrder.prototype, GenericOrder.prototype);
+
 methods:
 -   equals
 -   compare

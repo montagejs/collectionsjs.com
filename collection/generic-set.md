@@ -2,6 +2,11 @@
 
 name: GenericSet
 
+usage: |
+    require("collections/shim-object");
+    var GenericSet = require("collections/generic-set");
+    Object.addEach(MySet.prototype, GenericSet.prototype);
+
 methods:
 -   union
 -   intersection

@@ -196,7 +196,8 @@ methods = new Dict(methods.map(function (method, ref) {
         see: method.see.map(function (see) {
             var method = methods.get(see);
             if (!method) {
-                throw new Error("Bad see reference in " + ref + " to " + see);
+                console.warn("Bad see reference in " + ref + " to " + see);
+                return;
             }
             return {
                 ref: see,
@@ -204,7 +205,7 @@ methods = new Dict(methods.map(function (method, ref) {
                 name: method.name,
                 summary: method.summary
             };
-        }),
+        }).filter(Boolean),
         collections: myCollections.values(),
         versions: method.versions
     }];

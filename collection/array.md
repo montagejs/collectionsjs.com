@@ -4,6 +4,7 @@ name: Array
 
 usage: |
     require("collections/shim-array");
+    require("collections/listen/array-changes");
 
 names:
 -   Array()
@@ -29,6 +30,14 @@ mixin:
 -   generic-collection/group
 -   generic-collection/sorted
 -   generic-collection/reversed
+
+inherits:
+-   range-changes
+-   map-changes
+-   property-changes
+-   observable-range
+-   observable-map
+-   observable-object
 
 methods:
 -   push

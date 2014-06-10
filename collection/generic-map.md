@@ -2,6 +2,11 @@
 
 name: GenericMap
 
+usage: |
+    require("collections/shim-object");
+    var GenericMap = require("collections/generic-map");
+    Object.addEach(MyMap.prototype, GenericMap.prototype);
+
 methods:
 -   add-each
 -   get-key
