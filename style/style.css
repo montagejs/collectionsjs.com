@@ -281,6 +281,13 @@ with the text on the left */
     }
 }
 
+/* index */
+
+.all-link {
+    /* same size as the bootsrap h4 */
+    font-size: 18px;
+}
+
 /* cards */
 
 .card.collection {
