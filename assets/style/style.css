@@ -194,6 +194,14 @@ nav a:active {
     content: "\00276F\0000a0";
 }
 
+.repl-output::before {
+    content: "\0000a0\0000a0";
+}
+
+.repl-output {
+    color: #999;
+}
+
 .repl-output-comment {
     overflow: hidden;
     height: 1px;
