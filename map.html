@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Map - Collections</title>
+    <title>Map - Collections for JavaScript</title>
 
     <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
@@ -15,11 +15,11 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <nav class="col-sm-7 col-xs-12 logo" role="navigation">
+                <nav class="col-sm-6 col-xs-12 logo" role="navigation">
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
-                <div class="col-sm-4 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-5 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
                 <div class="col-sm-1 col-xs-12 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
             </div>
             <div class="row">
@@ -218,24 +218,6 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
         </div>
 
         <div class="col-sm-6 supplements">
-            
-            <h3 class="visible-xs">Examples</h3>
-            <pre class="repl"><span class="repl-input">var map = new Map({a: 1, b: 2});</span>
-<span class="repl-input">map.set(&quot;c&quot;, 3);</span>
-<span class="repl-input">map.toObject();</span>
-<span class="repl-input">var key = {x: &quot;hello&quot;};</span>
-<span class="repl-input">map.set(key, 4);</span>
-<span class="repl-input">map.get(key);</span>
-<span class="repl-input">map.entries();</span>
-</pre><pre class="repl"><span class="repl-input">var defaultMap = new Map({a: 1}, null, null, function (key) {
-    return &quot;default: &quot; + key;
-});</span>
-<span class="repl-input">defaultMap.get(&quot;a&quot;);</span>
-<span class="repl-input">defaultMap.get(&quot;missing&quot;);</span>
-</pre>
-
-            
-
             <h3>Usage</h3>
             <pre><code class="lang-js"><span class="hljs-built_in">var</span> <span class="hljs-built_in">Map</span> <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">"collections/map"</span>);
 </code></pre>
@@ -251,6 +233,24 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
                 <li>Map(values, equals, hash, getDefault)</li>
             
             </ul>
+
+            
+            <h3>Examples</h3>
+            <pre class="repl"><span class="repl-input">var map = new Map({a: 1, b: 2});</span>
+<span class="repl-input">map.set(&quot;c&quot;, 3);</span>
+<span class="repl-input">map.toObject();</span>
+<span class="repl-input">var key = {x: &quot;hello&quot;};</span>
+<span class="repl-input">map.set(key, 4);</span>
+<span class="repl-input">map.get(key);</span>
+<span class="repl-input">map.entries();</span>
+</pre><pre class="repl"><span class="repl-input">var defaultMap = new Map({a: 1}, null, null, function (key) {
+    return &quot;default: &quot; + key;
+});</span>
+<span class="repl-input">defaultMap.get(&quot;a&quot;);</span>
+<span class="repl-input">defaultMap.get(&quot;missing&quot;);</span>
+</pre>
+
+            
 
             
 

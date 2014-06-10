@@ -120,12 +120,12 @@ var form = document.getElementById("choose");
 function handleChange() {
     var query = new Query();
 
-    query.shape = form.shape.value;
-    query.keys = form.keys.value;
+    query.shape = getRadioGroupValue(form.shape);
+    query.keys = getRadioGroupValue(form.keys);
     query.unique = form.unique.checked;
     query.weak = form.weak.checked;
     query.capacity = (query.shape === "map" || query.unique) && form.capacity.checked;
-    query.strategy = form.strategy.value;
+    query.strategy = getRadioGroupValue(form.strategy);
     query.ordered = !query.weak && form.ordered.checked;
     query.sorted = query.ordered && form.sorted.checked;
     query.multi = form.multi.checked;
@@ -133,7 +133,7 @@ function handleChange() {
     query.shift = form.shift.checked;
     query.splice = form.splice.checked;
     query.long = form.long.checked;
-    query.churn = form.churn.value;
+    query.churn = getRadioGroupValue(form.churn);
 
     for (var id in questions) {
         var element = document.getElementById(id);
@@ -146,6 +146,19 @@ function handleChange() {
 
 }
 
+function getRadioGroupValue(nodeList) {
+    // Available on the RadioNodeList
+    if (nodeList.value) {
+        return nodeList.value;
+    }
+
+    for (var i = 0; i < nodeList.length; i++) {
+        var radio = nodeList[i];
+        if (radio.checked) {
+            return radio.value;
+        }
+    }
+}
 }],["collections-website","lib/choose",{},function (require, exports, module){
 
 // collections-website lib/choose
