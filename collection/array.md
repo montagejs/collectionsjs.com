@@ -63,6 +63,7 @@ methods:
 -   equals
 -   construct-clone
 -   clone
+-   make-observable
 
 ---
 

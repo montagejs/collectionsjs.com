@@ -5,6 +5,7 @@ name: dispatchBeforeMapChange(key, value)
 version: 1
 
 see:
+-   dispatch-map-change
 -   add-map-change-listener
 
 ---

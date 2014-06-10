@@ -21,4 +21,3 @@ Unregisters a map change listener provided by
 
 --- |
 
-

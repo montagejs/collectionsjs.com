@@ -173,15 +173,15 @@
 #-   get-all-map-change-descriptors
 
 # Property changes
-#-   add-own-property-change-listener
-#-   add-before-own-property-change-listener
-#-   remove-own-property-change-listener
-#-   remove-before-own-property-change-listener
-#-   dispatch-own-property-change
-#-   dispatch-before-own-property-change
-#-   make-property-observable
-##-   get-own-property-change-descriptor
-##-   has-own-property-change-descriptor
+-   add-own-property-change-listener
+-   add-before-own-property-change-listener
+-   remove-own-property-change-listener
+-   remove-before-own-property-change-listener
+-   dispatch-own-property-change
+-   dispatch-before-own-property-change
+-   make-property-observable
+#-   get-own-property-change-descriptor
+#-   has-own-property-change-descriptor
 
 # General observability for arrays
 -   make-observable

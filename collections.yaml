@@ -25,7 +25,7 @@
 -   generic-order
 -   generic-set
 -   generic-map
-#-   property-changes
+-   property-changes
 -   range-changes
 -   map-changes
 #-   observable-object

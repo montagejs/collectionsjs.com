@@ -19,4 +19,3 @@ Informs map change listeners that an entry was created, deleted, or updated.
 
 Collections that can dispatch map changes call this method to inform listeners.
 
-

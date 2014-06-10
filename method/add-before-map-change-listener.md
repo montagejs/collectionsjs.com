@@ -15,7 +15,7 @@ see:
 
 ---
 
-Adds a listener for when map entries are created, deleted, or updated.
+Adds a listener for before map entries are created, deleted, or updated.
 
 ---
 
