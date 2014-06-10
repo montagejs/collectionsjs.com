@@ -3,6 +3,9 @@ body {
     font-family: 'Fira Sans', sans-serif;
 }
 
+label {
+    font-weight: 500;
+}
 
 /* Header -------------------------- */
 
@@ -125,20 +128,51 @@ nav a:active {
 }
 
 .tt-dropdown-menu {
-    color: #000;
-    background-color: #f5f5f5;
-    border: 1px solid #cccccc;
-    border-radius: 0 0 4px 4px;
-    border-top: 0;
-    margin-top: 1px;
+    width: 100%;
+    color: hsl(316, 72%, 30%);
+    background-color: hsl(316, 72%, 96%);
+    border: 2px solid hsl(316, 72%, 18%);
+    border-radius: 6px;
+    margin-top: -22px;
+}
+
+.tt-dataset-documents {
+    padding: 10px 15px;
+}
+
+.tt-suggestions {
+    margin: -10px -15px;
 }
 
 .tt-suggestion {
-    padding: 2px 0.4em;
+    padding: 10px 15px 0 15px;
+    border-bottom: 1px solid hsla(0, 0%, 0%, 0.15);
+    cursor: pointer;
+}
+
+.tt-suggestion:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.tt-suggestion:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.tt-suggestion:only-child {
+    border-radius: 6px;
+}
+
+.tt-suggestion code {
+    background: hsla(0, 0%, 0%, 0.1);
+}
+
+.tt-suggestion strong {
+    color: #000;
+    font-weight: 500;
 }
 
 .tt-cursor {
-    background: #c9c9c9;
+    background: #fff;
 }
 
 /* Content -------------------------- */
