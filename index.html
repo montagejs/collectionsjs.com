@@ -19,7 +19,7 @@
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
-                <div class="col-sm-5 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-5 col-xs-12 search"><input id="search" type="text" placeholder="Search" style="width: 100%"></div>
                 <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
             </div>
             <div class="row">
@@ -60,6 +60,8 @@
             <p>Works in <a href="http://nodejs.org/">Node.js</a>,
             <a href="http://browserify.org/">Browserify</a> and
             <a href="https://github.com/montagejs/mr#montage-require">Mr</a>.</p>
+
+            <p id="all-link"><a href="/all">All collections and methods</a></p>
         </div>
     </div>
     <h2>Choose a collection</h2>
@@ -76,7 +78,7 @@
             </div>
 
             <div class="row question hide" id="keys">
-                <p class="col-sm-6 col-xs-12">What with the keys be?</p>
+                <p class="col-sm-6 col-xs-12">What will the keys be?</p>
                 <div class="col-sm-6 col-xs-12">
                     <label><input type="radio" name="keys" value="any" checked> Anything.</label><br>
                     <label><input type="radio" name="keys" value="numbers"> Only numbers.</label><br>

@@ -19,7 +19,7 @@
                     <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
                     <a class="header-name" href="/">collections.js</a>
                 </nav>
-                <div class="col-sm-5 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-5 col-xs-12 search"><input id="search" type="text" placeholder="Search" style="width: 100%"></div>
                 <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
             </div>
             <div class="row">
@@ -146,6 +146,12 @@ but also taking the <code>length</code> into account).</p>
                 <li>
                     <a href="add-map-change-listener">addMapChangeListener(listener, token?, beforeChange?)</a>
                     <p>Adds a listener for when the value for a key changes, or when entries are added or removed.</p>
+
+                </li>
+                
+                <li>
+                    <a href="add-own-property-change-listener">addOwnPropertyChangeListener(key, listener, beforeChange?)</a>
+                    <p>Adds a listener for an owned property with the given name.</p>
 
                 </li>
                 
