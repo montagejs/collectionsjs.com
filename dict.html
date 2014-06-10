@@ -232,7 +232,7 @@ expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abc
 </dd>
                 
                 <dt><a href="/method/add-before-map-change-listener">addBeforeMapChangeListener(listener, token?)</a></dt>
-                <dd><p>Adds a listener for when map entries are created, deleted, or updated.</p>
+                <dd><p>Adds a listener for before map entries are created, deleted, or updated.</p>
 </dd>
                 
                 <dt><a href="/method/remove-map-change-listener">removeMapChangeListener(listener, token?, beforeChange?)</a></dt>
@@ -249,6 +249,34 @@ expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abc
                 
                 <dt><a href="/method/dispatch-before-map-change">dispatchBeforeMapChange(key, value)</a></dt>
                 <dd><p>Informs map change listeners that an entry will be created, deleted, or updated.</p>
+</dd>
+                
+                <dt><a href="/method/add-own-property-change-listener">addOwnPropertyChangeListener(key, listener, beforeChange?)</a></dt>
+                <dd><p>Adds a listener for an owned property with the given name.</p>
+</dd>
+                
+                <dt><a href="/method/add-before-own-property-change-listener">addBeforeOwnPropertyChangeListener(name, listener)</a></dt>
+                <dd><p>Adds a listener for before a property changes.</p>
+</dd>
+                
+                <dt><a href="/method/remove-own-property-change-listener">removeOwnPropertyChangeListener(name, listener, beforeChange?)</a></dt>
+                <dd><p>Unregisters a property change listener provided by <a href="add-own-property-change-listener">addOwnPropertyChangeListener</a>.</p>
+</dd>
+                
+                <dt><a href="/method/remove-before-own-property-change-listener">removeBeforeOwnPropertyChangeListener(key, listener)</a></dt>
+                <dd><p>Unregisters a property change listener provided by <a href="add-before-own-property-change-listener">addBeforeOwnPropertyChangeListener</a> or <a href="add-own-property-change-listener">addOwnPropertyChangeListener</a> with the <code>beforeChange</code> flag.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-own-property-change">dispatchOwnPropertyChange(key, value, beforeChange?)</a></dt>
+                <dd><p>Informs property change listeners that the value for a property name has changed.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-before-own-property-change">dispatchBeforeOwnPropertyChange(key, value)</a></dt>
+                <dd><p>Informs property change listeners that the value for a property name will change.</p>
+</dd>
+                
+                <dt><a href="/method/make-property-observable">makePropertyObservable(name)</a></dt>
+                <dd><p>May perform internal changes necessary to dispatch property changes for a particular name.</p>
 </dd>
                 
             </dl>

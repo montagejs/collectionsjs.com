@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PropertyChanges - Collections for JavaScript</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/tomorrow.css">
+</head>
+<body class="collection">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <nav class="col-sm-6 col-xs-12 logo" role="navigation">
+                    <a href="/"><img class="header-logo" src="/images/collections-js.svg" alt="collections.js logo"></a>
+                    <a class="header-name" href="/">collections.js</a>
+                </nav>
+                <div class="col-sm-5 col-xs-12 search"><input type="text" placeholder="Search" style="width: 100%"></div>
+                <div class="col-sm-1 github"><a href="https://github.com/montagejs/collections"><img src="/images/github-mark-light-32px.png" alt="Fork Collections on Github"></a></div>
+            </div>
+            <div class="row">
+                <p class="header-intro">This package provides JavaScript implementations of common collections, with many useful features.</p>
+            </div>
+        </div>
+    </header>
+    <div class="container content">
+        
+
+    <h2>PropertyChanges</h2>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>A prototype that provides the interface for listening to and dispatching synchronous property change notifications.</p>
+
+
+            <p>ECMAScript 5 introduces property descriptors to JavaScript.
+The <code>Object.defineProperty</code> interface allows us to install <code>get</code> and <code>set</code>
+methods that intercept changes to particular properties.
+This allows us to watch for changes to specific methods on arbitrary objects.</p>
+<p>The property change listener system installs property descriptors on arbitrary
+objects.</p>
+<p>Arrays are special.
+You cannot add a change listener on <code>length</code>, and it would be impractical to
+install change listeners on every index of an array.
+The <code>collections/listen/array-changes</code> module provides an override for
+<a href="/method/make-observable">makeObservable</a> that instead swaps out the
+implemntations of all array change <em>methods</em> and manually dispatches property
+changes to each observed index and the <code>length</code>.</p>
+<p>However, property change listeners cannot observe the effect of the <code>delete</code>
+operator, because deletion changes the property descriptor.
+Setting a value to <code>null</code> or <code>undefined</code> should suffice in all cases where
+property change listeners are involved.</p>
+<h2 id="arbitrary-objects">Arbitrary objects</h2>
+<p>Objects do not need to implement the property changes interface to be
+observable.
+The <code>PropertyChanges</code> constructor provides alternate methods to those on the
+prototype that accept the desired object as a first argument.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> <span class="hljs-keyword">object</span> = <span class="hljs-comment">{x: 10}</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xChange</span><span class="hljs-params">(value, key, <span class="hljs-keyword">object</span>)</span> <span class="hljs-comment">{}</span>
+<span class="hljs-title">PropertyChanges</span>.<span class="hljs-title">addOwnPropertyChangeListener</span><span class="hljs-params">(<span class="hljs-keyword">object</span>, "x", xChange)</span>;</span>
+</code></pre>
+<h2 id="version-2">Version 2</h2>
+<p>This property changes interface is endemic to Collections version 1.
+In particular, property change listeners do not receive both the old and new
+value, so you must install separate change and will-change listeners if you want
+to see both values.
+The system will ignore duplicate requests to install a specific change listener
+for a key and <code>beforeChange</code> flag, but will throw an error if you unregister
+multiple times.
+In version 2, we will introduce property observers which overcome these
+limitations.
+Particularly, in version 2, change observers have much less book-keeping (just
+an array for each property and phase), allow redundant listeners, gracefully
+handle redundant cancellations, and recycle the change observer objects to
+reduce garbage collections.
+Change observers will also compose better, allowing one change observer to be
+automatically be created and cancelled depending on the value of another
+observer.</p>
+
+
+            <h3>Methods</h3>
+            <dl>
+                
+                <dt><a href="/method/add-own-property-change-listener">addOwnPropertyChangeListener(key, listener, beforeChange?)</a></dt>
+                <dd><p>Adds a listener for an owned property with the given name.</p>
+</dd>
+                
+                <dt><a href="/method/add-before-own-property-change-listener">addBeforeOwnPropertyChangeListener(name, listener)</a></dt>
+                <dd><p>Adds a listener for before a property changes.</p>
+</dd>
+                
+                <dt><a href="/method/remove-own-property-change-listener">removeOwnPropertyChangeListener(name, listener, beforeChange?)</a></dt>
+                <dd><p>Unregisters a property change listener provided by <a href="add-own-property-change-listener">addOwnPropertyChangeListener</a>.</p>
+</dd>
+                
+                <dt><a href="/method/remove-before-own-property-change-listener">removeBeforeOwnPropertyChangeListener(key, listener)</a></dt>
+                <dd><p>Unregisters a property change listener provided by <a href="add-before-own-property-change-listener">addBeforeOwnPropertyChangeListener</a> or <a href="add-own-property-change-listener">addOwnPropertyChangeListener</a> with the <code>beforeChange</code> flag.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-own-property-change">dispatchOwnPropertyChange(key, value, beforeChange?)</a></dt>
+                <dd><p>Informs property change listeners that the value for a property name has changed.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-before-own-property-change">dispatchBeforeOwnPropertyChange(key, value)</a></dt>
+                <dd><p>Informs property change listeners that the value for a property name will change.</p>
+</dd>
+                
+                <dt><a href="/method/make-property-observable">makePropertyObservable(name)</a></dt>
+                <dd><p>May perform internal changes necessary to dispatch property changes for a particular name.</p>
+</dd>
+                
+            </dl>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            <h3>Usage</h3>
+            <pre><code class="lang-js"><span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/shim-object"</span>);
+<span class="hljs-keyword">var</span> PropertyChanges = <span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/listen/property-changes"</span>);
+<span class="hljs-built_in">Object</span>.addEach(MyConstructor.prototype, PropertyChanges.prototype);
+</code></pre>
+
+            <ul>
+            
+                <li>PropertyChanges</li>
+            
+            </ul>
+
+            
+
+            
+
+        </div>
+    </div>
+
+
+    </div>
+    <footer class="footer">
+        <h3 class="footer-title">collections.js is brought to you by</h3>
+        <a href="http://montagestudio.com"><img class="footer-logo" src="/images/montagestudio.png" alt="Montage Studio"></a>
+    </footer>
+
+    <script type="text/javascript" src="/script/collections.js"></script>
+    <script type="text/javascript" src="/script/autocomplete.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-51771141-1', 'collectionsjs.com');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>
+

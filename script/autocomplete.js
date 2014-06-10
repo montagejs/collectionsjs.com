@@ -1201,7 +1201,7 @@ module.exports={
                 "addbeforemapchangelistener listener ",
                 "addbeforemapchangelistener listener token "
             ],
-            "summary": "<p>Adds a listener for when map entries are created, deleted, or updated.</p>\n"
+            "summary": "<p>Adds a listener for before map entries are created, deleted, or updated.</p>\n"
         },
         {
             "ref": "remove-map-change-listener",
@@ -1242,6 +1242,72 @@ module.exports={
                 "dispatchbeforemapchange key value "
             ],
             "summary": "<p>Informs map change listeners that an entry will be created, deleted, or updated.</p>\n"
+        },
+        {
+            "ref": "add-own-property-change-listener",
+            "type": "method",
+            "name": "addOwnPropertyChangeListener(key, listener, beforeChange?)",
+            "searches": [
+                "addownpropertychangelistener key listener ",
+                "addownpropertychangelistener key listener beforechange "
+            ],
+            "summary": "<p>Adds a listener for an owned property with the given name.</p>\n"
+        },
+        {
+            "ref": "add-before-own-property-change-listener",
+            "type": "method",
+            "name": "addBeforeOwnPropertyChangeListener(name, listener)",
+            "searches": [
+                "addbeforeownpropertychangelistener listener "
+            ],
+            "summary": "<p>Adds a listener for before a property changes.</p>\n"
+        },
+        {
+            "ref": "remove-own-property-change-listener",
+            "type": "method",
+            "name": "removeOwnPropertyChangeListener(name, listener, beforeChange?)",
+            "searches": [
+                "removeownpropertychangelistener name listener ",
+                "removeownpropertychangelistener name listener beforechange "
+            ],
+            "summary": "<p>Unregisters a property change listener provided by <a href=\"add-own-property-change-listener\">addOwnPropertyChangeListener</a>.</p>\n"
+        },
+        {
+            "ref": "remove-before-own-property-change-listener",
+            "type": "method",
+            "name": "removeBeforeOwnPropertyChangeListener(key, listener)",
+            "searches": [
+                "removebeforeownpropertychangelistener key listener "
+            ],
+            "summary": "<p>Unregisters a property change listener provided by <a href=\"add-before-own-property-change-listener\">addBeforeOwnPropertyChangeListener</a> or <a href=\"add-own-property-change-listener\">addOwnPropertyChangeListener</a> with the <code>beforeChange</code> flag.</p>\n"
+        },
+        {
+            "ref": "dispatch-own-property-change",
+            "type": "method",
+            "name": "dispatchOwnPropertyChange(key, value, beforeChange?)",
+            "searches": [
+                "dispatchownpropertychange key value ",
+                "dispatchownpropertychange key value beforechange "
+            ],
+            "summary": "<p>Informs property change listeners that the value for a property name has changed.</p>\n"
+        },
+        {
+            "ref": "dispatch-before-own-property-change",
+            "type": "method",
+            "name": "dispatchBeforeOwnPropertyChange(key, value)",
+            "searches": [
+                "dispatchbeforeownpropertychange key value "
+            ],
+            "summary": "<p>Informs property change listeners that the value for a property name will change.</p>\n"
+        },
+        {
+            "ref": "make-property-observable",
+            "type": "method",
+            "name": "makePropertyObservable(name)",
+            "searches": [
+                "makepropertyobservable name "
+            ],
+            "summary": "<p>May perform internal changes necessary to dispatch property changes for a particular name.</p>\n"
         },
         {
             "ref": "make-observable",
@@ -1435,6 +1501,13 @@ module.exports={
             "name": "GenericMap",
             "search": "genericmap",
             "summary": "<p>An abstract collection that implements many generic methods, reusable by most maps.</p>\n"
+        },
+        {
+            "ref": "property-changes",
+            "type": "collection",
+            "name": "PropertyChanges",
+            "search": "propertychanges",
+            "summary": "<p>A prototype that provides the interface for listening to and dispatching synchronous property change notifications.</p>\n"
         },
         {
             "ref": "range-changes",
