@@ -2,6 +2,8 @@
 
 name: removeBeforeRangeChangeListener(listener, token?)
 
+version: 1
+
 names:
 -   removeBeforeRangeChangeListener(listener)
 -   removeBeforeRangeChangeListener(listener, token)

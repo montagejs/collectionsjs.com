@@ -2,6 +2,8 @@
 
 name: dispatchRangeChange(plus, minus, index, beforeChange?)
 
+version: 1
+
 names:
 -   dispatchRangeChange(plus, minus, index)
 -   dispatchRangeChange(plus, minus, index, beforeChange)

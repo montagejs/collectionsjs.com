@@ -81,3 +81,10 @@ sought node.
 These methods will always accept a node instead to instantly traverse to a known
 position.
 
+Lists provide [range change listeners](range-changes), but at significant cost.
+Making range changes observable on a list requires that for each change to the
+list, it must scan back to the head of the list to determine the node’s index,
+which obviates the principle advantage of using the linked list structure.
+Also, direct manipulation of the nodes is not observable and will require manual
+change dispatch.
+

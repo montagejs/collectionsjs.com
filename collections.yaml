@@ -27,7 +27,7 @@
 -   generic-map
 #-   property-changes
 -   range-changes
-#-   map-changes
+-   map-changes
 #-   observable-object
 #-   observable-range
 #-   observable-map

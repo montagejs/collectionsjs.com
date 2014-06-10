@@ -2,6 +2,8 @@
 
 name: RangeChanges
 
+version: 1
+
 usage: |
     require("collections/shim-object");
     var RangeChange = require("collections/listen/range-changes");

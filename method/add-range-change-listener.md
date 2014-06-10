@@ -2,6 +2,8 @@
 
 name: addRangeChangeListener(listener, token?, beforeChange?)
 
+version: 1
+
 names:
 -   addRangeChangeListener(listener)
 -   addRangeChangeListener(listener, token)

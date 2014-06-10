@@ -7,6 +7,9 @@ usage: |
     var GenericMap = require("collections/generic-map");
     Object.addEach(MyMap.prototype, GenericMap.prototype);
 
+inherits:
+-   map-changes
+
 methods:
 -   add-each
 -   get-key

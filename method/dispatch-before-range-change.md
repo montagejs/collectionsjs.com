@@ -2,6 +2,8 @@
 
 name: dispatchBeforeRangeChange(plus, minus, index)
 
+version: 1
+
 see:
 -   add-range-change-listener
 

@@ -163,15 +163,15 @@
 #-   get-all-range-change-descriptors
 
 ## Map changes
-#-   add-map-change-listener
-#-   add-before-map-change-listener
-#-   remove-map-change-listener
-#-   remove-before-map-change-listener
-#-   dispatch-map-change
-#-   dispatch-before-map-change
-##-   get-map-change-descriptor
-##-   get-all-map-change-descriptors
-#
+-   add-map-change-listener
+-   add-before-map-change-listener
+-   remove-map-change-listener
+-   remove-before-map-change-listener
+-   dispatch-map-change
+-   dispatch-before-map-change
+#-   get-map-change-descriptor
+#-   get-all-map-change-descriptors
+
 # Property changes
 #-   add-own-property-change-listener
 #-   add-before-own-property-change-listener
