@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>entries() method - Collections for JavaScript</title>
+    <title>addMapChangeListener(listener, token?, beforeChange?) method - Collections for JavaScript</title>
 
     <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
@@ -30,19 +30,59 @@
     <div class="container content">
         
 
-    <h2 >entries()</h2>
+    <h2 >addMapChangeListener(listener, token?, beforeChange?)</h2>
 
     <div class="row">
         <div class="col-sm-6">
             
 
-            <p>Returns an array of all <em>[key, value]</em> entries for this map.</p>
+            <p>Adds a listener for when the value for a key changes, or when entries are added or removed.</p>
 
 
-            <p>Previous versions called this method <code>items()</code>.
-This name has been deprecated in version 1, and removed in version 2.</p>
-<p>The ES6 standard stipulates that this method should return an iterator.
-This library does not yet comply, but may in version 2.</p>
+            <p>When the value for a key <em>changes</em>, maps will first dispatch a <em>map will change</em>
+notification with the old value followed by a <em>map change</em> event with the new
+value.
+When a new entry gets <em>added</em> to a map, it will first dispatch a <em>map will
+change</em> with undefined, followed by the <em>map change</em> with the initial value.
+When an existing entry is <em>deleted</em> from a map, it will first dispatch a <em>map
+will change</em> with the current value, followed by a <em>map change</em> with undefined.</p>
+<p>As such, it is not possible to distinguish an undefined value from a
+non-existant value, and it is not possible to capture both the new and old value
+with a single listener.
+These problems are addressed in version 2 with a new <code>observeMapChange</code>
+interface.</p>
+<p>Map change listeners receive such messages synchronously, as the map changes.</p>
+<p>The listener itself can be a function, or a “handler” object.
+A map change listener function <code>(value, key, map)</code>, the same argument pattern
+familiar from iterator callbacks.</p>
+<p>A handler object must implement a method that receives the same arguments, but
+the name of the method depends on whether your change listener has a name or
+“token” and whether the change listener is listening for change before or after
+they take effect.</p>
+<p>The <code>token</code> argument passed to <code>addMapChangeListener</code> dictates the listener’s
+name, and the <code>beforeChange</code> argument (true or false) determines whether the
+listener is called before or after the change is reflected on the collection.</p>
+<p>If the <code>token</code> is <code>&quot;values&quot;</code> and <code>beforeChange</code> is <code>false</code>, the handler method
+name would be <code>handleValuesMapChange</code>.
+If <code>beforeChange</code> is <code>true</code>, the handler method would be
+<code>handleValuesMapWillChange</code>.
+If there is no <code>token</code>, the handler method would be either <code>handleMapChange</code>
+or <code>handleMapWillChange</code>.</p>
+<p>The formula for handler method names gives precedence to the most specific name
+implemented by the handler:</p>
+<ul>
+<li>handle + <strong>token</strong> + Map + Change <strong>or</strong> WillChange</li>
+<li>handleMap + Change <strong>or</strong> WillChange</li>
+<li>call</li>
+</ul>
+<p>The <code>collections/map-changes</code> module exports a map changes <strong>mixin</strong>.
+The methods of <code>MapChanges.prototype</code> can be copied to any collection
+that needs this interface.  Its mutation methods will need to dispatch
+the map changes.</p>
+<p>To register a will-change listener, use
+<a href="add-before-map-change-listener">addBeforeMapChangeListener</a> and avoid using
+the <code>beforeChange</code> boolean argument unless it does in fact depend on a variable
+with that name, for the sake of readability.</p>
 
 
             <h3>On collections</h3>
@@ -50,6 +90,10 @@ This library does not yet comply, but may in version 2.</p>
                 
                 
                 <li><a href="/map">Map</a> </li>
+                
+                
+                
+                <li><a href="/heap">Heap</a> </li>
                 
                 
                 
@@ -81,13 +125,15 @@ This library does not yet comply, but may in version 2.</p>
                 
                 
                 
+                <li><a href="/array">Array</a> </li>
+                
+                
+                
                 <li><a href="/generic-map">GenericMap</a> </li>
                 
                 
                 
-                
-                
-                
+                <li><a href="/map-changes">MapChanges</a> </li>
                 
                 
                 
@@ -130,9 +176,11 @@ This library does not yet comply, but may in version 2.</p>
             <h3>Usage</h3>
             <ul>
             
-                <li>entries()</li>
+                <li>addMapChangeListener(listener)</li>
             
-                <li>items()</li>
+                <li>addMapChangeListener(listener, token)</li>
+            
+                <li>addMapChangeListener(listener, token, beforeChange)</li>
             
             </ul>
 
@@ -143,14 +191,20 @@ This library does not yet comply, but may in version 2.</p>
             <ul>
                 
                 <li>
-                    <a href="keys">keys()</a>
-                    <p>Returns an array of the keys of this map.</p>
+                    <a href="add-before-map-change-listener">addBeforeMapChangeListener(listener, token?)</a>
+                    <p>Adds a listener for when map entries are created, deleted, or updated.</p>
 
                 </li>
                 
                 <li>
-                    <a href="values">values()</a>
-                    <p>Returns an array of the values of this map.</p>
+                    <a href="remove-map-change-listener">removeMapChangeListener(listener, token?, beforeChange?)</a>
+                    <p>Unregisters a map change listener provided by <a href="add-map-change-listener">addMapChangeListener</a>.</p>
+
+                </li>
+                
+                <li>
+                    <a href="dispatch-map-change">dispatchMapChange(key, value, beforeChange?)</a>
+                    <p>Informs map change listeners that an entry was created, deleted, or updated.</p>
 
                 </li>
                 

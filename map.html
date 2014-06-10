@@ -213,6 +213,30 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
                 <dd><p>The <code>hash</code> function used by this collection to hash its own values.</p>
 </dd>
                 
+                <dt><a href="/method/add-map-change-listener">addMapChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Adds a listener for when the value for a key changes, or when entries are added or removed.</p>
+</dd>
+                
+                <dt><a href="/method/add-before-map-change-listener">addBeforeMapChangeListener(listener, token?)</a></dt>
+                <dd><p>Adds a listener for when map entries are created, deleted, or updated.</p>
+</dd>
+                
+                <dt><a href="/method/remove-map-change-listener">removeMapChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Unregisters a map change listener provided by <a href="add-map-change-listener">addMapChangeListener</a>.</p>
+</dd>
+                
+                <dt><a href="/method/remove-before-map-change-listener">removeBeforeMapChangeListener(listener, token?)</a></dt>
+                <dd><p>Unregisters a map change listener provided by <a href="add-before-map-change-listener">addBeforeMapChangeListener</a> or <a href="add-map-change-listener">addMapChangeListener</a> with the <code>beforeChange</code> flag.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-map-change">dispatchMapChange(key, value, beforeChange?)</a></dt>
+                <dd><p>Informs map change listeners that an entry was created, deleted, or updated.</p>
+</dd>
+                
+                <dt><a href="/method/dispatch-before-map-change">dispatchBeforeMapChange(key, value)</a></dt>
+                <dd><p>Informs map change listeners that an entry will be created, deleted, or updated.</p>
+</dd>
+                
             </dl>
 
         </div>

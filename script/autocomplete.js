@@ -1183,6 +1183,67 @@ module.exports={
             "summary": "<p>Informs range change listeners that values will be removed then added at an index.</p>\n"
         },
         {
+            "ref": "add-map-change-listener",
+            "type": "method",
+            "name": "addMapChangeListener(listener, token?, beforeChange?)",
+            "searches": [
+                "addmapchangelistener listener ",
+                "addmapchangelistener listener token ",
+                "addmapchangelistener listener token beforechange "
+            ],
+            "summary": "<p>Adds a listener for when the value for a key changes, or when entries are added or removed.</p>\n"
+        },
+        {
+            "ref": "add-before-map-change-listener",
+            "type": "method",
+            "name": "addBeforeMapChangeListener(listener, token?)",
+            "searches": [
+                "addbeforemapchangelistener listener ",
+                "addbeforemapchangelistener listener token "
+            ],
+            "summary": "<p>Adds a listener for when map entries are created, deleted, or updated.</p>\n"
+        },
+        {
+            "ref": "remove-map-change-listener",
+            "type": "method",
+            "name": "removeMapChangeListener(listener, token?, beforeChange?)",
+            "searches": [
+                "removemapchangelistener listener ",
+                "removemapchangelistener listener token ",
+                "removemapchangelistener listener token beforechange "
+            ],
+            "summary": "<p>Unregisters a map change listener provided by <a href=\"add-map-change-listener\">addMapChangeListener</a>.</p>\n"
+        },
+        {
+            "ref": "remove-before-map-change-listener",
+            "type": "method",
+            "name": "removeBeforeMapChangeListener(listener, token?)",
+            "searches": [
+                "removebeforemapchangelistener listener ",
+                "removebeforemapchangelistener listener token "
+            ],
+            "summary": "<p>Unregisters a map change listener provided by <a href=\"add-before-map-change-listener\">addBeforeMapChangeListener</a> or <a href=\"add-map-change-listener\">addMapChangeListener</a> with the <code>beforeChange</code> flag.</p>\n"
+        },
+        {
+            "ref": "dispatch-map-change",
+            "type": "method",
+            "name": "dispatchMapChange(key, value, beforeChange?)",
+            "searches": [
+                "dispatchmapchange key value ",
+                "dispatchmapchange key value beforechange "
+            ],
+            "summary": "<p>Informs map change listeners that an entry was created, deleted, or updated.</p>\n"
+        },
+        {
+            "ref": "dispatch-before-map-change",
+            "type": "method",
+            "name": "dispatchBeforeMapChange(key, value)",
+            "searches": [
+                "dispatchbeforemapchange key value "
+            ],
+            "summary": "<p>Informs map change listeners that an entry will be created, deleted, or updated.</p>\n"
+        },
+        {
             "ref": "make-observable",
             "type": "method",
             "name": "makeObservable()",
@@ -1381,6 +1442,13 @@ module.exports={
             "name": "RangeChanges",
             "search": "rangechanges",
             "summary": "<p>An abstract collection that provides the interface for listening to and dispatching notifications when values are removed then added at an index.</p>\n"
+        },
+        {
+            "ref": "map-changes",
+            "type": "collection",
+            "name": "MapChanges",
+            "search": "mapchanges",
+            "summary": "<p>An abstract collection that provides the interface for listening to and dispatching notifications when the value for a key changes and when entries are added or removed.</p>\n"
         }
     ]
 }}],["collections-website","lib/typeahead",{"jquery/dist/jquery.js":3,"typeahead.js/dist/typeahead.bundle.js":4},function (require, exports, module){

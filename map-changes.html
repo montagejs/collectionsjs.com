@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>pokeBack(value) method - Collections for JavaScript</title>
+    <title>MapChanges - Collections for JavaScript</title>
 
     <link href='http://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="/style/tomorrow.css">
 </head>
-<body class="method">
+<body class="collection">
     <header class="header">
         <div class="container">
             <div class="row">
@@ -30,123 +30,61 @@
     <div class="container content">
         
 
-    <h2 >pokeBack(value)</h2>
+    <h2>MapChanges</h2>
 
     <div class="row">
         <div class="col-sm-6">
-            
-
-            <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
+            <p>An abstract collection that provides the interface for listening to and dispatching notifications when the value for a key changes and when entries are added or removed.</p>
 
 
             
 
-            <h3>On collections</h3>
-            <ul>
+            <h3>Methods</h3>
+            <dl>
                 
+                <dt><a href="/method/add-map-change-listener">addMapChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Adds a listener for when the value for a key changes, or when entries are added or removed.</p>
+</dd>
                 
-                <li><a href="/deque">Deque</a> </li>
+                <dt><a href="/method/add-before-map-change-listener">addBeforeMapChangeListener(listener, token?)</a></dt>
+                <dd><p>Adds a listener for when map entries are created, deleted, or updated.</p>
+</dd>
                 
+                <dt><a href="/method/remove-map-change-listener">removeMapChangeListener(listener, token?, beforeChange?)</a></dt>
+                <dd><p>Unregisters a map change listener provided by <a href="add-map-change-listener">addMapChangeListener</a>.</p>
+</dd>
                 
+                <dt><a href="/method/remove-before-map-change-listener">removeBeforeMapChangeListener(listener, token?)</a></dt>
+                <dd><p>Unregisters a map change listener provided by <a href="add-before-map-change-listener">addBeforeMapChangeListener</a> or <a href="add-map-change-listener">addMapChangeListener</a> with the <code>beforeChange</code> flag.</p>
+</dd>
                 
-                <li><a href="/array">Array</a> </li>
+                <dt><a href="/method/dispatch-map-change">dispatchMapChange(key, value, beforeChange?)</a></dt>
+                <dd><p>Informs map change listeners that an entry was created, deleted, or updated.</p>
+</dd>
                 
+                <dt><a href="/method/dispatch-before-map-change">dispatchBeforeMapChange(key, value)</a></dt>
+                <dd><p>Informs map change listeners that an entry will be created, deleted, or updated.</p>
+</dd>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-            </ul>
+            </dl>
 
         </div>
 
         <div class="col-sm-6 supplements">
             <h3>Usage</h3>
+            <pre><code class="lang-js"><span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/shim-object"</span>);
+<span class="hljs-keyword">var</span> MapChange = <span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/listen/map-changes"</span>);
+<span class="hljs-built_in">Object</span>.addEach(MyMap.prototype, MapChange.prototype);
+</code></pre>
+
             <ul>
             
-                <li>pokeBack(value)</li>
+                <li>MapChanges</li>
             
             </ul>
 
             
 
-            
-            <h3>Related</h3>
-            <ul>
-                
-                <li>
-                    <a href="peek-back">peekBack()</a>
-                    <p>Returns the value at the beginning of a collection, the value that would be returned by <code>pop()</code>.</p>
-
-                </li>
-                
-                <li>
-                    <a href="poke">poke(value)</a>
-                    <p>Replaces the value at the beginning of a collection, the value that would be returned by <code>shift()</code>.</p>
-
-                </li>
-                
-                <li>
-                    <a href="pop">pop()</a>
-                    <p>Removes a value from the end of a collection, and returns that value.</p>
-
-                </li>
-                
-                <li>
-                    <a href="push">push(...values)</a>
-                    <p>Adds values to the end of a collection.</p>
-
-                </li>
-                
-            </ul>
             
 
         </div>
