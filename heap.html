@@ -298,6 +298,20 @@ or <code>float(index)</code>.</p>
             </ul>
 
             
+            <h3>Examples</h3>
+            <div class="repl"><pre><span class="repl-input">var heap = new Heap([2, 8, 5]);
+</span><span class="repl-input">heap.push(6)
+</span><span class="repl-input">heap.pop();
+</span><span class="repl-input">heap.peek();
+</span></pre></div><div class="repl"><pre><span class="repl-input">var minHeap = new Heap([2, 8, 5], null, function (a, b) {
+    return b - a ;
+});
+</span><span class="repl-input">minHeap.push(6)
+</span><span class="repl-input">minHeap.pop();
+</span><span class="repl-input">minHeap.peek();
+</span></pre></div>
+
+            
 
             
 

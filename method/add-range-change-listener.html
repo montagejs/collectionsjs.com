@@ -185,6 +185,16 @@ with that name, for the sake of readability.</p>
             </ul>
 
             
+            <h3>Example</h3>
+            <div class="repl"><pre><span class="repl-input">var array = [1, 2, 3];
+</span><span class="repl-input">var cancel = array.addRangeChangeListener(function (plus, minus, index) {
+    console.log(&quot;added:&quot;, plus, &quot;removed:&quot;, minus, &quot;at&quot;, index);
+});
+</span><span class="repl-input">array.push(4);
+</span><span class="repl-input">array.splice(1, 2, 5);
+</span></pre></div>
+
+            
 
             
             <h3>Related</h3>
