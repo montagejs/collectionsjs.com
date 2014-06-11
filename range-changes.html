@@ -46,9 +46,9 @@ as <code>splice(index, 1, value)</code>.
 Every time you push a value onto an array, it can be modeled as <code>splice(length,
 0, value)</code>.
 Every time you shift a value off an array, it cam be modeled as <code>splice(0, 1)</code>.
-Each of these changes can be communicated with a single message, <code>(index, plus,
-minus)</code>: the index of the change, the values removed after that index, then the
-values that were added after that index, in that order.</p>
+Each of these changes can be communicated with a single message, <code>(plus, minus,
+index)</code>: the values removed after that index, then the values that were added
+after that index, and the index, in that order.</p>
 <p>Range change listeners receive such messages synchronously, as the array
 changes.</p>
 
