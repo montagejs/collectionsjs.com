@@ -14,6 +14,15 @@ see:
 -   remove-map-change-listener
 -   dispatch-map-change
 
+samples:
+- |
+    var map = new Map({a: 1, b: 2});
+    var cancel = map.addMapChangeListener(function (value, key, map) {
+        console.log("changed " + key + " to " + value);
+    });
+    map.set("b", 4);
+    map.set("c", 9000);
+
 ---
 
 Adds a listener for when the value for a key changes, or when entries are added
