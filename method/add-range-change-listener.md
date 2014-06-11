@@ -14,6 +14,15 @@ see:
 -   remove-range-change-listener
 -   dispatch-range-change
 
+samples:
+- |
+    var array = [1, 2, 3];
+    var cancel = array.addRangeChangeListener(function (plus, minus, index) {
+        console.log("added:", plus, "removed:", minus, "at", index);
+    });
+    array.push(4);
+    array.splice(1, 2, 5);
+
 ---
 
 Adds a listener for when values are added or removed at any position.

@@ -42,6 +42,20 @@ methods:
 -   content-equals
 -   content-compare
 
+samples:
+- |
+    var heap = new Heap([2, 8, 5]);
+    heap.push(6)
+    heap.pop();
+    heap.peek();
+- |
+    var minHeap = new Heap([2, 8, 5], null, function (a, b) {
+        return b - a ;
+    });
+    minHeap.push(6)
+    minHeap.pop();
+    minHeap.peek();
+
 ---
 
 A collection of values with the largest always on top.

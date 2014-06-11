@@ -48,6 +48,13 @@ todo:
 -   clone
 -   iterate
 
+samples:
+- |
+    var deque = new Deque([1, 2, 3]);
+    deque.unshift(0);
+    deque.push(4);
+    deque.toArray();
+
 ---
 
 An ordered collection of values with fast random access, push, pop, shift,

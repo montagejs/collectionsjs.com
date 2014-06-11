@@ -51,6 +51,12 @@ todo:
 -   peek-back
 -   poke-back
 
+samples:
+- |
+    var list = new List([1, 2, 3]);
+    list.splice(1, 1, 6, 5);
+    list.toArray();
+
 ---
 
 An ordered list of values.

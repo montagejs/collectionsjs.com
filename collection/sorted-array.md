@@ -46,6 +46,13 @@ methods:
 -   content-equals
 -   content-compare
 
+samples:
+- |
+    var sortedArray = new SortedArray([2, 8, 5]);
+    sortedArray.push(3);
+    sortedArray.toArray();
+    sortedArray.pop();
+
 ---
 
 A collection of values stored in stable stored order, backed by an array.
