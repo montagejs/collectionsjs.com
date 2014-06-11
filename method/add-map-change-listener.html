@@ -187,6 +187,16 @@ with that name, for the sake of readability.</p>
             </ul>
 
             
+            <h3>Example</h3>
+            <div class="repl"><pre><span class="repl-input">var map = new Map({a: 1, b: 2});
+</span><span class="repl-input">var cancel = map.addMapChangeListener(function (value, key, map) {
+    console.log(&quot;changed &quot; + key + &quot; to &quot; + value);
+});
+</span><span class="repl-input">map.set(&quot;b&quot;, 4);
+</span><span class="repl-input">map.set(&quot;c&quot;, 9000);
+</span></pre></div>
+
+            
 
             
             <h3>Related</h3>

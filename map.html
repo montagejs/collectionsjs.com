@@ -288,19 +288,19 @@ which is called by <code>get(key)</code> if no entry is found for the requested 
 
             
             <h3>Examples</h3>
-            <pre class="repl"><span class="repl-input">var map = new Map({a: 1, b: 2});</span>
-<span class="repl-input">map.set(&quot;c&quot;, 3);</span>
-<span class="repl-input">map.toObject();</span>
-<span class="repl-input">var key = {x: &quot;hello&quot;};</span>
-<span class="repl-input">map.set(key, 4);</span>
-<span class="repl-input">map.get(key);</span>
-<span class="repl-input">map.entries();</span>
-</pre><pre class="repl"><span class="repl-input">var defaultMap = new Map({a: 1}, null, null, function (key) {
+            <div class="repl"><pre><span class="repl-input">var map = new Map({a: 1, b: 2});
+</span><span class="repl-input">map.set(&quot;c&quot;, 3);
+</span><span class="repl-input">map.toObject();
+</span><span class="repl-input">var key = {x: &quot;hello&quot;};
+</span><span class="repl-input">map.set(key, 4);
+</span><span class="repl-input">map.get(key);
+</span><span class="repl-input">map.entries();
+</span></pre></div><div class="repl"><pre><span class="repl-input">var defaultMap = new Map({a: 1}, null, null, function (key) {
     return &quot;default: &quot; + key;
-});</span>
-<span class="repl-input">defaultMap.get(&quot;a&quot;);</span>
-<span class="repl-input">defaultMap.get(&quot;missing&quot;);</span>
-</pre>
+});
+</span><span class="repl-input">defaultMap.get(&quot;a&quot;);
+</span><span class="repl-input">defaultMap.get(&quot;missing&quot;);
+</span></pre></div>
 
             
 

@@ -328,23 +328,23 @@ their <code>value</code> property.</p>
 
             
             <h3>Examples</h3>
-            <pre class="repl"><span class="repl-input">var object = {x: &quot;hello&quot;};</span>
-<span class="repl-input">var set = new Set([&quot;a&quot;, object]);</span>
-<span class="repl-input">set.add(&quot;b&quot;);</span>
-<span class="repl-input">set.toArray();</span>
-<span class="repl-input">set.add(object);</span>
-<span class="repl-input">set.toArray();</span>
-</pre><pre class="repl"><span class="repl-input">var nameSet = new Set(null, function (a, b) {
+            <div class="repl"><pre><span class="repl-input">var object = {x: &quot;hello&quot;};
+</span><span class="repl-input">var set = new Set([&quot;a&quot;, object]);
+</span><span class="repl-input">set.add(&quot;b&quot;);
+</span><span class="repl-input">set.toArray();
+</span><span class="repl-input">set.add(object);
+</span><span class="repl-input">set.toArray();
+</span></pre></div><div class="repl"><pre><span class="repl-input">var nameSet = new Set(null, function (a, b) {
     return a.name === b.name;
 }, function (object) {
     return object.name;
-});</span>
-<span class="repl-input">nameSet.add({name: &quot;Kris&quot;, github: &quot;kriskowal&quot;});</span>
-<span class="repl-input">nameSet.add({name: &quot;Stuart&quot;, github: &quot;stuk&quot;});</span>
-<span class="repl-input">nameSet.get({name: &quot;Kris&quot;});</span>
-<span class="repl-input">nameSet.add({name: &quot;Stuart&quot;, github: &quot;wrong&quot;});</span>
-<span class="repl-input">nameSet.get({name: &quot;Stuart&quot;});</span>
-</pre>
+});
+</span><span class="repl-input">nameSet.add({name: &quot;Kris&quot;, github: &quot;kriskowal&quot;});
+</span><span class="repl-input">nameSet.add({name: &quot;Stuart&quot;, github: &quot;stuk&quot;});
+</span><span class="repl-input">nameSet.get({name: &quot;Kris&quot;});
+</span><span class="repl-input">nameSet.add({name: &quot;Stuart&quot;, github: &quot;wrong&quot;});
+</span><span class="repl-input">nameSet.get({name: &quot;Stuart&quot;});
+</span></pre></div>
 
             
 
