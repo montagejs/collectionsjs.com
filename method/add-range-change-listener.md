@@ -39,15 +39,15 @@ as `splice(index, 1, value)`.
 Every time you push a value onto an array, it can be modeled as `splice(length,
 0, value)`.
 Every time you shift a value off an array, it cam be modeled as `splice(0, 1)`.
-Each of these changes can be communicated with a single message, `(index, plus,
-minus)`: the index of the change, the values removed after that index, then the
-values that were added after that index, in that order.
+Each of these changes can be communicated with a single message, `(plus, minus,
+index)`: the values removed after that index, the values that were added after
+that index, and the index itself, in that order.
 
 Range change listeners receive such messages synchronously, as the array
 changes.
 
 The listener itself can be a function, or a “handler” object.
-The function receives the arguments, `(index, plus, minus)`.
+The function receives the arguments, `(plus, minus, index)`.
 A handler object must implement a method that receives the same arguments, but
 the name of the method depends on whether your change listener has a name or
 “token” and whether the change listener is listening for change before or after
