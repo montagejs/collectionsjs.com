@@ -6748,13 +6748,9 @@ var globalEval = eval;
 
 module.exports = function (element) {
     var outputEl = element.children[0];
-    var context = {
-        console: {
-            log: createLogFunction(outputEl)
-        }
-    };
-    evalSample(outputEl, context);
-    addInput(element, outputEl, context);
+    var log = createLogFunction(outputEl);
+    evalSample(outputEl, log);
+    addInput(element, outputEl, log);
 };
 
 function createLogFunction(element) {
@@ -6770,7 +6766,7 @@ function createLogFunction(element) {
     };
 }
 
-function evalSample(element, context) {
+function evalSample(element, log) {
     var statementEls = element.querySelectorAll(".repl-input");
 
     // What's this?! Removing the statemtents, only to add them again below?!
@@ -6788,28 +6784,30 @@ function evalSample(element, context) {
 
         element.appendChild(statementEl);
 
-        var output = createOutputElement(evaluate(statementEl.textContent, context));
+        var output = createOutputElement(evaluate(statementEl.textContent, log));
         if (output) {
             element.appendChild(output);
         }
     }
 }
 
-function evaluate(source, context) {
+function evaluate(source, log) {
     var result;
 
-    window.__replContext__ = context;
-    var wrappedSource = "with(window.__replContext__){\n" + source + "\n}";
+    window.__replApi__ = {
+        console: {
+            log: log
+        }
+    };
+    var wrappedSource = "with(window.__replApi__){\n" + source + "\n}";
 
     try {
-        result = globalEval(wrappedSource);
-        context._ = context.$_ = result;
-        result = stringify(result);
+        result = stringify(globalEval(wrappedSource));
     } catch (error) {
         result = error.name + ": " + error.message;
     }
 
-    delete window.__replContext__;
+    delete window.__replApi__;
 
     return result;
 }
@@ -6852,7 +6850,7 @@ function createOutputElement(result, cssClass) {
     }
 }
 
-function addInput(element, outputEl, context) {
+function addInput(element, outputEl, log) {
     var container = document.createElement("div");
     container.classList.add("repl-command");
 
@@ -6862,7 +6860,7 @@ function addInput(element, outputEl, context) {
         if (event.keyCode === 13 && this.value) {
             var input = createInputElement(this.value);
             outputEl.appendChild(input);
-            var output = createOutputElement(evaluate(this.value, context));
+            var output = createOutputElement(evaluate(this.value, log));
             if (output) {
                 outputEl.appendChild(output);
             }
