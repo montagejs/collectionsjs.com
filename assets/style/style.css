@@ -103,7 +103,6 @@ nav a:active {
     font-size: 24px;
     padding: 0 15px;
     font-weight: 300;
-    display: none;
 }
 @media (min-width: 768px) {
     .header-intro {
@@ -115,9 +114,6 @@ nav a:active {
     .header-intro {
         font-size: 36px;
     }
-}
-.index .header-intro {
-    display: block;
 }
 
 
