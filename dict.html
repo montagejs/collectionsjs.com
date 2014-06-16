@@ -40,10 +40,6 @@
 The keys are required to be strings.
 With this constraint in place, the mapping can make many simplifying assumptions
 and use a plain JavaScript object as its backing store.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> Dict = <span class="hljs-built_in">require</span>(<span class="hljs-string">"collections/dict"</span>);
-<span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict();
-</code></pre>
-<p>The <code>new</code> keyword is optional.</p>
 <p>The optional first argument of the dictionary constructor is an object to copy
 into the dictionary initially.
 The value to copy may be...</p>
@@ -55,12 +51,6 @@ The value to copy may be...</p>
 <p>The optional second argument of the constructor is a <code>getDefault(key)</code> function.
 This function will be called as a method of the dictionary if the value for a
 given key does not exist when a user calls <code>get(key)</code>.</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dict(<span class="hljs-literal">null</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(key)</span> {</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.<span class="hljs-keyword">get</span>(key.slice(<span class="hljs-number">0</span>, key.length - <span class="hljs-number">1</span>));
-});
-dict.<span class="hljs-keyword">set</span>(<span class="hljs-string">"a"</span>, <span class="hljs-number">10</span>);
-expect(dict.<span class="hljs-keyword">get</span>(<span class="hljs-string">"abcdefg"</span>)).toBe(<span class="hljs-number">10</span>);
-</code></pre>
 
 
             <h3>Methods</h3>
