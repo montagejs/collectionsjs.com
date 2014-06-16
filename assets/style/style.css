@@ -280,6 +280,15 @@ with the text on the left */
     margin-top: 0;
 }
 
+.generated-from {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.generated-from a {
+    color: #ccc;
+}
+
 /* Footer -------------------------- */
 
 .footer {
