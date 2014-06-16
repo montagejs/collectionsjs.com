@@ -5,6 +5,7 @@ var Reader = require("q-io/reader");
 var Dict = require("collections/dict");
 var path = require("path");
 var Handlebars = require("handlebars");
+var Uglify = require("uglify-js");
 var mrs = require("mr/build");
 var data = require("./scrape");
 
@@ -20,13 +21,16 @@ if (require.main === module) {
 }
 
 module.exports = generate;
-function generate(siteFs) {
+function generate(siteFs, options) {
+    options = options || {};
+    options.minify = true;
+
     return Q()
     .then(setup.bind(null, siteFs))
     .then(buildData.bind(null, siteFs))
     .then(loadTemplates)
     .then(buildPages.bind(null, siteFs))
-    .then(buildJavascript.bind(null, siteFs))
+    .then(buildJavascript.bind(null, siteFs, options))
     .then(function () {
         console.log("Generated.");
     });
@@ -134,11 +138,14 @@ function buildPages(siteFs, templates) {
     });
 }
 
-function buildJavascript(siteFs) {
+function buildJavascript(siteFs, options) {
     return Reader(["index.js", "autocomplete.js", "collections.js"])
     .forEach(function (entry) {
         return mrs(path.join("lib", entry))
         .then(function (bundle) {
+            if (options.minify) {
+                bundle = Uglify.minify(bundle, {fromString: true}).code;
+            }
             return siteFs.write(path.join("script", entry), bundle);
         });
     });
