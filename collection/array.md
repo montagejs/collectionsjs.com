@@ -76,7 +76,3 @@ The `shim-array` module provides extensions so it hosts all the expressiveness
 of other collections.  The `shim-array` module shims some ECMAScript 5 methods
 onto the array prototype if they are not natively implemented.
 
-```js
-require("collections/shim-array");
-```
-

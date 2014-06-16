@@ -49,13 +49,6 @@ The keys are required to be strings.
 With this constraint in place, the mapping can make many simplifying assumptions
 and use a plain JavaScript object as its backing store.
 
-```js
-var Dict = require("collections/dict");
-var dict = new Dict();
-```
-
-The `new` keyword is optional.
-
 The optional first argument of the dictionary constructor is an object to copy
 into the dictionary initially.
 The value to copy may be...
@@ -67,12 +60,4 @@ The value to copy may be...
 The optional second argument of the constructor is a `getDefault(key)` function.
 This function will be called as a method of the dictionary if the value for a
 given key does not exist when a user calls `get(key)`.
-
-```js
-var dict = new Dict(null, function (key) {
-    return this.get(key.slice(0, key.length - 1));
-});
-dict.set("a", 10);
-expect(dict.get("abcdefg")).toBe(10);
-```
 

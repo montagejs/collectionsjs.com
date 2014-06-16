@@ -72,9 +72,5 @@ and values spill over from the end of the buffer back to the beginning.
 As values are removed by way of shifting, it makes room for values by way of
 pushing.
 
-```js
-var Deque = require("collections/deque")
-```
-
 Deques have constants `maxCapacity` and `minCapacity`.
 
