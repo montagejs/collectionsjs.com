@@ -12,6 +12,17 @@ see:
 -   unshift
 -   poke-back
 
+samples:
+- |
+    var array = [1, 2, 3];
+    array.push(6, 4);
+    array
+- |
+    var sortedSet = new SortedSet([2, 8, 5]);
+    sortedSet.toArray();
+    sortedSet.push(1, 6, 14);
+    sortedSet.toArray();
+
 ---
 
 Adds values to the end of a collection.
