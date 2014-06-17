@@ -39,7 +39,7 @@
 
 
             <p>For purposes of genericity, collections that have an intrinsic relative order
-for their values, like a <code>SortedSet</code>, support the <code>unsfhit</code> method but do
+for their values, like a <code>SortedSet</code>, support the <code>unshift</code> method but do
 not necessarily add the new values to the beginning of the collection.</p>
 
 
@@ -127,6 +127,17 @@ not necessarily add the new values to the beginning of the collection.</p>
                 <li>unshift(...values)</li>
             
             </ul>
+
+            
+            <h3>Examples</h3>
+            <div class="repl"><pre><span class="repl-input">var list = new List([1, 2, 3]);
+</span><span class="repl-input">list.unshift(6, 4);
+</span><span class="repl-input">list.toArray();
+</span></pre></div><div class="repl"><pre><span class="repl-input">var sortedSet = new SortedSet([2, 8, 5]);
+</span><span class="repl-input">sortedSet.toArray();
+</span><span class="repl-input">sortedSet.unshift(1, 6, 14);
+</span><span class="repl-input">sortedSet.toArray();
+</span></pre></div>
 
             
 

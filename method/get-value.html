@@ -136,7 +136,38 @@ search, and <code>SortedSet</code>, which is backed by a <a href="http://en.wiki
             </ul>
 
             
+            <h3>Example</h3>
+            <div class="repl"><pre><span class="repl-input">var nameSet = new Set([{name: &quot;Kris&quot;, github: &quot;kriskowal&quot;}],
+    // change uniqueness
+    function (a, b) {
+        return a.name === b.name;
+    },
+    function (object) {
+        return object.name;
+    }
+);
+</span><span class="repl-input">nameSet.get({name: &quot;Kris&quot;});
+</span></pre></div>
 
+            
+
+            
+            <h3>Related</h3>
+            <ul>
+                
+                <li>
+                    <a href="get-key">get(key|index, default?)</a>
+                    <p>Gets the value for a key in a map.</p>
+
+                </li>
+                
+                <li>
+                    <a href="get-value-equals">get(value, equals?)</a>
+                    <p>Retrieves the equivalent value from this collection.</p>
+
+                </li>
+                
+            </ul>
             
 
         </div>
