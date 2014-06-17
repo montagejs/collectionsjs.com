@@ -2,6 +2,16 @@
 
 name: has(value)
 
+see:
+-   has-key
+-   has-value-equals
+
+samples:
+- |
+    var set = new Set([1, 2, 3]);
+    set.has(2);
+    set.has(4);
+
 ---
 
 Whether an equivalent value exists in this collection.

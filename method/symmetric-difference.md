@@ -7,6 +7,12 @@ see:
 -   union
 -   intersection
 
+samples:
+- |
+    var set = new SortedSet([2, 8, 5]);
+    var symDifferenceSet = set.symmetricDifference([3, 8, 5]);
+    symDifferenceSet.toArray();
+
 ---
 
 Returns the set of values that are only in one of these sets.

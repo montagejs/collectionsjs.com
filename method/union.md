@@ -7,6 +7,12 @@ see:
 -   difference
 -   symmetric-difference
 
+samples:
+- |
+    var set = new SortedSet([2, 8, 5]);
+    var unionSet = set.union([3, 8, 5]);
+    unionSet.toArray();
+
 ---
 
 Returns the set of values including all values from both of these sets.

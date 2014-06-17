@@ -8,6 +8,10 @@ names:
 -   get(index)
 -   get(index, default)
 
+see:
+-   get-value
+-   get-value-equals
+
 ---
 
 Gets the value for a key in a map.

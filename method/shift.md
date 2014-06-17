@@ -15,6 +15,16 @@ see:
 -   pop
 -   peek
 
+samples:
+- |
+    var list = new List([1, 2, 3]);
+    list.shift();
+    list.toArray();
+- |
+    var sortedSet = new SortedSet([11, 8, 5]);
+    sortedSet.shift();
+    sortedSet.toArray();
+
 ---
 
 Removes a value from the beginning of a collection, and returns that value.

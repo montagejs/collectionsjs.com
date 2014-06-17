@@ -6,6 +6,10 @@ names:
 -   get(value)
 -   get(value, equals)
 
+see:
+-   get-key
+-   get-value
+
 ---
 
 Retrieves the equivalent value from this collection.

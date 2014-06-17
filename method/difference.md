@@ -7,6 +7,12 @@ see:
 -   union
 -   intersection
 
+samples:
+- |
+    var set = new SortedSet([2, 8, 5]);
+    var differenceSet = set.difference([3, 8, 5]);
+    differenceSet.toArray();
+
 ---
 
 Returns the set of values that are in this set, excluding the values that are

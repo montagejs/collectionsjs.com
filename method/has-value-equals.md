@@ -6,6 +6,21 @@ names:
 -   has(value)
 -   has(value, equals)
 
+see:
+-   has-key
+-   has-value
+
+samples:
+- |
+    var array = [1, 2, 3];
+    array.has(2);
+    array.has(4);
+- |
+    var set = new List(["One", "TWO", "three"]);
+    set.has("two", function (a, b) {
+        return a.toLowerCase() === b.toLowerCase();
+    });
+
 ---
 
 Returns whether an equivalent value exists in this collection.
@@ -22,9 +37,3 @@ This method is also distinct from the `has` method provided by maps.
 
 For the purposes of the `has` method, an `Array` behaves like a `List`, even
 though the `Array` implements `get` and `set` as if it were a `Map`.
-
-```js
-var found = [1, 2, 3].has(1);
-expect(found).toBe(true);
-```
-

@@ -7,6 +7,11 @@ see:
 -   difference
 -   symmetric-difference
 
+samples:
+- |
+    var set = new SortedSet([2, 8, 5]);
+    var intersectionSet = set.intersection([3, 8, 5]);
+    intersectionSet.toArray();
 ---
 
 Returns the set of values that are in both of these sets.
