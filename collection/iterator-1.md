@@ -10,6 +10,8 @@ see:
 usage: |
     var Iterator = require("collections/iterator");
 
+source: iterator
+
 names:
 -   Iterator(iterable)
 -   Iterator(iterator)
