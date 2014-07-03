@@ -6,6 +6,8 @@ usage: |
     require("collections/shim-array");
     require("collections/listen/array-changes");
 
+source: shim-array
+
 names:
 -   Array()
 -   Array(length)

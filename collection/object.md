@@ -5,6 +5,8 @@ name: Object
 usage: |
     require("collections/shim-object");
 
+source: shim-object
+
 methods:
 -   is-object
 -   clone

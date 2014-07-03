@@ -55,6 +55,7 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         detail: render(front.detail || parts[2] || ""),
         samples: (front.samples || []).map(parseSample),
         usage: render("```js\n" + (front.usage || "").trim() + "\n```"),
+        source: front.source || ref,
         see: front.see || []
     }];
 }));
@@ -133,6 +134,7 @@ collections = new Dict(collections.map(function (collection, ref) {
         detail: collection.detail,
         samples: collection.samples,
         usage: collection.usage,
+        source: collection.source,
         see: collection.see.map(function (see) {
             var collection = collections.get(see);
             if (!collection) {
