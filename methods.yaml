@@ -125,6 +125,7 @@
 
 -   to-array
 -   to-object
+-   to-json
 
 # operators
 

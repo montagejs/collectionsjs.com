@@ -41,6 +41,7 @@ methods:
 -   heap-handle-content-map-will-change
 -   content-equals
 -   content-compare
+-   to-json
 
 samples:
 - |
