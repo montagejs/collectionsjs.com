@@ -52,6 +52,7 @@ methods:
 -   set
 -   delete-value
 -   delete-value-equals
+-   delete-all
 -   find-value
 -   find-last-value
 -   swap
