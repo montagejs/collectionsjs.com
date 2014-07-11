@@ -18,6 +18,9 @@ inherits:
 -   property-changes
 -   observable-object
 
+properties:
+-   length
+
 methods:
 -   construct-clone
 -   lfu-map-log

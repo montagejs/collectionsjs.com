@@ -19,6 +19,9 @@ inherits:
 -   observable-range
 -   observable-map
 
+properties:
+-   length
+
 methods:
 -   push
 -   pop
