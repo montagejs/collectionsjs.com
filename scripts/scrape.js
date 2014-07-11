@@ -109,16 +109,23 @@ function parseYaml(ref, type, parts) {
 // Also generate "see" cross reference
 // TODO Also generate "deepSee" cross reference
 
+// Map from method object to an array of all collections it is available on
 var collectionsByMethod = new MultiMap();
+
 collections = new Dict(collections.map(function (collection, ref) {
     var implemented = new Dict();
     collectMethods(implemented, collection);
+
+    // This creates an inverted index of method -> [collection, ...] as each
+    // collection is processed, and returns an array of all the methods on this
+    // collection
     var implementations = methods.filter(function (method) {
         return implemented.has(method.ref);
     }).map(function (method) {
         collectionsByMethod.get(method.ref).add(ref);
         return implemented.get(method.ref);
     });
+
     var collectionMethods = implementations.map(function (implementation) {
         return methods.get(implementation.ref).versions.map(function (method, version) {
             return {
@@ -131,6 +138,7 @@ collections = new Dict(collections.map(function (collection, ref) {
             };
         });
     }).flatten();
+
     return [ref, {
         ref: ref,
         type: "collection",
