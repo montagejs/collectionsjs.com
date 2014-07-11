@@ -38,6 +38,7 @@
 # common
 -   add-each
 -   delete-each
+-   delete-all
 
 # order
 -   slice

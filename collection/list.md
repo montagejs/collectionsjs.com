@@ -26,6 +26,7 @@ methods:
 -   get-value-equals
 -   delete-value
 -   delete-value-equals
+-   delete-all
 -   clear
 -   add-value
 -   push

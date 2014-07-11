@@ -16,6 +16,7 @@ methods:
 -   contains
 -   remove
 -   toggle
+-   delete-all
 -   to-json
 
 ---

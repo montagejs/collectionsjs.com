@@ -23,6 +23,7 @@ methods:
 -   get-value
 -   add-value
 -   delete-value
+-   delete-all
 -   index-of
 -   last-index-of
 -   find-value
