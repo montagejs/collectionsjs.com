@@ -8,7 +8,7 @@ samples:
     map.set({a: 1}, 10);
     map.set({b: 2}, 20);
     var json = JSON.stringify(map);
-    json;
+    console.log(json);
     var newMap = new Map(JSON.parse(json));
     newMap.entries();
 
