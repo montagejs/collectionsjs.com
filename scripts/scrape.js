@@ -212,6 +212,35 @@ function filter(available, implemented, ref, collector) {
 // Also construct complete "see" cross reference
 // TODO Also construct transitive "deepSee" list
 
+properties = new Dict(properties.map(function (property, ref) {
+    var myCollections = new Dict();
+    collectCollections(myCollections, collectionsByProperty.get(ref));
+    return [ref, {
+        ref: property.ref,
+        type: "property",
+        name: property.name,
+        deprecated: property.deprecated,
+        summary: property.summary,
+        detail: property.detail,
+        samples: property.samples,
+        see: property.see.map(function (see) {
+            var property = properties.get(see);
+            if (!property) {
+                console.warn("Bad see reference in " + ref + " to " + see);
+                return;
+            }
+            return {
+                ref: see,
+                type: "property",
+                name: property.name,
+                summary: property.summary
+            };
+        }).filter(Boolean),
+        collections: myCollections.values(),
+        versions: property.versions
+    }];
+}));
+
 methods = new Dict(methods.map(function (method, ref) {
     var myCollections = new Dict();
     collectCollections(myCollections, method["very-fast"], "very-fast");
@@ -262,6 +291,20 @@ function collectCollections(myCollections, refs, note) {
 
 // Create seach indexes
 
+var propertyIndex = properties.map(function (property, ref) {
+    return {
+        ref: ref,
+        type: "property",
+        name: property.name,
+        searches: new Set(property.versions.map(function (version) {
+            return version.names.map(function (name) {
+                return name.toLowerCase().replace(/\W+/g, " ");
+            })
+        })).flatten(),
+        summary: property.summary
+    };
+});
+
 var methodIndex = methods.map(function (method, ref) {
     return {
         ref: ref,
@@ -309,10 +352,13 @@ function render(markdown) {
 module.exports = {
     interfaceRefs: interfaceRefs,
     collectionRefs: collectionRefs,
+    propertyRefs: propertyRefs,
     methodRefs: methodRefs,
     interfaces: interfaces,
     collections: collections,
+    properties: properties,
     methods: methods,
+    propertyIndex: propertyIndex,
     methodIndex: methodIndex,
     searchIndex: searchIndex
 };
