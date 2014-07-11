@@ -46,7 +46,7 @@ operator, because deletion changes the property descriptor.
 Setting a value to `null` or `undefined` should suffice in all cases where
 property change listeners are involved.
 
-## Arbitrary objects
+### Arbitrary objects
 
 Objects do not need to implement the property changes interface to be
 observable.
@@ -59,7 +59,7 @@ function xChange(value, key, object) {}
 PropertyChanges.addOwnPropertyChangeListener(object, "x", xChange);
 ```
 
-## Version 2
+### Version 2
 
 This property changes interface is endemic to Collections version 1.
 In particular, property change listeners do not receive both the old and new
