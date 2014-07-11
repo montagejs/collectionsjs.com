@@ -43,6 +43,20 @@ interest surfaces to the root node.
 This tends to cause the most frequently used nodes to stay toward the top over
 time.</p>
 <p><code>SortedSet</code> instances fly the <code>isSorted</code> and <code>isSet</code> flags.</p>
+<h2 id="design-notes">Design notes</h2>
+<p>This collection was designed based on analysis of two other JavaScript splay
+tree implementations, but further augmented to incrementally track the length of
+every subtree.</p>
+<ul>
+<li>a SplayTree impementation buried in Fedor Indutny’s super-secret
+<a href="https://github.com/indutny/callgrind.js">Callgrind</a>. This
+implementation uses parent references.</li>
+<li>a SplayTree implementation adapted by <a href="https://github.com/hij1nx/forest">Paolo
+Fragomeni</a> from the V8 project and
+based on the top-down splaying algorithm from &quot;Self-adjusting Binary
+Search Trees&quot; by Sleator and Tarjan. This does not use or require
+parent references, so I favored it over Fedor Indutny’s style.</li>
+</ul>
 
 
             <h3>Methods</h3>

@@ -232,7 +232,7 @@ nav a:active {
 }
 
 .repl-output, .repl-log {
-    color: #999;
+    color: hsl(316, 72%, 45%);
 }
 
 .repl-output::before {
