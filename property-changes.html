@@ -53,7 +53,7 @@ changes to each observed index and the <code>length</code>.</p>
 operator, because deletion changes the property descriptor.
 Setting a value to <code>null</code> or <code>undefined</code> should suffice in all cases where
 property change listeners are involved.</p>
-<h2 id="arbitrary-objects">Arbitrary objects</h2>
+<h3 id="arbitrary-objects">Arbitrary objects</h3>
 <p>Objects do not need to implement the property changes interface to be
 observable.
 The <code>PropertyChanges</code> constructor provides alternate methods to those on the
@@ -62,7 +62,7 @@ prototype that accept the desired object as a first argument.</p>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xChange</span><span class="hljs-params">(value, key, <span class="hljs-keyword">object</span>)</span> <span class="hljs-comment">{}</span>
 <span class="hljs-title">PropertyChanges</span>.<span class="hljs-title">addOwnPropertyChangeListener</span><span class="hljs-params">(<span class="hljs-keyword">object</span>, "x", xChange)</span>;</span>
 </code></pre>
-<h2 id="version-2">Version 2</h2>
+<h3 id="version-2">Version 2</h3>
 <p>This property changes interface is endemic to Collections version 1.
 In particular, property change listeners do not receive both the old and new
 value, so you must install separate change and will-change listeners if you want

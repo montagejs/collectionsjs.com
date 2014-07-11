@@ -43,7 +43,7 @@ interest surfaces to the root node.
 This tends to cause the most frequently used nodes to stay toward the top over
 time.</p>
 <p><code>SortedSet</code> instances fly the <code>isSorted</code> and <code>isSet</code> flags.</p>
-<h2 id="design-notes">Design notes</h2>
+<h3 id="design-notes">Design notes</h3>
 <p>This collection was designed based on analysis of two other JavaScript splay
 tree implementations, but further augmented to incrementally track the length of
 every subtree.</p>
@@ -124,6 +124,10 @@ parent references, so I favored it over Fedor Indutny’s style.</li>
                 
                 <dt><a href="/method/delete-each">deleteEach(values|keys, equals?)</a></dt>
                 <dd><p>Deletes every value or every value for each key. Returns the number of successful deletions.</p>
+</dd>
+                
+                <dt><a href="/method/delete-all">deleteAll(value, equals?)</a></dt>
+                <dd><p>Deletes every value equivalent to the given value from the collection.</p>
 </dd>
                 
                 <dt><a href="/method/slice">slice(start?, end?)</a></dt>
