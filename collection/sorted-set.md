@@ -71,7 +71,7 @@ time.
 `SortedSet` instances fly the `isSorted` and `isSet` flags.
 
 
-## Design notes
+### Design notes
 
 This collection was designed based on analysis of two other JavaScript splay
 tree implementations, but further augmented to incrementally track the length of
