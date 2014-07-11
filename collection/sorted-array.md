@@ -45,6 +45,7 @@ methods:
 -   construct-clone
 -   content-equals
 -   content-compare
+-   to-json
 
 samples:
 - |

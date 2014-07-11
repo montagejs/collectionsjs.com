@@ -10,6 +10,7 @@ usage: |
 methods:
 -   equals
 -   compare
+-   to-json
 
 ---
 

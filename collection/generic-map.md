@@ -24,6 +24,7 @@ methods:
 -   values
 -   entries
 -   equals
+-   to-json
 
 ---
 
