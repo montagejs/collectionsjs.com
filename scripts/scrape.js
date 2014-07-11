@@ -27,6 +27,7 @@ function readYaml(name) {
 
 var interfaceRefs = readYaml("interfaces.yaml")[0];
 var collectionRefs = readYaml("collections.yaml")[0];
+var propertyRefs = readYaml("properties.yaml")[0];
 var methodRefs = readYaml("methods.yaml")[0];
 
 var interfaces = new Dict(interfaceRefs.map(function (ref) {
@@ -50,6 +51,7 @@ var collections = new Dict(collectionRefs.map(function (ref) {
         names: front.names || [front.name],
         inherits: front.inherits || [],
         mixin: front.mixin || [],
+        properties: front.properties || [],
         methods: front.methods || [],
         summary: render(front.summary || parts[1] || ""),
         detail: render(front.detail || parts[2] || ""),
@@ -60,7 +62,12 @@ var collections = new Dict(collectionRefs.map(function (ref) {
     }];
 }));
 
-// Build method version tree
+// Build property and method version trees
+
+var properties = new Dict(propertyRefs.map(function (ref) {
+    var parts = readYaml(path.join("property", ref + ".md"));
+    return [ref, parseYaml(ref, "property", parts)];
+}));
 
 var methods = new Dict(methodRefs.map(function (ref) {
     var parts = readYaml(path.join("method", ref + ".md"));
@@ -111,30 +118,14 @@ function parseYaml(ref, type, parts) {
 
 // Map from method object to an array of all collections it is available on
 var collectionsByMethod = new MultiMap();
+var collectionsByProperty = new MultiMap();
 
 collections = new Dict(collections.map(function (collection, ref) {
+    var implementedProperties = collect("properties", collection);
     var implementedMethods = collect("methods", collection);
 
-    var collectionMethods = methods.filter(function (method) {
-        // Filter all methods based on what this collection implements
-        return implementedMethods.has(method.ref);
-    }).map(function (method) {
-        // Update the inverted index of method -> [collection, ...] as each
-        // method is processed
-        collectionsByMethod.get(method.ref).add(ref);
-
-        var implementation = implementedMethods.get(method.ref);
-        return method.versions.map(function (method, version) {
-            return {
-                ref: method.ref,
-                type: "collection",
-                name: method.name,
-                prototype: implementation.prototype,
-                summary: method.summary,
-                version: version
-            };
-        });
-    }).flatten();
+    var collectionProperties = filter(properties, implementedProperties, ref, collectionsByProperty);
+    var collectionMethods = filter(methods, implementedMethods, ref, collectionsByMethod);
 
     return [ref, {
         ref: ref,
@@ -159,10 +150,10 @@ collections = new Dict(collections.map(function (collection, ref) {
                 summary: collection.summary
             };
         }).filter(Boolean),
+        properties: collectionProperties,
         methods: collectionMethods
     }];
 }));
-
 
 // Collects all the methods the collection has from: the explicitly listed, all
 // of the inherited methods, and any individual mixins.
@@ -192,6 +183,29 @@ function collect(type, collection, implemented) {
     });
 
     return implemented;
+}
+
+function filter(available, implemented, ref, collector) {
+    return available.filter(function (method) {
+        // Filter all methods based on what this collection implements
+        return implemented.has(method.ref);
+    }).map(function (method) {
+        // Update the inverted index of method -> [collection, ...] as each
+        // method is processed
+        collector.get(method.ref).add(ref);
+
+        var implementation = implemented.get(method.ref);
+        return method.versions.map(function (method, version) {
+            return {
+                ref: method.ref,
+                type: "collection",
+                name: method.name,
+                prototype: implementation.prototype,
+                summary: method.summary,
+                version: version
+            };
+        });
+    }).flatten();
 }
 
 // Construct full collection list for each method
