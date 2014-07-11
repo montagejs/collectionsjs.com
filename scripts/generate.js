@@ -43,6 +43,7 @@ function setup(siteFs) {
     })
     .then(function () {
         return Q.all([
+            siteFs.makeTree("property"),
             siteFs.makeTree("method"),
             siteFs.makeTree("script")
         ]);
@@ -87,7 +88,7 @@ function loadTemplates() {
         });
     })
     .then(function () {
-        return Reader(["index", "all", "collection", "method"])
+        return Reader(["index", "all", "collection", "property", "method"])
         .map(function (name) {
             return fs.read(fs.join(__dirname, "..", "templates", name + ".html"))
             .then(function (template) {
@@ -105,6 +106,7 @@ function buildData(siteFs) {
     return fs.write(
         fs.join(__dirname, "..", "lib", "data.js"),
         "module.exports=" + JSON.stringify({
+            propertyIndex: data.propertyIndex,
             methodIndex: data.methodIndex,
             searchIndex: data.searchIndex
         }, null, 4),
@@ -115,6 +117,7 @@ function buildData(siteFs) {
 function buildPages(siteFs, templates) {
     var collectionTemplate = templates.collection;
     var methodTemplate = templates.method;
+    var propertyTemplate = templates.property;
     return Q().then(function () {
         return siteFs.write("index.html", templates.index({
             collections: data.collections.toObject()
@@ -122,6 +125,7 @@ function buildPages(siteFs, templates) {
     }).then(function () {
         return siteFs.write("all.html", templates.all({
             collections: data.collections.toObject(),
+            properties: data.properties.toObject(),
             methods: data.methods.toObject()
         }));
     }).then(function () {
@@ -131,6 +135,11 @@ function buildPages(siteFs, templates) {
         });
     })
     .then(function () {
+        return Reader(data.properties)
+        .forEach(function (details, name) {
+            return siteFs.write(path.join("property", name + ".html"), propertyTemplate(details));
+        });
+    }).then(function () {
         return Reader(data.methods)
         .forEach(function (details, name) {
             return siteFs.write(path.join("method", name + ".html"), methodTemplate(details));

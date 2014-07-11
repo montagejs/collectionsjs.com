@@ -1,0 +1,51 @@
+{{#include "layout" title=name afterTitle="property" bodyClass="property" bundle="collections"}}
+
+    <h2 {{#if deprecated}}class="deprecated"{{/if}}>{{name}}</h2>
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{#if deprecated}}<p><strong>Deprecated.</strong></p>{{/if}}
+
+            {{{summary}}}
+
+            {{{detail}}}
+
+            <h3>On collections</h3>
+            <ul>
+                {{#each collections}}
+                {{#if implemented}}
+                <li><a href="/{{ref}}">{{name}}</a> {{#if note}}&mdash; {{note}}{{/if}}</li>
+                {{/if}}
+                {{/each}}
+            </ul>
+
+        </div>
+
+        <div class="col-sm-6 supplements">
+            {{#if samples}}
+            <h3>{{#if samples.[1]}}Examples{{else}}Example{{/if}}</h3>
+            {{include "repl" samples=samples}}
+            {{/if}}
+
+            {{#if see.length }}
+            <h3>Related</h3>
+            <ul>
+                {{#each see}}
+                <li>
+                    <a href="{{ref}}">{{name}}</a>
+                    {{{summary}}}
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+
+        </div>
+    </div>
+
+    <div class="row generated-from">
+        <div class="col-sm-12">
+            <a href="https://github.com/montagejs/collectionsjs.com/tree/master/property/{{ref}}.md">Generated from {{ref}}.md</a>
+        </div>
+    </div>
+
+{{/include}}

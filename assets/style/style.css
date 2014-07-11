@@ -194,7 +194,7 @@ nav a:active {
     @-ms-keyframes show { 0% { opacity: 0; } }
         @keyframes show { 0% { opacity: 0; } }
 
-.method h2::before {
+.property h2::before, .method h2::before {
     font-style: italic;
     color: #CCC;
     content: "collection.";
