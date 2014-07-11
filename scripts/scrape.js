@@ -64,16 +64,22 @@ var collections = new Dict(collectionRefs.map(function (ref) {
 
 var methods = new Dict(methodRefs.map(function (ref) {
     var parts = readYaml(path.join("method", ref + ".md"));
+    return [ref, parseYaml(ref, "method", parts)];
+}));
+
+function parseYaml(ref, type, parts) {
     var front = parts[0] || {};
+
     var versions;
     if (front.version) {
         versions = new Dict([["" + front.version, {}]]);
     } else {
         versions = new Dict(front.versions || {"": {}});
     }
-    return [ref, {
+
+    return {
         ref: ref,
-        type: "method",
+        type: type,
         name: front.name,
         names: front.names,
         deprecated: Boolean(front.deprecated),
@@ -87,7 +93,7 @@ var methods = new Dict(methodRefs.map(function (ref) {
         versions: new Dict(versions.map(function (versionSpecific, version) {
             return [version, {
                 ref: ref,
-                type: "method",
+                type: type,
                 version: version,
                 name: versionSpecific.name || front.name,
                 names: versionSpecific.names || front.names || [versionSpecific.name || front.name],
@@ -95,8 +101,8 @@ var methods = new Dict(methodRefs.map(function (ref) {
                 summary: render(front.summary || parts[1] || "")
             }];
         }))
-    }];
-}));
+    };
+}
 
 // Collection complete list of implemented methods and the prototype used for
 // each method
