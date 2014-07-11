@@ -113,21 +113,18 @@ function parseYaml(ref, type, parts) {
 var collectionsByMethod = new MultiMap();
 
 collections = new Dict(collections.map(function (collection, ref) {
-    var implemented = new Dict();
-    collectMethods(implemented, collection);
+    var implementedMethods = collect("methods", collection);
 
-    // This creates an inverted index of method -> [collection, ...] as each
-    // collection is processed, and returns an array of all the methods on this
-    // collection
-    var implementations = methods.filter(function (method) {
-        return implemented.has(method.ref);
+    var collectionMethods = methods.filter(function (method) {
+        // Filter all methods based on what this collection implements
+        return implementedMethods.has(method.ref);
     }).map(function (method) {
+        // Update the inverted index of method -> [collection, ...] as each
+        // method is processed
         collectionsByMethod.get(method.ref).add(ref);
-        return implemented.get(method.ref);
-    });
 
-    var collectionMethods = implementations.map(function (implementation) {
-        return methods.get(implementation.ref).versions.map(function (method, version) {
+        var implementation = implementedMethods.get(method.ref);
+        return method.versions.map(function (method, version) {
             return {
                 ref: method.ref,
                 type: "collection",
@@ -166,10 +163,15 @@ collections = new Dict(collections.map(function (collection, ref) {
     }];
 }));
 
-function collectMethods(implemented, collection) {
+
+// Collects all the methods the collection has from: the explicitly listed, all
+// of the inherited methods, and any individual mixins.
+function collect(type, collection, implemented) {
+    implemented = implemented || new Dict();
+
     collection.inherits.forEach(function (parent) {
         if (collections.has(parent)) {
-            collectMethods(implemented, collections.get(parent));
+            collect(type, collections.get(parent), implemented);
         }
     });
     collection.mixin.forEach(function (line) {
@@ -181,12 +183,15 @@ function collectMethods(implemented, collection) {
             prototype: parent
         });
     });
-    collection.methods.forEach(function (ref) {
+    // "methods" or "properties"
+    collection[type].forEach(function (ref) {
         implemented.set(ref, {
             ref: ref,
             prototype: collection.ref
         });
     });
+
+    return implemented;
 }
 
 // Construct full collection list for each method
