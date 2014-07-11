@@ -52,3 +52,6 @@ By virtue of implementation reuse, all maps are also observable.
 However, the observer implementation varies significantly between versions 1 and
 2.
 
+See the interface of ECMAScript Harmony [simple maps and
+sets](http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets)
+

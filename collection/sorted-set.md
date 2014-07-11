@@ -70,3 +70,19 @@ time.
 
 `SortedSet` instances fly the `isSorted` and `isSet` flags.
 
+
+## Design notes
+
+This collection was designed based on analysis of two other JavaScript splay
+tree implementations, but further augmented to incrementally track the length of
+every subtree.
+
+- a SplayTree impementation buried in Fedor Indutny’s super-secret
+  [Callgrind](https://github.com/indutny/callgrind.js). This
+  implementation uses parent references.
+- a SplayTree implementation adapted by [Paolo
+  Fragomeni](https://github.com/hij1nx/forest) from the V8 project and
+  based on the top-down splaying algorithm from "Self-adjusting Binary
+  Search Trees" by Sleator and Tarjan. This does not use or require
+  parent references, so I favored it over Fedor Indutny’s style.
+

@@ -23,3 +23,6 @@ Sets ignore attempts to add duplicate values.
 Sets share a wealth of special methods like `union(values)` and
 `intersection(values)`.
 
+See the interface of ECMAScript Harmony [simple maps and
+sets](http://wiki.ecmascript.org/doku.php?id=harmony:simple_maps_and_sets)
+
