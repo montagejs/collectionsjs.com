@@ -14,6 +14,9 @@ inherits:
 -   generic-order
 -   range-changes
 
+properties:
+-   length
+
 methods:
 -   add-value
 -   push

@@ -16,6 +16,9 @@ inherits:
 -   observable-object
 -   property-changes
 
+properties:
+-   length
+
 methods:
 -   has-value
 -   get-value

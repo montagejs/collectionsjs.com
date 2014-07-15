@@ -17,6 +17,9 @@ inherits:
 -   property-changes
 -   observable-object
 
+properties:
+-   length
+
 methods:
 -   construct-clone
 -   sorted-map-log

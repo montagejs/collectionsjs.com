@@ -22,8 +22,10 @@ inherits:
 -   observable-object
 -   property-changes
 
-methods:
+properties:
+-   length
 
+methods:
 -   construct-clone
 -   fast-map-log
 -   fast-map-stringify

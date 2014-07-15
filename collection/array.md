@@ -41,6 +41,9 @@ inherits:
 -   observable-map
 -   observable-object
 
+properties:
+-   length
+
 methods:
 -   push
 -   pop

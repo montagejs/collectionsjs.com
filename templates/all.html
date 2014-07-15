@@ -11,6 +11,14 @@
     </div>
 
     <div class="col-sm-6">
+        <h2>Properties</h2>
+        <dl>
+            {{#each properties}}
+            <dt><a href="/property/{{ref}}">{{name}}</a></dt>
+            <dd>{{{summary}}}</dd>
+            {{/each}}
+        </dl>
+
         <h2>Methods</h2>
         <dl>
             {{#each methods}}

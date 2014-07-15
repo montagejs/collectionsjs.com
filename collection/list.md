@@ -17,6 +17,9 @@ inherits:
 -   observable-object
 -   observable-range
 
+properties:
+-   length
+
 methods:
 -   find-value
 -   find-last-value

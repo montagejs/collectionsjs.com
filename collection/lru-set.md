@@ -19,6 +19,9 @@ inherits:
 -   observable-object
 -   observable-range
 
+properties:
+-   length
+
 methods:
 -   construct-clone
 -   has-value

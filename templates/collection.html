@@ -8,6 +8,16 @@
 
             {{{detail}}}
 
+            {{#if properties.length}}
+            <h3>Properties</h3>
+            <dl>
+                {{#each properties}}
+                <dt><a href="/property/{{ref}}">{{name}}</a></dt>
+                <dd>{{{summary}}}</dd>
+                {{/each}}
+            </dl>
+            {{/if}}
+
             <h3>Methods</h3>
             <dl>
                 {{#each methods}}
