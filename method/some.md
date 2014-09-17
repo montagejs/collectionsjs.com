@@ -11,6 +11,13 @@ see:
 -   filter
 -   iterate
 
+samples:
+- |
+    var list = new List([2, 4, 6, 8]);
+    list.some(function (value) { return value % 2 === 0; });
+    list.some(function (value) { return value % 3 === 0 });
+    list.some(function (value) { return value === 10 });
+
 ---
 
 Returns whether any entry in this collection passes a given test.

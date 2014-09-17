@@ -11,6 +11,12 @@ see:
 -   filter
 -   iterate
 
+samples:
+- |
+    var list = new List([2, 4, 6, 8]);
+    list.every(function (value) { return value % 2 === 0; });
+    list.every(function (value) { return value % 3 === 0 });
+
 ---
 
 Returns whether every entry in this collection passes a given test.
