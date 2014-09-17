@@ -13,13 +13,12 @@ see:
 
 ---
 
-Returns whether every entry in this collection passes a given test.
+Returns whether any entry in this collection passes a given test.
 
 --- |
 
 The given callback receives the value for each entry, the key or index, and the
 collection itself.
-`every` stops visiting entries upon reaching an entry for which the guard
-returns a falsy value, and returns *false*.
-Otherwise it will return *true*.
-
+`some` stops visiting entries upon reaching an entry for which the guard returns
+a truthy value, and returns *true*.
+Otherwise it will return *false*.
