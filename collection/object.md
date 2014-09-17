@@ -9,7 +9,6 @@ source: shim-object
 
 methods:
 -   is-object
--   clone
 -   get-value-of
 -   hash
 -   is
