@@ -35,14 +35,14 @@
         <div class="col-sm-6">
             
 
-            <p>Returns whether any entry in this collection passes a given test.</p>
+            <p>Returns whether every entry in this collection passes a given test.</p>
 
 
             <p>The given callback receives the value for each entry, the key or index, and the
 collection itself.
-<code>some</code> stops visiting entries upon reaching an entry for which the guard returns
-a truthy value, and returns <em>true</em>.
-Otherwise it will return <em>false</em>.</p>
+<code>every</code> stops visiting entries upon reaching an entry for which the guard
+returns a falsy value, and returns <em>false</em>.
+Otherwise it will return <em>true</em>.</p>
 
 
             <h3>On collections</h3>
@@ -161,6 +161,13 @@ Otherwise it will return <em>false</em>.</p>
             </ul>
 
             
+            <h3>Example</h3>
+            <div class="repl"><pre><span class="repl-input">var list = new List([2, 4, 6, 8]);
+</span><span class="repl-input">list.every(function (value) { return value % 2 === 0; });
+</span><span class="repl-input">list.every(function (value) { return value % 3 === 0 });
+</span></pre></div>
+
+            
 
             
             <h3>Related</h3>
@@ -168,7 +175,7 @@ Otherwise it will return <em>false</em>.</p>
                 
                 <li>
                     <a href="some">some(callback, thisp?)</a>
-                    <p>Returns whether every entry in this collection passes a given test.</p>
+                    <p>Returns whether any entry in this collection passes a given test.</p>
 
                 </li>
                 
