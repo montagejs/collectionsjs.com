@@ -33,7 +33,7 @@ always be a single bucket value intrinsic to each key, always returned by `get`
 and only modified by `set`.
 
 The optional `bucket` argument overrides the `MultiMap`’s default `bucket(key)`
-method, which creates a new bucketsfor a given key.
+method, which creates a new bucket for a given key.
 By default, this method just returns an empty array.
 
 The optional `equals` and `hash` arguments override the `contentEquals` and
