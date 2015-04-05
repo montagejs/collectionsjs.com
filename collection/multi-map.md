@@ -27,7 +27,7 @@ A map from keys to buckets, typically arrays.
 
 --- |
 
-A `MultMap` is a thin layer on a `Map`.
+A `MultiMap` is a thin layer on a `Map`.
 The `getDefault` and `set` methods are overriden to ensure that there will
 always be a single bucket value intrinsic to each key, always returned by `get`
 and only modified by `set`.
