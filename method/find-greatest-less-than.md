@@ -1,6 +1,6 @@
 ---
 
-name: findLGreatestLessThan(value)
+name: findGreatestLessThan(value)
 
 see:
 -   find-least-greater-than
