@@ -13,8 +13,7 @@ todo:
 
 ---
 
-Deletes every value or every value for each key.
-Returns the number of successful deletions.
+Deletes every value or every value for each key, and then returns this.
 
 --- |
 
