@@ -40,3 +40,14 @@ than 100 values.
 
 `SortedArraySet` instances fly the `isSorted` and `isSet` flags.
 
+> ⚠️ **Callback Caveat**:
+> The equality of your `compare` callback must match the equality of your `equals` callback,
+> or you may end up with duplicates in your set.
+> #### Broken example:    
+> `equals`: `(foo, bar) => foo.a === bar.a`  
+> `compare`: `(foo, bar) => foo.b - bar.b`
+> #### Working alternative:
+>`equals`: `(foo, bar) => foo.a === bar.a`  
+>`compare`: `(foo, bar) => foo.a === bar.a ? 0 : foo.b - bar.b` 
+>
+> More info here: https://github.com/montagejs/collections/issues/93
