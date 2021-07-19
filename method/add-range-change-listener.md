@@ -39,9 +39,9 @@ as `splice(index, 1, value)`.
 Every time you push a value onto an array, it can be modeled as `splice(length,
 0, value)`.
 Every time you shift a value off an array, it cam be modeled as `splice(0, 1)`.
-Each of these changes can be communicated with a single message, `(plus, minus,
-index)`: the values removed after that index, the values that were added after
-that index, and the index itself, in that order.
+Each of these changes can be communicated with a single message, `(plus, minus, 
+index)`: the values added after that index, then the values that were removed 
+after that index, and the index, in that order.
 
 Range change listeners receive such messages synchronously, as the array
 changes.
