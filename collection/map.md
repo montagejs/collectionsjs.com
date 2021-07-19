@@ -3,7 +3,7 @@
 name: Map
 
 usage: |
-    var Map = require("collections/map");
+    var Map = require("collections/map").CollectionsMap;
 
 names:
 -   Map()
